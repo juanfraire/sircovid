@@ -1,0 +1,5 @@
+
+
+go mode init github.com/juanfraire/sircovid
+
+
