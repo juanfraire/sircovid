@@ -47,25 +47,31 @@ var (
 
 func init() {
 
-	tilesImage, _, err = ebitenutil.NewImageFromFile("data/city2.png", ebiten.FilterDefault)
+	tilesImage, _, err = ebitenutil.NewImageFromFile("sircovid/data/city2.png", ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	viejoImg, _, err = ebitenutil.NewImageFromFile("data/viejo.png", ebiten.FilterDefault)
+	viejoImg, _, err = ebitenutil.NewImageFromFile("sircovid/data/viejo.png", ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	smokeImg, _, err = ebitenutil.NewImageFromFile("data/smoke.png", ebiten.FilterDefault)
+	smokeImg, _, err = ebitenutil.NewImageFromFile("sircovid/data/smoke.png", ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
+// Game es la estructura del juego
 type Game struct {
 	layers [][]int
 	count  int
 }
 
+////////////////////////////
+// Update
+////////////////////////////
+
+// Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 
 	g.count++
@@ -82,9 +88,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	return nil
 }
 
+// mover recorte de imagen segun la direccion de movimiento del viejo
 func mover() {
-	// recorte de imagen segun la direccion de movimiento del viejo
-
 	switch {
 	case inpututil.IsKeyJustPressed(ebiten.KeyRight) && movy != 1 && movy != 2:
 		frameOY = 96
@@ -117,8 +122,8 @@ func mover() {
 	}
 }
 
+// traslado del viejo coordenadas en x-y
 func translado() {
-	//traslado del viejo coordenadas en x-y
 	x1 = x
 	y1 = y
 	switch {
@@ -132,6 +137,7 @@ func translado() {
 		y += 1.3
 	}
 }
+
 func restricciones() {
 	switch {
 	case y < 300*1.3 && x > 20*1.3 && x < 214*1.3:
@@ -161,7 +167,7 @@ func restricciones() {
 	}
 }
 
-//Estoy trabajando en esta funcion de abajo
+//vida estoy trabajando en esta funcion de abajo
 func vida() {
 	if vidas == vidtime {
 		time.Sleep(1 * time.Second)
@@ -174,8 +180,8 @@ func vida() {
 
 }
 
+// covid aumenta y disminuye transparencia de la nube (alpha)
 func covid() {
-	// aumenta y disminuye transparencia de la nube (alpha)
 	switch {
 	case tmp == 0 && alpha < 1:
 		alpha += .003
@@ -188,6 +194,11 @@ func covid() {
 	}
 }
 
+////////////////////////////
+// Draw
+////////////////////////////
+
+// Draw dibuja la pantalla 60 veces por segundo
 func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(1.3, 1.3)
@@ -208,9 +219,14 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("TPS: %0.2f", ebiten.CurrentTPS()))
 }
 
+// Layout manja las dimensiones de pantalla
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return int(screenWidth), int(screenHeight)
 }
+
+////////////////////////////
+// Main
+////////////////////////////
 
 func main() {
 
