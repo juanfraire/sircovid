@@ -14,8 +14,8 @@ import (
 
 const (
 	// game
-	screenWidth  = 999
-	screenHeight = 687
+	screenWidth  = 768
+	screenHeight = 528
 
 	// viejo
 	viejoFrameWidth  = 32
@@ -137,38 +137,38 @@ func moverViejo() {
 	var viejoY1 = viejoY
 	switch {
 	case viejoMovX == 1:
-		viejoX += 1.3
+		viejoX++
 	case viejoMovX == 2:
-		viejoX -= 1.3
+		viejoX--
 	case viejoMovY == 1:
-		viejoY -= 1.3
+		viejoY--
 	case viejoMovY == 2:
-		viejoY += 1.3
+		viejoY++
 	}
 
 	// restringir viejo
 	switch {
-	case viejoY < 300*1.3 && viejoX > 20*1.3 && viejoX < 214*1.3:
+	case viejoY < 300 && viejoX > 20 && viejoX < 214:
 		viejoX = viejoX1
 		viejoY = viejoY1
 		viejoFrameNum = 1
-	case viejoY < 130*1.3 && viejoX > 214*1.3 && viejoX < 768*1.3:
+	case viejoY < 130 && viejoX > 214 && viejoX < 768:
 		viejoX = viejoX1
 		viejoY = viejoY1
 		viejoFrameNum = 1
-	case viejoY < 270*1.3 && viejoX > 240*1.3 && viejoX < 610*1.3:
+	case viejoY < 270 && viejoX > 240 && viejoX < 610:
 		viejoX = viejoX1
 		viejoY = viejoY1
 		viejoFrameNum = 1
-	case viejoY < 270*1.3 && viejoX > 675*1.3 && viejoX < 768*1.3:
+	case viejoY < 270 && viejoX > 675 && viejoX < 768:
 		viejoX = viejoX1
 		viejoY = viejoY1
 		viejoFrameNum = 1
-	case viejoY > 335*1.3 && viejoY < 528*1.3 && viejoX > 40*1.3 && viejoX < 350*1.3:
+	case viejoY > 335 && viejoY < 528 && viejoX > 40 && viejoX < 350:
 		viejoX = viejoX1
 		viejoY = viejoY1
 		viejoFrameNum = 1
-	case viejoY > 310*1.3 && viejoY < 450*1.3 && viejoX > 390*1.3 && viejoX < 630*1.3:
+	case viejoY > 310 && viejoY < 450 && viejoX > 390 && viejoX < 630:
 		viejoX = viejoX1
 		viejoY = viejoY1
 		viejoFrameNum = 1
@@ -217,7 +217,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dubujar fondo
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(1.3, 1.3)
+
 	screen.DrawImage(imgTiles, op)
 
 	// dibujar viejo
@@ -247,6 +247,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("Sircovid")
+	ebiten.SetWindowResizable(true)
 
 	if err := ebiten.RunGame(&Game{}); err != nil {
 		log.Fatal(err)
