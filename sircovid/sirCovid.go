@@ -6,6 +6,7 @@ import (
 	"image/color"
 	_ "image/png"
 	"log"
+	"math/rand"
 	"time"
 
 	"github.com/golang/freetype/truetype"
@@ -50,8 +51,8 @@ var (
 	viejoMovY     int
 
 	// nube
-	nubeX       = float64(screenWidth + 1200)
-	nubeY       = float64(800)
+	nubeX       = float64(screenWidth)
+	nubeY       = float64(rand.Intn(200) + 600)
 	nubeAlpha   float64
 	nubeAlphaUp bool
 
@@ -211,19 +212,28 @@ func vida() {
 
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube() {
+	// if nubeAlpha >= 0 {
 	nubeX--
+	// }
 
-	// actualizar alpha
+	// // actualizar alpha
 	if nubeAlphaUp {
-		nubeAlpha += .003
+		nubeAlpha += .009
 	} else {
 		nubeAlpha -= .003
 	}
+	if nubeAlpha <= 0 {
+		nubeX = float64(rand.Intn(screenWidth) + 300)
+		nubeY = float64(rand.Intn(400) + 600)
+		nubeAlphaUp = true
+		// time.Sleep(1 * time.Second)
+	}
+	// }
 
 	// cambiar dirección alpha
-	if nubeAlpha < 1 {
-		nubeAlphaUp = true
-	}
+	// if nubeAlpha < 1 {
+
+	// }
 	if nubeAlpha > 1 {
 		nubeAlphaUp = false
 	}
