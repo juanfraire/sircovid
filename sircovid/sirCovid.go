@@ -68,15 +68,15 @@ var (
 // init carga los datos
 func init() {
 
-	imgTiles, _, err = ebitenutil.NewImageFromFile(`C:\Aprendiendo Go\Games\sircovid\sircovid\data\city2.png`, ebiten.FilterDefault)
+	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	imgViejo, _, err = ebitenutil.NewImageFromFile(`C:\Aprendiendo Go\Games\sircovid\sircovid\data\viejo.png`, ebiten.FilterDefault)
+	imgViejo, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	imgNube, _, err = ebitenutil.NewImageFromFile(`C:\Aprendiendo Go\Games\sircovid\sircovid\data\smoke.png`, ebiten.FilterDefault)
+	imgNube, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
