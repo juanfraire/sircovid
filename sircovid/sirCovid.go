@@ -91,16 +91,6 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// 	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// 	const dpi = 72
-	// 	arcadeFont = truetype.NewFace(tt, &truetype.Options{
-	// 		Size:    fontSize,
-	// 		DPI:     dpi,
-	// 		Hinting: font.HintingFull,
-	// 	})
 }
 
 // Game es la estructura del juego
@@ -251,29 +241,12 @@ func textos() {
 	})
 }
 
-// func StarGameOver() {
-
-// 	switch {
-// 	case ModeTitle == 0:
-// 		texts = []string{"FLAPPY GOPHER", "", "", "", "", "PRESS SPACE KEY", "", "OR TOUCH SCREEN"}
-// 	case vidas == 0:
-// 		texts = []string{"", "GAME OVER!"}
-// 	}
-// 	for i, l := range texts {
-// 		//fmt.Println("paso por acas", i, len(l))
-
-// 		x := (screenWidth - len(l)*fontSize) / 2
-// 		//fmt.Println("esto x", x)
-// 		text.Draw(imgTiles, l, arcadeFont, x, (i+4)*fontSize, color.White)
-// 	}
-// }
-
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube() {
 	// creacion de nuevas nubes
 	if nubeAlpha <= 0 {
-		nubeX = float64(rand.Intn(screenWidth) + 300)
-		nubeY = float64(rand.Intn(400) + 600)
+		nubeX = float64(rand.Intn(screenWidth) + 500)
+		nubeY = float64(rand.Intn(500) + 600)
 		nubeAlphaUp = true
 	} else if nubeAlpha > 1 {
 		nubeAlphaUp = false
