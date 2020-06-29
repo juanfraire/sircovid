@@ -6,7 +6,6 @@ import (
 	"image/color"
 	_ "image/png"
 	"log"
-	"math/rand"
 
 	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten"
@@ -51,10 +50,14 @@ var (
 	viejoMovY     int
 
 	// nube
-	nubeX       = float64(screenWidth)
-	nubeY       = float64(rand.Intn(200) + 600)
-	nubeAlpha   float64
-	nubeAlphaUp bool
+	nubeX     = float64(screenWidth + 1200)
+	nubeY     = float64(600)
+	nubeAlpha float64
+	tmp       int
+	// nubeX       = float64(screenWidth)
+	// nubeY       = float64(rand.Intn(200) + 600)
+	// nubeAlpha   float64
+	// nubeAlphaUp bool
 
 	// vidas
 	vidas   = 3
@@ -225,7 +228,6 @@ func textos() {
 		log.Fatal(err)
 	}
 	const dpi = 72
-
 	arcadeFont = truetype.NewFace(tt, &truetype.Options{
 		Size:    fontSize,
 		DPI:     dpi,
@@ -258,38 +260,39 @@ func gameOver() {
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube() {
 	// if nubeAlpha >= 0 {
-	nubeX--
+	// 	nubeX--
+	// 	// }
+
+	// 	// // actualizar alpha
+	// 	if nubeAlphaUp {
+	// 		nubeAlpha += .009
+	// 	} else {
+	// 		nubeAlpha -= .003
+	// 	}
+	// 	if nubeAlpha <= 0 {
+	// 		nubeX = float64(rand.Intn(screenWidth) + 300)
+	// 		nubeY = float64(rand.Intn(400) + 600)
+	// 		nubeAlphaUp = true
+	// 		if nubeAlpha > 1 {
+	// 			nubeAlphaUp = false
+	// 		}
+	// 	}
 	// }
 
-	// // actualizar alpha
-	if nubeAlphaUp {
-		nubeAlpha += .009
-	} else {
+	//Agus ver si el codigo de abajo no es mas bonito
+	nubeX--
+	switch {
+	case tmp == 0 && nubeAlpha < 1:
+		nubeAlpha += .003
+	case nubeAlpha > 1 && tmp != 1:
+		tmp = 1
+	case tmp == 1 && nubeAlpha > 0:
 		nubeAlpha -= .003
-	}
-	if nubeAlpha <= 0 {
-		nubeX = float64(rand.Intn(screenWidth) + 300)
-		nubeY = float64(rand.Intn(400) + 600)
-		nubeAlphaUp = true
-		if nubeAlpha > 1 {
-			nubeAlphaUp = false
-		}
+	case nubeAlpha <= 0:
+		tmp = 0
 	}
 }
 
-//Agus ver si el codigo de abajo no es mas bonito
-// 	nubeX--
-// 	switch {
-// 	case tmp == 0 && alpha < 1:
-// 		alpha += .003
-// 	case alpha > 1 && tmp != 1:
-// 		tmp = 1
-// 	case tmp == 1 && alpha > 0:
-// 		alpha -= .003
-// 	case alpha <= 0:
-// 		tmp = 0
-// 	}
-// }
 // }
 
 ////////////////////////////
