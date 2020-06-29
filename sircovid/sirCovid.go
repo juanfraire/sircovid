@@ -7,7 +7,6 @@ import (
 	_ "image/png"
 	"log"
 	"math/rand"
-	"time"
 
 	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten"
@@ -31,8 +30,9 @@ const (
 	tileSize = 16
 	tileXNum = 48
 
-	// texto
-	fontSize = 20
+	//para start y game Over
+	fontSize      = 32
+	smallFontSize = fontSize / 2
 )
 
 var (
@@ -59,9 +59,13 @@ var (
 	// vidas
 	vidas   = 3
 	vidtime int
+	nube    int
+	v       int
 
-	// texto
-	arcadeFont font.Face
+	//para start y game over
+	arcadeFont      font.Face
+	smallArcadeFont font.Face
+	texts           []string
 
 	err error
 )
@@ -81,16 +85,16 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
-	if err != nil {
-		log.Fatal(err)
-	}
-	const dpi = 72
-	arcadeFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    fontSize,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
+	// 	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
+	// 	if err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	const dpi = 72
+	// 	arcadeFont = truetype.NewFace(tt, &truetype.Options{
+	// 		Size:    fontSize,
+	// 		DPI:     dpi,
+	// 		Hinting: font.HintingFull,
+	// 	})
 }
 
 // Game es la estructura del juego
@@ -104,6 +108,8 @@ type Game struct {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
+	//textos
+	textos()
 
 	// game counter
 	g.count++
@@ -115,7 +121,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	moverViejo()
 
 	// vida
-	// vida()
+	vida()
+
+	gameOver()
 
 	return nil
 }
@@ -199,15 +207,52 @@ func moverViejo() {
 
 // vida estoy trabajando en esta funcion de abajo
 func vida() {
-	if vidas == vidtime {
-		time.Sleep(1 * time.Second)
+	nube = int(nubeX / 2.57)
+	if int(viejoX) > int(nube) && int(viejoX) < int(nube+120) && int(viejoY) < 375 && int(viejoY) > 226 {
+		v++
 	}
-	if int(viejoX) > int(nubeX) && int(viejoX) < int(nubeX+50) && int(viejoY) < 428 && int(viejoY) > 298 {
-		vidas = vidas - 1
-		vidtime = vidas
-		fmt.Println(vidas)
+	if v == 1 {
+		vidas--
 	}
+	if v == 30 {
+		v = 0
+	}
+}
 
+func textos() {
+	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	const dpi = 72
+
+	arcadeFont = truetype.NewFace(tt, &truetype.Options{
+		Size:    fontSize,
+		DPI:     dpi,
+		Hinting: font.HintingFull,
+	})
+	smallArcadeFont = truetype.NewFace(tt, &truetype.Options{
+		Size:    smallFontSize,
+		DPI:     dpi,
+		Hinting: font.HintingFull,
+	})
+}
+
+func gameOver() {
+
+	switch {
+	// case ModeTitle:
+	// 	texts = []string{"FLAPPY GOPHER", "", "", "", "", "PRESS SPACE KEY", "", "OR TOUCH SCREEN"}
+	case vidas == 0:
+		texts = []string{"", "GAME OVER!"}
+	}
+	for i, l := range texts {
+		//fmt.Println("paso por acas", i, len(l))
+
+		x := (screenWidth - len(l)*fontSize) / 2
+		//fmt.Println("esto x", x)
+		text.Draw(imgTiles, l, arcadeFont, x, (i+4)*fontSize, color.White)
+	}
 }
 
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
@@ -226,18 +271,26 @@ func moverNube() {
 		nubeX = float64(rand.Intn(screenWidth) + 300)
 		nubeY = float64(rand.Intn(400) + 600)
 		nubeAlphaUp = true
-		// time.Sleep(1 * time.Second)
-	}
-	// }
-
-	// cambiar dirección alpha
-	// if nubeAlpha < 1 {
-
-	// }
-	if nubeAlpha > 1 {
-		nubeAlphaUp = false
+		if nubeAlpha > 1 {
+			nubeAlphaUp = false
+		}
 	}
 }
+
+//Agus ver si el codigo de abajo no es mas bonito
+// 	nubeX--
+// 	switch {
+// 	case tmp == 0 && alpha < 1:
+// 		alpha += .003
+// 	case alpha > 1 && tmp != 1:
+// 		tmp = 1
+// 	case tmp == 1 && alpha > 0:
+// 		alpha -= .003
+// 	case alpha <= 0:
+// 		tmp = 0
+// 	}
+// }
+// }
 
 ////////////////////////////
 // Draw
