@@ -309,7 +309,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 }
 
-// Layout manja las dimensiones de pantalla
+// Layout maneja las dimensiones de pantalla
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return int(screenWidth), int(screenHeight)
 }
