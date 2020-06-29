@@ -323,7 +323,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar texto
 	lifes := fmt.Sprintf("Vidas:%02d", vidas)
-	text.Draw(screen, lifes, arcadeFont, fontSize, 40, color.Black)
+	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.Black)
 }
 
 // Layout manja las dimensiones de pantalla
