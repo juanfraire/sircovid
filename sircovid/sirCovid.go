@@ -36,6 +36,12 @@ const (
 )
 
 var (
+	ModeGame     int
+	ModeTitle    int
+	ModeGameOver int
+)
+
+var (
 	// imágenes
 	imgTiles *ebiten.Image
 	imgNube  *ebiten.Image
@@ -65,7 +71,7 @@ var (
 	//para start y game over
 	arcadeFont      font.Face
 	smallArcadeFont font.Face
-	texts           []string
+	texts           = []string{}
 
 	err error
 )
@@ -108,23 +114,31 @@ type Game struct {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
+
 	//textos
 	textos()
 
-	// game counter
-	g.count++
+	switch {
+	case ModeTitle == 0:
+		//StarGameOver()
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ModeTitle = 1
+		}
+	case ModeGame == 0 && vidas != 0:
 
-	// nube
-	moverNube()
+		// game counter
+		g.count++
 
-	// viejo
-	moverViejo()
+		// nube
+		moverNube()
 
-	// vida
-	vida()
+		// viejo
+		moverViejo()
 
-	gameOver()
-
+		// vida
+		vida()
+	case ModeGameOver == 0:
+	}
 	return nil
 }
 
@@ -237,22 +251,22 @@ func textos() {
 	})
 }
 
-func gameOver() {
+// func StarGameOver() {
 
-	switch {
-	// case ModeTitle:
-	// 	texts = []string{"FLAPPY GOPHER", "", "", "", "", "PRESS SPACE KEY", "", "OR TOUCH SCREEN"}
-	case vidas == 0:
-		texts = []string{"", "GAME OVER!"}
-	}
-	for i, l := range texts {
-		//fmt.Println("paso por acas", i, len(l))
+// 	switch {
+// 	case ModeTitle == 0:
+// 		texts = []string{"FLAPPY GOPHER", "", "", "", "", "PRESS SPACE KEY", "", "OR TOUCH SCREEN"}
+// 	case vidas == 0:
+// 		texts = []string{"", "GAME OVER!"}
+// 	}
+// 	for i, l := range texts {
+// 		//fmt.Println("paso por acas", i, len(l))
 
-		x := (screenWidth - len(l)*fontSize) / 2
-		//fmt.Println("esto x", x)
-		text.Draw(imgTiles, l, arcadeFont, x, (i+4)*fontSize, color.White)
-	}
-}
+// 		x := (screenWidth - len(l)*fontSize) / 2
+// 		//fmt.Println("esto x", x)
+// 		text.Draw(imgTiles, l, arcadeFont, x, (i+4)*fontSize, color.White)
+// 	}
+// }
 
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube() {
@@ -307,6 +321,19 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar texto
 	lifes := fmt.Sprintf("Vidas:%02d", vidas)
 	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.Black)
+
+	switch {
+	case ModeTitle == 0:
+		texts = []string{"SIRCOVID", "", "", "", "", "PRESS SPACE KEY"}
+	case ModeTitle == 1 && vidas != 0:
+		texts = []string{}
+	case vidas == 0:
+		texts = []string{"", "GAME OVER!"}
+	}
+	for i, l := range texts {
+		x := (screenWidth - len(l)*fontSize) / 2
+		text.Draw(screen, l, arcadeFont, x, (i+4)*fontSize, color.White)
+	}
 }
 
 // Layout manja las dimensiones de pantalla
