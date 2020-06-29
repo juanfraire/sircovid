@@ -65,7 +65,6 @@ var (
 	// vidas
 	vidas   = 3
 	vidtime int
-	nube    int
 	v       int
 
 	//para start y game over
@@ -211,8 +210,9 @@ func moverViejo() {
 
 // vida estoy trabajando en esta funcion de abajo
 func vida() {
-	nube = int(nubeX / 2.57)
-	if int(viejoX) > int(nube) && int(viejoX) < int(nube+120) && int(viejoY) < 375 && int(viejoY) > 226 {
+	nubeX := float64(nubeX * .4)
+	nubeY := float64(nubeY * .4)
+	if viejoX > nubeX && viejoX < nubeX+140 && viejoY > nubeY && viejoY < nubeY+140 {
 		v++
 	}
 	if v == 1 {
@@ -293,7 +293,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar texto
 	lifes := fmt.Sprintf("Vidas:%02d", vidas)
-	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.Black)
+	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
 
 	switch {
 	case ModeTitle == 0:
@@ -301,11 +301,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case ModeTitle == 1 && vidas != 0:
 		texts = []string{}
 	case vidas == 0:
-		texts = []string{"", "GAME OVER!"}
+		texts = []string{"", "", "", "", "", "GAME OVER!"}
 	}
 	for i, l := range texts {
 		x := (screenWidth - len(l)*fontSize) / 2
-		text.Draw(screen, l, arcadeFont, x, (i+4)*fontSize, color.White)
+		text.Draw(screen, l, arcadeFont, x, (i+5)*fontSize, color.White)
 	}
 }
 
