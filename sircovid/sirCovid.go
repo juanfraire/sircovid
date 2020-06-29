@@ -3,13 +3,18 @@ package main
 import (
 	"fmt"
 	"image"
+	"image/color"
 	_ "image/png"
 	"log"
 	"time"
 
+	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
+	"github.com/hajimehoshi/ebiten/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/inpututil"
+	"github.com/hajimehoshi/ebiten/text"
+	"golang.org/x/image/font"
 )
 
 const (
@@ -24,6 +29,9 @@ const (
 	// tiles
 	tileSize = 16
 	tileXNum = 48
+
+	// texto
+	fontSize = 20
 )
 
 var (
@@ -51,24 +59,37 @@ var (
 	vidas   = 3
 	vidtime int
 
+	// texto
+	arcadeFont font.Face
+
 	err error
 )
 
 // init carga los datos
 func init() {
 
-	imgTiles, _, err = ebitenutil.NewImageFromFile("sircovid/data/city2.png", ebiten.FilterDefault)
+	imgTiles, _, err = ebitenutil.NewImageFromFile(`C:\Aprendiendo Go\Games\sircovid\sircovid\data\city2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	imgViejo, _, err = ebitenutil.NewImageFromFile("sircovid/data/viejo.png", ebiten.FilterDefault)
+	imgViejo, _, err = ebitenutil.NewImageFromFile(`C:\Aprendiendo Go\Games\sircovid\sircovid\data\viejo.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	imgNube, _, err = ebitenutil.NewImageFromFile("sircovid/data/smoke.png", ebiten.FilterDefault)
+	imgNube, _, err = ebitenutil.NewImageFromFile(`C:\Aprendiendo Go\Games\sircovid\sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	const dpi = 72
+	arcadeFont = truetype.NewFace(tt, &truetype.Options{
+		Size:    fontSize,
+		DPI:     dpi,
+		Hinting: font.HintingFull,
+	})
 }
 
 // Game es la estructura del juego
@@ -93,7 +114,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	moverViejo()
 
 	// vida
-	vida()
+	// vida()
 
 	return nil
 }
@@ -175,7 +196,7 @@ func moverViejo() {
 	}
 }
 
-//vida estoy trabajando en esta funcion de abajo
+// vida estoy trabajando en esta funcion de abajo
 func vida() {
 	if vidas == vidtime {
 		time.Sleep(1 * time.Second)
@@ -233,6 +254,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op.ColorM.Scale(1, 3, 2, nubeAlpha)
 	op.GeoM.Scale(.4, .4)
 	screen.DrawImage(imgNube, op)
+
+	// dibujar texto
+	lifes := fmt.Sprintf("Vidas:%02d", vidas)
+	text.Draw(screen, lifes, arcadeFont, fontSize, 40, color.Black)
 }
 
 // Layout manja las dimensiones de pantalla
