@@ -27,9 +27,9 @@ const (
 	viejoFrameWidth  = 32
 	viejoFrameHeight = 48
 
-	// cobani
-	copFrameWidth  = 35
-	copFrameHeight = 60
+	//hombre
+	hombreFrameWidth  = 32
+	hombreFrameHeight = 48
 
 	// tiles
 	tileSize = 16
@@ -48,10 +48,10 @@ var (
 
 var (
 	// imágenes
-	imgTiles *ebiten.Image
-	imgNube  *ebiten.Image
-	imgViejo *ebiten.Image
-	imgCop   *ebiten.Image
+	imgTiles  *ebiten.Image
+	imgNube   *ebiten.Image
+	imgViejo  *ebiten.Image
+	imgHombre *ebiten.Image
 
 	// viejo
 	viejoFrameOX  = 0
@@ -62,17 +62,20 @@ var (
 	viejoMovX     int
 	viejoMovY     int
 
-	// cobani
-	copFrameOX  = 0
-	copFrameOY  = 0
-	copFrameNum = 4
+	//hombre
+	hombreFrameOX  = 0
+	hombreFrameOY  = 48
+	hombreFrameNum = 1
+	hombreX        = float64(750)
+	hombreY        = float64(300)
+	hombreMovX     int
+	hombreMovY     int
 
 	// nube
 	nubeX       = float64(rand.Intn(screenWidth) + 300)
 	nubeY       = float64(rand.Intn(200) + 600)
 	nubeAlpha   float64
 	nubeAlphaUp bool
-	scale       = float64(.4)
 
 	// vidas
 	vidas   = 3
@@ -99,8 +102,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Imagen cobani
-	imgCop, _, err = ebitenutil.NewImageFromFile(`sircovid\data\Cop.png`, ebiten.FilterDefault)
+	imgHombre, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -248,10 +250,11 @@ func moverViejo() {
 	}
 }
 
-// contador vidas--
+// vida estoy trabajando en esta funcion de abajo
 func vida() {
-	nubeX := float64(nubeX * scale)
-	nubeY := float64(nubeY * scale)
+	//pierde vidas con la nuve
+	nubeX := float64(nubeX * .4)
+	nubeY := float64(nubeY * .4)
 	if viejoX > nubeX && viejoX < nubeX+120 && viejoY > nubeY && viejoY < nubeY+120 {
 		v++
 	}
@@ -261,6 +264,8 @@ func vida() {
 	if v == 30 {
 		v = 0
 	}
+	//pierde vidas con el hombre
+
 }
 
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
@@ -307,20 +312,19 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	sx, sy := viejoFrameOX+i*viejoFrameWidth, viejoFrameOY
 	screen.DrawImage(imgViejo.SubImage(image.Rect(sx, sy, sx+viejoFrameWidth, sy+viejoFrameHeight)).(*ebiten.Image), op)
 
-	// dibujar cobani
+	//dibujar hombre
 	op = &ebiten.DrawImageOptions{}
-
-	// op.GeoM.Scale(.6, .6)
-	op.GeoM.Translate(float64(g.count), 380)
-	iCop := (g.count / 7) % copFrameNum
-	copSX, copSY := copFrameOX+iCop*copFrameWidth, copFrameOY
-	screen.DrawImage(imgCop.SubImage(image.Rect(copSX, copSY, copSX+copFrameWidth, copSY+copFrameHeight)).(*ebiten.Image), op)
+	op.GeoM.Scale(.7, .7)
+	op.GeoM.Translate(hombreX, hombreY)
+	j := (g.count / 7) % hombreFrameNum
+	hx, hy := hombreFrameOX+j*hombreFrameWidth, hombreFrameOY
+	screen.DrawImage(imgHombre.SubImage(image.Rect(hx, hy, hx+hombreFrameWidth, hy+hombreFrameHeight)).(*ebiten.Image), op)
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(nubeX, nubeY)
 	op.ColorM.Scale(1, 3, 2, nubeAlpha)
-	op.GeoM.Scale(scale, scale)
+	op.GeoM.Scale(.4, .4)
 	screen.DrawImage(imgNube, op)
 
 	// dibujar texto
