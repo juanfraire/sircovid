@@ -7,6 +7,7 @@ import (
 	_ "image/png"
 	"log"
 	"math/rand"
+	"time"
 
 	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten"
@@ -77,19 +78,37 @@ var (
 
 // init carga los datos
 func init() {
-
+	// Imagen city
 	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Imangen Viejo
 	imgViejo, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Imagen nube Covid
 	imgNube, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Textos
+	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	const dpi = 72
+	arcadeFont = truetype.NewFace(tt, &truetype.Options{
+		Size:    fontSize,
+		DPI:     dpi,
+		Hinting: font.HintingFull,
+	})
+	smallArcadeFont = truetype.NewFace(tt, &truetype.Options{
+		Size:    smallFontSize,
+		DPI:     dpi,
+		Hinting: font.HintingFull,
+	})
 }
 
 // Game es la estructura del juego
@@ -104,19 +123,15 @@ type Game struct {
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 
-	//textos
-	textos()
+	// game counter
+	g.count++
 
 	switch {
 	case ModeTitle == 0:
-		//StarGameOver()
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 1
 		}
 	case ModeGame == 0 && vidas != 0:
-
-		// game counter
-		g.count++
 
 		// nube
 		moverNube()
@@ -126,7 +141,16 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		// vida
 		vida()
+
 	case ModeGameOver == 0:
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ModeTitle = 0
+			vidas = 3
+			// nubeAlpha -= 1
+			// viejoX = 25
+			// viejoY = 375
+
+		}
 	}
 	return nil
 }
@@ -212,7 +236,7 @@ func moverViejo() {
 func vida() {
 	nubeX := float64(nubeX * .4)
 	nubeY := float64(nubeY * .4)
-	if viejoX > nubeX && viejoX < nubeX+140 && viejoY > nubeY && viejoY < nubeY+140 {
+	if viejoX > nubeX && viejoX < nubeX+120 && viejoY > nubeY && viejoY < nubeY+120 {
 		v++
 	}
 	if v == 1 {
@@ -223,32 +247,15 @@ func vida() {
 	}
 }
 
-func textos() {
-	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
-	if err != nil {
-		log.Fatal(err)
-	}
-	const dpi = 72
-	arcadeFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    fontSize,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-	smallArcadeFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    smallFontSize,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-}
-
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube() {
 	// creacion de nuevas nubes
 	if nubeAlpha <= 0 {
-		nubeX = float64(rand.Intn(screenWidth) + 500)
+		nubeX = float64(rand.Intn(1500))
 		nubeY = float64(rand.Intn(500) + 600)
 		nubeAlphaUp = true
 	} else if nubeAlpha > 1 {
+		time.Sleep(10000 * time.Microsecond)
 		nubeAlphaUp = false
 	}
 
@@ -301,7 +308,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case ModeTitle == 1 && vidas != 0:
 		texts = []string{}
 	case vidas == 0:
-		texts = []string{"", "", "", "", "", "GAME OVER!"}
+		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAYN?", "", "PRESS SPACE KEY"}
 	}
 	for i, l := range texts {
 		x := (screenWidth - len(l)*fontSize) / 2
