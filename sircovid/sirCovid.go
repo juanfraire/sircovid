@@ -254,12 +254,14 @@ func moverViejo() {
 	}
 }
 
-// vida estoy trabajando en esta funcion de abajo
 func vida() {
 	//pierde vidas con la nuve
 	nubeX := float64(nubeX * .4)
 	nubeY := float64(nubeY * .4)
 	if viejoX > nubeX && viejoX < nubeX+120 && viejoY > nubeY && viejoY < nubeY+120 {
+		v++
+	}
+	if viejoX > hombreX && viejoX < hombreX+32 && viejoY+48 > hombreY && viejoY < hombreY+48 {
 		v++
 	}
 	if v == 1 {
@@ -268,8 +270,6 @@ func vida() {
 	if v == 30 {
 		v = 0
 	}
-	//pierde vidas con el hombre
-
 }
 
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
