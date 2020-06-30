@@ -63,14 +63,15 @@ var (
 	viejoMovY     int
 
 	//hombre
-	hombreFrameOX  = 0
-	hombreFrameOY  = 48
-	hombreFrameNum = 1
-	hombreX        = float64(750)
-	hombreY        = float64(290)
-	hombreMovX     int
-	hombreMovY     int
-	a              int
+	hombreFrameOX             = 0
+	hombreFrameOY             = 48
+	hombreFrameNum            = 1
+	hombreX                   = float64(750)
+	hombreY                   = float64(290)
+	hombreMovX                int
+	hombreMovY                int
+	a, a1, a2, a3, a4, a5, a6 int
+	a7, a8, a9, a10           int
 
 	// nube
 	nubeX       = float64(rand.Intn(screenWidth) + 300)
@@ -298,23 +299,76 @@ func moverNube() {
 }
 
 func moverHombre() {
-
 	hombreFrameNum = 4
 	switch {
-	case hombreX > 228:
+	case a != 1:
+		hombreFrameOY = 48
+		hombreY = 290
 		hombreX--
-	case hombreX == 228 && a != 1:
+		if hombreX < 228 {
+			a = 1
+		}
+	case a == 1 && a1 != 1:
 		hombreFrameOY = 144
 		hombreY--
 		if hombreY == 137 {
-			a = 1
+			a1 = 1
 		}
-	case hombreY >= 137 && hombreY != 310:
+	case a1 == 1 && a2 != 1:
 		hombreFrameOY = 0
 		hombreY++
-	case hombreY == 310:
+		if hombreY == 310 {
+			a2 = 1
+		}
+	case a2 == 1 && a3 != 1:
 		hombreFrameOY = 48
 		hombreX--
+		if hombreX == -100 {
+			a3 = 1
+		}
+	case a3 == 1 && a4 != 1:
+		hombreFrameOY = 96
+		hombreY = 460
+		hombreX++
+		if hombreX == 20 {
+			a4 = 1
+		}
+	case a4 == 1 && a5 != 1:
+		hombreFrameOY = 144
+		hombreY--
+		if hombreY == 310 {
+			a5 = 1
+		}
+	case a5 == 1 && a6 != 1:
+		hombreFrameOY = 96
+		hombreX++
+		if hombreX == 228 {
+			a6 = 1
+		}
+	case a6 == 1 && a7 != 1:
+		hombreFrameOY = 144
+		hombreY--
+		if hombreY == 280 {
+			a7 = 1
+		}
+	case a7 == 1 && a8 != 1:
+		hombreFrameOY = 96
+		hombreX++
+		if hombreX == 370 {
+			a8 = 1
+		}
+	case a8 == 1 && a9 != 1:
+		hombreFrameOY = 0
+		hombreY++
+		if hombreY == 470 {
+			a9 = 1
+		}
+	case a9 == 1:
+		hombreFrameOY = 96
+		hombreX++
+		if hombreX == 800 {
+			a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+		}
 	}
 
 }
