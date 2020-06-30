@@ -341,7 +341,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	switch {
 	case ModeTitle == 0:
-		texts = []string{"SIRCOVID", "", "", "", "", "PRESS SPACE KEY"}
+		texts = []string{"SIR-COVID", "", "", "", "", "PRESS SPACE KEY"}
 	case ModeTitle == 1 && vidas != 0:
 		texts = []string{}
 	case vidas == 0:
