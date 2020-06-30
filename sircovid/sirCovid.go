@@ -6,6 +6,7 @@ import (
 	"image/color"
 	_ "image/png"
 	"log"
+	"math/rand"
 
 	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten"
@@ -56,19 +57,14 @@ var (
 	viejoMovY     int
 
 	// nube
-	nubeX     = float64(screenWidth + 1200)
-	nubeY     = float64(600)
-	nubeAlpha float64
-	tmp       int
-	// nubeX       = float64(screenWidth)
-	// nubeY       = float64(rand.Intn(200) + 600)
-	// nubeAlpha   float64
-	// nubeAlphaUp bool
+	nubeX       = float64(rand.Intn(screenWidth) + 300)
+	nubeY       = float64(rand.Intn(200) + 600)
+	nubeAlpha   float64
+	nubeAlphaUp bool
 
 	// vidas
 	vidas   = 3
 	vidtime int
-	nube    int
 	v       int
 
 	//para start y game over
@@ -94,16 +90,6 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// 	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// 	const dpi = 72
-	// 	arcadeFont = truetype.NewFace(tt, &truetype.Options{
-	// 		Size:    fontSize,
-	// 		DPI:     dpi,
-	// 		Hinting: font.HintingFull,
-	// 	})
 }
 
 // Game es la estructura del juego
@@ -224,8 +210,9 @@ func moverViejo() {
 
 // vida estoy trabajando en esta funcion de abajo
 func vida() {
-	nube = int(nubeX / 2.57)
-	if int(viejoX) > int(nube) && int(viejoX) < int(nube+120) && int(viejoY) < 375 && int(viejoY) > 226 {
+	nubeX := float64(nubeX * .4)
+	nubeY := float64(nubeY * .4)
+	if viejoX > nubeX && viejoX < nubeX+140 && viejoY > nubeY && viejoY < nubeY+140 {
 		v++
 	}
 	if v == 1 {
@@ -254,60 +241,29 @@ func textos() {
 	})
 }
 
-// func StarGameOver() {
-
-// 	switch {
-// 	case ModeTitle == 0:
-// 		texts = []string{"FLAPPY GOPHER", "", "", "", "", "PRESS SPACE KEY", "", "OR TOUCH SCREEN"}
-// 	case vidas == 0:
-// 		texts = []string{"", "GAME OVER!"}
-// 	}
-// 	for i, l := range texts {
-// 		//fmt.Println("paso por acas", i, len(l))
-
-// 		x := (screenWidth - len(l)*fontSize) / 2
-// 		//fmt.Println("esto x", x)
-// 		text.Draw(imgTiles, l, arcadeFont, x, (i+4)*fontSize, color.White)
-// 	}
-// }
-
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube() {
-	// if nubeAlpha >= 0 {
-	// 	nubeX--
-	// 	// }
+	// creacion de nuevas nubes
+	if nubeAlpha <= 0 {
+		nubeX = float64(rand.Intn(screenWidth) + 500)
+		nubeY = float64(rand.Intn(500) + 600)
+		nubeAlphaUp = true
+	} else if nubeAlpha > 1 {
+		nubeAlphaUp = false
+	}
 
-	// 	// // actualizar alpha
-	// 	if nubeAlphaUp {
-	// 		nubeAlpha += .009
-	// 	} else {
-	// 		nubeAlpha -= .003
-	// 	}
-	// 	if nubeAlpha <= 0 {
-	// 		nubeX = float64(rand.Intn(screenWidth) + 300)
-	// 		nubeY = float64(rand.Intn(400) + 600)
-	// 		nubeAlphaUp = true
-	// 		if nubeAlpha > 1 {
-	// 			nubeAlphaUp = false
-	// 		}
-	// 	}
-	// }
+	// movimiento nube
+	if nubeAlpha >= 0 {
+		nubeX--
+	}
 
-	//Agus ver si el codigo de abajo no es mas bonito
-	nubeX--
-	switch {
-	case tmp == 0 && nubeAlpha < 1:
-		nubeAlpha += .003
-	case nubeAlpha > 1 && tmp != 1:
-		tmp = 1
-	case tmp == 1 && nubeAlpha > 0:
+	// actualizar alpha
+	if nubeAlphaUp {
+		nubeAlpha += .009
+	} else {
 		nubeAlpha -= .003
-	case nubeAlpha <= 0:
-		tmp = 0
 	}
 }
-
-// }
 
 ////////////////////////////
 // Draw
@@ -337,7 +293,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar texto
 	lifes := fmt.Sprintf("Vidas:%02d", vidas)
-	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.Black)
+	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
 
 	switch {
 	case ModeTitle == 0:
@@ -345,15 +301,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case ModeTitle == 1 && vidas != 0:
 		texts = []string{}
 	case vidas == 0:
-		texts = []string{"", "GAME OVER!"}
+		texts = []string{"", "", "", "", "", "GAME OVER!"}
 	}
 	for i, l := range texts {
 		x := (screenWidth - len(l)*fontSize) / 2
-		text.Draw(screen, l, arcadeFont, x, (i+4)*fontSize, color.White)
+		text.Draw(screen, l, arcadeFont, x, (i+5)*fontSize, color.White)
 	}
 }
 
-// Layout manja las dimensiones de pantalla
+// Layout maneja las dimensiones de pantalla
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return int(screenWidth), int(screenHeight)
 }
