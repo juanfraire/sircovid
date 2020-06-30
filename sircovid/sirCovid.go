@@ -67,9 +67,10 @@ var (
 	hombreFrameOY  = 48
 	hombreFrameNum = 1
 	hombreX        = float64(750)
-	hombreY        = float64(300)
+	hombreY        = float64(290)
 	hombreMovX     int
 	hombreMovY     int
+	a              int
 
 	// nube
 	nubeX       = float64(rand.Intn(screenWidth) + 300)
@@ -159,6 +160,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		// vida
 		vida()
+
+		//hombre
+		moverHombre()
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -293,6 +297,28 @@ func moverNube() {
 	}
 }
 
+func moverHombre() {
+
+	hombreFrameNum = 4
+	switch {
+	case hombreX > 228:
+		hombreX--
+	case hombreX == 228 && a != 1:
+		hombreFrameOY = 144
+		hombreY--
+		if hombreY == 137 {
+			a = 1
+		}
+	case hombreY >= 137 && hombreY != 310:
+		hombreFrameOY = 0
+		hombreY++
+	case hombreY == 310:
+		hombreFrameOY = 48
+		hombreX--
+	}
+
+}
+
 ////////////////////////////
 // Draw
 ////////////////////////////
@@ -314,7 +340,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibujar hombre
 	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.7, .7)
+	op.GeoM.Scale(.8, .8)
 	op.GeoM.Translate(hombreX, hombreY)
 	j := (g.count / 7) % hombreFrameNum
 	hx, hy := hombreFrameOX+j*hombreFrameWidth, hombreFrameOY
