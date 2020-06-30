@@ -27,6 +27,10 @@ const (
 	viejoFrameWidth  = 32
 	viejoFrameHeight = 48
 
+	// cobani
+	copFrameWidth  = 35
+	copFrameHeight = 60
+
 	// tiles
 	tileSize = 16
 	tileXNum = 48
@@ -47,6 +51,7 @@ var (
 	imgTiles *ebiten.Image
 	imgNube  *ebiten.Image
 	imgViejo *ebiten.Image
+	imgCop   *ebiten.Image
 
 	// viejo
 	viejoFrameOX  = 0
@@ -57,11 +62,17 @@ var (
 	viejoMovX     int
 	viejoMovY     int
 
+	// cobani
+	copFrameOX  = 0
+	copFrameOY  = 0
+	copFrameNum = 4
+
 	// nube
 	nubeX       = float64(rand.Intn(screenWidth) + 300)
 	nubeY       = float64(rand.Intn(200) + 600)
 	nubeAlpha   float64
 	nubeAlphaUp bool
+	scale       = float64(.4)
 
 	// vidas
 	vidas   = 3
@@ -85,6 +96,11 @@ func init() {
 	}
 	// Imangen Viejo
 	imgViejo, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Imagen cobani
+	imgCop, _, err = ebitenutil.NewImageFromFile(`sircovid\data\Cop.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -232,10 +248,10 @@ func moverViejo() {
 	}
 }
 
-// vida estoy trabajando en esta funcion de abajo
+// contador vidas--
 func vida() {
-	nubeX := float64(nubeX * .4)
-	nubeY := float64(nubeY * .4)
+	nubeX := float64(nubeX * scale)
+	nubeY := float64(nubeY * scale)
 	if viejoX > nubeX && viejoX < nubeX+120 && viejoY > nubeY && viejoY < nubeY+120 {
 		v++
 	}
@@ -291,11 +307,20 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	sx, sy := viejoFrameOX+i*viejoFrameWidth, viejoFrameOY
 	screen.DrawImage(imgViejo.SubImage(image.Rect(sx, sy, sx+viejoFrameWidth, sy+viejoFrameHeight)).(*ebiten.Image), op)
 
+	// dibujar cobani
+	op = &ebiten.DrawImageOptions{}
+
+	// op.GeoM.Scale(.6, .6)
+	op.GeoM.Translate(float64(g.count), 380)
+	iCop := (g.count / 7) % copFrameNum
+	copSX, copSY := copFrameOX+iCop*copFrameWidth, copFrameOY
+	screen.DrawImage(imgCop.SubImage(image.Rect(copSX, copSY, copSX+copFrameWidth, copSY+copFrameHeight)).(*ebiten.Image), op)
+
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(nubeX, nubeY)
 	op.ColorM.Scale(1, 3, 2, nubeAlpha)
-	op.GeoM.Scale(.4, .4)
+	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(imgNube, op)
 
 	// dibujar texto
