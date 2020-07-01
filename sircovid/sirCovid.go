@@ -45,7 +45,8 @@ const (
 )
 
 var (
-	ModeGame     int
+	ModeGame int
+
 	ModeTitle    int
 	ModeGameOver int
 )
@@ -59,13 +60,14 @@ var (
 	imgBarbijo *ebiten.Image
 
 	// viejo
-	viejoFrameOX  = 0
-	viejoFrameOY  = 96
-	viejoFrameNum = 1
-	viejoX        = float64(25)
-	viejoY        = float64(375)
-	viejoMovX     int
-	viejoMovY     int
+	viejoFrameOX    = 0
+	viejoFrameOY    = 96
+	viejoFrameNum   = 1
+	viejoX          = float64(25)
+	viejoY          = float64(375)
+	posicionInicial int
+	viejoMovX       int
+	viejoMovY       int
 
 	//hombre
 	hombreFrameOX             = 0
@@ -167,7 +169,28 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 1
 		}
+	case ModeTitle == 2:
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ModeTitle = 3
+		}
 	case ModeGame == 0 && vidas != 0:
+
+		// nube
+		moverNube()
+
+		// viejo
+		moverViejo()
+
+		// vida
+		vida()
+
+		//hombre
+		moverHombre()
+
+		//pasar de nivel
+		siguienteNivel()
+
+	case ModeGame == 1 && vidas != 0:
 
 		// nube
 		moverNube()
@@ -229,6 +252,13 @@ func moverViejo() {
 	}
 
 	// transladar viejo
+
+	if ModeGame == 1 && posicionInicial != 1 {
+		viejoX = float64(25)
+		viejoY = float64(375)
+		posicionInicial = 1
+	}
+
 	var viejoX1 = viejoX
 	var viejoY1 = viejoY
 	switch {
@@ -241,7 +271,6 @@ func moverViejo() {
 	case viejoMovY == 2:
 		viejoY++
 	}
-	fmt.Println(viejoX, viejoY)
 	// restringir viejo
 	switch {
 	case viejoY < 300 && viejoX > 20 && viejoX < 214:
@@ -269,6 +298,8 @@ func moverViejo() {
 		viejoY = viejoY1
 		viejoFrameNum = 1
 	}
+	fmt.Println(viejoX, viejoY)
+
 }
 
 func vida() {
@@ -390,6 +421,14 @@ func moverHombre() {
 			a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 		}
 	}
+
+}
+func siguienteNivel() {
+	if viejoX > 750 && viejoY > 450 {
+		fmt.Println("paso por aca")
+		ModeTitle = 2
+		ModeGame = 1
+	}
 }
 
 ////////////////////////////
@@ -439,9 +478,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	switch {
 	case ModeTitle == 0:
-		texts = []string{"SIR-COVID", "", "", "", "", "PRESS SPACE KEY"}
+		texts = []string{"SIR-COVID", "", "PRIMER NIVEL", "", "", "PRESS SPACE KEY"}
 	case ModeTitle == 1 && vidas != 0:
 		texts = []string{}
+
+	case ModeTitle == 2:
+		texts = []string{"", "", "SEGUNDO NIVEL", "", "", "PRESS SPACE KEY"}
+	case ModeTitle == 3 && vidas != 0:
+		texts = []string{}
+
 	case vidas == 0:
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAYN?", "", "PRESS SPACE KEY"}
 	}
