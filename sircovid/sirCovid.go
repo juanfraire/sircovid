@@ -31,6 +31,10 @@ const (
 	hombreFrameWidth  = 32
 	hombreFrameHeight = 48
 
+	//barbijo
+	barbijoFrameWidth  = 105
+	barbijoFrameHeight = 48
+
 	// tiles
 	tileSize = 16
 	tileXNum = 48
@@ -48,10 +52,11 @@ var (
 
 var (
 	// imágenes
-	imgTiles  *ebiten.Image
-	imgNube   *ebiten.Image
-	imgViejo  *ebiten.Image
-	imgHombre *ebiten.Image
+	imgTiles   *ebiten.Image
+	imgNube    *ebiten.Image
+	imgViejo   *ebiten.Image
+	imgHombre  *ebiten.Image
+	imgBarbijo *ebiten.Image
 
 	// viejo
 	viejoFrameOX  = 0
@@ -78,6 +83,13 @@ var (
 	nubeY       = float64(rand.Intn(200) + 600)
 	nubeAlpha   float64
 	nubeAlphaUp bool
+
+	//barbijo
+	barbijoFrameOX  = 0
+	barbijoFrameOY  = 74
+	barbijoFrameNum = 1
+	barbijoX        = float64(630)
+	barbijoY        = float64(150)
 
 	// vidas
 	vidas   = 3
@@ -110,6 +122,10 @@ func init() {
 	}
 	// Imagen nube Covid
 	imgNube, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	imgBarbijo, _, err = ebitenutil.NewImageFromFile(`sircovid\data\barbijo.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -225,7 +241,7 @@ func moverViejo() {
 	case viejoMovY == 2:
 		viejoY++
 	}
-
+	fmt.Println(viejoX, viejoY)
 	// restringir viejo
 	switch {
 	case viejoY < 300 && viejoX > 20 && viejoX < 214:
@@ -264,6 +280,10 @@ func vida() {
 	}
 	if viejoX > hombreX && viejoX < hombreX+32 && viejoY+48 > hombreY && viejoY < hombreY+48 {
 		v++
+	}
+	if viejoX > barbijoX && viejoX < barbijoX+32 && viejoY+48 > barbijoY && viejoY < barbijoY+48 {
+		vidas++
+		barbijoX = 1000
 	}
 	if v == 1 {
 		vidas--
@@ -370,7 +390,6 @@ func moverHombre() {
 			a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 		}
 	}
-
 }
 
 ////////////////////////////
@@ -406,6 +425,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op.ColorM.Scale(1, 3, 2, nubeAlpha)
 	op.GeoM.Scale(.4, .4)
 	screen.DrawImage(imgNube, op)
+
+	// dibujar barbijo
+	op = &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(.5, .5)
+	op.GeoM.Translate(barbijoX, barbijoY)
+	bx, by := barbijoFrameOX+barbijoFrameWidth, barbijoFrameOY
+	screen.DrawImage(imgBarbijo.SubImage(image.Rect(bx, by, bx+barbijoFrameWidth, by+barbijoFrameHeight)).(*ebiten.Image), op)
 
 	// dibujar texto
 	lifes := fmt.Sprintf("Vidas:%02d", vidas)
