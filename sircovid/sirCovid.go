@@ -277,7 +277,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player1 = moverPlayer(player1)
 
 		// vida
-		vida(mujer, viejo)
+		vida(mujer, player1)
 
 		//hombre
 		mujer = moverHumanos(mujer)
