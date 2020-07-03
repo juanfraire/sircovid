@@ -206,7 +206,8 @@ type Game struct {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
-
+	ragtimeContext.SetVolume(.5)
+	ragtimeContext.Play()
 	if ModeTitle == 0 {
 		hombre.FrameOX = 0
 		hombre.FrameOY = 48
@@ -250,8 +251,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModeTitle = 3
 		}
 	case ModeGame == 0 && vidas != 0:
-		ragtimeContext.SetVolume(.5)
-		ragtimeContext.Play()
 
 		// nube
 		moverNube()
@@ -285,18 +284,19 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 	case ModeGameOver == 0:
 		ragtimeContext.Pause()
-		time.Sleep(time.Millisecond * 150)
+		time.Sleep(time.Millisecond * 100)
 		deadSound2.SetVolume(.4)
 		deadSound2.Play()
 		ragtimeContext.Rewind()
 
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-			ModeTitle = 0
+			ModeGame = 0
 			vidas = 3
 			// nubeAlpha -= 1
 			// viejoX = 25
 			// viejoY = 375
 		}
+
 	}
 	return nil
 }
