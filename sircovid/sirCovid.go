@@ -25,6 +25,24 @@ import (
 	"github.com/hajimehoshi/ebiten/text"
 )
 
+type humanos struct {
+	FrameOX     int
+	FrameOY     int
+	FrameNum    int
+	X           float64
+	Y           float64
+	MovX        int
+	MovY        int
+	FrameWidth  int
+	FrameHeight int
+	img         *ebiten.Image
+}
+
+//hombre
+var hombre humanos
+var mujer humanos
+var humano humanos
+
 const (
 	// game
 	screenWidth  = 768
@@ -33,10 +51,6 @@ const (
 	// viejo
 	viejoFrameWidth  = 32
 	viejoFrameHeight = 48
-
-	//hombre
-	hombreFrameWidth  = 32
-	hombreFrameHeight = 48
 
 	//barbijo
 	barbijoFrameWidth  = 105
@@ -63,7 +77,6 @@ var (
 	imgTiles   *ebiten.Image
 	imgNube    *ebiten.Image
 	imgViejo   *ebiten.Image
-	imgHombre  *ebiten.Image
 	imgBarbijo *ebiten.Image
 
 	// viejo
@@ -76,14 +89,7 @@ var (
 	viejoMovX       int
 	viejoMovY       int
 
-	//hombre
-	hombreFrameOX             = 0
-	hombreFrameOY             = 48
-	hombreFrameNum            = 1
-	hombreX                   = float64(750)
-	hombreY                   = float64(290)
-	hombreMovX                int
-	hombreMovY                int
+	//para mover humanos
 	a, a1, a2, a3, a4, a5, a6 int
 	a7, a8, a9, a10           int
 
@@ -125,7 +131,11 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	imgHombre, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
+	hombre.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	mujer.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mujer.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -209,13 +219,31 @@ type Game struct {
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 
+	if ModeTitle == 0 {
+		hombre.FrameOX = 0
+		hombre.FrameOY = 48
+		hombre.FrameNum = 1
+		hombre.X = float64(750)
+		hombre.Y = float64(290)
+		hombre.FrameWidth = 32
+		hombre.FrameHeight = 48
+
+		mujer.FrameOX = 0
+		mujer.FrameOY = 48
+		mujer.FrameNum = 1
+		mujer.X = float64(750)
+		mujer.Y = float64(290)
+		mujer.FrameWidth = 32
+		mujer.FrameHeight = 48
+		humano = hombre
+	}
+
 	// game counter
 	g.count++
 
 	switch {
 	case ModeTitle == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-
 			ModeTitle = 1
 		}
 	case ModeTitle == 2:
@@ -233,16 +261,16 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		moverViejo()
 
 		// vida
-		vida()
+		vida(hombre)
 
 		//hombre
-		moverHombre()
+		hombre = moverHumanos(hombre)
+		humano = hombre
 
 		//pasar de nivel
 		siguienteNivel()
 
 	case ModeGame == 1 && vidas != 0:
-
 		// nube
 		moverNube()
 
@@ -250,10 +278,11 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		moverViejo()
 
 		// vida
-		vida()
+		vida(mujer)
 
 		//hombre
-		moverHombre()
+		mujer = moverHumanos(mujer)
+		humano = mujer
 
 	case ModeGameOver == 0:
 		ragtimeContext.Pause()
@@ -265,7 +294,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		ragtimeContext.Rewind()
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-
 			ModeTitle = 0
 			vidas = 3
 			// nubeAlpha -= 1
@@ -361,15 +389,14 @@ func moverViejo() {
 	fmt.Println(viejoX, viejoY)
 
 }
-
-func vida() {
+func vida(h humanos) {
 	//pierde vidas con la nuve
 	nubeX := float64(nubeX * .4)
 	nubeY := float64(nubeY * .4)
 	if viejoX > nubeX && viejoX < nubeX+120 && viejoY > nubeY && viejoY < nubeY+120 {
 		v++
 	}
-	if viejoX > hombreX && viejoX < hombreX+32 && viejoY+48 > hombreY && viejoY < hombreY+48 {
+	if viejoX > h.X && viejoX < h.X+32 && viejoY+48 > h.Y && viejoY < h.Y+48 {
 		v++
 	}
 	if viejoX > barbijoX && viejoX < barbijoX+32 && viejoY+48 > barbijoY && viejoY < barbijoY+48 {
@@ -377,8 +404,6 @@ func vida() {
 		barbijoX = 1000
 	}
 	if v == 1 {
-		deadSound.Rewind()
-		deadSound.Play()
 		vidas--
 	}
 	if v == 30 {
@@ -411,83 +436,94 @@ func moverNube() {
 	}
 }
 
-func moverHombre() {
-	hombreFrameNum = 4
+func moverHumanos(h humanos) humanos {
+	h.FrameNum = 4
 	switch {
 	case a != 1:
-		hombreFrameOY = 48
-		hombreY = 290
-		hombreX--
-		if hombreX < 228 {
+		h.FrameOY = 48
+		h.Y = 290
+		h.X--
+		if h.X < 228 {
 			a = 1
 		}
+		return h
 	case a == 1 && a1 != 1:
-		hombreFrameOY = 144
-		hombreY--
-		if hombreY == 137 {
+		h.FrameOY = 144
+		h.Y--
+		if h.Y == 137 {
 			a1 = 1
 		}
+		return h
 	case a1 == 1 && a2 != 1:
-		hombreFrameOY = 0
-		hombreY++
-		if hombreY == 310 {
+		h.FrameOY = 0
+		h.Y++
+		if h.Y == 310 {
 			a2 = 1
 		}
+		return h
 	case a2 == 1 && a3 != 1:
-		hombreFrameOY = 48
-		hombreX--
-		if hombreX == -100 {
+		h.FrameOY = 48
+		h.X--
+		if h.X == -100 {
 			a3 = 1
 		}
+		return h
 	case a3 == 1 && a4 != 1:
-		hombreFrameOY = 96
-		hombreY = 460
-		hombreX++
-		if hombreX == 20 {
+		h.FrameOY = 96
+		h.Y = 460
+		h.X++
+		if h.X == 20 {
 			a4 = 1
 		}
+		return h
 	case a4 == 1 && a5 != 1:
-		hombreFrameOY = 144
-		hombreY--
-		if hombreY == 310 {
+		h.FrameOY = 144
+		h.Y--
+		if h.Y == 310 {
 			a5 = 1
 		}
+		return h
 	case a5 == 1 && a6 != 1:
-		hombreFrameOY = 96
-		hombreX++
-		if hombreX == 228 {
+		h.FrameOY = 96
+		h.X++
+		if h.X == 228 {
 			a6 = 1
 		}
+		return h
 	case a6 == 1 && a7 != 1:
-		hombreFrameOY = 144
-		hombreY--
-		if hombreY == 280 {
+		h.FrameOY = 144
+		h.Y--
+		if h.Y == 280 {
 			a7 = 1
 		}
+		return h
 	case a7 == 1 && a8 != 1:
-		hombreFrameOY = 96
-		hombreX++
-		if hombreX == 370 {
+		h.FrameOY = 96
+		h.X++
+		if h.X == 370 {
 			a8 = 1
 		}
+		return h
 	case a8 == 1 && a9 != 1:
-		hombreFrameOY = 0
-		hombreY++
-		if hombreY == 470 {
+		h.FrameOY = 0
+		h.Y++
+		if h.Y == 470 {
 			a9 = 1
 		}
+		return h
 	case a9 == 1:
-		hombreFrameOY = 96
-		hombreX++
-		if hombreX == 800 {
+		h.FrameOY = 96
+		h.X++
+		if h.X == 800 {
 			a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 		}
+		return h
 	}
+	return h
 
 }
 func siguienteNivel() {
 	if viejoX > 750 && viejoY > 450 {
-		fmt.Println("paso por aca")
 		ModeTitle = 2
 		ModeGame = 1
 	}
@@ -512,13 +548,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	sx, sy := viejoFrameOX+i*viejoFrameWidth, viejoFrameOY
 	screen.DrawImage(imgViejo.SubImage(image.Rect(sx, sy, sx+viejoFrameWidth, sy+viejoFrameHeight)).(*ebiten.Image), op)
 
-	//dibujar hombre
+	//dibujar humano
 	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(.8, .8)
-	op.GeoM.Translate(hombreX, hombreY)
-	j := (g.count / 7) % hombreFrameNum
-	hx, hy := hombreFrameOX+j*hombreFrameWidth, hombreFrameOY
-	screen.DrawImage(imgHombre.SubImage(image.Rect(hx, hy, hx+hombreFrameWidth, hy+hombreFrameHeight)).(*ebiten.Image), op)
+	op.GeoM.Translate(humano.X, humano.Y)
+	j := (g.count / 7) % humano.FrameNum
+	hx, hy := humano.FrameOX+j*humano.FrameWidth, humano.FrameOY
+	screen.DrawImage(humano.img.SubImage(image.Rect(hx, hy, hx+humano.FrameWidth, hy+humano.FrameHeight)).(*ebiten.Image), op)
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
