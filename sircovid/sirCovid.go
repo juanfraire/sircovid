@@ -10,12 +10,18 @@ import (
 	"time"
 
 	"github.com/golang/freetype/truetype"
+	"golang.org/x/image/font"
+
+	// "golang.ge/font"
+
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/audio"
+	"github.com/hajimehoshi/ebiten/audio/vorbis"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
+	raudio "github.com/hajimehoshi/ebiten/examples/resources/audio"
 	"github.com/hajimehoshi/ebiten/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/inpututil"
 	"github.com/hajimehoshi/ebiten/text"
-	"golang.org/x/image/font"
 )
 
 const (
@@ -149,6 +155,37 @@ func init() {
 	})
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////// AUDIO (separado variables y func init momentaneamente)///////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+var (
+	audioContext   *audio.Context
+	ragtimeContext *audio.Player
+	// hitPlayer    *audio.Player
+)
+
+func init() {
+	audioContext, _ = audio.NewContext(44100)
+
+	ragtimeD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Ragtime_ogg))
+	if err != nil {
+		log.Fatal(err)
+	}
+	ragtimeContext, err = audio.NewPlayer(audioContext, ragtimeD)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// jabD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jab_wav))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// hitPlayer, err = audio.NewPlayer(audioContext, jabD)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+}
+
 // Game es la estructura del juego
 type Game struct {
 	count int
@@ -160,7 +197,7 @@ type Game struct {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
-
+	ragtimeContext.Play()
 	// game counter
 	g.count++
 
