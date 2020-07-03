@@ -37,20 +37,24 @@ type humanos struct {
 	FrameHeight int
 	img         *ebiten.Image
 }
+type player struct {
+	humanos
+	posicionInicial int
+}
 
 //hombre
 var hombre humanos
 var mujer humanos
 var humano humanos
 
+//viejo
+var viejo player
+var player1 player
+
 const (
 	// game
 	screenWidth  = 768
 	screenHeight = 528
-
-	// viejo
-	viejoFrameWidth  = 32
-	viejoFrameHeight = 48
 
 	//barbijo
 	barbijoFrameWidth  = 105
@@ -66,8 +70,7 @@ const (
 )
 
 var (
-	ModeGame int
-
+	ModeGame     int
 	ModeTitle    int
 	ModeGameOver int
 )
@@ -76,18 +79,7 @@ var (
 	// imágenes
 	imgTiles   *ebiten.Image
 	imgNube    *ebiten.Image
-	imgViejo   *ebiten.Image
 	imgBarbijo *ebiten.Image
-
-	// viejo
-	viejoFrameOX    = 0
-	viejoFrameOY    = 96
-	viejoFrameNum   = 1
-	viejoX          = float64(25)
-	viejoY          = float64(375)
-	posicionInicial int
-	viejoMovX       int
-	viejoMovY       int
 
 	//para mover humanos
 	a, a1, a2, a3, a4, a5, a6 int
@@ -127,7 +119,7 @@ func init() {
 		log.Fatal(err)
 	}
 	// Imangen Viejo
-	imgViejo, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
+	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -236,6 +228,17 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		mujer.FrameWidth = 32
 		mujer.FrameHeight = 48
 		humano = hombre
+
+		// viejo
+		viejo.FrameOX = 0
+		viejo.FrameOY = 96
+		viejo.FrameNum = 1
+		viejo.X = float64(25)
+		viejo.Y = float64(375)
+		viejo.FrameWidth = 32
+		viejo.FrameHeight = 48
+		player1 = viejo
+
 	}
 
 	// game counter
@@ -258,27 +261,27 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		moverNube()
 
 		// viejo
-		moverViejo()
+		player1 = moverPlayer(player1)
 
 		// vida
-		vida(hombre)
+		vida(hombre, player1)
 
 		//hombre
 		hombre = moverHumanos(hombre)
 		humano = hombre
 
 		//pasar de nivel
-		siguienteNivel()
+		siguienteNivel(player1)
 
 	case ModeGame == 1 && vidas != 0:
 		// nube
 		moverNube()
 
 		// viejo
-		moverViejo()
+		player1 = moverPlayer(player1)
 
 		// vida
-		vida(mujer)
+		vida(mujer, viejo)
 
 		//hombre
 		mujer = moverHumanos(mujer)
@@ -299,107 +302,141 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			// nubeAlpha -= 1
 			// viejoX = 25
 			// viejoY = 375
-
 		}
 	}
 	return nil
 }
 
 // moverViejo recorte de imagen segun la direccion de movimiento del viejo
-func moverViejo() {
+func moverPlayer(p player) player {
 	// leer tecla
 	switch {
-	case inpututil.IsKeyJustPressed(ebiten.KeyRight) && viejoMovY != 1 && viejoMovY != 2:
-		viejoFrameOY = 96
-		viejoFrameNum = 3
-		viejoMovX = 1
-	case inpututil.IsKeyJustReleased(ebiten.KeyRight) && viejoMovY != 1 && viejoMovY != 2:
-		viejoFrameNum = 1
-		viejoMovX = 0
-	case inpututil.IsKeyJustPressed(ebiten.KeyLeft) && viejoMovY != 1 && viejoMovY != 2:
-		viejoFrameOY = 48
-		viejoFrameNum = 3
-		viejoMovX = 2
-	case inpututil.IsKeyJustReleased(ebiten.KeyLeft) && viejoMovY != 1 && viejoMovY != 2:
-		viejoFrameNum = 1
-		viejoMovX = 0
-	case inpututil.IsKeyJustPressed(ebiten.KeyUp) && viejoMovX != 1 && viejoMovX != 2:
-		viejoFrameOY = 144
-		viejoFrameNum = 3
-		viejoMovY = 1
-	case inpututil.IsKeyJustReleased(ebiten.KeyUp) && viejoMovX != 1 && viejoMovX != 2:
-		viejoFrameNum = 1
-		viejoMovY = 0
-	case inpututil.IsKeyJustPressed(ebiten.KeyDown) && viejoMovX != 1 && viejoMovX != 2:
-		viejoFrameOY = 0
-		viejoFrameNum = 3
-		viejoMovY = 2
-	case inpututil.IsKeyJustReleased(ebiten.KeyDown) && viejoMovX != 1 && viejoMovX != 2:
-		viejoFrameNum = 1
-		viejoMovY = 0
+	case inpututil.IsKeyJustPressed(ebiten.KeyRight) && p.MovY != 1 && p.MovY != 2:
+		p.FrameOY = 96
+		p.FrameNum = 3
+		p.MovX = 1
+		return p
+	case inpututil.IsKeyJustReleased(ebiten.KeyRight) && p.MovY != 1 && p.MovY != 2:
+		p.FrameNum = 1
+		p.MovX = 0
+		return p
+
+	case inpututil.IsKeyJustPressed(ebiten.KeyLeft) && p.MovY != 1 && p.MovY != 2:
+		p.FrameOY = 48
+		p.FrameNum = 3
+		p.MovX = 2
+		return p
+
+	case inpututil.IsKeyJustReleased(ebiten.KeyLeft) && p.MovY != 1 && p.MovY != 2:
+		p.FrameNum = 1
+		p.MovX = 0
+		return p
+
+	case inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.MovX != 1 && p.MovX != 2:
+		p.FrameOY = 144
+		p.FrameNum = 3
+		p.MovY = 1
+		return p
+
+	case inpututil.IsKeyJustReleased(ebiten.KeyUp) && p.MovX != 1 && p.MovX != 2:
+		p.FrameNum = 1
+		p.MovY = 0
+		return p
+
+	case inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.MovX != 1 && p.MovX != 2:
+		p.FrameOY = 0
+		p.FrameNum = 3
+		p.MovY = 2
+		return p
+
+	case inpututil.IsKeyJustReleased(ebiten.KeyDown) && p.MovX != 1 && p.MovX != 2:
+		p.FrameNum = 1
+		p.MovY = 0
+		return p
+
 	}
 
 	// transladar viejo
 
-	if ModeGame == 1 && posicionInicial != 1 {
-		viejoX = float64(25)
-		viejoY = float64(375)
-		posicionInicial = 1
+	if ModeGame == 1 && p.posicionInicial != 1 {
+		p.X = float64(25)
+		p.Y = float64(375)
+		p.posicionInicial = 1
 	}
 
-	var viejoX1 = viejoX
-	var viejoY1 = viejoY
+	var X1 = p.X
+	var Y1 = p.Y
 	switch {
-	case viejoMovX == 1:
-		viejoX++
-	case viejoMovX == 2:
-		viejoX--
-	case viejoMovY == 1:
-		viejoY--
-	case viejoMovY == 2:
-		viejoY++
+	case p.MovX == 1:
+		p.X++
+		return p
+
+	case p.MovX == 2:
+		p.X--
+		return p
+
+	case p.MovY == 1:
+		p.Y--
+		return p
+
+	case p.MovY == 2:
+		p.Y++
+		return p
+
 	}
 	// restringir viejo
 	switch {
-	case viejoY < 300 && viejoX > 20 && viejoX < 214:
-		viejoX = viejoX1
-		viejoY = viejoY1
-		viejoFrameNum = 1
-	case viejoY < 130 && viejoX > 214 && viejoX < 768:
-		viejoX = viejoX1
-		viejoY = viejoY1
-		viejoFrameNum = 1
-	case viejoY < 270 && viejoX > 240 && viejoX < 610:
-		viejoX = viejoX1
-		viejoY = viejoY1
-		viejoFrameNum = 1
-	case viejoY < 270 && viejoX > 675 && viejoX < 768:
-		viejoX = viejoX1
-		viejoY = viejoY1
-		viejoFrameNum = 1
-	case viejoY > 335 && viejoY < 528 && viejoX > 40 && viejoX < 350:
-		viejoX = viejoX1
-		viejoY = viejoY1
-		viejoFrameNum = 1
-	case viejoY > 310 && viejoY < 450 && viejoX > 390 && viejoX < 630:
-		viejoX = viejoX1
-		viejoY = viejoY1
-		viejoFrameNum = 1
+	case p.Y < 300 && p.X > 20 && p.X < 214:
+		p.X = X1
+		p.Y = Y1
+		p.FrameNum = 1
+		return p
+
+	case p.Y < 130 && p.X > 214 && p.X < 768:
+		p.X = X1
+		p.Y = Y1
+		p.FrameNum = 1
+		return p
+
+	case p.Y < 270 && p.X > 240 && p.X < 610:
+		p.X = X1
+		p.Y = Y1
+		p.FrameNum = 1
+		return p
+
+	case p.Y < 270 && p.X > 675 && p.X < 768:
+		p.X = X1
+		p.Y = Y1
+		p.FrameNum = 1
+		return p
+
+	case p.Y > 335 && p.Y < 528 && p.X > 40 && p.X < 350:
+		p.X = X1
+		p.Y = Y1
+		p.FrameNum = 1
+		return p
+
+	case p.Y > 310 && p.Y < 450 && p.X > 390 && p.X < 630:
+		p.X = X1
+		p.Y = Y1
+		p.FrameNum = 1
+		return p
+
 	}
-	fmt.Println(viejoX, viejoY)
+	return p
 
 }
-func vida(h humanos) {
+func vida(h humanos, p player) player {
 	//pierde vidas con la nuve
 	nubeX := float64(nubeX * .4)
 	nubeY := float64(nubeY * .4)
-	if viejoX > nubeX && viejoX < nubeX+120 && viejoY > nubeY && viejoY < nubeY+120 {
+	if p.X > nubeX && p.X < nubeX+120 && p.Y > nubeY && p.Y < nubeY+120 {
 		v++
 	}
-	if viejoX > h.X && viejoX < h.X+32 && viejoY+48 > h.Y && viejoY < h.Y+48 {
+	if p.X > h.X && p.X < h.X+32 && p.Y+48 > h.Y && p.Y < h.Y+48 {
 		v++
 	}
-	if viejoX > barbijoX && viejoX < barbijoX+32 && viejoY+48 > barbijoY && viejoY < barbijoY+48 {
+	if p.X > barbijoX && p.X < barbijoX+32 && p.Y+48 > barbijoY && p.Y < barbijoY+48 {
 		vidas++
 		barbijoX = 1000
 	}
@@ -409,6 +446,7 @@ func vida(h humanos) {
 	if v == 30 {
 		v = 0
 	}
+	return p
 }
 
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
@@ -522,8 +560,8 @@ func moverHumanos(h humanos) humanos {
 	return h
 
 }
-func siguienteNivel() {
-	if viejoX > 750 && viejoY > 450 {
+func siguienteNivel(p player) {
+	if p.X > 750 && p.Y > 450 {
 		ModeTitle = 2
 		ModeGame = 1
 	}
@@ -541,12 +579,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	screen.DrawImage(imgTiles, op)
 
-	// dibujar viejo
+	// dibujar player
 	op.GeoM.Scale(.7, .7)
-	op.GeoM.Translate(viejoX, viejoY)
-	i := (g.count / 7) % viejoFrameNum
-	sx, sy := viejoFrameOX+i*viejoFrameWidth, viejoFrameOY
-	screen.DrawImage(imgViejo.SubImage(image.Rect(sx, sy, sx+viejoFrameWidth, sy+viejoFrameHeight)).(*ebiten.Image), op)
+	op.GeoM.Translate(player1.X, player1.Y)
+	i := (g.count / 7) % player1.FrameNum
+	sx, sy := player1.FrameOX+i*player1.FrameWidth, player1.FrameOY
+	screen.DrawImage(player1.img.SubImage(image.Rect(sx, sy, sx+player1.FrameWidth, sy+player1.FrameHeight)).(*ebiten.Image), op)
 
 	//dibujar humano
 	op = &ebiten.DrawImageOptions{}
