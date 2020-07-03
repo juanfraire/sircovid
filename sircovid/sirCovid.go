@@ -81,6 +81,12 @@ var (
 	imgNube    *ebiten.Image
 	imgBarbijo *ebiten.Image
 
+	// sonido
+	audioContext   *audio.Context
+	ragtimeContext *audio.Player
+	deadSound      *audio.Player
+	deadSound2     *audio.Player
+
 	//para mover humanos
 	a, a1, a2, a3, a4, a5, a6 int
 	a7, a8, a9, a10           int
@@ -113,12 +119,12 @@ var (
 
 // init carga los datos
 func init() {
-	// Imagen city
+	//////////////   Imagen CITY  ////////////////////////////////
 	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Imangen Viejo
+	//////////////   Imangen VIEJO  //////////////////////////////
 	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -131,7 +137,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Imagen nube Covid
+	///////////// Imagen NUBE COVID ///////////////////
 	imgNube, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -140,35 +146,8 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Textos
-	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
-	if err != nil {
-		log.Fatal(err)
-	}
-	const dpi = 72
-	arcadeFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    fontSize,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-	smallArcadeFont = truetype.NewFace(tt, &truetype.Options{
-		Size:    smallFontSize,
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-}
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////// AUDIO (separado variables y func init momentaneamente)///////////////
-//////////////////////////////////////////////////////////////////////////////////////////////
-var (
-	audioContext   *audio.Context
-	ragtimeContext *audio.Player
-	deadSound      *audio.Player
-	deadSound2     *audio.Player
-)
-
-func init() {
+	////////////// SONIDOS //////////////
 	audioContext, _ = audio.NewContext(44100)
 
 	ragtimeD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Ragtime_ogg))
@@ -197,6 +176,23 @@ func init() {
 		log.Fatal(err)
 
 	}
+
+	////////////////  TEXTOS    ////////////////////////////
+	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	const dpi = 72
+	arcadeFont = truetype.NewFace(tt, &truetype.Options{
+		Size:    fontSize,
+		DPI:     dpi,
+		Hinting: font.HintingFull,
+	})
+	smallArcadeFont = truetype.NewFace(tt, &truetype.Options{
+		Size:    smallFontSize,
+		DPI:     dpi,
+		Hinting: font.HintingFull,
+	})
 }
 
 // Game es la estructura del juego
