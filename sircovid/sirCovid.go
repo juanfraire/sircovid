@@ -10,12 +10,19 @@ import (
 	"time"
 
 	"github.com/golang/freetype/truetype"
+	"golang.org/x/image/font"
+
+	// "golang.ge/font"
+
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/audio"
+	"github.com/hajimehoshi/ebiten/audio/vorbis"
+	"github.com/hajimehoshi/ebiten/audio/wav"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
+	raudio "github.com/hajimehoshi/ebiten/examples/resources/audio"
 	"github.com/hajimehoshi/ebiten/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/inpututil"
 	"github.com/hajimehoshi/ebiten/text"
-	"golang.org/x/image/font"
 )
 
 const (
@@ -149,6 +156,47 @@ func init() {
 	})
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////// AUDIO (separado variables y func init momentaneamente)///////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+var (
+	audioContext   *audio.Context
+	ragtimeContext *audio.Player
+	deadSound      *audio.Player
+	deadSound2     *audio.Player
+)
+
+func init() {
+	audioContext, _ = audio.NewContext(44100)
+
+	ragtimeD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Ragtime_ogg))
+	if err != nil {
+		log.Fatal(err)
+	}
+	ragtimeContext, err = audio.NewPlayer(audioContext, ragtimeD)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
+	if err != nil {
+		log.Fatal(err)
+	}
+	deadSound, err = audio.NewPlayer(audioContext, jumpD)
+	if err != nil {
+		log.Fatal(err)
+	}
+	jabD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jab_wav))
+	if err != nil {
+		log.Fatal(err)
+	}
+	deadSound2, err = audio.NewPlayer(audioContext, jabD)
+	if err != nil {
+		log.Fatal(err)
+
+	}
+}
+
 // Game es la estructura del juego
 type Game struct {
 	count int
@@ -167,6 +215,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	switch {
 	case ModeTitle == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+
 			ModeTitle = 1
 		}
 	case ModeTitle == 2:
@@ -174,6 +223,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModeTitle = 3
 		}
 	case ModeGame == 0 && vidas != 0:
+		ragtimeContext.SetVolume(.5)
+		ragtimeContext.Play()
 
 		// nube
 		moverNube()
@@ -205,7 +256,16 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		moverHombre()
 
 	case ModeGameOver == 0:
+		ragtimeContext.Pause()
+		// deadSound.SetVolume(1)
+
+		time.Sleep(time.Millisecond * 150)
+		deadSound2.SetVolume(.4)
+		deadSound2.Play()
+
+		ragtimeContext.Rewind()
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+
 			ModeTitle = 0
 			vidas = 3
 			// nubeAlpha -= 1
@@ -317,6 +377,8 @@ func vida() {
 		barbijoX = 1000
 	}
 	if v == 1 {
+		deadSound.Rewind()
+		deadSound.Play()
 		vidas--
 	}
 	if v == 30 {
@@ -488,7 +550,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		texts = []string{}
 
 	case vidas == 0:
-		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAYN?", "", "PRESS SPACE KEY"}
+		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
 	for i, l := range texts {
 		x := (screenWidth - len(l)*fontSize) / 2
