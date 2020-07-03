@@ -290,6 +290,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		time.Sleep(time.Millisecond * 100)
 		deadSound2.SetVolume(.4)
 		deadSound2.Play()
+		deadSound2.Rewind()
 		ragtimeContext.Rewind()
 
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
