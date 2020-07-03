@@ -445,28 +445,24 @@ func moverHumanos(h humanos) humanos {
 		if h.X < 228 {
 			a = 1
 		}
-		return h
 	case a == 1 && a1 != 1:
 		h.FrameOY = 144
 		h.Y--
 		if h.Y == 137 {
 			a1 = 1
 		}
-		return h
 	case a1 == 1 && a2 != 1:
 		h.FrameOY = 0
 		h.Y++
 		if h.Y == 310 {
 			a2 = 1
 		}
-		return h
 	case a2 == 1 && a3 != 1:
 		h.FrameOY = 48
 		h.X--
 		if h.X == -100 {
 			a3 = 1
 		}
-		return h
 	case a3 == 1 && a4 != 1:
 		h.FrameOY = 96
 		h.Y = 460
@@ -474,49 +470,42 @@ func moverHumanos(h humanos) humanos {
 		if h.X == 20 {
 			a4 = 1
 		}
-		return h
 	case a4 == 1 && a5 != 1:
 		h.FrameOY = 144
 		h.Y--
 		if h.Y == 310 {
 			a5 = 1
 		}
-		return h
 	case a5 == 1 && a6 != 1:
 		h.FrameOY = 96
 		h.X++
 		if h.X == 228 {
 			a6 = 1
 		}
-		return h
 	case a6 == 1 && a7 != 1:
 		h.FrameOY = 144
 		h.Y--
 		if h.Y == 280 {
 			a7 = 1
 		}
-		return h
 	case a7 == 1 && a8 != 1:
 		h.FrameOY = 96
 		h.X++
 		if h.X == 370 {
 			a8 = 1
 		}
-		return h
 	case a8 == 1 && a9 != 1:
 		h.FrameOY = 0
 		h.Y++
 		if h.Y == 470 {
 			a9 = 1
 		}
-		return h
 	case a9 == 1:
 		h.FrameOY = 96
 		h.X++
 		if h.X == 800 {
 			a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 		}
-		return h
 	}
 	return h
 
