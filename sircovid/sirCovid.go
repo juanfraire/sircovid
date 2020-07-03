@@ -285,13 +285,11 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 	case ModeGameOver == 0:
 		ragtimeContext.Pause()
-		// deadSound.SetVolume(1)
-
 		time.Sleep(time.Millisecond * 150)
 		deadSound2.SetVolume(.4)
 		deadSound2.Play()
-
 		ragtimeContext.Rewind()
+
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 0
 			vidas = 3
@@ -337,7 +335,7 @@ func moverPlayer(p player) player {
 		p.MovY = 0
 	}
 
-	// transladar viejo
+	// trasladar viejo
 
 	if ModeGame == 1 && p.posicionInicial != 1 {
 		p.X = float64(25)
@@ -403,6 +401,8 @@ func vida(h humanos, p player) player {
 	}
 	if v == 1 {
 		vidas--
+		deadSound.Play()
+		deadSound.Rewind()
 	}
 	if v == 30 {
 		v = 0
