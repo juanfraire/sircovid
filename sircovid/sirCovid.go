@@ -315,45 +315,30 @@ func moverPlayer(p player) player {
 		p.FrameOY = 96
 		p.FrameNum = 3
 		p.MovX = 1
-		return p
 	case inpututil.IsKeyJustReleased(ebiten.KeyRight) && p.MovY != 1 && p.MovY != 2:
 		p.FrameNum = 1
 		p.MovX = 0
-		return p
-
 	case inpututil.IsKeyJustPressed(ebiten.KeyLeft) && p.MovY != 1 && p.MovY != 2:
 		p.FrameOY = 48
 		p.FrameNum = 3
 		p.MovX = 2
-		return p
-
 	case inpututil.IsKeyJustReleased(ebiten.KeyLeft) && p.MovY != 1 && p.MovY != 2:
 		p.FrameNum = 1
 		p.MovX = 0
-		return p
-
 	case inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.MovX != 1 && p.MovX != 2:
 		p.FrameOY = 144
 		p.FrameNum = 3
 		p.MovY = 1
-		return p
-
 	case inpututil.IsKeyJustReleased(ebiten.KeyUp) && p.MovX != 1 && p.MovX != 2:
 		p.FrameNum = 1
 		p.MovY = 0
-		return p
-
 	case inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.MovX != 1 && p.MovX != 2:
 		p.FrameOY = 0
 		p.FrameNum = 3
 		p.MovY = 2
-		return p
-
 	case inpututil.IsKeyJustReleased(ebiten.KeyDown) && p.MovX != 1 && p.MovX != 2:
 		p.FrameNum = 1
 		p.MovY = 0
-		return p
-
 	}
 
 	// transladar viejo
@@ -369,20 +354,12 @@ func moverPlayer(p player) player {
 	switch {
 	case p.MovX == 1:
 		p.X++
-		return p
-
 	case p.MovX == 2:
 		p.X--
-		return p
-
 	case p.MovY == 1:
 		p.Y--
-		return p
-
 	case p.MovY == 2:
 		p.Y++
-		return p
-
 	}
 	// restringir viejo
 	switch {
@@ -390,38 +367,26 @@ func moverPlayer(p player) player {
 		p.X = X1
 		p.Y = Y1
 		p.FrameNum = 1
-		return p
-
 	case p.Y < 130 && p.X > 214 && p.X < 768:
 		p.X = X1
 		p.Y = Y1
 		p.FrameNum = 1
-		return p
-
 	case p.Y < 270 && p.X > 240 && p.X < 610:
 		p.X = X1
 		p.Y = Y1
 		p.FrameNum = 1
-		return p
-
 	case p.Y < 270 && p.X > 675 && p.X < 768:
 		p.X = X1
 		p.Y = Y1
 		p.FrameNum = 1
-		return p
-
 	case p.Y > 335 && p.Y < 528 && p.X > 40 && p.X < 350:
 		p.X = X1
 		p.Y = Y1
 		p.FrameNum = 1
-		return p
-
 	case p.Y > 310 && p.Y < 450 && p.X > 390 && p.X < 630:
 		p.X = X1
 		p.Y = Y1
 		p.FrameNum = 1
-		return p
-
 	}
 	return p
 
