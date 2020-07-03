@@ -387,9 +387,12 @@ func moverPlayer(p player) player {
 }
 func vida(h humanos, p player) player {
 	//pierde vidas con la nuve
-	nubeX := float64(nubeX * .4)
-	nubeY := float64(nubeY * .4)
-	if p.X > nubeX && p.X < nubeX+120 && p.Y > nubeY && p.Y < nubeY+120 {
+	collisionX := float64(nubeX * .4)
+	collisionY := float64(nubeY * .4)
+	if nubeAlpha < .3 {
+		collisionX = screenWidth + 300
+	}
+	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {
 		v++
 	}
 	if p.X > h.X && p.X < h.X+32 && p.Y+48 > h.Y && p.Y < h.Y+48 {
