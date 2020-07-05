@@ -26,29 +26,31 @@ import (
 )
 
 type humanos struct {
-	FrameOX     int
-	FrameOY     int
-	FrameNum    int
-	X           float64
-	Y           float64
-	MovX        int
-	MovY        int
-	FrameWidth  int
-	FrameHeight int
-	img         *ebiten.Image
+	FrameOX         int
+	FrameOY         int
+	FrameNum        int
+	X               float64
+	Y               float64
+	MovX            int
+	MovY            int
+	posicionInicial int
+	FrameWidth      int
+	FrameHeight     int
+
+	img *ebiten.Image
 }
 type player struct {
 	humanos
-	posicionInicial int
+	moverPlayer (humanos)
 }
 
 //hombre
 var hombre humanos
 var mujer humanos
 var humano humanos
+var viejo humanos
 
-//viejo
-var viejo player
+//jugador
 var player1 player
 
 const (
@@ -234,7 +236,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		viejo.Y = float64(375)
 		viejo.FrameWidth = 32
 		viejo.FrameHeight = 48
-		player1 = viejo
+
+		player1.humanos = viejo
 
 	}
 
@@ -256,7 +259,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		moverNube()
 
 		// viejo
-		player1 = moverPlayer(player1)
+		player1.humanos = moverPlayer(player1.humanos)
 
 		// vida
 		vida(hombre, player1)
@@ -273,7 +276,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		moverNube()
 
 		// viejo
-		player1 = moverPlayer(player1)
+		//player1.humanos = moverPlayer(viejo)
 
 		// vida
 		vida(mujer, player1)
@@ -303,7 +306,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 }
 
 // moverViejo recorte de imagen segun la direccion de movimiento del viejo
-func moverPlayer(p player) player {
+func moverPlayer(p humanos) humanos {
 	// leer tecla
 	switch {
 	case inpututil.IsKeyJustPressed(ebiten.KeyRight) && p.MovY != 1 && p.MovY != 2:
@@ -356,6 +359,7 @@ func moverPlayer(p player) player {
 	case p.MovY == 2:
 		p.Y++
 	}
+
 	// restringir viejo
 	switch {
 	case p.Y < 300 && p.X > 20 && p.X < 214:
