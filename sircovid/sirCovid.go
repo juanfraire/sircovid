@@ -258,7 +258,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		// nube
 		moverNube()
 
-		// viejo
+		// palyer
 		player1.humanos = moverPlayer(player1.humanos)
 
 		// vida
@@ -275,8 +275,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		// nube
 		moverNube()
 
-		// viejo
-		//player1.humanos = moverPlayer(viejo)
+		// player
+		player1.humanos = moverPlayer(player1.humanos)
 
 		// vida
 		vida(mujer, player1)
