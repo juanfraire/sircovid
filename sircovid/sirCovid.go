@@ -195,6 +195,32 @@ func init() {
 		DPI:     dpi,
 		Hinting: font.HintingFull,
 	})
+
+	hombre.FrameOX = 0
+	hombre.FrameOY = 48
+	hombre.FrameNum = 1
+	hombre.X = float64(750)
+	hombre.Y = float64(290)
+	hombre.FrameWidth = 32
+	hombre.FrameHeight = 48
+
+	mujer.FrameOX = 0
+	mujer.FrameOY = 48
+	mujer.FrameNum = 1
+	mujer.X = float64(750)
+	mujer.Y = float64(290)
+	mujer.FrameWidth = 32
+	mujer.FrameHeight = 48
+	humano = hombre
+
+	// viejo
+	viejo.FrameOX = 0
+	viejo.FrameOY = 96
+	viejo.FrameNum = 1
+	viejo.X = float64(25)
+	viejo.Y = float64(375)
+	viejo.FrameWidth = 32
+	viejo.FrameHeight = 48
 }
 
 // Game es la estructura del juego
@@ -211,31 +237,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	ragtimeContext.SetVolume(.5)
 	ragtimeContext.Play()
 	if ModeTitle == 0 {
-		hombre.FrameOX = 0
-		hombre.FrameOY = 48
-		hombre.FrameNum = 1
-		hombre.X = float64(750)
-		hombre.Y = float64(290)
-		hombre.FrameWidth = 32
-		hombre.FrameHeight = 48
-
-		mujer.FrameOX = 0
-		mujer.FrameOY = 48
-		mujer.FrameNum = 1
-		mujer.X = float64(750)
-		mujer.Y = float64(290)
-		mujer.FrameWidth = 32
-		mujer.FrameHeight = 48
-		humano = hombre
-
-		// viejo
-		viejo.FrameOX = 0
-		viejo.FrameOY = 96
-		viejo.FrameNum = 1
-		viejo.X = float64(25)
-		viejo.Y = float64(375)
-		viejo.FrameWidth = 32
-		viejo.FrameHeight = 48
 
 		player1.humanos = viejo
 
