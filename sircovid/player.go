@@ -1,9 +1,6 @@
 package main
 
 import (
-	"math/rand"
-	"time"
-
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
@@ -102,9 +99,9 @@ func moverPlayer(p humanos) humanos {
 }
 func vida(h humanos, p humanos) player {
 	//pierde vidas con la nuve
-	collisionX := float64(nubeX * .4)
-	collisionY := float64(nubeY * .4)
-	if nubeAlpha < .3 {
+	collisionX := float64(Game1.nubeX * .4)
+	collisionY := float64(Game1.nubeY * .4)
+	if Game1.nubeAlpha < .3 {
 		collisionX = screenWidth + 300
 	}
 	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {
@@ -126,29 +123,4 @@ func vida(h humanos, p humanos) player {
 		player1.v = 0
 	}
 	return player1
-}
-
-// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
-func moverNube() {
-	// creacion de nuevas nubes
-	if nubeAlpha <= 0 {
-		nubeX = float64(rand.Intn(1500))
-		nubeY = float64(rand.Intn(500) + 600)
-		nubeAlphaUp = true
-	} else if nubeAlpha > 1 {
-		time.Sleep(10000 * time.Microsecond)
-		nubeAlphaUp = false
-	}
-
-	// movimiento nube
-	if nubeAlpha >= 0 {
-		nubeX--
-	}
-
-	// actualizar alpha
-	if nubeAlphaUp {
-		nubeAlpha += .009
-	} else {
-		nubeAlpha -= .003
-	}
 }

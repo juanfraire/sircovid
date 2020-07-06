@@ -25,6 +25,21 @@ import (
 	"github.com/hajimehoshi/ebiten/text"
 )
 
+type nube struct {
+	nubeX       float64
+	nubeY       float64
+	nubeAlpha   float64
+	nubeAlphaUp bool
+	img         *ebiten.Image
+}
+
+// Game es la estructura del juego
+type Game struct {
+	count int
+	nube
+	moverNube (nube)
+}
+
 //hombre
 var hombre humanos
 var mujer humanos
@@ -34,6 +49,13 @@ var viejo humanos
 //jugador
 var player1 player
 
+//nube
+var nube1 nube
+
+//Game
+var Game1 Game
+
+//humanos enemigos
 var enemigos1 enemigos
 
 const (
@@ -62,8 +84,8 @@ var (
 
 var (
 	// imágenes
-	imgTiles   *ebiten.Image
-	imgNube    *ebiten.Image
+	imgTiles *ebiten.Image
+	//imgNube    *ebiten.Image
 	imgBarbijo *ebiten.Image
 
 	// sonido
@@ -76,23 +98,12 @@ var (
 	a, a1, a2, a3, a4, a5, a6 int
 	a7, a8, a9, a10           int
 
-	// nube
-	nubeX       = float64(rand.Intn(screenWidth) + 300)
-	nubeY       = float64(rand.Intn(200) + 600)
-	nubeAlpha   float64
-	nubeAlphaUp bool
-
 	//barbijo
 	barbijoFrameOX  = 0
 	barbijoFrameOY  = 74
 	barbijoFrameNum = 1
 	barbijoX        = float64(630)
 	barbijoY        = float64(150)
-
-	// vidas
-	//vidas   = 3
-	//vidtime int
-	//v       int
 
 	//para start y game over
 	arcadeFont      font.Face
@@ -123,7 +134,7 @@ func init() {
 		log.Fatal(err)
 	}
 	///////////// Imagen NUBE COVID ///////////////////
-	imgNube, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
+	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -212,11 +223,13 @@ func init() {
 
 	//enemigos
 	enemigos1.humanos = hombre
-}
 
-// Game es la estructura del juego
-type Game struct {
-	count int
+	//nube
+	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
+	nube1.nubeY = float64(rand.Intn(200) + 600)
+
+	Game1.nube = nube1
+
 }
 
 ////////////////////////////
@@ -246,7 +259,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModeGame == 0 && player1.vidas != 0:
 
 		// nube
-		moverNube()
+		Game1.nube = moverNube(Game1.nube)
 
 		// palyer
 		player1.humanos = moverPlayer(player1.humanos)
@@ -261,8 +274,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		siguienteNivel(player1)
 
 	case ModeGame == 1 && player1.vidas != 0:
+
 		// nube
-		moverNube()
+		Game1.nube = moverNube(Game1.nube)
 
 		// player
 		player1.humanos = moverPlayer(player1.humanos)
@@ -293,8 +307,32 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	return nil
 }
 
-// moverViejo recorte de imagen segun la direccion de movimiento del viejo
+// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 
+func moverNube(n nube) nube {
+	// creacion de nuevas nubes
+	if n.nubeAlpha <= 0 {
+		n.nubeX = float64(rand.Intn(1500))
+		n.nubeY = float64(rand.Intn(500) + 600)
+		n.nubeAlphaUp = true
+	} else if n.nubeAlpha > 1 {
+		time.Sleep(10000 * time.Microsecond)
+		n.nubeAlphaUp = false
+	}
+
+	// movimiento nube
+	if n.nubeAlpha >= 0 {
+		n.nubeX--
+	}
+
+	// actualizar alpha
+	if n.nubeAlphaUp {
+		n.nubeAlpha += .009
+	} else {
+		n.nubeAlpha -= .003
+	}
+	return n
+}
 func siguienteNivel(p player) {
 	if p.X > 750 && p.Y > 450 {
 		ModeTitle = 2
@@ -333,10 +371,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(nubeX, nubeY)
-	op.ColorM.Scale(1, 3, 2, nubeAlpha)
+	op.GeoM.Translate(Game1.nubeX, Game1.nubeY)
+	op.ColorM.Scale(1, 3, 2, Game1.nubeAlpha)
 	op.GeoM.Scale(.4, .4)
-	screen.DrawImage(imgNube, op)
+	screen.DrawImage(Game1.nube.img, op)
 
 	// dibujar barbijo
 	op = &ebiten.DrawImageOptions{}
