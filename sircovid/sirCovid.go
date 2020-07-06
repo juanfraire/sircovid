@@ -25,20 +25,7 @@ import (
 	"github.com/hajimehoshi/ebiten/text"
 )
 
-type nube struct {
-	nubeX       float64
-	nubeY       float64
-	nubeAlpha   float64
-	nubeAlphaUp bool
-	img         *ebiten.Image
-}
-
 // Game es la estructura del juego
-type Game struct {
-	count int
-	nube
-	moverNube (nube)
-}
 
 //hombre
 var hombre humanos
@@ -229,6 +216,7 @@ func init() {
 	nube1.nubeY = float64(rand.Intn(200) + 600)
 
 	Game1.nube = nube1
+	Game1.siguienteNivel = player1.humanos
 
 }
 
@@ -271,7 +259,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
 		//pasar de nivel
-		siguienteNivel(player1)
+		Game1.siguienteNivel = siguienteNivel(player1.humanos)
 
 	case ModeGame == 1 && player1.vidas != 0:
 
@@ -305,41 +293,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 	}
 	return nil
-}
-
-// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
-
-func moverNube(n nube) nube {
-	// creacion de nuevas nubes
-	if n.nubeAlpha <= 0 {
-		n.nubeX = float64(rand.Intn(1500))
-		n.nubeY = float64(rand.Intn(500) + 600)
-		n.nubeAlphaUp = true
-	} else if n.nubeAlpha > 1 {
-		time.Sleep(10000 * time.Microsecond)
-		n.nubeAlphaUp = false
-	}
-
-	// movimiento nube
-	if n.nubeAlpha >= 0 {
-		n.nubeX--
-	}
-
-	// actualizar alpha
-	if n.nubeAlphaUp {
-		n.nubeAlpha += .009
-	} else {
-		n.nubeAlpha -= .003
-	}
-	return n
-}
-func siguienteNivel(p player) {
-	if p.X > 750 && p.Y > 450 {
-		ModeTitle = 2
-		ModeGame = 1
-		enemigos1.humanos = mujer
-		a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	}
 }
 
 ////////////////////////////
