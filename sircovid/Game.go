@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+//Game es la estructura del juego
 type Game struct {
 	count int
 	nube

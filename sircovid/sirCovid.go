@@ -25,8 +25,6 @@ import (
 	"github.com/hajimehoshi/ebiten/text"
 )
 
-// Game es la estructura del juego
-
 //hombre
 var hombre humanos
 var mujer humanos
@@ -39,7 +37,7 @@ var player1 player
 //nube
 var nube1 nube
 
-//Game
+// Game1 es el juego
 var Game1 Game
 
 //humanos enemigos
@@ -63,6 +61,7 @@ const (
 	smallFontSize = fontSize / 2
 )
 
+//Mode Game es el en que parte del juego estamos
 var (
 	ModeGame     int
 	ModeTitle    int
@@ -71,8 +70,7 @@ var (
 
 var (
 	// imágenes
-	imgTiles *ebiten.Image
-	//imgNube    *ebiten.Image
+	imgTiles   *ebiten.Image
 	imgBarbijo *ebiten.Image
 
 	// sonido
