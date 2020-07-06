@@ -41,7 +41,10 @@ type humanos struct {
 }
 type player struct {
 	humanos
+	vidas       int
+	v           int
 	moverPlayer (humanos)
+	vida        (humanos)
 }
 
 //hombre
@@ -107,9 +110,9 @@ var (
 	barbijoY        = float64(150)
 
 	// vidas
-	vidas   = 3
-	vidtime int
-	v       int
+	//vidas   = 3
+	//vidtime int
+	//v       int
 
 	//para start y game over
 	arcadeFont      font.Face
@@ -221,6 +224,11 @@ func init() {
 	viejo.Y = float64(375)
 	viejo.FrameWidth = 32
 	viejo.FrameHeight = 48
+
+	//player
+	player1.humanos = viejo
+	player1.vidas = 3
+	player1.v = 0
 }
 
 // Game es la estructura del juego
@@ -238,8 +246,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	ragtimeContext.Play()
 	if ModeTitle == 0 {
 
-		player1.humanos = viejo
-
 	}
 
 	// game counter
@@ -254,7 +260,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 3
 		}
-	case ModeGame == 0 && vidas != 0:
+	case ModeGame == 0 && player1.vidas != 0:
 
 		// nube
 		moverNube()
@@ -263,7 +269,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player1.humanos = moverPlayer(player1.humanos)
 
 		// vida
-		vida(hombre, player1)
+		player1 = vida(hombre, player1.humanos)
 
 		//hombre
 		hombre = moverHumanos(hombre)
@@ -272,7 +278,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//pasar de nivel
 		siguienteNivel(player1)
 
-	case ModeGame == 1 && vidas != 0:
+	case ModeGame == 1 && player1.vidas != 0:
 		// nube
 		moverNube()
 
@@ -280,7 +286,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player1.humanos = moverPlayer(player1.humanos)
 
 		// vida
-		vida(mujer, player1)
+		player1 = vida(hombre, player1.humanos)
 
 		//hombre
 		mujer = moverHumanos(mujer)
@@ -296,7 +302,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeGame = 0
-			vidas = 3
+			player1.vidas = 3
 			// nubeAlpha -= 1
 			// viejoX = 25
 			// viejoY = 375
@@ -391,7 +397,7 @@ func moverPlayer(p humanos) humanos {
 	return p
 
 }
-func vida(h humanos, p player) player {
+func vida(h humanos, p humanos) player {
 	//pierde vidas con la nuve
 	collisionX := float64(nubeX * .4)
 	collisionY := float64(nubeY * .4)
@@ -399,24 +405,24 @@ func vida(h humanos, p player) player {
 		collisionX = screenWidth + 300
 	}
 	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {
-		v++
+		player1.v++
 	}
 	if p.X > h.X && p.X < h.X+32 && p.Y+48 > h.Y && p.Y < h.Y+48 {
-		v++
+		player1.v++
 	}
 	if p.X > barbijoX && p.X < barbijoX+32 && p.Y+48 > barbijoY && p.Y < barbijoY+48 {
-		vidas++
+		player1.vidas++
 		barbijoX = 1000
 	}
-	if v == 1 {
-		vidas--
+	if player1.v == 1 {
+		player1.vidas--
 		deadSound.Play()
 		deadSound.Rewind()
 	}
-	if v == 30 {
-		v = 0
+	if player1.v == 30 {
+		player1.v = 0
 	}
-	return p
+	return player1
 }
 
 // nubeCovid aumenta y disminuye transparencia de la nube (alpha)
@@ -568,21 +574,21 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(imgBarbijo.SubImage(image.Rect(bx, by, bx+barbijoFrameWidth, by+barbijoFrameHeight)).(*ebiten.Image), op)
 
 	// dibujar texto
-	lifes := fmt.Sprintf("Vidas:%02d", vidas)
+	lifes := fmt.Sprintf("Vidas:%02d", player1.vidas)
 	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
 
 	switch {
 	case ModeTitle == 0:
 		texts = []string{"SIR-COVID", "", "PRIMER NIVEL", "", "", "PRESS SPACE KEY"}
-	case ModeTitle == 1 && vidas != 0:
+	case ModeTitle == 1 && player1.vidas != 0:
 		texts = []string{}
 
 	case ModeTitle == 2:
 		texts = []string{"", "", "SEGUNDO NIVEL", "", "", "PRESS SPACE KEY"}
-	case ModeTitle == 3 && vidas != 0:
+	case ModeTitle == 3 && player1.vidas != 0:
 		texts = []string{}
 
-	case vidas == 0:
+	case player1.vidas == 0:
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
 	for i, l := range texts {
