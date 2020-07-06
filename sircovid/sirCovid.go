@@ -36,9 +36,14 @@ type humanos struct {
 	posicionInicial int
 	FrameWidth      int
 	FrameHeight     int
-
-	img *ebiten.Image
+	img             *ebiten.Image
 }
+
+type enemigos struct {
+	humanos
+	moverHumanos (humanos)
+}
+
 type player struct {
 	humanos
 	vidas       int
@@ -55,6 +60,8 @@ var viejo humanos
 
 //jugador
 var player1 player
+
+var enemigos1 enemigos
 
 const (
 	// game
@@ -229,6 +236,9 @@ func init() {
 	player1.humanos = viejo
 	player1.vidas = 3
 	player1.v = 0
+
+	//enemigos
+	enemigos1.humanos = hombre
 }
 
 // Game es la estructura del juego
@@ -269,11 +279,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player1.humanos = moverPlayer(player1.humanos)
 
 		// vida
-		player1 = vida(hombre, player1.humanos)
+		player1 = vida(enemigos1.humanos, player1.humanos)
 
 		//hombre
-		hombre = moverHumanos(hombre)
-		humano = hombre
+		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
 		//pasar de nivel
 		siguienteNivel(player1)
@@ -286,11 +295,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player1.humanos = moverPlayer(player1.humanos)
 
 		// vida
-		player1 = vida(hombre, player1.humanos)
+		player1 = vida(enemigos1.humanos, player1.humanos)
 
-		//hombre
-		mujer = moverHumanos(mujer)
-		humano = mujer
+		//mujer
+		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
 	case ModeGameOver == 0:
 		ragtimeContext.Pause()
@@ -529,6 +537,8 @@ func siguienteNivel(p player) {
 	if p.X > 750 && p.Y > 450 {
 		ModeTitle = 2
 		ModeGame = 1
+		enemigos1.humanos = mujer
+		a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	}
 }
 
@@ -554,10 +564,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibujar humano
 	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(.8, .8)
-	op.GeoM.Translate(humano.X, humano.Y)
-	j := (g.count / 7) % humano.FrameNum
-	hx, hy := humano.FrameOX+j*humano.FrameWidth, humano.FrameOY
-	screen.DrawImage(humano.img.SubImage(image.Rect(hx, hy, hx+humano.FrameWidth, hy+humano.FrameHeight)).(*ebiten.Image), op)
+	op.GeoM.Translate(enemigos1.humanos.X, enemigos1.humanos.Y)
+	j := (g.count / 7) % enemigos1.humanos.FrameNum
+	hx, hy := enemigos1.humanos.FrameOX+j*enemigos1.humanos.FrameWidth, enemigos1.humanos.FrameOY
+	screen.DrawImage(enemigos1.humanos.img.SubImage(image.Rect(hx, hy, hx+enemigos1.humanos.FrameWidth, hy+enemigos1.humanos.FrameHeight)).(*ebiten.Image), op)
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
