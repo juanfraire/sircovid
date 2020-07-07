@@ -237,6 +237,7 @@ func init() {
 	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
 	nube1.nubeY = float64(rand.Intn(200) + 600)
 
+	//defino el juego
 	Game1.nube = nube1
 	Game1.siguienteNivel = player1.humanos
 
