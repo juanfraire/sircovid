@@ -79,7 +79,8 @@ var (
 	ragtimeContext *audio.Player
 	deadSound      *audio.Player
 	deadSound2     *audio.Player
-	sonidoFondo    *audio.Player
+	sonidoFondo    *audio.InfiniteLoop
+	fondo          *audio.Player
 
 	//para mover humanos
 	a, a1, a2, a3, a4, a5, a6 int
@@ -133,7 +134,6 @@ func init() {
 	////////////// SONIDOS //////////////
 
 	audioContext, _ = audio.NewContext(44100)
-
 	s, err := os.Open(`sircovid\data\SIR-COVID.wav`)
 	if err != nil {
 		panic(err)
@@ -146,11 +146,23 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	sonidoFondo, err = audio.NewPlayer(audioContext, fondoD)
+	sonidoFondo = audio.NewInfiniteLoop(fondoD, int64(c))
 	if err != nil {
 		log.Fatal(err)
-
 	}
+	fondo, err = audio.NewPlayer(audioContext, sonidoFondo)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// ragtimeD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Ragtime_ogg))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// ragtimeContext, err = audio.NewPlayer(audioContext, ragtimeD)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
 	if err != nil {
@@ -257,7 +269,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//// sonido ////
 		deadSound2.Rewind()
 		// sonidoFondo.SetVolume(.)
-		sonidoFondo.Play()
+		fondo.Play()
 
 		// nube
 		Game1.nube = moverNube(Game1.nube)
@@ -290,8 +302,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 	case ModeGameOver == 0:
 
-		ragtimeContext.Pause()
-		ragtimeContext.Rewind()
+		fondo.Pause()
+		fondo.Rewind()
 		time.Sleep(time.Millisecond * 100)
 		deadSound2.SetVolume(.4)
 		deadSound2.Play()
