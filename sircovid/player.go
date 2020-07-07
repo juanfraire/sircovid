@@ -67,32 +67,26 @@ func moverPlayer(p humanos) humanos {
 		p.Y++
 	}
 
-	// restringir viejo
-	switch {
-	case p.Y < 300 && p.X > 20 && p.X < 214:
-		p.X = X1
-		p.Y = Y1
-		p.FrameNum = 1
-	case p.Y < 130 && p.X > 214 && p.X < 768:
-		p.X = X1
-		p.Y = Y1
-		p.FrameNum = 1
-	case p.Y < 270 && p.X > 240 && p.X < 610:
-		p.X = X1
-		p.Y = Y1
-		p.FrameNum = 1
-	case p.Y < 270 && p.X > 675 && p.X < 768:
-		p.X = X1
-		p.Y = Y1
-		p.FrameNum = 1
-	case p.Y > 335 && p.Y < 528 && p.X > 40 && p.X < 350:
-		p.X = X1
-		p.Y = Y1
-		p.FrameNum = 1
-	case p.Y > 310 && p.Y < 450 && p.X > 390 && p.X < 630:
-		p.X = X1
-		p.Y = Y1
-		p.FrameNum = 1
+	objetos := make([][]int, 12)
+
+	objetos[0] = []int{578, 189, 2, 148}
+	objetos[1] = []int{386, 191, 0, 79}
+	objetos[2] = []int{193, 159, -1, 112}
+	objetos[3] = []int{211, 43, 109, 34}
+	objetos[4] = []int{83, 106, 1, 124}
+	objetos[5] = []int{1, 77, 1, 301}
+	objetos[6] = []int{83, 188, 416, 113}
+	objetos[7] = []int{458, 129, 337, 106}
+	objetos[8] = []int{705, 61, 352, 108}
+	objetos[9] = []int{723, 45, 149, 107}
+	objetos[10] = []int{306, 268, 162, 111}
+	objetos[11] = []int{306, 189, 148, 13}
+
+	for i := 0; i < len(objetos); i++ {
+		if (int(p.X+20) > objetos[i][0] && int(p.X) < objetos[i][0]+objetos[i][1]) && int(p.Y+35) > objetos[i][2] && int(p.Y+35) < objetos[i][2]+objetos[i][3] {
+			p.X = X1
+			p.Y = Y1
+		}
 	}
 	return p
 
