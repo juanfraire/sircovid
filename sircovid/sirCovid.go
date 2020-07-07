@@ -7,6 +7,7 @@ import (
 	_ "image/png"
 	"log"
 	"math/rand"
+	"os"
 	"time"
 
 	"github.com/golang/freetype/truetype"
@@ -78,6 +79,7 @@ var (
 	ragtimeContext *audio.Player
 	deadSound      *audio.Player
 	deadSound2     *audio.Player
+	sonidoFondo    *audio.Player
 
 	//para mover humanos
 	a, a1, a2, a3, a4, a5, a6 int
@@ -129,7 +131,26 @@ func init() {
 	}
 
 	////////////// SONIDOS //////////////
+
 	audioContext, _ = audio.NewContext(44100)
+
+	s, err := os.Open(`sircovid\data\SIR-COVID.wav`)
+	if err != nil {
+		panic(err)
+	}
+	defer s.Close()
+	data := make([]byte, 11491248)
+	c, err := s.Read(data)
+	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	fmt.Println(c)
+	if err != nil {
+		log.Fatal(err)
+	}
+	sonidoFondo, err = audio.NewPlayer(audioContext, fondoD)
+	if err != nil {
+		log.Fatal(err)
+
+	}
 
 	ragtimeD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Ragtime_ogg))
 	if err != nil {
@@ -224,8 +245,7 @@ func init() {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
-	ragtimeContext.SetVolume(.5)
-	ragtimeContext.Play()
+
 	if ModeTitle == 0 {
 
 	}
@@ -243,6 +263,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModeTitle = 3
 		}
 	case ModeGame == 0 && player1.vidas != 0:
+		//// sonido ////
+		deadSound2.Rewind()
+		// sonidoFondo.SetVolume(.)
+		sonidoFondo.Play()
 
 		// nube
 		Game1.nube = moverNube(Game1.nube)
@@ -274,12 +298,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
 	case ModeGameOver == 0:
+
 		ragtimeContext.Pause()
+		ragtimeContext.Rewind()
 		time.Sleep(time.Millisecond * 100)
 		deadSound2.SetVolume(.4)
 		deadSound2.Play()
-		deadSound2.Rewind()
-		ragtimeContext.Rewind()
 
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeGame = 0
