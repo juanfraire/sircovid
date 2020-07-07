@@ -152,15 +152,6 @@ func init() {
 
 	}
 
-	ragtimeD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Ragtime_ogg))
-	if err != nil {
-		log.Fatal(err)
-	}
-	ragtimeContext, err = audio.NewPlayer(audioContext, ragtimeD)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
 	if err != nil {
 		log.Fatal(err)
