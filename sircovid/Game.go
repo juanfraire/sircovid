@@ -18,17 +18,20 @@ func moverNube(n nube) nube {
 	// creacion de nuevas nubes
 	if n.nubeAlpha <= 0 {
 		n.nubeX = float64(rand.Intn(1500))
-		n.nubeY = float64(rand.Intn(500) + 600)
+		n.nubeY = float64(rand.Intn(500) + 216)
 		n.nubeAlphaUp = true
 	} else if n.nubeAlpha > 1 {
 		time.Sleep(10000 * time.Microsecond)
 		n.nubeAlphaUp = false
 	}
 
+	nubeX1 := n.nubeX
+	nubeY1 := n.nubeY
 	// movimiento nube
 	if n.nubeAlpha >= 0 {
 		n.nubeX--
 	}
+	n.nubeX, n.nubeY = obstaculos(n.nubeX, n.nubeY, nubeX1, nubeY1)
 
 	// actualizar alpha
 	if n.nubeAlphaUp {

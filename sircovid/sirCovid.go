@@ -350,7 +350,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(Game1.nubeX, Game1.nubeY)
+	op.GeoM.Translate(Game1.nubeX, Game1.nubeY+384)
 	op.ColorM.Scale(1, 3, 2, Game1.nubeAlpha)
 	op.GeoM.Scale(.4, .4)
 	screen.DrawImage(Game1.nube.img, op)
