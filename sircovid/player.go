@@ -68,7 +68,6 @@ func moverPlayer(p humanos) humanos {
 	}
 
 	objetos := make([][]int, 12)
-
 	objetos[0] = []int{578, 189, 2, 148}
 	objetos[1] = []int{386, 191, 0, 79}
 	objetos[2] = []int{193, 159, -1, 112}

@@ -33,6 +33,11 @@ func main() {
 		objeto[i][2] = decoded[i].Y
 		objeto[i][3] = decoded[i].Height
 	}
+	
+	fmt.Println("objetos := make([][]int,", len(objeto), ")")
 
-	fmt.Println(objeto)
+	for i := 0; i < len(objeto); i++ {
+		fmt.Println("objetos[", i, "] = []int{", objeto[i][0], ",", objeto[i][1], ",", objeto[i][2], ",", objeto[i][3], "}")
+	}
+
 }
