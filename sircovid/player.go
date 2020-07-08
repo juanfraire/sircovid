@@ -19,6 +19,7 @@ var as, b, c, d int
 
 func moverPlayer(p humanos) humanos {
 	// leer tecla
+
 	fmt.Println(as, b, c, d)
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
 		as = 1
@@ -99,7 +100,7 @@ func moverPlayer(p humanos) humanos {
 func vida(h humanos, p humanos) player {
 	//pierde vidas con la nuve
 	collisionX := float64(Game1.nubeX * .4)
-	collisionY := float64(Game1.nubeY*.4) + 82
+	collisionY := float64(Game1.nubeY*.4) + 106
 	if Game1.nubeAlpha < .3 {
 		collisionX = screenWidth + 300
 	}

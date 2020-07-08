@@ -47,6 +47,8 @@ func siguienteNivel(p humanos) humanos {
 		ModeGame = 1
 		enemigos1.humanos = mujer
 		a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+		as, b, c, d = 0, 0, 0, 0
+
 	}
 	return p
 }
