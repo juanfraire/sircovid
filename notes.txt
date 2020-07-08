@@ -1,7 +1,0 @@
-
-
-go run .\sircovid\sirCovid.go .\sircovid\player.go .\sircovid\nube.go .\sircovid\humanos.go .\sircovid\Game.go .\sircovid\enemigos.go
-
-go mode init github.com/juanfraire/sircovid
-
-
