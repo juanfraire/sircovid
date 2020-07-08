@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
@@ -17,7 +19,7 @@ var as, b, c, d int
 
 func moverPlayer(p humanos) humanos {
 	// leer tecla
-
+	fmt.Println(as, b, c, d)
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
 		as = 1
 	}
@@ -72,13 +74,11 @@ func moverPlayer(p humanos) humanos {
 	}
 
 	// trasladar viejo
-
 	if ModeGame == 1 && p.posicionInicial != 1 {
 		p.X = float64(25)
 		p.Y = float64(375)
 		p.posicionInicial = 1
 	}
-
 	var X1 = p.X
 	var Y1 = p.Y
 	switch {
@@ -91,15 +91,15 @@ func moverPlayer(p humanos) humanos {
 	case p.MovY == 2:
 		p.Y++
 	}
-
 	p.X, p.Y = obstaculos(p.X, p.Y, X1, Y1)
-	return p
 
+	return p
 }
+
 func vida(h humanos, p humanos) player {
 	//pierde vidas con la nuve
 	collisionX := float64(Game1.nubeX * .4)
-	collisionY := float64(Game1.nubeY * .4)
+	collisionY := float64(Game1.nubeY*.4) + 82
 	if Game1.nubeAlpha < .3 {
 		collisionX = screenWidth + 300
 	}

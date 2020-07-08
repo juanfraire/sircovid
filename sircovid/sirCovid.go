@@ -6,7 +6,6 @@ import (
 	"image/color"
 	_ "image/png"
 	"log"
-	"math/rand"
 	"os"
 	"time"
 
@@ -198,48 +197,7 @@ func init() {
 		DPI:     dpi,
 		Hinting: font.HintingFull,
 	})
-
-	hombre.FrameOX = 0
-	hombre.FrameOY = 48
-	hombre.FrameNum = 1
-	hombre.X = float64(750)
-	hombre.Y = float64(290)
-	hombre.FrameWidth = 32
-	hombre.FrameHeight = 48
-
-	mujer.FrameOX = 0
-	mujer.FrameOY = 48
-	mujer.FrameNum = 1
-	mujer.X = float64(750)
-	mujer.Y = float64(290)
-	mujer.FrameWidth = 32
-	mujer.FrameHeight = 48
-	humano = hombre
-
-	// viejo
-	viejo.FrameOX = 0
-	viejo.FrameOY = 96
-	viejo.FrameNum = 1
-	viejo.X = float64(25)
-	viejo.Y = float64(375)
-	viejo.FrameWidth = 32
-	viejo.FrameHeight = 48
-
-	//player
-	player1.humanos = viejo
-	player1.vidas = 3
-	player1.v = 0
-
-	//enemigos
-	enemigos1.humanos = hombre
-
-	//nube
-	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
-	nube1.nubeY = float64(rand.Intn(200) + 600)
-
-	//defino el juego
-	Game1.nube = nube1
-	Game1.siguienteNivel = player1.humanos
+	iniciarVariables()
 
 }
 
@@ -310,11 +268,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		deadSound2.Play()
 
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-			ModeGame = 0
-			player1.vidas = 3
-			// nubeAlpha -= 1
-			// viejoX = 25
-			// viejoY = 375
+			iniciarVariables()
 		}
 
 	}
