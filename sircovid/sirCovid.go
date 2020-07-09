@@ -137,7 +137,10 @@ func init() {
 
 	////////////// SONIDOS //////////////
 
+	// contexto de decodificacion
 	audioContext, _ = audio.NewContext(44100)
+
+	// abre sonido de fondo
 	s, err := os.Open(`sircovid\data\SIR-COVID.wav`)
 	if err != nil {
 		panic(err)
@@ -145,20 +148,26 @@ func init() {
 	defer s.Close()
 	data := make([]byte, 11491248)
 	c, err := s.Read(data)
+
+	// decodifico sonido fondo
 	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
-	//fmt.Println(c)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// creo loop infinito de sonido
 	sonidoFondo = audio.NewInfiniteLoop(fondoD, int64(c))
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// sonido de reproduccion
 	fondo, err = audio.NewPlayer(audioContext, sonidoFondo)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// decode y creacion sonido a reproducir - SONIDO PERDER VIDAS
 	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
 	if err != nil {
 		log.Fatal(err)
@@ -167,6 +176,8 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// decode y creacion -SONIDO MUERTE FINAL
 	jabD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jab_wav))
 	if err != nil {
 		log.Fatal(err)
@@ -203,6 +214,15 @@ func init() {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
+
+	///// "S" = anular sonido fondo  (temporal - para mejorar y exportar)
+	if inpututil.IsKeyJustPressed(ebiten.KeyS) {
+		if fondo.Volume() != 0 {
+			fondo.SetVolume(0)
+		} else if fondo.Volume() == 0 {
+			fondo.SetVolume(1)
+		}
+	}
 
 	// game counter
 	g.count++
