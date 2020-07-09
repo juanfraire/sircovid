@@ -70,6 +70,7 @@ var (
 	ModeGame     int
 	ModeTitle    int
 	ModeGameOver int
+	count1       int
 )
 
 var (
@@ -212,7 +213,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 	// game counter
 	g.count++
-
+	count1++
 	switch {
 	case ModeTitle == 0:
 
@@ -305,10 +306,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		dibujarEnemigos(enemigos1.humanos, screen)
 	}
 	if ModeGame == 1 {
-
 		dibujarEnemigos(enemigos1.humanos, screen)
 		dibujarEnemigos(enemigos2.humanos, screen)
-
 	}
 
 	// dibujar nube

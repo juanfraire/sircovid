@@ -73,7 +73,7 @@ func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(.8, .8)
 	op.GeoM.Translate(E.X, E.Y)
-	j := (count / 7) % E.FrameNum
+	j := (count1 / 7) % E.FrameNum
 	hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY
 	screen.DrawImage(E.img.SubImage(image.Rect(hx, hy, hx+E.FrameWidth, hy+E.FrameHeight)).(*ebiten.Image), op)
 }

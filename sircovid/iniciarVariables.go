@@ -72,6 +72,7 @@ func pasarNivel() {
 	mujer.FrameHeight = 48
 
 	//reinciar enemigos
+	count1 = 0
 
 	// viejo
 	viejo.FrameOX = 0
