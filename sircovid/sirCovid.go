@@ -214,8 +214,6 @@ func init() {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
-
-	///// "S" = anular sonido fondo  (temporal - para mejorar y exportar)
 	if inpututil.IsKeyJustPressed(ebiten.KeyS) {
 		if fondo.Volume() != 0 {
 			fondo.SetVolume(0)
