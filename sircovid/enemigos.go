@@ -1,13 +1,17 @@
 package main
 
 import (
+	"image"
 	"math/rand"
 	"time"
+
+	"github.com/hajimehoshi/ebiten"
 )
 
 type enemigos struct {
 	humanos
-	moverHumanos (humanos)
+	moverHumanos    (humanos)
+	dibujarEnemigos (humanos)
 }
 
 func init() {
@@ -63,4 +67,13 @@ func moverHumanos(h humanos) humanos {
 		h.Y++
 	}
 	return h
+}
+
+func (g *Game) dibujarEnemigos(screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(.8, .8)
+	op.GeoM.Translate(enemigos1.humanos.X, enemigos1.humanos.Y)
+	j := (g.count / 7) % enemigos1.humanos.FrameNum
+	hx, hy := enemigos1.humanos.FrameOX+j*enemigos1.humanos.FrameWidth, enemigos1.humanos.FrameOY
+	screen.DrawImage(enemigos1.humanos.img.SubImage(image.Rect(hx, hy, hx+enemigos1.humanos.FrameWidth, hy+enemigos1.humanos.FrameHeight)).(*ebiten.Image), op)
 }

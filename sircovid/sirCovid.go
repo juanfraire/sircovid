@@ -233,6 +233,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//hombre
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
+		//g.dibujarEnemigos(screen, enemigos1.img)
+
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
 
@@ -288,13 +290,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	sx, sy := player1.FrameOX+i*player1.FrameWidth, player1.FrameOY
 	screen.DrawImage(player1.img.SubImage(image.Rect(sx, sy, sx+player1.FrameWidth, sy+player1.FrameHeight)).(*ebiten.Image), op)
 
-	//dibujar enemigo
-	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.8, .8)
-	op.GeoM.Translate(enemigos1.humanos.X, enemigos1.humanos.Y)
-	j := (g.count / 7) % enemigos1.humanos.FrameNum
-	hx, hy := enemigos1.humanos.FrameOX+j*enemigos1.humanos.FrameWidth, enemigos1.humanos.FrameOY
-	screen.DrawImage(enemigos1.humanos.img.SubImage(image.Rect(hx, hy, hx+enemigos1.humanos.FrameWidth, hy+enemigos1.humanos.FrameHeight)).(*ebiten.Image), op)
+	//dibuja al enemigo
+	g.dibujarEnemigos(screen)
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
