@@ -84,8 +84,8 @@ var (
 	fondo        *audio.Player
 
 	//para mover humanos
-	a, a1, a2, a3, a4, a5, a6 int
-	a7, a8, a9, a10           int
+	// a, a1, a2, a3, a4, a5, a6 int
+	// a7, a8, a9, a10           int
 
 	//barbijo
 	barbijoFrameOX  = 0

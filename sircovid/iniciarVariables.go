@@ -50,4 +50,7 @@ func iniciarVariables() {
 	ModeTitle = 0
 	ModeGameOver = 0
 
+	//para movimiento de player
+	a, b, c, d = 0, 0, 0, 0
+
 }

@@ -13,14 +13,13 @@ type player struct {
 	vida        (humanos)
 }
 
-var as, b, c, d int
+var a, b, c, d int
 
 func moverPlayer(p humanos) humanos {
 	// leer tecla
 
-	// fmt.Println(as, b, c, d)
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
-		as = 1
+		a = 1
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
 		b = 1
@@ -31,7 +30,7 @@ func moverPlayer(p humanos) humanos {
 	if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 		d = 1
 	}
-	if as == 1 && p.MovY != 1 && p.MovY != 2 {
+	if a == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOY = 96
 		p.FrameNum = 3
 		p.MovX = 1
@@ -39,7 +38,7 @@ func moverPlayer(p humanos) humanos {
 	if inpututil.IsKeyJustReleased(ebiten.KeyRight) && p.MovY != 1 && p.MovY != 2 {
 		p.FrameNum = 1
 		p.MovX = 0
-		as = 0
+		a = 0
 	}
 	if b == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOY = 48

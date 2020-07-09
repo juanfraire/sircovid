@@ -42,12 +42,11 @@ func moverNube(n nube) nube {
 	return n
 }
 func siguienteNivel(p humanos) humanos {
-	if p.X > 750 && p.Y > 450 {
+	if p.X >= 748 && p.Y > 450 {
 		ModeTitle = 2
 		ModeGame = 1
 		enemigos1.humanos = mujer
-		a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-		as, b, c, d = 0, 0, 0, 0
+		a, b, c, d = 0, 0, 0, 0
 		fondo.Pause()
 		fondo.Rewind()
 	}
