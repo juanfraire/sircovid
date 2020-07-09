@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
@@ -20,7 +18,7 @@ var as, b, c, d int
 func moverPlayer(p humanos) humanos {
 	// leer tecla
 
-	fmt.Println(as, b, c, d)
+	// fmt.Println(as, b, c, d)
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
 		as = 1
 	}
@@ -92,7 +90,7 @@ func moverPlayer(p humanos) humanos {
 	case p.MovY == 2:
 		p.Y++
 	}
-	p.X, p.Y = obstaculos(p.X, p.Y, X1, Y1)
+	p.X, p.Y, _ = obstaculos(p.X, p.Y, X1, Y1)
 
 	return p
 }
@@ -116,6 +114,7 @@ func vida(h humanos, p humanos) player {
 	}
 	if player1.v == 1 {
 		player1.vidas--
+		//sonido
 		deadSound.Play()
 		deadSound.Rewind()
 	}

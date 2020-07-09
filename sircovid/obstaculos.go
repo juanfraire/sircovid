@@ -1,6 +1,6 @@
 package main
 
-func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64) {
+func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 
 	objetos := make([][]int, 12)
 	objetos[0] = []int{578, 189, 2, 148}
@@ -17,10 +17,11 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64)
 	objetos[11] = []int{306, 189, 148, 13}
 
 	for i := 0; i < len(objetos); i++ {
-		if (int(X+20) > objetos[i][0] && int(X) < objetos[i][0]+objetos[i][1]) && int(Y+35) > objetos[i][2] && int(Y+35) < objetos[i][2]+objetos[i][3] {
+		if (int(X+20) > objetos[i][0] && int(X) < objetos[i][0]+objetos[i][1]) && int(Y+35) > objetos[i][2] && int(Y+32) < objetos[i][2]+objetos[i][3] {
 			X = X1
 			Y = Y1
+			return X, Y, true
 		}
 	}
-	return X, Y
+	return X, Y, false
 }

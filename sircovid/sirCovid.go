@@ -74,12 +74,11 @@ var (
 	imgBarbijo *ebiten.Image
 
 	// sonido
-	audioContext   *audio.Context
-	ragtimeContext *audio.Player
-	deadSound      *audio.Player
-	deadSound2     *audio.Player
-	sonidoFondo    *audio.InfiniteLoop
-	fondo          *audio.Player
+	audioContext *audio.Context
+	deadSound    *audio.Player
+	deadSound2   *audio.Player
+	sonidoFondo  *audio.InfiniteLoop
+	fondo        *audio.Player
 
 	//para mover humanos
 	a, a1, a2, a3, a4, a5, a6 int
@@ -154,15 +153,6 @@ func init() {
 		log.Fatal(err)
 	}
 
-	// ragtimeD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Ragtime_ogg))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// ragtimeContext, err = audio.NewPlayer(audioContext, ragtimeD)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
 	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
 	if err != nil {
 		log.Fatal(err)
@@ -227,7 +217,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModeGame == 0 && player1.vidas != 0:
 		//// sonido ////
 		deadSound2.Rewind()
-		// sonidoFondo.SetVolume(.)
 		fondo.Play()
 
 		// nube
@@ -246,6 +235,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
 
 	case ModeGame == 1 && player1.vidas != 0:
+		// sonido
+		deadSound2.Rewind()
+		fondo.Play()
 
 		// nube
 		Game1.nube = moverNube(Game1.nube)
@@ -260,16 +252,16 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
 	case ModeGameOver == 0:
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			iniciarVariables()
+		}
 
+		// sonido
 		fondo.Pause()
 		fondo.Rewind()
 		time.Sleep(time.Millisecond * 100)
 		deadSound2.SetVolume(.4)
 		deadSound2.Play()
-
-		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-			iniciarVariables()
-		}
 
 	}
 	return nil
@@ -311,7 +303,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar barbijo
 	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.5, .5)
+	op.GeoM.Scale(.3, .3)
 	op.GeoM.Translate(barbijoX, barbijoY)
 	bx, by := barbijoFrameOX+barbijoFrameWidth, barbijoFrameOY
 	screen.DrawImage(imgBarbijo.SubImage(image.Rect(bx, by, bx+barbijoFrameWidth, by+barbijoFrameHeight)).(*ebiten.Image), op)

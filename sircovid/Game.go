@@ -18,7 +18,7 @@ func moverNube(n nube) nube {
 	// creacion de nuevas nubes
 	if n.nubeAlpha <= 0 {
 		n.nubeX = float64(rand.Intn(1500))
-		n.nubeY = float64(rand.Intn(500) + 216)
+		n.nubeY = float64(rand.Intn(1500))
 		n.nubeAlphaUp = true
 	} else if n.nubeAlpha > 1 {
 		time.Sleep(10000 * time.Microsecond)
@@ -31,7 +31,7 @@ func moverNube(n nube) nube {
 	if n.nubeAlpha >= 0 {
 		n.nubeX--
 	}
-	n.nubeX, n.nubeY = obstaculos(n.nubeX, n.nubeY, nubeX1, nubeY1)
+	n.nubeX, n.nubeY, _ = obstaculos(n.nubeX, n.nubeY, nubeX1, nubeY1)
 
 	// actualizar alpha
 	if n.nubeAlphaUp {
@@ -48,7 +48,8 @@ func siguienteNivel(p humanos) humanos {
 		enemigos1.humanos = mujer
 		a, a1, a2, a3, a4, a5, a6, a7, a8, a9 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 		as, b, c, d = 0, 0, 0, 0
-
+		fondo.Pause()
+		fondo.Rewind()
 	}
 	return p
 }

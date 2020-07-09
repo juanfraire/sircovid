@@ -6,7 +6,7 @@ func iniciarVariables() {
 	hombre.FrameOX = 0
 	hombre.FrameOY = 48
 	hombre.FrameNum = 1
-	hombre.X = float64(750)
+	hombre.X = float64(350)
 	hombre.Y = float64(290)
 	hombre.FrameWidth = 32
 	hombre.FrameHeight = 48
@@ -39,7 +39,7 @@ func iniciarVariables() {
 
 	//nube
 	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
-	nube1.nubeY = float64(rand.Intn(200) + 600)
+	nube1.nubeY = float64(rand.Intn(1500))
 
 	//defino el juego
 	Game1.nube = nube1
