@@ -14,10 +14,6 @@ type enemigos struct {
 	//dibujarEnemigos (humanos)
 }
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
-
 var (
 	num    = rand.Intn(5)
 	tmp    int
@@ -25,6 +21,10 @@ var (
 	count  int
 	ok     bool
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func moverHumanos(h humanos) humanos {
 	// var rand int
