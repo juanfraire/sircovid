@@ -18,7 +18,6 @@ func iniciarVariables() {
 	mujer.Y = float64(290)
 	mujer.FrameWidth = 32
 	mujer.FrameHeight = 48
-	humano = hombre
 
 	// viejo
 	viejo.FrameOX = 0
