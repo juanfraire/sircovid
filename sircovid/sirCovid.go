@@ -31,6 +31,9 @@ var mujer humanos
 var humano humanos
 var viejo humanos
 
+//intro
+var intro1 intro
+
 //jugador
 var player1 player
 
@@ -101,6 +104,9 @@ var (
 
 // init carga los datos
 func init() {
+	// Intro Init
+	intro1.initIntro(screenWidth, screenHeight)
+
 	//////////////   Imagen CITY  ////////////////////////////////
 	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city2.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -140,7 +146,7 @@ func init() {
 	data := make([]byte, 11491248)
 	c, err := s.Read(data)
 	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
-	fmt.Println(c)
+	//fmt.Println(c)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -198,15 +204,15 @@ func init() {
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 
-	if ModeTitle == 0 {
-
-	}
-
 	// game counter
 	g.count++
 
 	switch {
 	case ModeTitle == 0:
+
+		// intro update
+		intro1.updateIntro(screenWidth, screenHeight)
+
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 1
 		}
@@ -314,7 +320,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	switch {
 	case ModeTitle == 0:
-		texts = []string{"SIR-COVID", "", "PRIMER NIVEL", "", "", "PRESS SPACE KEY"}
+
+		// intro draw
+		intro1.drawIntro(screen, screenWidth, screenHeight)
+		texts = []string{"", "", "", "", "", "", "PRIMER NIVEL", "", "", "PRESS SPACE KEY"}
+
 	case ModeTitle == 1 && player1.vidas != 0:
 		texts = []string{}
 
