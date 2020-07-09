@@ -200,6 +200,15 @@ func init() {
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 
+	//  maneja sonido fondo (S = mute)
+	if inpututil.IsKeyJustPressed(ebiten.KeyS) {
+		if fondo.Volume() != 0 {
+			fondo.SetVolume(0)
+		} else if fondo.Volume() == 0 {
+			fondo.SetVolume(1)
+		}
+	}
+
 	// game counter
 	g.count++
 
