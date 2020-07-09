@@ -31,8 +31,11 @@ func moverNube(n nube) nube {
 	if n.nubeAlpha >= 0 {
 		n.nubeX--
 	}
-	n.nubeX, n.nubeY, _ = obstaculos(n.nubeX, n.nubeY, nubeX1, nubeY1)
-
+	n.nubeX, n.nubeY, ok = obstaculos(n.nubeX+70, n.nubeY+70, nubeX1, nubeY1)
+	if !ok {
+		n.nubeX -= 70
+		n.nubeY -= 70
+	}
 	// actualizar alpha
 	if n.nubeAlphaUp {
 		n.nubeAlpha += .009

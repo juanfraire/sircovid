@@ -107,10 +107,10 @@ func vida(h humanos, p humanos) player {
 	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {
 		player1.v++
 	}
-	if p.X > h.X && p.X < h.X+32 && p.Y+48 > h.Y && p.Y < h.Y+48 {
+	if p.X > h.X && p.X < h.X+20 && p.Y > h.Y && p.Y < h.Y+32 {
 		player1.v++
 	}
-	if p.X > barbijoX && p.X < barbijoX+32 && p.Y+48 > barbijoY && p.Y < barbijoY+48 {
+	if p.X > barbijoX && p.X < barbijoX+20 && p.Y+32 > barbijoY && p.Y < barbijoY+32 {
 		player1.vidas++
 		barbijoX = 1000
 	}
