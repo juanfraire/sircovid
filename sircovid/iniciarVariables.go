@@ -58,8 +58,8 @@ func pasarNivel() {
 	hombre.FrameOX = 0
 	hombre.FrameOY = 48
 	hombre.FrameNum = 1
-	hombre.X = float64(350)
-	hombre.Y = float64(290)
+	hombre.X = float64(200)
+	hombre.Y = float64(200)
 	hombre.FrameWidth = 32
 	hombre.FrameHeight = 48
 
@@ -85,8 +85,6 @@ func pasarNivel() {
 
 	//player
 	player1.humanos = viejo
-	player1.vidas = 3
-	player1.v = 0
 
 	//enemigos
 	enemigos1.humanos = hombre
