@@ -45,6 +45,7 @@ var Game1 Game
 
 //humanos enemigos
 var enemigos1 enemigos
+var enemigos2 enemigos
 
 const (
 	// game
@@ -242,8 +243,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//hombre
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
-		//g.dibujarEnemigos(screen, enemigos1.img)
-
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
 
@@ -261,8 +260,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		// vida
 		player1 = vida(enemigos1.humanos, player1.humanos)
 
-		//mujer
+		//hombre
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
+		//mujer
+		enemigos2.humanos = moverHumanos(enemigos2.humanos)
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -300,7 +301,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(player1.img.SubImage(image.Rect(sx, sy, sx+player1.FrameWidth, sy+player1.FrameHeight)).(*ebiten.Image), op)
 
 	//dibuja al enemigo
-	g.dibujarEnemigos(screen)
+	if ModeGame == 0 {
+		dibujarEnemigos(enemigos1.humanos, screen)
+	}
+	if ModeGame == 1 {
+
+		dibujarEnemigos(enemigos1.humanos, screen)
+		dibujarEnemigos(enemigos2.humanos, screen)
+
+	}
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}

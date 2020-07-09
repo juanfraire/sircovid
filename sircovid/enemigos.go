@@ -10,8 +10,8 @@ import (
 
 type enemigos struct {
 	humanos
-	moverHumanos    (humanos)
-	dibujarEnemigos (humanos)
+	moverHumanos (humanos)
+	//dibujarEnemigos (humanos)
 }
 
 func init() {
@@ -69,11 +69,11 @@ func moverHumanos(h humanos) humanos {
 	return h
 }
 
-func (g *Game) dibujarEnemigos(screen *ebiten.Image) {
+func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(.8, .8)
-	op.GeoM.Translate(enemigos1.humanos.X, enemigos1.humanos.Y)
-	j := (g.count / 7) % enemigos1.humanos.FrameNum
-	hx, hy := enemigos1.humanos.FrameOX+j*enemigos1.humanos.FrameWidth, enemigos1.humanos.FrameOY
-	screen.DrawImage(enemigos1.humanos.img.SubImage(image.Rect(hx, hy, hx+enemigos1.humanos.FrameWidth, hy+enemigos1.humanos.FrameHeight)).(*ebiten.Image), op)
+	op.GeoM.Translate(E.X, E.Y)
+	j := (count / 7) % E.FrameNum
+	hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY
+	screen.DrawImage(E.img.SubImage(image.Rect(hx, hy, hx+E.FrameWidth, hy+E.FrameHeight)).(*ebiten.Image), op)
 }

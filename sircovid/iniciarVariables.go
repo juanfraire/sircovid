@@ -35,6 +35,7 @@ func iniciarVariables() {
 
 	//enemigos
 	enemigos1.humanos = hombre
+	enemigos2.humanos = mujer
 
 	//nube
 	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)

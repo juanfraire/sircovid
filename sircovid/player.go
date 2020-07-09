@@ -89,9 +89,9 @@ func moverPlayer(p humanos) humanos {
 	case p.MovY == 2:
 		p.Y++
 	}
-	p.X, p.Y, ok = obstaculos(p.X, p.Y+32, X1, Y1)
+	p.X, p.Y, ok = obstaculos(p.X+20, p.Y+32, X1, Y1)
 	if !ok {
-		p.X -= 0
+		p.X -= 20
 		p.Y -= 32
 	}
 	return p
