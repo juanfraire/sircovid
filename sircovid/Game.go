@@ -48,7 +48,10 @@ func siguienteNivel(p humanos) humanos {
 	if p.X >= 748 && p.Y > 450 {
 		ModeTitle = 2
 		ModeGame = 1
-		a, b, c, d = 0, 0, 0, 0
+		iniciarVariables()
+		//, b, c, d = 0, 0, 0, 0
+		ModeGame = 1
+
 		fondo.Pause()
 		fondo.Rewind()
 	}
