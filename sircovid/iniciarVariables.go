@@ -14,7 +14,7 @@ func iniciarVariables() {
 	mujer.FrameOX = 0
 	mujer.FrameOY = 48
 	mujer.FrameNum = 1
-	mujer.X = float64(750)
+	mujer.X = float64(screenWidth - 50)
 	mujer.Y = float64(290)
 	mujer.FrameWidth = 32
 	mujer.FrameHeight = 48
