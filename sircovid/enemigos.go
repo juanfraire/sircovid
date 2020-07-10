@@ -32,7 +32,7 @@ func moverHumanos(h humanos) humanos {
 	count++
 
 	x1, y1 := h.X, h.Y
-	_, _, ok = obstaculos(h.X+10, h.Y+32, x1, y1)
+	_, _, ok = obstaculos(h.X+20, h.Y+32, x1, y1)
 	if count == cambio {
 		for tmp = num; tmp == num || tmp == 0; tmp = rand.Intn(5) {
 		}
