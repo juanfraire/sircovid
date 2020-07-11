@@ -392,7 +392,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		text.Draw(screen, jugadores, smallArcadeFont, 140, 250, color.White)
 
 	case ElectPlayer == 0 && Game1.numPlayers == 1:
-		jugadores := fmt.Sprintf("Elija el jugador \n\ny presione enter")
+		jugadores := fmt.Sprintf("Elija el jugador \n\n con las flechas\n\ny presione enter")
 		text.Draw(screen, jugadores, smallArcadeFont, 250, 250, color.White)
 
 	case ElectNumPlayers == 1:
