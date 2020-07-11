@@ -228,7 +228,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 				ElectNumPlayers = 1
 			}
-		case ElectPlayer == 0:
+		case ElectPlayer == 0 && Game1.numPlayers == 1:
 			if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
 				if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
 					player1.humanos = chica
@@ -371,12 +371,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		// intro draw
 		intro1.drawIntro(screen, screenWidth, screenHeight)
 
-		switch {
-
-		case ElectNumPlayers == 0:
-			texts = []string{"", "", "", "Elija la cantidad de jugadores", "con las flechas y presione enter"}
-
-		case ElectNumPlayers == 1:
+		if ElectNumPlayers == 1 {
 			texts = []string{"", "", "", "PRIMER NIVEL", "", "PRESS SPACE KEY"}
 		}
 
@@ -393,10 +388,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 	switch {
 	case ElectNumPlayers == 0:
-		for i, l := range texts {
-			x := (screenWidth - len(l)*fontSize) / 2
-			text.Draw(screen, l, smallArcadeFont, x, (i+5)*fontSize, color.White)
-		}
+		jugadores := fmt.Sprintf(" Elija la cantidad de jugadores \n\ncon las flechas y presione enter\n\nJUGADORES:%02d", Game1.numPlayers)
+		text.Draw(screen, jugadores, smallArcadeFont, 140, 250, color.White)
+
+	case ElectPlayer == 0 && Game1.numPlayers == 1:
+		jugadores := fmt.Sprintf("Elija el jugador \n\ny presione enter")
+		text.Draw(screen, jugadores, smallArcadeFont, 250, 250, color.White)
+
 	case ElectNumPlayers == 1:
 		for i, l := range texts {
 			x := (screenWidth - len(l)*fontSize) / 2

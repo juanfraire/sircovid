@@ -73,7 +73,7 @@ func moverPlayer(p player) player {
 	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1 {
 		p.c = 1
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyZ) && p.señalador == 1 {
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyX) && p.señalador == 1 {
 		p.d = 1
 	}
 
@@ -112,7 +112,7 @@ func moverPlayer(p player) player {
 		p.FrameNum = 3
 		p.MovY = 2
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyDown) || inpututil.IsKeyJustReleased(ebiten.KeyZ) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyDown) || inpututil.IsKeyJustReleased(ebiten.KeyX) {
 		p.FrameNum = 1
 		p.MovY = 0
 		p.d = 0
