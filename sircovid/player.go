@@ -11,10 +11,11 @@ import (
 
 type player struct {
 	humanos
-	vidas       int
-	v           int
-	moverPlayer (humanos)
-	vida        (humanos)
+	vidas        int
+	v            int
+	moverPlayer  (humanos)
+	vida         (humanos)
+	moverPlayer2 (humanos)
 }
 
 var a, b, c, d int
@@ -56,7 +57,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovX = 1
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyRight) && p.MovY != 1 && p.MovY != 2 {
+	if inpututil.IsKeyJustReleased(ebiten.KeyRight) {
 		p.FrameNum = 1
 		p.MovX = 0
 		a = 0
@@ -66,7 +67,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovX = 2
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) && p.MovY != 1 && p.MovY != 2 {
+	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) {
 		p.FrameNum = 1
 		p.MovX = 0
 		b = 0
@@ -76,7 +77,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovY = 1
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyUp) && p.MovX != 1 && p.MovX != 2 {
+	if inpututil.IsKeyJustReleased(ebiten.KeyUp) {
 		p.FrameNum = 1
 		p.MovY = 0
 		c = 0
@@ -86,7 +87,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovY = 2
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyDown) && p.MovX != 1 && p.MovX != 2 {
+	if inpututil.IsKeyJustReleased(ebiten.KeyDown) {
 		p.FrameNum = 1
 		p.MovY = 0
 		d = 0
