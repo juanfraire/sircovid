@@ -35,6 +35,8 @@ func iniciarVariables() {
 	ModeGame = 0
 	ModeTitle = 0
 	ModeGameOver = 0
+	ElectNumPlayers = 0
+	ElectPlayer = 0
 
 }
 func pasarNivel() {

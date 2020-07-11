@@ -65,10 +65,12 @@ const (
 
 //Mode Game es el en que parte del juego estamos
 var (
-	ModeGame     int
-	ModeTitle    int
-	ModeGameOver int
-	count1       int
+	ModeGame        int
+	ModeTitle       int
+	ElectNumPlayers int
+	ElectPlayer     int
+	ModeGameOver    int
+	count1          int
 )
 
 var (
@@ -212,10 +214,33 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	count1++
 	switch {
 	case ModeTitle == 0:
-
 		// intro update
 		intro1.updateIntro(screenWidth, screenHeight)
 
+		switch {
+		case ElectNumPlayers == 0:
+			if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+				Game1.numPlayers = 2
+			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+				Game1.numPlayers = 1
+			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+				ElectNumPlayers = 1
+			}
+		case ElectPlayer == 0:
+			if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
+				if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+					player1.humanos = chica
+				}
+				if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+					player1.humanos = viejo
+				}
+			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+				ElectPlayer = 1
+			}
+		}
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 1
 		}
@@ -233,18 +258,24 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		// palyer
 		player1 = moverPlayer(player1)
-		player2 = moverPlayer(player2)
+		if Game1.numPlayers == 2 {
+			player2 = moverPlayer(player2)
+		}
 
 		// vida
 		player1 = vida(enemigos1.humanos, player1)
-		player2 = vida(enemigos1.humanos, player2)
+		if Game1.numPlayers == 2 {
+			player2 = vida(enemigos1.humanos, player2)
+		}
 
 		//hombre
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
 
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
-		Game1.siguienteNivel = siguienteNivel(player2.humanos)
+		if Game1.numPlayers == 2 {
+			Game1.siguienteNivel = siguienteNivel(player2.humanos)
+		}
 
 	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
 		// sonido
@@ -298,7 +329,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibujar palyers
 	dibujarPlayer(player1, screen)
-	dibujarPlayer(player2, screen)
+	if Game1.numPlayers == 2 {
+		dibujarPlayer(player2, screen)
+	}
 
 	//dibuja al enemigo
 	if ModeGame == 0 {
@@ -327,15 +360,25 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	lifesP1 := fmt.Sprintf("Vidas:%02d", player1.vidas)
 	text.Draw(screen, lifesP1, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
 
-	lifesP2 := fmt.Sprintf("Vidas:%02d", player2.vidas)
-	text.Draw(screen, lifesP2, smallArcadeFont, 600, 40, color.RGBA{35, 27, 190, 0xff})
+	if Game1.numPlayers == 2 {
+		lifesP2 := fmt.Sprintf("Vidas:%02d", player2.vidas)
+		text.Draw(screen, lifesP2, smallArcadeFont, 600, 40, color.RGBA{35, 27, 190, 0xff})
+	}
 
 	switch {
 	case ModeTitle == 0:
 
 		// intro draw
 		intro1.drawIntro(screen, screenWidth, screenHeight)
-		texts = []string{"", "", "", "", "", "", "PRIMER NIVEL", "", "", "PRESS SPACE KEY"}
+
+		switch {
+
+		case ElectNumPlayers == 0:
+			texts = []string{"", "", "", "Elija la cantidad de jugadores", "con las flechas y presione enter"}
+
+		case ElectNumPlayers == 1:
+			texts = []string{"", "", "", "PRIMER NIVEL", "", "PRESS SPACE KEY"}
+		}
 
 	case ModeTitle == 1 && (player1.vidas != 0 && player2.vidas != 0):
 		texts = []string{}
@@ -348,9 +391,17 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case player2.vidas == 0 || player1.vidas == 0:
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
-	for i, l := range texts {
-		x := (screenWidth - len(l)*fontSize) / 2
-		text.Draw(screen, l, arcadeFont, x, (i+5)*fontSize, color.White)
+	switch {
+	case ElectNumPlayers == 0:
+		for i, l := range texts {
+			x := (screenWidth - len(l)*fontSize) / 2
+			text.Draw(screen, l, smallArcadeFont, x, (i+5)*fontSize, color.White)
+		}
+	case ElectNumPlayers == 1:
+		for i, l := range texts {
+			x := (screenWidth - len(l)*fontSize) / 2
+			text.Draw(screen, l, arcadeFont, x, (i+5)*fontSize, color.White)
+		}
 	}
 }
 

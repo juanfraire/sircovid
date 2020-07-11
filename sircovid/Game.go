@@ -9,6 +9,8 @@ import (
 type Game struct {
 	count int
 	nube
+	numPlayers     int
+	electPlayer    int
 	moverNube      (nube)
 	siguienteNivel (humanos)
 }
