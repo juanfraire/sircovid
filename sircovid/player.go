@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -165,7 +164,6 @@ func vida(h humanos, p player) player {
 		p.vidas++
 		barbijoX = 1000
 	}
-	fmt.Println(p.vidas)
 	if p.v == 1 {
 		p.vidas--
 		//sonido

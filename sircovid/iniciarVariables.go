@@ -66,9 +66,6 @@ func pasarNivel() {
 	viejo.FrameWidth = 32
 	viejo.FrameHeight = 48
 
-	//player
-	//player1.humanos = viejo
-
 	//palyer 2
 	chica.FrameOX = 0
 	chica.FrameOY = 96
@@ -92,7 +89,6 @@ func pasarNivel() {
 
 	//paso de nivel
 	ModeTitle = 2
-	ModeGameOver = 0
 	ModeGame = 1
 
 	//para movimiento de player

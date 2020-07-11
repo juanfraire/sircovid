@@ -35,9 +35,6 @@ var chica humanos
 //intro
 var intro1 intro
 
-//jugador
-//var player1 player
-
 //nube
 var nube1 nube
 
@@ -111,7 +108,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//inicializa a player
+	//inicializa a players
 	initPlayer()
 
 	hombre.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
@@ -273,6 +270,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			iniciarVariables()
+			initPlayer()
 		}
 
 		// sonido
@@ -339,15 +337,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		intro1.drawIntro(screen, screenWidth, screenHeight)
 		texts = []string{"", "", "", "", "", "", "PRIMER NIVEL", "", "", "PRESS SPACE KEY"}
 
-	case ModeTitle == 1 && player1.vidas != 0:
+	case ModeTitle == 1 && (player1.vidas != 0 && player2.vidas != 0):
 		texts = []string{}
 
 	case ModeTitle == 2:
 		texts = []string{"", "", "SEGUNDO NIVEL", "", "", "PRESS SPACE KEY"}
-	case ModeTitle == 3 && player1.vidas != 0:
+	case ModeTitle == 3 && (player1.vidas != 0 && player2.vidas != 0):
 		texts = []string{}
 
-	case player1.vidas == 0 || player2.vidas == 0:
+	case player2.vidas == 0 || player1.vidas == 0:
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
 	for i, l := range texts {
