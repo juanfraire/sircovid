@@ -35,7 +35,7 @@ var viejo humanos
 var intro1 intro
 
 //jugador
-var player1 player
+//var player1 player
 
 //nube
 var nube1 nube
@@ -110,11 +110,8 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//////////////   Imangen VIEJO  //////////////////////////////
-	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
+
+	initPlayer()
 	hombre.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -294,12 +291,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	screen.DrawImage(imgTiles, op)
 
-	// dibujar player
-	op.GeoM.Scale(.7, .7)
-	op.GeoM.Translate(player1.X, player1.Y)
-	i := (g.count / 7) % player1.FrameNum
-	sx, sy := player1.FrameOX+i*player1.FrameWidth, player1.FrameOY
-	screen.DrawImage(player1.img.SubImage(image.Rect(sx, sy, sx+player1.FrameWidth, sy+player1.FrameHeight)).(*ebiten.Image), op)
+	dibujarPlayer(player1, screen)
 
 	//dibuja al enemigo
 	if ModeGame == 0 {

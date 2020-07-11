@@ -1,7 +1,11 @@
 package main
 
 import (
+	"image"
+	"log"
+
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/ebitenutil"
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
 
@@ -14,6 +18,23 @@ type player struct {
 }
 
 var a, b, c, d int
+
+var player1, player2 player
+
+func initPlayer() {
+
+	//////////////   Imangen VIEJO  //////////////////////////////
+	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//imagen chica
+	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+}
 
 func moverPlayer(p humanos) humanos {
 	// leer tecla
@@ -124,4 +145,13 @@ func vida(h humanos, p humanos) player {
 		player1.v = 0
 	}
 	return player1
+}
+
+func dibujarPlayer(P player, screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(.7, .7)
+	op.GeoM.Translate(P.X, P.Y)
+	i := (count1 / 7) % P.FrameNum
+	sx, sy := P.FrameOX+i*P.FrameWidth, P.FrameOY
+	screen.DrawImage(P.img.SubImage(image.Rect(sx, sy, sx+P.FrameWidth, sy+P.FrameHeight)).(*ebiten.Image), op)
 }
