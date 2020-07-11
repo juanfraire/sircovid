@@ -67,7 +67,16 @@ func pasarNivel() {
 	viejo.FrameHeight = 48
 
 	//player
-	player1.humanos = viejo
+	//player1.humanos = viejo
+
+	//palyer 2
+	chica.FrameOX = 0
+	chica.FrameOY = 96
+	chica.FrameNum = 1
+	chica.X = float64(25)
+	chica.Y = float64(415)
+	chica.FrameWidth = 32
+	chica.FrameHeight = 48
 
 	//enemigos
 	enemigos1.humanos = hombre

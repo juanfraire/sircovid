@@ -226,7 +226,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 3
 		}
-	case ModeGame == 0 && player1.vidas != 0:
+	case ModeGame == 0 && player1.vidas != 0 && player2.vidas != 0:
 		//// sonido ////
 		deadSound2.Rewind()
 		fondo.Play()
@@ -236,7 +236,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		// palyer
 		player1 = moverPlayer(player1)
-
 		player2 = moverPlayer(player2)
 
 		// vida
@@ -248,8 +247,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
+		Game1.siguienteNivel = siguienteNivel(player2.humanos)
 
-	case ModeGame == 1 && player1.vidas != 0:
+	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
 		// sonido
 		deadSound2.Rewind()
 		fondo.Play()
@@ -298,8 +298,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	screen.DrawImage(imgTiles, op)
 
+	//dibujar palyers
 	dibujarPlayer(player1, screen)
-
 	dibujarPlayer(player2, screen)
 
 	//dibuja al enemigo
@@ -326,8 +326,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(imgBarbijo.SubImage(image.Rect(bx, by, bx+barbijoFrameWidth, by+barbijoFrameHeight)).(*ebiten.Image), op)
 
 	// dibujar texto
-	lifes := fmt.Sprintf("Vidas:%02d", player1.vidas)
-	text.Draw(screen, lifes, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
+	lifesP1 := fmt.Sprintf("Vidas:%02d", player1.vidas)
+	text.Draw(screen, lifesP1, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
+
+	lifesP2 := fmt.Sprintf("Vidas:%02d", player2.vidas)
+	text.Draw(screen, lifesP2, smallArcadeFont, 600, 40, color.RGBA{35, 27, 190, 0xff})
 
 	switch {
 	case ModeTitle == 0:
@@ -344,7 +347,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case ModeTitle == 3 && player1.vidas != 0:
 		texts = []string{}
 
-	case player1.vidas == 0:
+	case player1.vidas == 0 || player2.vidas == 0:
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
 	for i, l := range texts {

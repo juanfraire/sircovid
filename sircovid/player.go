@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -151,24 +152,28 @@ func vida(h humanos, p player) player {
 	if Game1.nubeAlpha < .3 {
 		collisionX = screenWidth + 300
 	}
+	//pierde vidas con nube
 	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {
-		player1.v++
+		p.v++
 	}
+	//pierde vidas con humanos
 	if p.X > h.X && p.X < h.X+20 && p.Y > h.Y && p.Y < h.Y+32 {
-		player1.v++
+		p.v++
 	}
+	//gana vida con barbijo
 	if p.X > barbijoX && p.X < barbijoX+20 && p.Y+32 > barbijoY && p.Y < barbijoY+32 {
-		player1.vidas++
+		p.vidas++
 		barbijoX = 1000
 	}
-	if player1.v == 1 {
-		player1.vidas--
+	fmt.Println(p.vidas)
+	if p.v == 1 {
+		p.vidas--
 		//sonido
 		deadSound.Play()
 		deadSound.Rewind()
 	}
-	if player1.v == 30 {
-		player1.v = 0
+	if p.v == 30 {
+		p.v = 0
 	}
 	return p
 }
