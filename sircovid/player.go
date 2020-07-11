@@ -11,14 +11,11 @@ import (
 
 type player struct {
 	humanos
-	vidas        int
-	v            int
-	moverPlayer  (humanos)
-	vida         (humanos)
-	moverPlayer2 (humanos)
+	vidas      int
+	v          int
+	señalador  int
+	a, b, c, d int
 }
-
-var a, b, c, d int
 
 var player1, player2 player
 
@@ -29,28 +26,58 @@ func initPlayer() {
 		log.Fatal(err)
 	}
 	//imagen chica
-	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
+	chica.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\segundoPlayer.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// viejo
+	viejo.FrameOX = 0
+	viejo.FrameOY = 96
+	viejo.FrameNum = 1
+	viejo.X = float64(25)
+	viejo.Y = float64(375)
+	viejo.FrameWidth = 32
+	viejo.FrameHeight = 48
+	//player
+	player1.humanos = viejo
+	player1.vidas = 3
+	player1.v = 0
+	player1.señalador = 0
+	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
+
+	//player2
+	chica.FrameOX = 0
+	chica.FrameOY = 96
+	chica.FrameNum = 1
+	chica.X = float64(25)
+	chica.Y = float64(415)
+	chica.FrameWidth = 32
+	chica.FrameHeight = 48
+
+	player2.humanos = chica
+	player2.vidas = 3
+	player2.v = 0
+	player2.señalador = 1
+	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
+
 }
 
-func moverPlayer(p humanos) humanos {
+func moverPlayer(p player) player {
 	// leer tecla
+	if inpututil.IsKeyJustPressed(ebiten.KeyRight) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyD) && p.señalador == 1 {
+		p.a = 1
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyA) && p.señalador == 1 {
+		p.b = 1
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1 {
+		p.c = 1
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyZ) && p.señalador == 1 {
+		p.d = 1
+	}
 
-	if inpututil.IsKeyJustPressed(ebiten.KeyRight) || inpututil.IsKeyJustPressed(ebiten.KeyD) {
-		a = 1
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) || inpututil.IsKeyJustPressed(ebiten.KeyA) {
-		b = 1
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyUp) || inpututil.IsKeyJustPressed(ebiten.KeyW) {
-		c = 1
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) || inpututil.IsKeyJustPressed(ebiten.KeyZ) {
-		d = 1
-	}
-	if a == 1 && p.MovY != 1 && p.MovY != 2 {
+	if p.a == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOY = 96
 		p.FrameNum = 3
 		p.MovX = 1
@@ -58,9 +85,9 @@ func moverPlayer(p humanos) humanos {
 	if inpututil.IsKeyJustReleased(ebiten.KeyRight) || inpututil.IsKeyJustReleased(ebiten.KeyD) {
 		p.FrameNum = 1
 		p.MovX = 0
-		a = 0
+		p.a = 0
 	}
-	if b == 1 && p.MovY != 1 && p.MovY != 2 {
+	if p.b == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOY = 48
 		p.FrameNum = 3
 		p.MovX = 2
@@ -68,9 +95,9 @@ func moverPlayer(p humanos) humanos {
 	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) || inpututil.IsKeyJustReleased(ebiten.KeyA) {
 		p.FrameNum = 1
 		p.MovX = 0
-		b = 0
+		p.b = 0
 	}
-	if c == 1 && p.MovX != 1 && p.MovX != 2 {
+	if p.c == 1 && p.MovX != 1 && p.MovX != 2 {
 		p.FrameOY = 144
 		p.FrameNum = 3
 		p.MovY = 1
@@ -78,9 +105,9 @@ func moverPlayer(p humanos) humanos {
 	if inpututil.IsKeyJustReleased(ebiten.KeyUp) || inpututil.IsKeyJustReleased(ebiten.KeyW) {
 		p.FrameNum = 1
 		p.MovY = 0
-		c = 0
+		p.c = 0
 	}
-	if d == 1 && p.MovX != 1 && p.MovX != 2 {
+	if p.d == 1 && p.MovX != 1 && p.MovX != 2 {
 		p.FrameOY = 0
 		p.FrameNum = 3
 		p.MovY = 2
@@ -88,7 +115,7 @@ func moverPlayer(p humanos) humanos {
 	if inpututil.IsKeyJustReleased(ebiten.KeyDown) || inpututil.IsKeyJustReleased(ebiten.KeyZ) {
 		p.FrameNum = 1
 		p.MovY = 0
-		d = 0
+		p.d = 0
 	}
 
 	// trasladar viejo
@@ -117,7 +144,7 @@ func moverPlayer(p humanos) humanos {
 	return p
 }
 
-func vida(h humanos, p humanos) player {
+func vida(h humanos, p player) player {
 	//pierde vidas con la nuve
 	collisionX := float64(Game1.nubeX * .4)
 	collisionY := float64(Game1.nubeY*.4) + 106
@@ -143,7 +170,7 @@ func vida(h humanos, p humanos) player {
 	if player1.v == 30 {
 		player1.v = 0
 	}
-	return player1
+	return p
 }
 
 func dibujarPlayer(P player, screen *ebiten.Image) {

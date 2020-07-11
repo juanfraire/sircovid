@@ -19,20 +19,6 @@ func iniciarVariables() {
 	mujer.FrameWidth = 32
 	mujer.FrameHeight = 48
 
-	// viejo
-	viejo.FrameOX = 0
-	viejo.FrameOY = 96
-	viejo.FrameNum = 1
-	viejo.X = float64(25)
-	viejo.Y = float64(375)
-	viejo.FrameWidth = 32
-	viejo.FrameHeight = 48
-
-	//player
-	player1.humanos = viejo
-	player1.vidas = 3
-	player1.v = 0
-
 	//enemigos
 	enemigos1.humanos = hombre
 	enemigos2.humanos = mujer
@@ -49,9 +35,6 @@ func iniciarVariables() {
 	ModeGame = 0
 	ModeTitle = 0
 	ModeGameOver = 0
-
-	//para movimiento de player
-	a, b, c, d = 0, 0, 0, 0
 
 }
 func pasarNivel() {
@@ -104,5 +87,6 @@ func pasarNivel() {
 	ModeGame = 1
 
 	//para movimiento de player
-	a, b, c, d = 0, 0, 0, 0
+	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
+	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
 }

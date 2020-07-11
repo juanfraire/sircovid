@@ -30,6 +30,7 @@ var hombre humanos
 var mujer humanos
 var humano humanos
 var viejo humanos
+var chica humanos
 
 //intro
 var intro1 intro
@@ -110,8 +111,9 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	//inicializa a player
 	initPlayer()
+
 	hombre.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -233,10 +235,13 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		Game1.nube = moverNube(Game1.nube)
 
 		// palyer
-		player1.humanos = moverPlayer(player1.humanos)
+		player1 = moverPlayer(player1)
+
+		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(enemigos1.humanos, player1.humanos)
+		player1 = vida(enemigos1.humanos, player1)
+		player2 = vida(enemigos1.humanos, player2)
 
 		//hombre
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
@@ -253,10 +258,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		Game1.nube = moverNube(Game1.nube)
 
 		// player
-		player1.humanos = moverPlayer(player1.humanos)
+		player1 = moverPlayer(player1)
+		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(enemigos1.humanos, player1.humanos)
+		player1 = vida(enemigos1.humanos, player1)
+		player2 = vida(enemigos1.humanos, player2)
 
 		//hombre
 		enemigos1.humanos = moverHumanos(enemigos1.humanos)
@@ -292,6 +299,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(imgTiles, op)
 
 	dibujarPlayer(player1, screen)
+
+	dibujarPlayer(player2, screen)
 
 	//dibuja al enemigo
 	if ModeGame == 0 {
