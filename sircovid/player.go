@@ -23,7 +23,6 @@ var a, b, c, d int
 var player1, player2 player
 
 func initPlayer() {
-
 	//////////////   Imangen VIEJO  //////////////////////////////
 	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -34,22 +33,21 @@ func initPlayer() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
 
 func moverPlayer(p humanos) humanos {
 	// leer tecla
 
-	if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyRight) || inpututil.IsKeyJustPressed(ebiten.KeyD) {
 		a = 1
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) || inpututil.IsKeyJustPressed(ebiten.KeyA) {
 		b = 1
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyUp) || inpututil.IsKeyJustPressed(ebiten.KeyW) {
 		c = 1
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) || inpututil.IsKeyJustPressed(ebiten.KeyZ) {
 		d = 1
 	}
 	if a == 1 && p.MovY != 1 && p.MovY != 2 {
@@ -57,7 +55,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovX = 1
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyRight) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyRight) || inpututil.IsKeyJustReleased(ebiten.KeyD) {
 		p.FrameNum = 1
 		p.MovX = 0
 		a = 0
@@ -67,7 +65,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovX = 2
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) || inpututil.IsKeyJustReleased(ebiten.KeyA) {
 		p.FrameNum = 1
 		p.MovX = 0
 		b = 0
@@ -77,7 +75,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovY = 1
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyUp) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyUp) || inpututil.IsKeyJustReleased(ebiten.KeyW) {
 		p.FrameNum = 1
 		p.MovY = 0
 		c = 0
@@ -87,7 +85,7 @@ func moverPlayer(p humanos) humanos {
 		p.FrameNum = 3
 		p.MovY = 2
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyDown) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyDown) || inpututil.IsKeyJustReleased(ebiten.KeyZ) {
 		p.FrameNum = 1
 		p.MovY = 0
 		d = 0
