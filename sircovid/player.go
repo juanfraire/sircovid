@@ -156,7 +156,7 @@ func vida(h humanos, p player) player {
 		p.v++
 	}
 	//pierde vidas con humanos
-	if p.X > h.X && p.X < h.X+20 && p.Y > h.Y && p.Y < h.Y+32 {
+	if p.X+20 > h.X && p.X < h.X+20 && p.Y+32 > h.Y && p.Y < h.Y+32 {
 		p.v++
 	}
 	//gana vida con barbijo
