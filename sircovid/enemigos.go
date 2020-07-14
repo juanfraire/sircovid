@@ -8,17 +8,10 @@ import (
 	"github.com/hajimehoshi/ebiten"
 )
 
-<<<<<<< HEAD
-=======
-type enemigos struct {
-	humanos
-}
-
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
->>>>>>> 3bb2d837a2760e6774f74a8c03e827626696b24f
 var (
 	num = rand.Intn(5)
 
@@ -26,7 +19,6 @@ var (
 	ok    bool
 )
 
-<<<<<<< HEAD
 func init() {
 	rand.Seed(time.Now().UnixNano())
 	//hombre
@@ -48,11 +40,6 @@ func init() {
 
 }
 
-func moverEnemigos(h humanos) humanos {
-	// var rand int
-	h.FrameNum = 4
-	count++
-=======
 func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int, int, float64, float64) {
 
 	FrameNum = 4
@@ -79,7 +66,6 @@ func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int
 
 func cambioDireccion(num int, cambio int, count int) (int, int) {
 	var tmp int
->>>>>>> 3bb2d837a2760e6774f74a8c03e827626696b24f
 
 	if count == cambio {
 		for tmp = num; tmp == num || tmp == 0; tmp = rand.Intn(5) {
