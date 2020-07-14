@@ -272,10 +272,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 		//hombre
-
-		enemigos1.num = obstEnemigo(enemigos1.num, enemigos1.X, enemigos1.Y)
-		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
 		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
+		enemigos1.num, enemigos1.cambio = obstEnemigo(enemigos1.cambio, countH, enemigos1.num, enemigos1.X, enemigos1.Y)
+		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
 
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
@@ -299,14 +298,15 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player1 = vida(enemigos1.humanos, player1)
 		player2 = vida(enemigos1.humanos, player2)
 
-		//hombre
-		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
-		enemigos1.num = obstEnemigo(enemigos1.num, enemigos1.X, enemigos1.Y)
-		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
 		//mujer
-		enemigos2.num, enemigos2.cambio = cambioDireccion(enemigos2.num, enemigos2.cambio, countH)
-		enemigos2.num = obstEnemigo(enemigos2.num, enemigos2.X, enemigos2.Y)
 		enemigos2.FrameOY, enemigos2.FrameNum, enemigos2.X, enemigos2.Y = moverHumanos(enemigos2.FrameOY, enemigos2.FrameNum, enemigos2.num, enemigos2.X, enemigos2.Y)
+		enemigos2.num, enemigos2.cambio = obstEnemigo(enemigos2.cambio, countH, enemigos2.num, enemigos2.X, enemigos2.Y)
+		enemigos2.num, enemigos2.cambio = cambioDireccion(enemigos2.num, enemigos2.cambio, countH)
+
+		//hombre
+		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
+		enemigos1.num, enemigos1.cambio = obstEnemigo(enemigos1.cambio, countH, enemigos1.num, enemigos1.X, enemigos1.Y)
+		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {

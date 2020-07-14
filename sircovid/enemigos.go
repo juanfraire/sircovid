@@ -29,7 +29,7 @@ func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int
 
 	switch num {
 	case 0:
-		num = 1
+		FrameNum = 1
 	case 1:
 		FrameOY = 48
 		X--
@@ -50,9 +50,8 @@ func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int
 func cambioDireccion(num int, cambio int, count int) (int, int) {
 	var tmp int
 
-	if count == cambio {
-		for tmp = num; tmp == num || tmp == 0; tmp = rand.Intn(5) {
-			// fmt.Println(tmp)
+	if count >= cambio {
+		for tmp = num; tmp == num; tmp = rand.Intn(5) {
 		}
 		cambio += rand.Intn(50) + 20
 		num = tmp
@@ -61,10 +60,9 @@ func cambioDireccion(num int, cambio int, count int) (int, int) {
 	return num, cambio
 }
 
-func obstEnemigo(num int, X float64, Y float64) int {
-
+func obstEnemigo(cambio int, count int, num int, X float64, Y float64) (int, int) {
 	x1, y1 := X, Y
-	_, _, ok = obstaculos(X+20, Y+32, x1, y1)
+	_, _, ok = obstaculos(X, Y, x1, y1)
 
 	if ok {
 		switch num {
@@ -77,8 +75,9 @@ func obstEnemigo(num int, X float64, Y float64) int {
 		case 4:
 			num = 3
 		}
+		cambio = count + 15
 	}
-	return num
+	return num, cambio
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
