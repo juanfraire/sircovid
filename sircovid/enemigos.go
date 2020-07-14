@@ -10,36 +10,63 @@ import (
 
 type enemigos struct {
 	humanos
-	moverHumanos (humanos)
-	//dibujarEnemigos (humanos)
 }
-
-var (
-	num    = rand.Intn(5)
-	tmp    int
-	cambio = rand.Intn(50) + 50
-	count  int
-	ok     bool
-)
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-func moverHumanos(h humanos) humanos {
-	// var rand int
-	h.FrameNum = 4
-	count++
+var (
+	num = rand.Intn(5)
 
-	x1, y1 := h.X, h.Y
-	_, _, ok = obstaculos(h.X+20, h.Y+32, x1, y1)
+	count int
+	ok    bool
+)
+
+func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int, int, float64, float64) {
+
+	FrameNum = 4
+
+	switch num {
+	case 0:
+		num = 1
+	case 1:
+		FrameOY = 48
+		X--
+	case 2:
+		FrameOY = 96
+		X++
+	case 3:
+		FrameOY = 144
+		Y--
+	case 4:
+		FrameOY = 0
+		Y++
+	}
+
+	return FrameOY, FrameNum, X, Y
+}
+
+func cambioDireccion(num int, cambio int, count int) (int, int) {
+	var tmp int
+
 	if count == cambio {
 		for tmp = num; tmp == num || tmp == 0; tmp = rand.Intn(5) {
+			// fmt.Println(tmp)
 		}
-		cambio += rand.Intn(100) + 50
+		cambio += rand.Intn(50) + 20
 		num = tmp
+	}
 
-	} else if ok {
+	return num, cambio
+}
+
+func obstEnemigo(num int, X float64, Y float64) int {
+
+	x1, y1 := X, Y
+	_, _, ok = obstaculos(X+20, Y+32, x1, y1)
+
+	if ok {
 		switch num {
 		case 1:
 			num = 2
@@ -51,22 +78,7 @@ func moverHumanos(h humanos) humanos {
 			num = 3
 		}
 	}
-
-	switch num {
-	case 1:
-		h.FrameOY = 48
-		h.X--
-	case 2:
-		h.FrameOY = 96
-		h.X++
-	case 3:
-		h.FrameOY = 144
-		h.Y--
-	case 4:
-		h.FrameOY = 0
-		h.Y++
-	}
-	return h
+	return num
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {

@@ -1,8 +1,16 @@
 package main
 
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func iniciarVariables() {
+
 	hombre.FrameOX = 0
 	hombre.FrameOY = 48
 	hombre.FrameNum = 1
@@ -10,6 +18,8 @@ func iniciarVariables() {
 	hombre.Y = float64(290)
 	hombre.FrameWidth = 32
 	hombre.FrameHeight = 48
+	hombre.num = rand.Intn(5)
+	hombre.cambio = rand.Intn(100) + 100
 
 	mujer.FrameOX = 0
 	mujer.FrameOY = 48
@@ -18,6 +28,8 @@ func iniciarVariables() {
 	mujer.Y = float64(290)
 	mujer.FrameWidth = 32
 	mujer.FrameHeight = 48
+	mujer.num = rand.Intn(5)
+	mujer.cambio = rand.Intn(100) + 50
 
 	//enemigos
 	enemigos1.humanos = hombre

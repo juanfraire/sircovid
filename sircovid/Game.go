@@ -48,9 +48,7 @@ func moverNube(n nube) nube {
 }
 func siguienteNivel(p humanos) humanos {
 	if p.X >= 748 && p.Y > 450 {
-
 		pasarNivel()
-
 		fondo.Pause()
 		fondo.Rewind()
 	}
