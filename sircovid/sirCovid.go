@@ -270,9 +270,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//hombre
 		hombre = moverHumanos(hombre)
 
-		enemigos1.num = obstEnemigo(enemigos1.num, enemigos1.X, enemigos1.Y)
-		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
-		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
+		// enemigos1.num = obstEnemigo(enemigos1.num, enemigos1.X, enemigos1.Y)
+		// enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
+		// enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
 
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
