@@ -29,6 +29,9 @@ func init() {
 	hombre.Y = float64(290)
 	hombre.FrameWidth = 32
 	hombre.FrameHeight = 48
+	hombre.num = rand.Intn(5)
+	hombre.cambio = rand.Intn(100) + 100
+
 	//mujer
 	mujer.FrameOX = 0
 	mujer.FrameOY = 48
@@ -37,7 +40,8 @@ func init() {
 	mujer.Y = float64(290)
 	mujer.FrameWidth = 32
 	mujer.FrameHeight = 48
-
+	mujer.num = rand.Intn(5)
+	mujer.cambio = rand.Intn(100) + 50
 }
 
 func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int, int, float64, float64) {
