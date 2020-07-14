@@ -3,25 +3,21 @@ package main
 import "math/rand"
 
 func iniciarVariables() {
-	hombre.FrameOX = 0
-	hombre.FrameOY = 48
-	hombre.FrameNum = 1
-	hombre.X = float64(350)
-	hombre.Y = float64(290)
-	hombre.FrameWidth = 32
-	hombre.FrameHeight = 48
+	// hombre.FrameOX = 0
+	// hombre.FrameOY = 48
+	// hombre.FrameNum = 1
+	// hombre.X = float64(350)
+	// hombre.Y = float64(290)
+	// hombre.FrameWidth = 32
+	// hombre.FrameHeight = 48
 
-	mujer.FrameOX = 0
-	mujer.FrameOY = 48
-	mujer.FrameNum = 1
-	mujer.X = float64(screenWidth - 50)
-	mujer.Y = float64(290)
-	mujer.FrameWidth = 32
-	mujer.FrameHeight = 48
-
-	//enemigos
-	enemigos1.humanos = hombre
-	enemigos2.humanos = mujer
+	// mujer.FrameOX = 0
+	// mujer.FrameOY = 48
+	// mujer.FrameNum = 1
+	// mujer.X = float64(screenWidth - 50)
+	// mujer.Y = float64(290)
+	// mujer.FrameWidth = 32
+	// mujer.FrameHeight = 48
 
 	//nube
 	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
@@ -76,10 +72,6 @@ func pasarNivel() {
 	chica.Y = float64(415)
 	chica.FrameWidth = 32
 	chica.FrameHeight = 48
-
-	//enemigos
-	enemigos1.humanos = hombre
-	enemigos2.humanos = mujer
 
 	//nube
 	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)

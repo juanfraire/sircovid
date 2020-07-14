@@ -8,12 +8,6 @@ import (
 	"github.com/hajimehoshi/ebiten"
 )
 
-type enemigos struct {
-	humanos
-	moverHumanos (humanos)
-	//dibujarEnemigos (humanos)
-}
-
 var (
 	num    = rand.Intn(5)
 	tmp    int
@@ -24,9 +18,26 @@ var (
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
+	//hombre
+	hombre.FrameOX = 0
+	hombre.FrameOY = 48
+	hombre.FrameNum = 1
+	hombre.X = float64(350)
+	hombre.Y = float64(290)
+	hombre.FrameWidth = 32
+	hombre.FrameHeight = 48
+	//mujer
+	mujer.FrameOX = 0
+	mujer.FrameOY = 48
+	mujer.FrameNum = 1
+	mujer.X = float64(screenWidth - 50)
+	mujer.Y = float64(290)
+	mujer.FrameWidth = 32
+	mujer.FrameHeight = 48
+
 }
 
-func moverHumanos(h humanos) humanos {
+func moverEnemigos(h humanos) humanos {
 	// var rand int
 	h.FrameNum = 4
 	count++
