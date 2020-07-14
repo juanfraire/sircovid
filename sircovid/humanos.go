@@ -14,4 +14,6 @@ type humanos struct {
 	FrameWidth      int
 	FrameHeight     int
 	img             *ebiten.Image
+	num             int
+	cambio          int
 }
