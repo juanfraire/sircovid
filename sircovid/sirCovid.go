@@ -268,18 +268,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 		//hombre
-<<<<<<< HEAD
-		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
-		enemigos1.num, enemigos1.cambio = obstEnemigo(enemigos1.cambio, countH, enemigos1.num, enemigos1.X, enemigos1.Y)
-		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
-=======
 
 		//hombre = moverHumanos(hombre)
 
-		hombre.num = obstEnemigo(hombre.num, hombre.X, hombre.Y)
+		hombre.num, hombre.cambio = obstEnemigo(hombre.cambio, countH, hombre.num, hombre.X, hombre.Y)
 		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
 		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
->>>>>>> 7db458bc163c13296d87e9835dcd54889ffc7570
 
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
@@ -306,30 +300,18 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = vida(hombre, player2)
 		player2 = vida(mujer, player2)
 
-<<<<<<< HEAD
-		//mujer
-		enemigos2.FrameOY, enemigos2.FrameNum, enemigos2.X, enemigos2.Y = moverHumanos(enemigos2.FrameOY, enemigos2.FrameNum, enemigos2.num, enemigos2.X, enemigos2.Y)
-		enemigos2.num, enemigos2.cambio = obstEnemigo(enemigos2.cambio, countH, enemigos2.num, enemigos2.X, enemigos2.Y)
-		enemigos2.num, enemigos2.cambio = cambioDireccion(enemigos2.num, enemigos2.cambio, countH)
-
-		//hombre
-		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
-		enemigos1.num, enemigos1.cambio = obstEnemigo(enemigos1.cambio, countH, enemigos1.num, enemigos1.X, enemigos1.Y)
-		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
-=======
 		//hombre
 		//hombre = moverHumanos(hombre)
 		//mujer
 		//mujer = moverHumanos(mujer)
 
 		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
-		hombre.num = obstEnemigo(hombre.num, hombre.X, hombre.Y)
+		hombre.num, hombre.cambio = obstEnemigo(hombre.cambio, countH, hombre.num, hombre.X, hombre.Y)
 		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
 		// //mujer
 		mujer.num, mujer.cambio = cambioDireccion(mujer.num, mujer.cambio, countH)
-		mujer.num = obstEnemigo(mujer.num, mujer.X, mujer.Y)
+		mujer.num, mujer.cambio = obstEnemigo(mujer.cambio, countH, mujer.num, mujer.X, mujer.Y)
 		mujer.FrameOY, mujer.FrameNum, mujer.X, mujer.Y = moverHumanos(mujer.FrameOY, mujer.FrameNum, mujer.num, mujer.X, mujer.Y)
->>>>>>> 7db458bc163c13296d87e9835dcd54889ffc7570
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
