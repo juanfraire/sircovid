@@ -85,7 +85,7 @@ func moverHumanos(E humanos) humanos {
 func cambioDireccion(E humanos) humanos {
 
 	var tmp int
-
+	//hay un problema con countH vs count
 	if count >= E.cambio {
 		for tmp = E.num; tmp == E.num; tmp = rand.Intn(5) {
 		}
