@@ -41,10 +41,6 @@ var nube1 nube
 // Game1 es el juego
 var Game1 Game
 
-//humanos enemigos
-var enemigos1 enemigos
-var enemigos2 enemigos
-
 const (
 	// game
 	screenWidth  = 768
@@ -266,15 +262,24 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 		// vida
-		player1 = vida(enemigos1.humanos, player1)
+		player1 = vida(hombre, player1)
 		if Game1.numPlayers == 2 {
-			player2 = vida(enemigos1.humanos, player2)
+			player2 = vida(hombre, player2)
 		}
 
 		//hombre
+<<<<<<< HEAD
 		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
 		enemigos1.num, enemigos1.cambio = obstEnemigo(enemigos1.cambio, countH, enemigos1.num, enemigos1.X, enemigos1.Y)
 		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
+=======
+
+		//hombre = moverHumanos(hombre)
+
+		hombre.num = obstEnemigo(hombre.num, hombre.X, hombre.Y)
+		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
+		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
+>>>>>>> 7db458bc163c13296d87e9835dcd54889ffc7570
 
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
@@ -295,9 +300,13 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(enemigos1.humanos, player1)
-		player2 = vida(enemigos1.humanos, player2)
+		player1 = vida(hombre, player1)
+		player1 = vida(mujer, player1)
 
+		player2 = vida(hombre, player2)
+		player2 = vida(mujer, player2)
+
+<<<<<<< HEAD
 		//mujer
 		enemigos2.FrameOY, enemigos2.FrameNum, enemigos2.X, enemigos2.Y = moverHumanos(enemigos2.FrameOY, enemigos2.FrameNum, enemigos2.num, enemigos2.X, enemigos2.Y)
 		enemigos2.num, enemigos2.cambio = obstEnemigo(enemigos2.cambio, countH, enemigos2.num, enemigos2.X, enemigos2.Y)
@@ -307,6 +316,20 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.X, enemigos1.Y = moverHumanos(enemigos1.FrameOY, enemigos1.FrameNum, enemigos1.num, enemigos1.X, enemigos1.Y)
 		enemigos1.num, enemigos1.cambio = obstEnemigo(enemigos1.cambio, countH, enemigos1.num, enemigos1.X, enemigos1.Y)
 		enemigos1.num, enemigos1.cambio = cambioDireccion(enemigos1.num, enemigos1.cambio, countH)
+=======
+		//hombre
+		//hombre = moverHumanos(hombre)
+		//mujer
+		//mujer = moverHumanos(mujer)
+
+		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
+		hombre.num = obstEnemigo(hombre.num, hombre.X, hombre.Y)
+		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
+		// //mujer
+		mujer.num, mujer.cambio = cambioDireccion(mujer.num, mujer.cambio, countH)
+		mujer.num = obstEnemigo(mujer.num, mujer.X, mujer.Y)
+		mujer.FrameOY, mujer.FrameNum, mujer.X, mujer.Y = moverHumanos(mujer.FrameOY, mujer.FrameNum, mujer.num, mujer.X, mujer.Y)
+>>>>>>> 7db458bc163c13296d87e9835dcd54889ffc7570
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -345,11 +368,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibuja al enemigo
 	if ModeGame == 0 {
-		dibujarEnemigos(enemigos1.humanos, screen)
+		dibujarEnemigos(hombre, screen)
 	}
 	if ModeGame == 1 {
-		dibujarEnemigos(enemigos1.humanos, screen)
-		dibujarEnemigos(enemigos2.humanos, screen)
+		dibujarEnemigos(hombre, screen)
+		dibujarEnemigos(mujer, screen)
 	}
 
 	// dibujar nube
