@@ -78,13 +78,15 @@ func moverHumanos(E humanos) humanos {
 		E.FrameOY = 0
 		E.Y++
 	}
+
 	return E
 }
 
 func cambioDireccion(E humanos) humanos {
+
 	var tmp int
 
-	if countH >= E.cambio {
+	if count >= E.cambio {
 		for tmp = E.num; tmp == E.num; tmp = rand.Intn(5) {
 		}
 		E.cambio += rand.Intn(100) + 20
@@ -110,6 +112,7 @@ func obstEnemigo(E humanos) humanos {
 		}
 		E.cambio = count + 5
 	}
+
 	return E
 }
 

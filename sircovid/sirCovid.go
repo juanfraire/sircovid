@@ -283,22 +283,16 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = vida(enemigo2, player2)
 
 		//enemigo1
-		//enemigo1 = moverHumanos(enemigo1)
 		//enemigo2
-		//enemigo2 = moverHumanos(enemigo2)
 
 		enemigo1 = obstEnemigo(enemigo1)
 		enemigo1 = moverHumanos(enemigo1)
-
 		enemigo1 = cambioDireccion(enemigo1)
-		//enemigo1.num, enemigo1.cambio = obstEnemigo(enemigo1.cambio, countH, enemigo1.num, enemigo1.X, enemigo1.Y)
 
 		//enemigo2
 		enemigo2 = obstEnemigo(enemigo2)
 		enemigo2 = moverHumanos(enemigo2)
 		enemigo2 = cambioDireccion(enemigo2)
-
-		//enemigo2.num, enemigo2.cambio = cambioDireccion(enemigo2.num, enemigo2.cambio, countH)
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
