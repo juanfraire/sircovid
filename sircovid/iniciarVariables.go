@@ -18,7 +18,7 @@ func iniciarVariables() {
 
 	//defino el juego
 	Game1.nube = nube1
-	Game1.siguienteNivel = player1.humanos
+	//Game1.siguienteNivel = player1
 
 	//paso de nivel
 	ModeGame = 0
@@ -31,25 +31,25 @@ func iniciarVariables() {
 func pasarNivel() {
 	countH = 0
 
-	hombre.FrameOX = 0
-	hombre.FrameOY = 48
-	hombre.FrameNum = 1
-	hombre.X = float64(200)
-	hombre.Y = float64(200)
-	hombre.FrameWidth = 32
-	hombre.FrameHeight = 48
-	hombre.num = rand.Intn(5)
-	hombre.cambio = rand.Intn(100) + 20
+	enemigo1.FrameOX = 0
+	enemigo1.FrameOY = 48
+	enemigo1.FrameNum = 1
+	enemigo1.X = float64(200)
+	enemigo1.Y = float64(200)
+	enemigo1.FrameWidth = 32
+	enemigo1.FrameHeight = 48
+	enemigo1.num = rand.Intn(5)
+	enemigo1.cambio = rand.Intn(100) + 20
 
-	mujer.FrameOX = 0
-	mujer.FrameOY = 48
-	mujer.FrameNum = 1
-	mujer.X = float64(screenWidth - 50)
-	mujer.Y = float64(290)
-	mujer.FrameWidth = 32
-	mujer.FrameHeight = 48
-	mujer.num = rand.Intn(5)
-	mujer.cambio = rand.Intn(50) + 50
+	enemigo2.FrameOX = 0
+	enemigo2.FrameOY = 48
+	enemigo2.FrameNum = 1
+	enemigo2.X = float64(screenWidth - 50)
+	enemigo2.Y = float64(290)
+	enemigo2.FrameWidth = 32
+	enemigo2.FrameHeight = 48
+	enemigo2.num = rand.Intn(5)
+	enemigo2.cambio = rand.Intn(50) + 50
 
 	//reinciar enemigos
 	count1 = 0
@@ -78,7 +78,7 @@ func pasarNivel() {
 
 	//defino el juego
 	Game1.nube = nube1
-	Game1.siguienteNivel = player1.humanos
+	//Game1.siguienteNivel = player1
 
 	//paso de nivel
 	ModeTitle = 2

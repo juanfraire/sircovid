@@ -12,7 +12,7 @@ type Game struct {
 	numPlayers     int
 	electPlayer    int
 	moverNube      (nube)
-	siguienteNivel (humanos)
+	siguienteNivel (player)
 }
 
 //// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
@@ -46,7 +46,7 @@ func moverNube(n nube) nube {
 	}
 	return n
 }
-func siguienteNivel(p humanos) humanos {
+func siguienteNivel(p player) player {
 
 	if p.X >= 746 && p.Y > 450 {
 

@@ -25,13 +25,6 @@ import (
 	"github.com/hajimehoshi/ebiten/text"
 )
 
-//hombre
-var hombre humanos
-var mujer humanos
-var humano humanos
-var viejo humanos
-var chica humanos
-
 //intro
 var intro1 intro
 
@@ -111,14 +104,6 @@ func init() {
 	//inicializa a players
 	initPlayer()
 
-	hombre.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	mujer.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mujer.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
 	///////////// Imagen NUBE COVID ///////////////////
 	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -239,7 +224,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 				ElectPlayer = 1
 			}
 		}
-		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
 			ModeTitle = 1
 		}
 	case ModeTitle == 2:
@@ -262,23 +247,19 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 		// vida
-		player1 = vida(hombre, player1)
+		player1 = vida(enemigo1, player1)
 		if Game1.numPlayers == 2 {
-			player2 = vida(hombre, player2)
+			player2 = vida(enemigo1, player2)
 		}
 
-		//hombre
-
-		//hombre = moverHumanos(hombre)
-
-		hombre.num, hombre.cambio = obstEnemigo(hombre.cambio, countH, hombre.num, hombre.X, hombre.Y)
-		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
-		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
+		enemigo1 = obstEnemigo(enemigo1)
+		enemigo1 = cambioDireccion(enemigo1)
+		enemigo1 = moverHumanos(enemigo1)
 
 		//pasar de nivel
-		Game1.siguienteNivel = siguienteNivel(player1.humanos)
+		Game1.siguienteNivel = siguienteNivel(player1)
 		if Game1.numPlayers == 2 {
-			Game1.siguienteNivel = siguienteNivel(player2.humanos)
+			Game1.siguienteNivel = siguienteNivel(player2)
 		}
 
 	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
@@ -295,24 +276,29 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(hombre, player1)
-		player1 = vida(mujer, player1)
+		player1 = vida(enemigo1, player1)
+		player1 = vida(enemigo2, player1)
 
-		player2 = vida(hombre, player2)
-		player2 = vida(mujer, player2)
+		player2 = vida(enemigo1, player2)
+		player2 = vida(enemigo2, player2)
 
-		//hombre
-		//hombre = moverHumanos(hombre)
-		//mujer
-		//mujer = moverHumanos(mujer)
+		//enemigo1
+		//enemigo1 = moverHumanos(enemigo1)
+		//enemigo2
+		//enemigo2 = moverHumanos(enemigo2)
 
-		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
-		hombre.num, hombre.cambio = obstEnemigo(hombre.cambio, countH, hombre.num, hombre.X, hombre.Y)
-		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
-		// //mujer
-		mujer.num, mujer.cambio = obstEnemigo(mujer.cambio, countH, mujer.num, mujer.X, mujer.Y)
-		mujer.num, mujer.cambio = cambioDireccion(mujer.num, mujer.cambio, countH)
-		mujer.FrameOY, mujer.FrameNum, mujer.X, mujer.Y = moverHumanos(mujer.FrameOY, mujer.FrameNum, mujer.num, mujer.X, mujer.Y)
+		enemigo1 = obstEnemigo(enemigo1)
+		enemigo1 = moverHumanos(enemigo1)
+
+		enemigo1 = cambioDireccion(enemigo1)
+		//enemigo1.num, enemigo1.cambio = obstEnemigo(enemigo1.cambio, countH, enemigo1.num, enemigo1.X, enemigo1.Y)
+
+		//enemigo2
+		enemigo2 = obstEnemigo(enemigo2)
+		enemigo2 = moverHumanos(enemigo2)
+		enemigo2 = cambioDireccion(enemigo2)
+
+		//enemigo2.num, enemigo2.cambio = cambioDireccion(enemigo2.num, enemigo2.cambio, countH)
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -351,11 +337,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibuja al enemigo
 	if ModeGame == 0 {
-		dibujarEnemigos(hombre, screen)
+		dibujarEnemigos(enemigo1, screen)
 	}
 	if ModeGame == 1 {
-		dibujarEnemigos(hombre, screen)
-		dibujarEnemigos(mujer, screen)
+		dibujarEnemigos(enemigo1, screen)
+		dibujarEnemigos(enemigo2, screen)
 	}
 
 	// dibujar nube

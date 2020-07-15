@@ -17,6 +17,7 @@ type player struct {
 	a, b, c, d int
 }
 
+var chica, viejo humanos
 var player1, player2 player
 
 func initPlayer() {
