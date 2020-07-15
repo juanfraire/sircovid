@@ -282,6 +282,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
+		countH++
 		// sonido
 		deadSound2.Rewind()
 		fondo.Play()
@@ -309,8 +310,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		hombre.num, hombre.cambio = obstEnemigo(hombre.cambio, countH, hombre.num, hombre.X, hombre.Y)
 		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
 		// //mujer
-		mujer.num, mujer.cambio = cambioDireccion(mujer.num, mujer.cambio, countH)
 		mujer.num, mujer.cambio = obstEnemigo(mujer.cambio, countH, mujer.num, mujer.X, mujer.Y)
+		mujer.num, mujer.cambio = cambioDireccion(mujer.num, mujer.cambio, countH)
 		mujer.FrameOY, mujer.FrameNum, mujer.X, mujer.Y = moverHumanos(mujer.FrameOY, mujer.FrameNum, mujer.num, mujer.X, mujer.Y)
 
 	case ModeGameOver == 0:

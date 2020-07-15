@@ -10,6 +10,7 @@ func init() {
 }
 
 func iniciarVariables() {
+	countH = 0
 
 	//nube
 	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
@@ -28,6 +29,8 @@ func iniciarVariables() {
 
 }
 func pasarNivel() {
+	countH = 0
+
 	hombre.FrameOX = 0
 	hombre.FrameOY = 48
 	hombre.FrameNum = 1
@@ -35,6 +38,8 @@ func pasarNivel() {
 	hombre.Y = float64(200)
 	hombre.FrameWidth = 32
 	hombre.FrameHeight = 48
+	hombre.num = rand.Intn(5)
+	hombre.cambio = rand.Intn(100) + 20
 
 	mujer.FrameOX = 0
 	mujer.FrameOY = 48
@@ -43,6 +48,8 @@ func pasarNivel() {
 	mujer.Y = float64(290)
 	mujer.FrameWidth = 32
 	mujer.FrameHeight = 48
+	mujer.num = rand.Intn(5)
+	mujer.cambio = rand.Intn(50) + 50
 
 	//reinciar enemigos
 	count1 = 0

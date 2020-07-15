@@ -47,7 +47,8 @@ func moverNube(n nube) nube {
 	return n
 }
 func siguienteNivel(p humanos) humanos {
-	if p.X >= 748 && p.Y > 450 {
+
+	if p.X >= 746 && p.Y > 450 {
 
 		pasarNivel()
 

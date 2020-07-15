@@ -30,8 +30,9 @@ func init() {
 	hombre.FrameWidth = 32
 	hombre.FrameHeight = 48
 	hombre.num = rand.Intn(5)
-	hombre.cambio = rand.Intn(100) + 100
+	hombre.cambio = rand.Intn(50) + 100
 
+	rand.Seed(time.Now().UnixNano())
 	//mujer
 	mujer.FrameOX = 0
 	mujer.FrameOY = 48
@@ -41,7 +42,7 @@ func init() {
 	mujer.FrameWidth = 32
 	mujer.FrameHeight = 48
 	mujer.num = rand.Intn(5)
-	mujer.cambio = rand.Intn(100) + 50
+	mujer.cambio = rand.Intn(50) + 50
 }
 
 func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int, int, float64, float64) {
@@ -74,7 +75,7 @@ func cambioDireccion(num int, cambio int, count int) (int, int) {
 	if count >= cambio {
 		for tmp = num; tmp == num; tmp = rand.Intn(5) {
 		}
-		cambio += rand.Intn(50) + 20
+		cambio += rand.Intn(100) + 20
 		num = tmp
 	}
 
@@ -96,7 +97,7 @@ func obstEnemigo(cambio int, count int, num int, X float64, Y float64) (int, int
 		case 4:
 			num = 3
 		}
-		cambio = count + 15
+		cambio = count + 5
 	}
 	return num, cambio
 }
