@@ -31,25 +31,45 @@ func iniciarVariables() {
 func pasarNivel() {
 	countH = 0
 
-	hombre.FrameOX = 0
-	hombre.FrameOY = 48
-	hombre.FrameNum = 1
-	hombre.X = float64(200)
-	hombre.Y = float64(200)
-	hombre.FrameWidth = 32
-	hombre.FrameHeight = 48
-	hombre.num = rand.Intn(5)
-	hombre.cambio = rand.Intn(100) + 20
+	enemigo1.FrameOX = 0
+	enemigo1.FrameOY = 48
+	enemigo1.FrameNum = 1
+	enemigo1.X = float64(200)
+	enemigo1.Y = float64(200)
+	enemigo1.FrameWidth = 32
+	enemigo1.FrameHeight = 48
+	enemigo1.num = rand.Intn(5)
+	enemigo1.cambio = rand.Intn(100) + 20
 
-	mujer.FrameOX = 0
-	mujer.FrameOY = 48
-	mujer.FrameNum = 1
-	mujer.X = float64(screenWidth - 50)
-	mujer.Y = float64(290)
-	mujer.FrameWidth = 32
-	mujer.FrameHeight = 48
-	mujer.num = rand.Intn(5)
-	mujer.cambio = rand.Intn(50) + 50
+	enemigo2.FrameOX = 0
+	enemigo2.FrameOY = 48
+	enemigo2.FrameNum = 1
+	enemigo2.X = float64(screenWidth - 50)
+	enemigo2.Y = float64(290)
+	enemigo2.FrameWidth = 32
+	enemigo2.FrameHeight = 48
+	enemigo2.num = rand.Intn(5)
+	enemigo2.cambio = rand.Intn(50) + 50
+
+	// enemigo3.FrameOX = 0
+	// enemigo3.FrameOY = 32
+	// enemigo3.FrameNum = 1
+	// enemigo3.X = float64(20)
+	// enemigo3.Y = float64(290)
+	// enemigo3.FrameWidth = 32
+	// enemigo3.FrameHeight = 32
+	// enemigo3.num = rand.Intn(5)
+	// enemigo3.cambio = rand.Intn(50) + 50
+
+	// policia.FrameOX = 0
+	// policia.FrameOY = 48
+	// policia.FrameNum = 1
+	// policia.X = float64(20)
+	// policia.Y = float64(290)
+	// policia.FrameWidth = 32
+	// policia.FrameHeight = 48
+	// policia.num = rand.Intn(5)
+	// policia.cambio = rand.Intn(50) + 50
 
 	//reinciar enemigos
 	count1 = 0

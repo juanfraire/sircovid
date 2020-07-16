@@ -25,12 +25,16 @@ import (
 	"github.com/hajimehoshi/ebiten/text"
 )
 
-//hombre
-var hombre humanos
-var mujer humanos
-var humano humanos
-var viejo humanos
-var chica humanos
+//enemigo1
+var (
+	enemigo1 humanos
+	enemigo2 humanos
+	// enemigo3 humanos
+	// policia  humanos
+	humano humanos
+	viejo  humanos
+	chica  humanos
+)
 
 //intro
 var intro1 intro
@@ -111,14 +115,23 @@ func init() {
 	//inicializa a players
 	initPlayer()
 
-	hombre.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
+	enemigo1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\enemigo1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	mujer.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mujer.png`, ebiten.FilterDefault)
+	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\enemigo2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// enemigo3.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\varios2.png`, ebiten.FilterDefault)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// policia.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\varios2.png`, ebiten.FilterDefault)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
 	///////////// Imagen NUBE COVID ///////////////////
 	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -262,19 +275,30 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 		// vida
-		player1 = vida(hombre, player1)
+		player1 = vida(enemigo1, player1)
 		if Game1.numPlayers == 2 {
-			player2 = vida(hombre, player2)
+			player2 = vida(enemigo1, player2)
 		}
 
-		//hombre
+		//enemigo1
 
-		//hombre = moverHumanos(hombre)
+		//enemigo1 = moverHumanos(enemigo1)
 
-		hombre.num, hombre.cambio = obstEnemigo(hombre.cambio, countH, hombre.num, hombre.X, hombre.Y)
-		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
-		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
+		enemigo1.num, enemigo1.cambio = obstEnemigo(enemigo1.cambio, countH, enemigo1.num, enemigo1.X, enemigo1.Y)
+		enemigo1.num, enemigo1.cambio = cambioDireccion(enemigo1.num, enemigo1.cambio, countH)
+		enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.X, enemigo1.Y = moverHumanos(enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.num, enemigo1.X, enemigo1.Y)
 
+		// enemigo2.num, enemigo2.cambio = obstEnemigo(enemigo2.cambio, countH, enemigo2.num, enemigo2.X, enemigo2.Y)
+		// enemigo2.num, enemigo2.cambio = cambioDireccion(enemigo2.num, enemigo2.cambio, countH)
+		// enemigo2.FrameOY, enemigo2.FrameNum, enemigo2.X, enemigo2.Y = moverHumanos(enemigo2.FrameOY, enemigo2.FrameNum, enemigo2.num, enemigo2.X, enemigo2.Y)
+
+		// enemigo3.num, enemigo3.cambio = obstEnemigo(enemigo3.cambio, countH, enemigo3.num, enemigo3.X, enemigo3.Y)
+		// enemigo3.num, enemigo3.cambio = cambioDireccion(enemigo3.num, enemigo3.cambio, countH)
+		// enemigo3.FrameOY, enemigo3.FrameNum, enemigo3.X, enemigo3.Y = moverHumanos(enemigo3.FrameOY, enemigo3.FrameNum, enemigo3.num, enemigo3.X, enemigo3.Y)
+
+		// policia.num, policia.cambio = obstEnemigo(policia.cambio, countH, policia.num, policia.X, policia.Y)
+		// policia.num, policia.cambio = cambioDireccion(policia.num, policia.cambio, countH)
+		// policia.FrameOY, policia.FrameNum, policia.X, policia.Y = moverHumanos(enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.num, enemigo1.X, enemigo1.Y)
 		//pasar de nivel
 		Game1.siguienteNivel = siguienteNivel(player1.humanos)
 		if Game1.numPlayers == 2 {
@@ -295,24 +319,32 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(hombre, player1)
-		player1 = vida(mujer, player1)
+		player1 = vida(enemigo1, player1)
+		player1 = vida(enemigo2, player1)
 
-		player2 = vida(hombre, player2)
-		player2 = vida(mujer, player2)
+		player2 = vida(enemigo1, player2)
+		player2 = vida(enemigo2, player2)
 
-		//hombre
-		//hombre = moverHumanos(hombre)
-		//mujer
-		//mujer = moverHumanos(mujer)
+		//enemigo1
+		//enemigo1 = moverHumanos(enemigo1)
+		//enemigo2
+		//enemigo2 = moverHumanos(enemigo2)
 
-		hombre.num, hombre.cambio = cambioDireccion(hombre.num, hombre.cambio, countH)
-		hombre.num, hombre.cambio = obstEnemigo(hombre.cambio, countH, hombre.num, hombre.X, hombre.Y)
-		hombre.FrameOY, hombre.FrameNum, hombre.X, hombre.Y = moverHumanos(hombre.FrameOY, hombre.FrameNum, hombre.num, hombre.X, hombre.Y)
-		// //mujer
-		mujer.num, mujer.cambio = obstEnemigo(mujer.cambio, countH, mujer.num, mujer.X, mujer.Y)
-		mujer.num, mujer.cambio = cambioDireccion(mujer.num, mujer.cambio, countH)
-		mujer.FrameOY, mujer.FrameNum, mujer.X, mujer.Y = moverHumanos(mujer.FrameOY, mujer.FrameNum, mujer.num, mujer.X, mujer.Y)
+		enemigo1.num, enemigo1.cambio = cambioDireccion(enemigo1.num, enemigo1.cambio, countH)
+		enemigo1.num, enemigo1.cambio = obstEnemigo(enemigo1.cambio, countH, enemigo1.num, enemigo1.X, enemigo1.Y)
+		enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.X, enemigo1.Y = moverHumanos(enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.num, enemigo1.X, enemigo1.Y)
+		// //enemigo2
+		enemigo2.num, enemigo2.cambio = obstEnemigo(enemigo2.cambio, countH, enemigo2.num, enemigo2.X, enemigo2.Y)
+		enemigo2.num, enemigo2.cambio = cambioDireccion(enemigo2.num, enemigo2.cambio, countH)
+		enemigo2.FrameOY, enemigo2.FrameNum, enemigo2.X, enemigo2.Y = moverHumanos(enemigo2.FrameOY, enemigo2.FrameNum, enemigo2.num, enemigo2.X, enemigo2.Y)
+
+		// enemigo3.num, enemigo3.cambio = obstEnemigo(enemigo3.cambio, countH, enemigo3.num, enemigo3.X, enemigo3.Y)
+		// enemigo3.num, enemigo3.cambio = cambioDireccion(enemigo3.num, enemigo3.cambio, countH)
+		// enemigo3.FrameOY, enemigo3.FrameNum, enemigo3.X, enemigo3.Y = moverHumanos(enemigo3.FrameOY, enemigo3.FrameNum, enemigo3.num, enemigo1.X, enemigo3.Y)
+
+		// policia.num, policia.cambio = obstEnemigo(policia.cambio, countH, policia.num, policia.X, policia.Y)
+		// policia.num, policia.cambio = cambioDireccion(policia.num, policia.cambio, countH)
+		// policia.FrameOY, policia.FrameNum, policia.X, policia.Y = moverHumanos(enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.num, enemigo1.X, enemigo1.Y)
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -351,11 +383,17 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibuja al enemigo
 	if ModeGame == 0 {
-		dibujarEnemigos(hombre, screen)
+		dibujarEnemigos(enemigo1, screen)
+		// dibujarEnemigos(enemigo2, screen)
+		// dibujarEnemigos(enemigo3, screen)
+		// dibujarEnemigos(policia, screen)
 	}
 	if ModeGame == 1 {
-		dibujarEnemigos(hombre, screen)
-		dibujarEnemigos(mujer, screen)
+		dibujarEnemigos(enemigo1, screen)
+		dibujarEnemigos(enemigo2, screen)
+		// dibujarEnemigos(enemigo3, screen)
+		// dibujarEnemigos(policia, screen)
+
 	}
 
 	// dibujar nube
