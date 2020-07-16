@@ -329,11 +329,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 
 	// dibujar nube
-	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(nube1.nubeX, nube1.nubeY+384)
-	op.ColorM.Scale(1, 3, 2, nube1.nubeAlpha)
-	op.GeoM.Scale(.4, .4)
-	screen.DrawImage(nube1.img, op)
+	dibujarNube(nube1, screen)
 
 	// dibujar barbijo
 	op = &ebiten.DrawImageOptions{}

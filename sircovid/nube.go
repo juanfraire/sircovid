@@ -46,3 +46,10 @@ func moverNube(n nube) nube {
 	}
 	return n
 }
+func dibujarNube(n nube, screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(n.nubeX, nube1.nubeY+384)
+	op.ColorM.Scale(1, 3, 2, n.nubeAlpha)
+	op.GeoM.Scale(.4, .4)
+	screen.DrawImage(n.img, op)
+}
