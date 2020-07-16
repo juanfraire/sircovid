@@ -240,9 +240,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		// palyer
 		player1 = moverPlayer(player1)
-		if Game1.numPlayers == 2 {
-			player2 = moverPlayer(player2)
-		}
+		player2 = moverPlayer(player2)
 
 		// vida
 		player1 = vida(enemigo1, player1)
@@ -254,9 +252,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		//siguiente nivel
 		Game1.siguienteNivel = siguienteNivel(player1)
-		if Game1.numPlayers == 2 {
-			Game1.siguienteNivel = siguienteNivel(player2)
-		}
+		Game1.siguienteNivel = siguienteNivel(player2)
 
 	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
 
@@ -274,14 +270,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		// vida
 		player1 = vida(enemigo1, player1)
 		player1 = vida(enemigo2, player1)
-
-		player2 = vida(enemigo1, player2)
-		player2 = vida(enemigo2, player2)
-
-		//enemigo1
+		if Game1.numPlayers == 2 {
+			player2 = vida(enemigo1, player2)
+			player2 = vida(enemigo2, player2)
+		}
+		//enemigos
 		enemigo1 = moverHumanos(enemigo1)
-
-		//enemigo2
 		enemigo2 = moverHumanos(enemigo2)
 
 	case ModeGameOver == 0:
@@ -310,7 +304,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dubujar fondo
 	op := &ebiten.DrawImageOptions{}
-
 	screen.DrawImage(imgTiles, op)
 
 	//dibujar palyers
