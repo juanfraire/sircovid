@@ -2,10 +2,12 @@ package main
 
 import (
 	"image"
+	"log"
 	"math/rand"
 	"time"
 
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/ebitenutil"
 )
 
 func init() {
@@ -13,10 +15,11 @@ func init() {
 }
 
 var (
-	num = rand.Intn(5)
-
-	count int
-	ok    bool
+	enemigo1 humanos
+	enemigo2 humanos
+	num      = rand.Intn(5)
+	count    int
+	ok       bool
 )
 
 func init() {
@@ -32,11 +35,16 @@ func init() {
 	enemigo1.num = rand.Intn(5)
 	enemigo1.cambio = rand.Intn(50) + 100
 
+	enemigo1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	rand.Seed(time.Now().UnixNano())
 	//enemigo2
 	enemigo2.FrameOX = 0
 	enemigo2.FrameOY = 48
-	enemigo2.FrameNum = 4
+	enemigo2.FrameNum = 1
 	enemigo2.X = float64(screenWidth - 50)
 	enemigo2.Y = float64(290)
 	enemigo2.FrameWidth = 32
@@ -44,85 +52,68 @@ func init() {
 	enemigo2.num = rand.Intn(5)
 	enemigo2.cambio = rand.Intn(50) + 50
 
-	// rand.Seed(time.Now().UnixNano())
-	// //enemigo2
-	// enemigo3.FrameOX = 0
-	// enemigo3.FrameOY = 32
-	// enemigo3.FrameNum = 3
-	// enemigo3.X = float64(20)
-	// enemigo3.Y = float64(330)
-	// enemigo3.FrameWidth = 32
-	// enemigo3.FrameHeight = 32
-	// enemigo3.num = rand.Intn(5)
-	// enemigo3.cambio = rand.Intn(50) + 50
-
-	// policia.FrameOX = 0
-	// policia.FrameOY = 48
-	// policia.FrameNum = 1
-	// policia.X = float64(20)
-	// policia.Y = float64(290)
-	// policia.FrameWidth = 32
-	// policia.FrameHeight = 48
-	// policia.num = rand.Intn(5)
-	// policia.cambio = rand.Intn(50) + 50
-
+	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mujer.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
-func moverHumanos(FrameOY int, FrameNum int, num int, X float64, Y float64) (int, int, float64, float64) {
+func moverHumanos(E humanos) humanos {
 
-	FrameNum = 4
+	E.FrameNum = 4
 
-	switch num {
+	switch E.num {
 	case 0:
-		FrameNum = 1
+		E.FrameNum = 1
 	case 1:
-		FrameOY = 48
-		X--
+		E.FrameOY = 48
+		E.X--
 	case 2:
-		FrameOY = 96
-		X++
+		E.FrameOY = 96
+		E.X++
 	case 3:
-		FrameOY = 144
-		Y--
+		E.FrameOY = 144
+		E.Y--
 	case 4:
-		FrameOY = 0
-		Y++
+		E.FrameOY = 0
+		E.Y++
 	}
 
-	return FrameOY, FrameNum, X, Y
+	return E
 }
 
-func cambioDireccion(num int, cambio int, count int) (int, int) {
+func cambioDireccion(E humanos) humanos {
+
 	var tmp int
-
-	if count >= cambio {
-		for tmp = num; tmp == num; tmp = rand.Intn(5) {
+	//hay un problema con countH vs count
+	if count >= E.cambio {
+		for tmp = E.num; tmp == E.num; tmp = rand.Intn(5) {
 		}
-		cambio += rand.Intn(100) + 20
-		num = tmp
+		E.cambio += rand.Intn(100) + 20
+		E.num = tmp
 	}
-
-	return num, cambio
+	return E
 }
 
-func obstEnemigo(cambio int, count int, num int, X float64, Y float64) (int, int) {
-	x1, y1 := X, Y
-	_, _, ok = obstaculos(X, Y, x1, y1)
+func obstEnemigo(E humanos) humanos {
+	x1, y1 := E.X, E.Y
+	_, _, ok = obstaculos(E.X, E.Y+32, x1, y1)
 
 	if ok {
-		switch num {
+		switch E.num {
 		case 1:
-			num = 2
+			E.num = 2
 		case 2:
-			num = 1
+			E.num = 1
 		case 3:
-			num = 4
+			E.num = 4
 		case 4:
-			num = 3
+			E.num = 3
 		}
-		cambio = count + 5
+		E.cambio = count + 5
 	}
-	return num, cambio
+
+	return E
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {

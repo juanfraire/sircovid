@@ -18,7 +18,7 @@ func iniciarVariables() {
 
 	//defino el juego
 	Game1.nube = nube1
-	Game1.siguienteNivel = player1.humanos
+	//Game1.siguienteNivel = player1
 
 	//paso de nivel
 	ModeGame = 0
@@ -51,26 +51,6 @@ func pasarNivel() {
 	enemigo2.num = rand.Intn(5)
 	enemigo2.cambio = rand.Intn(50) + 50
 
-	// enemigo3.FrameOX = 0
-	// enemigo3.FrameOY = 32
-	// enemigo3.FrameNum = 1
-	// enemigo3.X = float64(20)
-	// enemigo3.Y = float64(290)
-	// enemigo3.FrameWidth = 32
-	// enemigo3.FrameHeight = 32
-	// enemigo3.num = rand.Intn(5)
-	// enemigo3.cambio = rand.Intn(50) + 50
-
-	// policia.FrameOX = 0
-	// policia.FrameOY = 48
-	// policia.FrameNum = 1
-	// policia.X = float64(20)
-	// policia.Y = float64(290)
-	// policia.FrameWidth = 32
-	// policia.FrameHeight = 48
-	// policia.num = rand.Intn(5)
-	// policia.cambio = rand.Intn(50) + 50
-
 	//reinciar enemigos
 	count1 = 0
 
@@ -98,7 +78,7 @@ func pasarNivel() {
 
 	//defino el juego
 	Game1.nube = nube1
-	Game1.siguienteNivel = player1.humanos
+	//Game1.siguienteNivel = player1
 
 	//paso de nivel
 	ModeTitle = 2
