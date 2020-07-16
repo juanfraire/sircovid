@@ -107,7 +107,6 @@ func moverHumanos(E humanos) humanos {
 		}
 		E.cambio = count + 10
 	}
-
 	return E
 }
 
