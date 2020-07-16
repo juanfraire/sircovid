@@ -236,7 +236,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		fondo.Play()
 
 		// nube
-		Game1.nube = moverNube(Game1.nube)
+		nube1 = moverNube(nube1)
 
 		// palyer
 		player1 = moverPlayer(player1)
@@ -265,7 +265,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		fondo.Play()
 
 		// nube
-		Game1.nube = moverNube(Game1.nube)
+		nube1 = moverNube(nube1)
 
 		// player
 		player1 = moverPlayer(player1)
@@ -330,10 +330,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar nube
 	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(Game1.nubeX, Game1.nubeY+384)
-	op.ColorM.Scale(1, 3, 2, Game1.nubeAlpha)
+	op.GeoM.Translate(nube1.nubeX, nube1.nubeY+384)
+	op.ColorM.Scale(1, 3, 2, nube1.nubeAlpha)
 	op.GeoM.Scale(.4, .4)
-	screen.DrawImage(Game1.nube.img, op)
+	screen.DrawImage(nube1.img, op)
 
 	// dibujar barbijo
 	op = &ebiten.DrawImageOptions{}
