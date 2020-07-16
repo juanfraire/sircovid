@@ -52,7 +52,7 @@ func init() {
 	enemigo2.FrameWidth = 32
 	enemigo2.FrameHeight = 48
 	enemigo2.num = rand.Intn(5)
-	enemigo2.cambio = rand.Intn(50) + 50
+	enemigo2.cambio = rand.Intn(50) + 100
 
 	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\enemigo2.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -88,7 +88,7 @@ func moverHumanos(E humanos) humanos {
 	if count >= E.cambio {
 		for tmp = E.num; tmp == E.num; tmp = rand.Intn(5) {
 		}
-		E.cambio += rand.Intn(100) + 20
+		E.cambio += rand.Intn(100) + 100
 		E.num = tmp
 	}
 

@@ -60,7 +60,6 @@ var (
 	ElectPlayer     int
 	ModeGameOver    int
 	count1          int
-	countH          int
 )
 
 var (
@@ -235,7 +234,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//// sonido ////
 		deadSound2.Rewind()
 		fondo.Play()
-		countH++
 
 		// nube
 		Game1.nube = moverNube(Game1.nube)
