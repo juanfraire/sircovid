@@ -12,10 +12,6 @@ func init() {
 func iniciarVariables() {
 	count = 0
 
-	//nube
-	// nube1.X = float64(rand.Intn(screenWidth) + 300)
-	// nube1.Y = float64(rand.Intn(1500))
-
 	//cosas de Game
 	ModeGame = 0
 	ModeTitle = 0

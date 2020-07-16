@@ -146,7 +146,7 @@ func moverPlayer(p player) player {
 }
 
 func vida(h humanos, p player, b sumVidas) player {
-	//pierde vidas con la nuve
+	//pierde vidas con la nube
 	collisionX := float64(nube1.X * .4)
 	collisionY := float64(nube1.Y*.4) + 106
 	if nube1.Alpha < .3 {
@@ -165,15 +165,15 @@ func vida(h humanos, p player, b sumVidas) player {
 		p.vidas++
 		barbijo.X = 1000
 	}
-	if p.v == 1 {
+
+	if p.v == 30 {
 		p.vidas--
+		p.v = 0
 		//sonido
 		deadSound.Play()
 		deadSound.Rewind()
 	}
-	if p.v == 30 {
-		p.v = 0
-	}
+
 	return p
 }
 

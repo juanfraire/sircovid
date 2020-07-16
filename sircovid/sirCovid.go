@@ -98,11 +98,8 @@ func init() {
 	initSumarVidas()
 	//inicia nube
 	initNube()
-	///////////// Imagen NUBE COVID ///////////////////
-	// nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	//inicia enemigos
+	initEnemigos()
 
 	////////////// SONIDOS //////////////
 
@@ -273,6 +270,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			iniciarVariables()
 			initPlayer()
+			initNube()
+			initSumarVidas()
+			initEnemigos()
 		}
 
 		// sonido

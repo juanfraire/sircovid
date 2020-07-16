@@ -23,7 +23,7 @@ var (
 	ok       bool
 )
 
-func init() {
+func initEnemigos() {
 	rand.Seed(time.Now().UnixNano())
 	//enemigo1
 	enemigo1.FrameOX = 0
