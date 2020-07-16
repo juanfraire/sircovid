@@ -66,13 +66,6 @@ var (
 	sonidoFondo  *audio.InfiniteLoop
 	fondo        *audio.Player
 
-	//barbijo
-	// barbijoFrameOX  = 0
-	// barbijoFrameOY  = 74
-	// barbijoFrameNum = 1
-	// barbijoX        = float64(630)
-	// barbijoY        = float64(150)
-
 	//para start y game over
 	arcadeFont      font.Face
 	smallArcadeFont font.Face
@@ -100,6 +93,8 @@ func init() {
 	initNube()
 	//inicia enemigos
 	initEnemigos()
+	//iniciar otra variables
+	iniciarVariables()
 
 	////////////// SONIDOS //////////////
 
@@ -159,7 +154,6 @@ func init() {
 		DPI:     dpi,
 		Hinting: font.HintingFull,
 	})
-	iniciarVariables()
 
 }
 
@@ -195,7 +189,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
 				Game1.numPlayers = 1
 			}
-			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) && (Game1.numPlayers == 1 || Game1.numPlayers == 2) {
 				ElectNumPlayers = 1
 			}
 		case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
