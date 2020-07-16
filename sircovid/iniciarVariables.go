@@ -13,14 +13,10 @@ func iniciarVariables() {
 	count = 0
 
 	//nube
-	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
-	nube1.nubeY = float64(rand.Intn(1500))
+	// nube1.X = float64(rand.Intn(screenWidth) + 300)
+	// nube1.Y = float64(rand.Intn(1500))
 
-	//defino el juego
-	Game1.nube = nube1
-	//Game1.siguienteNivel = player1
-
-	//paso de nivel
+	//cosas de Game
 	ModeGame = 0
 	ModeTitle = 0
 	ModeGameOver = 0
@@ -73,12 +69,8 @@ func pasarNivel() {
 	chica.FrameHeight = 48
 
 	//nube
-	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
-	nube1.nubeY = float64(rand.Intn(1500))
-
-	//defino el juego
-	Game1.nube = nube1
-	//Game1.siguienteNivel = player1
+	nube1.X = float64(rand.Intn(screenWidth) + 300)
+	nube1.Y = float64(rand.Intn(1500))
 
 	//paso de nivel
 	ModeTitle = 2

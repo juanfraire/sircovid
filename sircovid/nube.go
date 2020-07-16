@@ -1,55 +1,69 @@
 package main
 
 import (
+	"log"
 	"math/rand"
 	"time"
 
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/ebitenutil"
 )
 
 type nube struct {
-	nubeX       float64
-	nubeY       float64
-	nubeAlpha   float64
-	nubeAlphaUp bool
-	img         *ebiten.Image
+	X       float64
+	Y       float64
+	Alpha   float64
+	AlphaUp bool
+	img     *ebiten.Image
+}
+
+var nube1 nube
+
+func initNube() {
+	nube1.X = float64(rand.Intn(screenWidth) + 300)
+	nube1.Y = float64(rand.Intn(1500))
+
+	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 //// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube(n nube) nube {
 	// creacion de nuevas nubes
-	if n.nubeAlpha <= 0 {
-		n.nubeX = float64(rand.Intn(1500))
-		n.nubeY = float64(rand.Intn(1500))
-		n.nubeAlphaUp = true
-	} else if n.nubeAlpha > 1 {
+	if n.Alpha <= 0 {
+		n.X = float64(rand.Intn(1500))
+		n.Y = float64(rand.Intn(1500))
+		n.AlphaUp = true
+	} else if n.Alpha > 1 {
 		time.Sleep(10000 * time.Microsecond)
-		n.nubeAlphaUp = false
+		n.AlphaUp = false
 	}
 
-	nubeX1 := n.nubeX
-	nubeY1 := n.nubeY
+	nubeX1 := n.X
+	nubeY1 := n.Y
 	// movimiento nube
-	if n.nubeAlpha >= 0 {
-		n.nubeX--
+	if n.Alpha >= 0 {
+		n.X--
 	}
-	n.nubeX, n.nubeY, ok = obstaculos(n.nubeX+70, n.nubeY+70, nubeX1, nubeY1)
+	n.X, n.Y, ok = obstaculos(n.X+70, n.Y+70, nubeX1, nubeY1)
 	if !ok {
-		n.nubeX -= 70
-		n.nubeY -= 70
+		n.X -= 70
+		n.Y -= 70
 	}
 	// actualizar alpha
-	if n.nubeAlphaUp {
-		n.nubeAlpha += .009
+	if n.AlphaUp {
+		n.Alpha += .009
 	} else {
-		n.nubeAlpha -= .003
+		n.Alpha -= .003
 	}
 	return n
 }
 func dibujarNube(n nube, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(n.nubeX, nube1.nubeY+384)
-	op.ColorM.Scale(1, 3, 2, n.nubeAlpha)
+	op.GeoM.Translate(n.X, n.Y+384)
+	op.ColorM.Scale(1, 3, 2, n.Alpha)
 	op.GeoM.Scale(.4, .4)
 	screen.DrawImage(n.img, op)
 }

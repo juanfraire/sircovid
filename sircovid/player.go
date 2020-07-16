@@ -145,11 +145,11 @@ func moverPlayer(p player) player {
 	return p
 }
 
-func vida(h humanos, p player) player {
+func vida(h humanos, p player, b sumVidas) player {
 	//pierde vidas con la nuve
-	collisionX := float64(Game1.nubeX * .4)
-	collisionY := float64(Game1.nubeY*.4) + 106
-	if Game1.nubeAlpha < .3 {
+	collisionX := float64(nube1.X * .4)
+	collisionY := float64(nube1.Y*.4) + 106
+	if nube1.Alpha < .3 {
 		collisionX = screenWidth + 300
 	}
 	//pierde vidas con nube
@@ -161,9 +161,9 @@ func vida(h humanos, p player) player {
 		p.v++
 	}
 	//gana vida con barbijo
-	if p.X > barbijoX && p.X < barbijoX+20 && p.Y+32 > barbijoY && p.Y < barbijoY+32 {
+	if p.X > b.X && p.X < b.X+20 && p.Y+32 > b.Y && p.Y < b.Y+32 {
 		p.vidas++
-		barbijoX = 1000
+		barbijo.X = 1000
 	}
 	if p.v == 1 {
 		p.vidas--

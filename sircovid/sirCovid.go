@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"image"
 	"image/color"
 	_ "image/png"
 	"log"
@@ -28,9 +27,6 @@ import (
 //intro
 var intro1 intro
 
-//nube
-var nube1 nube
-
 // Game1 es el juego
 var Game1 Game
 
@@ -38,10 +34,6 @@ const (
 	// game
 	screenWidth  = 768
 	screenHeight = 528
-
-	//barbijo
-	barbijoFrameWidth  = 105
-	barbijoFrameHeight = 48
 
 	// tiles
 	tileSize = 16
@@ -64,8 +56,8 @@ var (
 
 var (
 	// imágenes
-	imgTiles   *ebiten.Image
-	imgBarbijo *ebiten.Image
+	imgTiles *ebiten.Image
+	//imgBarbijo *ebiten.Image
 
 	// sonido
 	audioContext *audio.Context
@@ -75,11 +67,11 @@ var (
 	fondo        *audio.Player
 
 	//barbijo
-	barbijoFrameOX  = 0
-	barbijoFrameOY  = 74
-	barbijoFrameNum = 1
-	barbijoX        = float64(630)
-	barbijoY        = float64(150)
+	// barbijoFrameOX  = 0
+	// barbijoFrameOY  = 74
+	// barbijoFrameNum = 1
+	// barbijoX        = float64(630)
+	// barbijoY        = float64(150)
 
 	//para start y game over
 	arcadeFont      font.Face
@@ -102,16 +94,15 @@ func init() {
 	}
 	//inicializa a players
 	initPlayer()
-
+	//inicia sumarVidas
+	initSumarVidas()
+	//inicia nube
+	initNube()
 	///////////// Imagen NUBE COVID ///////////////////
-	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	imgBarbijo, _, err = ebitenutil.NewImageFromFile(`sircovid\data\barbijo.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	////////////// SONIDOS //////////////
 
@@ -210,7 +201,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 				ElectNumPlayers = 1
 			}
-		case ElectPlayer == 0 && Game1.numPlayers == 1:
+		case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
 			if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
 				if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
 					player1.humanos = chica
@@ -243,9 +234,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(enemigo1, player1)
+		player1 = vida(enemigo1, player1, barbijo)
 		if Game1.numPlayers == 2 {
-			player2 = vida(enemigo1, player2)
+			player2 = vida(enemigo1, player2, barbijo)
 		}
 		//enemigo1
 		enemigo1 = moverHumanos(enemigo1)
@@ -268,11 +259,11 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(enemigo1, player1)
-		player1 = vida(enemigo2, player1)
+		player1 = vida(enemigo1, player1, barbijo)
+		player1 = vida(enemigo2, player1, barbijo)
 		if Game1.numPlayers == 2 {
-			player2 = vida(enemigo1, player2)
-			player2 = vida(enemigo2, player2)
+			player2 = vida(enemigo1, player2, barbijo)
+			player2 = vida(enemigo2, player2, barbijo)
 		}
 		//enemigos
 		enemigo1 = moverHumanos(enemigo1)
@@ -325,11 +316,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarNube(nube1, screen)
 
 	// dibujar barbijo
-	op = &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.3, .3)
-	op.GeoM.Translate(barbijoX, barbijoY)
-	bx, by := barbijoFrameOX+barbijoFrameWidth, barbijoFrameOY
-	screen.DrawImage(imgBarbijo.SubImage(image.Rect(bx, by, bx+barbijoFrameWidth, by+barbijoFrameHeight)).(*ebiten.Image), op)
+	dibujarSumVidas(barbijo, screen)
 
 	// dibujar texto
 	lifesP1 := fmt.Sprintf("Vidas:%02d", player1.vidas)
