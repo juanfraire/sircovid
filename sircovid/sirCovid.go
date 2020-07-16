@@ -249,15 +249,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if Game1.numPlayers == 2 {
 			player2 = vida(enemigo1, player2)
 		}
-
-		// enemigo1 = obstEnemigo(enemigo1)
-		// enemigo1 = cambioDireccion(enemigo1, countH)
+		//enemigo1
 		enemigo1 = moverHumanos(enemigo1)
 
-		// policia.num, policia.cambio = obstEnemigo(policia.cambio, countH, policia.num, policia.X, policia.Y)
-		// policia.num, policia.cambio = cambioDireccion(policia.num, policia.cambio, countH)
-		// policia.FrameOY, policia.FrameNum, policia.X, policia.Y = moverHumanos(enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.num, enemigo1.X, enemigo1.Y)
-		//pasar de nivel
+		//siguiente nivel
 		Game1.siguienteNivel = siguienteNivel(player1)
 		if Game1.numPlayers == 2 {
 			Game1.siguienteNivel = siguienteNivel(player2)
@@ -284,16 +279,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = vida(enemigo2, player2)
 
 		//enemigo1
-		//enemigo2
-
-		// enemigo1 = obstEnemigo(enemigo1)
 		enemigo1 = moverHumanos(enemigo1)
-		// enemigo1 = cambioDireccion(enemigo1,
 
 		//enemigo2
-		// enemigo2 = obstEnemigo(enemigo2)
 		enemigo2 = moverHumanos(enemigo2)
-		// enemigo2 = cambioDireccion(enemigo2
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {

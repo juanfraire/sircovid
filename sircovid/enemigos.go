@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 	"math/rand"
@@ -108,7 +107,6 @@ func moverHumanos(E humanos) humanos {
 		}
 		E.cambio = count + 10
 	}
-	fmt.Println(count)
 
 	return E
 }
