@@ -253,7 +253,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 		enemigo1 = obstEnemigo(enemigo1)
-		enemigo1 = cambioDireccion(enemigo1)
+		enemigo1 = cambioDireccion(enemigo1, countH)
 		enemigo1 = moverHumanos(enemigo1)
 
 		// policia.num, policia.cambio = obstEnemigo(policia.cambio, countH, policia.num, policia.X, policia.Y)
@@ -290,12 +290,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		enemigo1 = obstEnemigo(enemigo1)
 		enemigo1 = moverHumanos(enemigo1)
-		enemigo1 = cambioDireccion(enemigo1)
+		enemigo1 = cambioDireccion(enemigo1, countH)
 
 		//enemigo2
 		enemigo2 = obstEnemigo(enemigo2)
 		enemigo2 = moverHumanos(enemigo2)
-		enemigo2 = cambioDireccion(enemigo2)
+		enemigo2 = cambioDireccion(enemigo2, countH)
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {

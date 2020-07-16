@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 	"math/rand"
@@ -82,7 +83,7 @@ func moverHumanos(E humanos) humanos {
 	return E
 }
 
-func cambioDireccion(E humanos) humanos {
+func cambioDireccion(E humanos, count int) humanos {
 
 	var tmp int
 	//hay un problema con countH vs count
@@ -92,7 +93,9 @@ func cambioDireccion(E humanos) humanos {
 		E.cambio += rand.Intn(100) + 20
 		E.num = tmp
 	}
+	fmt.Println(count)
 	return E
+
 }
 
 func obstEnemigo(E humanos) humanos {
