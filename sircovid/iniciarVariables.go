@@ -10,7 +10,7 @@ func init() {
 }
 
 func iniciarVariables() {
-	countH = 0
+	count = 0
 
 	//nube
 	nube1.nubeX = float64(rand.Intn(screenWidth) + 300)
@@ -29,7 +29,7 @@ func iniciarVariables() {
 
 }
 func pasarNivel() {
-	countH = 0
+	count = 0
 
 	enemigo1.FrameOX = 0
 	enemigo1.FrameOY = 48

@@ -20,6 +20,7 @@ var (
 	enemigo2 humanos
 	num      = rand.Intn(5)
 	count    int
+	tmp      int
 	ok       bool
 )
 
@@ -57,9 +58,13 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 func moverHumanos(E humanos) humanos {
+	if ModeGame >= 0 {
+		count++
+	}
 
 	E.FrameNum = 4
 
@@ -80,25 +85,13 @@ func moverHumanos(E humanos) humanos {
 		E.Y++
 	}
 
-	return E
-}
-
-func cambioDireccion(E humanos, count int) humanos {
-
-	var tmp int
-	//hay un problema con countH vs count
 	if count >= E.cambio {
 		for tmp = E.num; tmp == E.num; tmp = rand.Intn(5) {
 		}
 		E.cambio += rand.Intn(100) + 20
 		E.num = tmp
 	}
-	fmt.Println(count)
-	return E
 
-}
-
-func obstEnemigo(E humanos) humanos {
 	x1, y1 := E.X, E.Y
 	_, _, ok = obstaculos(E.X, E.Y+32, x1, y1)
 
@@ -113,8 +106,9 @@ func obstEnemigo(E humanos) humanos {
 		case 4:
 			E.num = 3
 		}
-		E.cambio = count + 5
+		E.cambio = count + 10
 	}
+	fmt.Println(count)
 
 	return E
 }

@@ -252,8 +252,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			player2 = vida(enemigo1, player2)
 		}
 
-		enemigo1 = obstEnemigo(enemigo1)
-		enemigo1 = cambioDireccion(enemigo1, countH)
+		// enemigo1 = obstEnemigo(enemigo1)
+		// enemigo1 = cambioDireccion(enemigo1, countH)
 		enemigo1 = moverHumanos(enemigo1)
 
 		// policia.num, policia.cambio = obstEnemigo(policia.cambio, countH, policia.num, policia.X, policia.Y)
@@ -266,7 +266,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 
 	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
-		countH++
+
 		// sonido
 		deadSound2.Rewind()
 		fondo.Play()
@@ -288,14 +288,14 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//enemigo1
 		//enemigo2
 
-		enemigo1 = obstEnemigo(enemigo1)
+		// enemigo1 = obstEnemigo(enemigo1)
 		enemigo1 = moverHumanos(enemigo1)
-		enemigo1 = cambioDireccion(enemigo1, countH)
+		// enemigo1 = cambioDireccion(enemigo1,
 
 		//enemigo2
-		enemigo2 = obstEnemigo(enemigo2)
+		// enemigo2 = obstEnemigo(enemigo2)
 		enemigo2 = moverHumanos(enemigo2)
-		enemigo2 = cambioDireccion(enemigo2, countH)
+		// enemigo2 = cambioDireccion(enemigo2
 
 	case ModeGameOver == 0:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
