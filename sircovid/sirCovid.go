@@ -256,10 +256,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		enemigo1 = cambioDireccion(enemigo1)
 		enemigo1 = moverHumanos(enemigo1)
 
-		// enemigo3.num, enemigo3.cambio = obstEnemigo(enemigo3.cambio, countH, enemigo3.num, enemigo3.X, enemigo3.Y)
-		// enemigo3.num, enemigo3.cambio = cambioDireccion(enemigo3.num, enemigo3.cambio, countH)
-		// enemigo3.FrameOY, enemigo3.FrameNum, enemigo3.X, enemigo3.Y = moverHumanos(enemigo3.FrameOY, enemigo3.FrameNum, enemigo3.num, enemigo3.X, enemigo3.Y)
-
 		// policia.num, policia.cambio = obstEnemigo(policia.cambio, countH, policia.num, policia.X, policia.Y)
 		// policia.num, policia.cambio = cambioDireccion(policia.num, policia.cambio, countH)
 		// policia.FrameOY, policia.FrameNum, policia.X, policia.Y = moverHumanos(enemigo1.FrameOY, enemigo1.FrameNum, enemigo1.num, enemigo1.X, enemigo1.Y)
