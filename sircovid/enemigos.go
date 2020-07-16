@@ -35,7 +35,7 @@ func init() {
 	enemigo1.num = rand.Intn(5)
 	enemigo1.cambio = rand.Intn(50) + 100
 
-	enemigo1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\hombre.png`, ebiten.FilterDefault)
+	enemigo1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\enemigo1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,7 +52,7 @@ func init() {
 	enemigo2.num = rand.Intn(5)
 	enemigo2.cambio = rand.Intn(50) + 50
 
-	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mujer.png`, ebiten.FilterDefault)
+	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\enemigo2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
