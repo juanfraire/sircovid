@@ -5,8 +5,6 @@ import (
 	"image/color"
 	_ "image/png"
 	"log"
-	"os"
-	"time"
 
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
@@ -15,10 +13,7 @@ import (
 
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/audio"
-	"github.com/hajimehoshi/ebiten/audio/vorbis"
-	"github.com/hajimehoshi/ebiten/audio/wav"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
-	raudio "github.com/hajimehoshi/ebiten/examples/resources/audio"
 	"github.com/hajimehoshi/ebiten/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/inpututil"
 	"github.com/hajimehoshi/ebiten/text"
@@ -95,48 +90,8 @@ func init() {
 	initEnemigos()
 	//iniciar otra variables
 	iniciarVariables()
-
-	////////////// SONIDOS //////////////
-
-	audioContext, _ = audio.NewContext(44100)
-	s, err := os.Open(`sircovid\data\SIR-COVID.wav`)
-	if err != nil {
-		panic(err)
-	}
-	defer s.Close()
-	data := make([]byte, 11491248)
-	c, err := s.Read(data)
-	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
-	//fmt.Println(c)
-	if err != nil {
-		log.Fatal(err)
-	}
-	sonidoFondo = audio.NewInfiniteLoop(fondoD, int64(c))
-	if err != nil {
-		log.Fatal(err)
-	}
-	fondo, err = audio.NewPlayer(audioContext, sonidoFondo)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
-	if err != nil {
-		log.Fatal(err)
-	}
-	deadSound, err = audio.NewPlayer(audioContext, jumpD)
-	if err != nil {
-		log.Fatal(err)
-	}
-	jabD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jab_wav))
-	if err != nil {
-		log.Fatal(err)
-	}
-	deadSound2, err = audio.NewPlayer(audioContext, jabD)
-	if err != nil {
-		log.Fatal(err)
-
-	}
+	//iniciar sonidos
+	initSonido()
 
 	////////////////  TEXTOS    ////////////////////////////
 	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
@@ -163,15 +118,7 @@ func init() {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
-
-	//  maneja sonido fondo (S = mute) en proceso (no sacar)
-	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
-		if fondo.Volume() != 0 {
-			fondo.SetVolume(0)
-		} else if fondo.Volume() == 0 {
-			fondo.SetVolume(1)
-		}
-	}
+	sonido()
 
 	// game counter
 	g.count++
@@ -214,9 +161,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 	case ModeGame == 0 && player1.vidas != 0 && player2.vidas != 0:
 		//// sonido ////
-		deadSound2.Rewind()
-		fondo.Play()
-
+		sonidoGame()
 		// nube
 		nube1 = moverNube(nube1)
 
@@ -239,8 +184,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
 
 		// sonido
-		deadSound2.Rewind()
-		fondo.Play()
+		sonidoGame()
 
 		// nube
 		nube1 = moverNube(nube1)
@@ -261,6 +205,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		enemigo2 = moverHumanos(enemigo2)
 
 	case ModeGameOver == 0:
+		sonidoGameover()
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			iniciarVariables()
 			initPlayer()
@@ -268,13 +213,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			initSumarVidas()
 			initEnemigos()
 		}
-
-		// sonido
-		fondo.Pause()
-		fondo.Rewind()
-		time.Sleep(time.Millisecond * 100)
-		deadSound2.SetVolume(.4)
-		deadSound2.Play()
 
 	}
 	return nil

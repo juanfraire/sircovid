@@ -22,6 +22,7 @@ func iniciarVariables() {
 
 }
 func pasarNivel() {
+	// initSonido()
 	count = 0
 
 	enemigo1.FrameOX = 0
