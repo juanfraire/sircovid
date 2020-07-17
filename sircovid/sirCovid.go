@@ -76,7 +76,7 @@ func init() {
 	intro1.initIntro(screenWidth, screenHeight)
 
 	//////////////   Imagen CITY  ////////////////////////////////
-	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city2.png`, ebiten.FilterDefault)
+	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}

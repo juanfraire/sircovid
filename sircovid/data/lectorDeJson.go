@@ -18,7 +18,7 @@ type Objetos struct {
 var decoded []Objetos
 
 func main() {
-	fJSON, err := ioutil.ReadFile("./city1.json")
+	fJSON, err := ioutil.ReadFile("sircovid/data/city.json")
 	if err != nil {
 		panic(err)
 	}
@@ -33,7 +33,7 @@ func main() {
 		objeto[i][2] = decoded[i].Y
 		objeto[i][3] = decoded[i].Height
 	}
-	
+
 	fmt.Println("objetos := make([][]int,", len(objeto), ")")
 
 	for i := 0; i < len(objeto); i++ {

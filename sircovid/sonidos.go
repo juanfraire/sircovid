@@ -28,7 +28,6 @@ func initSonido() {
 	data := make([]byte, 11491248)
 	c, err := s.Read(data)
 	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
-	//fmt.Println(c)
 	if err != nil {
 		log.Fatal(err)
 	}
