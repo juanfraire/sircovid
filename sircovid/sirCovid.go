@@ -123,6 +123,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	// game counter
 	g.count++
 	count1++
+	//funcion pausa
 	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
 		ModePause = 1
 	}
