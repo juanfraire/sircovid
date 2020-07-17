@@ -20,8 +20,8 @@ type nube struct {
 var nube1 nube
 
 func initNube() {
-	nube1.X = float64(rand.Intn(screenWidth) + 300)
-	nube1.Y = float64(rand.Intn(1500))
+	nube1.X = float64(rand.Intn(screenWidth / .4))
+	nube1.Y = float64(rand.Intn(screenHeight / .4))
 
 	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -33,25 +33,25 @@ func initNube() {
 func moverNube(n nube) nube {
 	// creacion de nuevas nubes
 	if n.Alpha <= 0 {
-		n.X = float64(rand.Intn(1500))
-		n.Y = float64(rand.Intn(1500))
+		n.X = float64(rand.Intn(screenWidth / .4))
+		n.Y = float64(rand.Intn(screenHeight / .4))
 		n.AlphaUp = true
 	} else if n.Alpha > 1 {
 		time.Sleep(10000 * time.Microsecond)
 		n.AlphaUp = false
 	}
 
-	nubeX1 := n.X
-	nubeY1 := n.Y
+	// nubeX1 := n.X
+	// nubeY1 := n.Y
 	// movimiento nube
 	if n.Alpha >= 0 {
 		n.X--
 	}
-	n.X, n.Y, ok = obstaculos(n.X+70, n.Y+70, nubeX1, nubeY1)
-	if !ok {
-		n.X -= 70
-		n.Y -= 70
-	}
+	// n.X, n.Y, ok = obstaculos(n.X+70, n.Y+70, nubeX1, nubeY1)
+	// if !ok {
+	// 	n.X -= 70
+	// 	n.Y -= 70
+	// }
 	// actualizar alpha
 	if n.AlphaUp {
 		n.Alpha += .009

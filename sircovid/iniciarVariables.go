@@ -65,8 +65,7 @@ func pasarNivel() {
 	chica.FrameHeight = 48
 
 	//nube
-	nube1.X = float64(rand.Intn(screenWidth) + 300)
-	nube1.Y = float64(rand.Intn(1500))
+	initNube()
 
 	//paso de nivel
 	ModeTitle = 2
