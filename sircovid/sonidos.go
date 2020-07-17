@@ -70,11 +70,11 @@ func sonido() {
 		}
 	}
 	// volumen +/-
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) && vol < .9 {
+	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) || inpututil.IsKeyJustPressed(ebiten.Key9) && vol < .9 {
 		vol += .1
 		temp = vol
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPSubtract) && vol > .1 {
+	if inpututil.IsKeyJustPressed(ebiten.KeyKPSubtract) || inpututil.IsKeyJustPressed(ebiten.Key8) && vol > .1 {
 		vol -= .1
 		temp = vol
 	}
