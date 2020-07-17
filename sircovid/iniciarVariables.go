@@ -18,9 +18,11 @@ func iniciarVariables() {
 	ModeGameOver = 0
 	ElectNumPlayers = 0
 	ElectPlayer = 0
+	Game1.numPlayers = 1
 
 }
 func pasarNivel() {
+	// initSonido()
 	count = 0
 
 	enemigo1.FrameOX = 0
@@ -65,8 +67,7 @@ func pasarNivel() {
 	chica.FrameHeight = 48
 
 	//nube
-	nube1.X = float64(rand.Intn(screenWidth) + 300)
-	nube1.Y = float64(rand.Intn(1500))
+	initNube()
 
 	//paso de nivel
 	ModeTitle = 2

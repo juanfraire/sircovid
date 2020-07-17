@@ -169,9 +169,7 @@ func vida(h humanos, p player, b sumVidas) player {
 	if p.v == 30 {
 		p.vidas--
 		p.v = 0
-		//sonido
-		deadSound.Play()
-		deadSound.Rewind()
+		sonidoVidas()
 	}
 
 	return p
