@@ -47,7 +47,7 @@ var (
 	ElectPlayer     int
 	ModeGameOver    int
 	count1          int
-	ModePause       int
+	ModePause       bool
 )
 
 var (
@@ -125,14 +125,11 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	count1++
 	//funcion pausa
 	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
-		ModePause = 1
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyO) {
-		ModePause = 0
+		ModePause = !ModePause
 	}
 	switch {
 
-	case ModePause == 1:
+	case ModePause == true:
 
 	case ModeTitle == 0:
 		// intro update
