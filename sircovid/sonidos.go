@@ -57,10 +57,6 @@ func initSonido() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	deadSound2.SetVolume(.4)
-	// deadSound2.Rewind()
-	// deadSound.Rewind()
-	// fondo.Rewind()
 }
 
 func sonido() {
@@ -74,6 +70,7 @@ func sonido() {
 			vol = temp
 		}
 	}
+	// volumen +/-
 	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) && vol < .9 {
 		vol += .1
 		temp = vol
@@ -85,7 +82,7 @@ func sonido() {
 
 	fondo.SetVolume(vol)
 	deadSound.SetVolume(vol)
-	deadSound2.SetVolume(vol)
+	deadSound2.SetVolume(vol * .4)
 
 }
 func sonidoGame() {
