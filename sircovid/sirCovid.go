@@ -52,12 +52,12 @@ var (
 	ElectPlayer     int
 	ModeGameOver    int
 	count1          int
+	ModePause       int
 )
 
 var (
 	// imágenes
 	imgTiles *ebiten.Image
-	//imgBarbijo *ebiten.Image
 
 	// sonido
 	audioContext *audio.Context
@@ -176,7 +176,16 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	// game counter
 	g.count++
 	count1++
+	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
+		ModePause = 1
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyO) {
+		ModePause = 0
+	}
 	switch {
+
+	case ModePause == 1:
+
 	case ModeTitle == 0:
 		// intro update
 		intro1.updateIntro(screenWidth, screenHeight)
@@ -213,6 +222,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModeTitle = 3
 		}
 	case ModeGame == 0 && player1.vidas != 0 && player2.vidas != 0:
+
 		//// sonido ////
 		deadSound2.Rewind()
 		fondo.Play()
