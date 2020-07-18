@@ -150,7 +150,7 @@ func vida(h humanos, p player, b sumVidas) player {
 	collisionX := float64(nube1.X * scale)
 	collisionY := float64(nube1.Y * scale)
 	if nube1.Alpha < .3 {
-		collisionX = 0
+		collisionX = screenWidth
 	}
 	//pierde vidas con nube
 	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {
