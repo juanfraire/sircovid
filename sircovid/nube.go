@@ -20,9 +20,9 @@ type nube struct {
 var nube1 nube
 
 func initNube() {
-	// rand.Seed(time.Now().UnixNano())
-	// nube1.X = float64(rand.Intn(screenWidth / .4))
-	// nube1.Y = float64(rand.Intn(screenHeight / .4))
+	rand.Seed(time.Now().UnixNano())
+	nube1.X = float64(rand.Intn(screenWidth / .4))
+	nube1.Y = float64(rand.Intn(screenHeight / .4))
 
 	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
