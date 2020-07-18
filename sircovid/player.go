@@ -147,10 +147,10 @@ func moverPlayer(p player) player {
 
 func vida(h humanos, p player, b sumVidas) player {
 	//pierde vidas con la nube
-	collisionX := float64(nube1.X * .4)
-	collisionY := float64(nube1.Y*.4) + 106
+	collisionX := float64(nube1.X * scale)
+	collisionY := float64(nube1.Y * scale)
 	if nube1.Alpha < .3 {
-		collisionX = screenWidth + 300
+		collisionX = 0
 	}
 	//pierde vidas con nube
 	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {

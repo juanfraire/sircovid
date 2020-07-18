@@ -20,8 +20,8 @@ type nube struct {
 var nube1 nube
 
 func initNube() {
-	// nube1.X = float64(rand.Intn(screenWidth / .4))
-	// nube1.Y = float64(rand.Intn(screenHeight / .4))
+	nube1.X = float64(rand.Intn(screenWidth / .4))
+	nube1.Y = float64(rand.Intn(screenHeight / .4))
 
 	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -53,10 +53,13 @@ func moverNube(n nube) nube {
 	}
 	return n
 }
+
+var scale = float64(.4)
+
 func dibujarNube(n nube, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(n.X, n.Y+384)
+	op.GeoM.Translate(n.X, n.Y)
 	op.ColorM.Scale(3, 2, 0, n.Alpha)
-	op.GeoM.Scale(.4, .4)
+	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(n.img, op)
 }
