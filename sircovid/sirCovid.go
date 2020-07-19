@@ -143,7 +143,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
 				Game1.numPlayers = 1
 			}
-			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) && (Game1.numPlayers == 1 || Game1.numPlayers == 2) {
+			if inpututil.IsKeyJustPressed(ebiten.KeySpace) && (Game1.numPlayers == 1 || Game1.numPlayers == 2) {
 				ElectNumPlayers = 1
 			}
 		case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
@@ -155,7 +155,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 					player1.humanos = viejo
 				}
 			}
-			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+			if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 				ElectPlayer = 1
 			}
 		}
@@ -293,12 +293,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
 	switch {
+	case ModePause == true:
+		jugadores := fmt.Sprintf("PAUSE")
+		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
 	case ElectNumPlayers == 0:
-		jugadores := fmt.Sprintf(" Elija la cantidad de jugadores \n\ncon las flechas y presione enter\n\nJUGADORES:%02d", Game1.numPlayers)
+		jugadores := fmt.Sprintf(" Elija la cantidad de jugadores \n\ncon las flechas y presione la barra espaciadora\n\nJUGADORES:%02d", Game1.numPlayers)
 		text.Draw(screen, jugadores, smallArcadeFont, 140, 250, color.White)
 
 	case ElectPlayer == 0 && Game1.numPlayers == 1:
-		jugadores := fmt.Sprintf("Elija el jugador \n\n con las flechas\n\ny presione enter")
+		jugadores := fmt.Sprintf("Elija el jugador \n\n con las flechas\n\ny presione la barra espaciadora")
 		text.Draw(screen, jugadores, smallArcadeFont, 250, 250, color.White)
 
 	case ElectNumPlayers == 1:
