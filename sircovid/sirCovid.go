@@ -289,6 +289,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
 	switch {
+	case ModePause == true:
+		jugadores := fmt.Sprintf("PAUSE")
+		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
 	case ElectNumPlayers == 0:
 		jugadores := fmt.Sprintf(" Elija la cantidad de jugadores \n\ncon las flechas y presione la barra espaciadora\n\nJUGADORES:%02d", Game1.numPlayers)
 		text.Draw(screen, jugadores, smallArcadeFont, 140, 250, color.White)
