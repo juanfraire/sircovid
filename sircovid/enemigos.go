@@ -17,6 +17,7 @@ func init() {
 var (
 	enemigo1 humanos
 	enemigo2 humanos
+	enemigo3 humanos
 	num      = rand.Intn(5)
 	count    int
 	tmp      int
@@ -58,6 +59,23 @@ func initEnemigos() {
 		log.Fatal(err)
 	}
 
+	rand.Seed(time.Now().UnixNano())
+
+	enemigo3.FrameOX = 0
+	enemigo3.FrameOY = 72
+	enemigo3.FrameNum = 1
+	enemigo3.X = float64(screenWidth - 100)
+	enemigo3.Y = float64(290)
+	enemigo3.FrameWidth = 48
+	enemigo3.FrameHeight = 72
+	enemigo3.num = rand.Intn(5)
+	enemigo3.cambio = rand.Intn(50) + 100
+
+	enemigo3.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mujer-con-sombrero.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
 
 func moverHumanos(E humanos) humanos {
@@ -65,19 +83,19 @@ func moverHumanos(E humanos) humanos {
 		count++
 	}
 
-	E.FrameNum = 4
+	E.FrameNum = 3
 
 	switch E.num {
 	case 0:
 		E.FrameNum = 1
 	case 1:
-		E.FrameOY = 48
+		E.FrameOY = 72
 		E.X--
 	case 2:
-		E.FrameOY = 96
+		E.FrameOY = 144
 		E.X++
 	case 3:
-		E.FrameOY = 144
+		E.FrameOY = 216
 		E.Y--
 	case 4:
 		E.FrameOY = 0
@@ -112,7 +130,7 @@ func moverHumanos(E humanos) humanos {
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.8, .8)
+	op.GeoM.Scale(.65, .51)
 	op.GeoM.Translate(E.X, E.Y)
 	j := (count1 / 7) % E.FrameNum
 	hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY

@@ -45,6 +45,18 @@ func pasarNivel() {
 	enemigo2.num = rand.Intn(5)
 	enemigo2.cambio = rand.Intn(50) + 50
 
+	rand.Seed(time.Now().UnixNano())
+
+	enemigo3.FrameOX = 0
+	enemigo3.FrameOY = 72
+	enemigo3.FrameNum = 1
+	enemigo3.X = float64(screenWidth - 100)
+	enemigo3.Y = float64(290)
+	enemigo3.FrameWidth = 48
+	enemigo3.FrameHeight = 72
+	enemigo3.num = rand.Intn(5)
+	enemigo3.cambio = rand.Intn(50) + 100
+
 	//reinciar enemigos
 	count1 = 0
 
