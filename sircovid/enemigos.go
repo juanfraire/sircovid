@@ -34,7 +34,7 @@ func randXY() (x float64, y float64) {
 	for obs {
 		x = float64(rand.Intn(screenWidth))
 		y = float64(rand.Intn(screenHeight))
-		_, _, obs = obstaculos(x, y+37, x, y)
+		_, _, obs = obstaculos(x, y, x, y)
 	}
 	fmt.Println(x, y, obs)
 	return
@@ -142,7 +142,7 @@ func moverHumanos(E humanos) humanos {
 	}
 
 	x1, y1 := E.X, E.Y
-	_, _, ok = obstaculos(E.X, E.Y+37, x1, y1)
+	_, _, ok = obstaculos(E.X, E.Y, x1, y1)
 
 	if ok {
 		switch E.num {

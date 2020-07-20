@@ -32,7 +32,7 @@ func initPlayer() {
 		log.Fatal(err)
 	}
 	// viejo
-	viejo.FrameOX = 32
+	viejo.FrameOX = 0
 	viejo.FrameOY = 96
 	viejo.FrameNum = 1
 	viejo.X = float64(25)
@@ -47,7 +47,7 @@ func initPlayer() {
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	//player2
-	chica.FrameOX = 32
+	chica.FrameOX = 0
 	chica.FrameOY = 96
 	chica.FrameNum = 1
 	chica.X = float64(25)
@@ -79,6 +79,7 @@ func moverPlayer(p player) player {
 	}
 
 	if p.a == 1 && p.MovY != 1 && p.MovY != 2 {
+		p.FrameOX = 0
 		p.FrameOY = 96
 		p.FrameNum = 3
 		p.MovX = 1
@@ -90,6 +91,7 @@ func moverPlayer(p player) player {
 		p.a = 0
 	}
 	if p.b == 1 && p.MovY != 1 && p.MovY != 2 {
+		p.FrameOX = 0
 		p.FrameOY = 48
 		p.FrameNum = 3
 		p.MovX = 2
@@ -101,6 +103,7 @@ func moverPlayer(p player) player {
 		p.b = 0
 	}
 	if p.c == 1 && p.MovX != 1 && p.MovX != 2 {
+		p.FrameOX = 0
 		p.FrameOY = 144
 		p.FrameNum = 3
 		p.MovY = 1
@@ -112,6 +115,7 @@ func moverPlayer(p player) player {
 		p.c = 0
 	}
 	if p.d == 1 && p.MovX != 1 && p.MovX != 2 {
+		p.FrameOX = 0
 		p.FrameOY = 0
 		p.FrameNum = 3
 		p.MovY = 2
@@ -141,15 +145,12 @@ func moverPlayer(p player) player {
 	case p.MovY == 2:
 		p.Y++
 	}
-	p.X, p.Y, ok = obstaculos(p.X, p.Y+32, X1, Y1)
-	switch {
-	case ok:
+	p.X, p.Y, ok = obstaculos(p.X, p.Y, X1, Y1)
+	if ok {
 		p.FrameOX = 32
 		p.FrameNum = 1
-	case !ok:
-		p.Y -= 32
-		p.FrameOX = 0
 	}
+
 	return p
 }
 

@@ -77,7 +77,7 @@ func init() {
 	// Intro Init
 	intro1.initIntro(screenWidth, screenHeight)
 
-	//////////////   Imagen CITY  ////////////////////////////////
+	////////////////////////   Imagen CITY  ////////////////////////////////
 	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -95,7 +95,7 @@ func init() {
 	//iniciar sonidos
 	initSonido()
 
-	////////////////  TEXTOS    ////////////////////////////
+	///////////////////  TEXTOS   //////////////////////
 	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
 	if err != nil {
 		log.Fatal(err)
@@ -115,13 +115,12 @@ func init() {
 }
 
 ////////////////////////////
-// Update
+//////// Update ////////////
 ////////////////////////////
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 	sonido()
-
 	// game counter
 	g.count++
 	count1++
@@ -244,7 +243,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 }
 
 ////////////////////////////
-// Draw
+///////// Draw /////////////
 ////////////////////////////
 
 // Draw dibuja la pantalla 60 veces por segundo
@@ -317,10 +316,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 		fmt.Println(pulso)
 		jugadores := fmt.Sprintf("PAUSE")
-		// fmt.Println(pulse)
-		if !pulse {
-			text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
-		}
+		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
 
 	case ElectNumPlayers == 0:
 		jugadores := fmt.Sprintf(" Elija la cantidad de jugadores \n\ncon las flechas y presione la barra espaciadora\n\nJUGADORES:%02d", Game1.numPlayers)
