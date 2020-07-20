@@ -18,51 +18,51 @@ var (
 	enemigo1 humanos
 	enemigo2 humanos
 	enemigo3 humanos
-	num      = rand.Intn(5)
-	count    int
-	tmp      int
-	ok       bool
+	// num      = rand.Intn(5)
+	count int
+	tmp   int
+	ok    bool
 )
 
 func initEnemigos() {
 	rand.Seed(time.Now().UnixNano())
 	//enemigo1
-	enemigo1.FrameOX = 0
-	enemigo1.FrameOY = 48
+	enemigo1.FrameOX = 48
+	enemigo1.FrameOY = 72 * rand.Intn(4)
 	enemigo1.FrameNum = 1
 	enemigo1.X = float64(350)
 	enemigo1.Y = float64(290)
-	enemigo1.FrameWidth = 32
-	enemigo1.FrameHeight = 48
+	enemigo1.FrameWidth = 48
+	enemigo1.FrameHeight = 72
 	enemigo1.num = rand.Intn(5)
 	enemigo1.cambio = rand.Intn(50) + 100
 
-	enemigo1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\enemigo1.png`, ebiten.FilterDefault)
+	enemigo1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\HERO-Jessica-Poses.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	rand.Seed(time.Now().UnixNano())
 	//enemigo2
-	enemigo2.FrameOX = 0
-	enemigo2.FrameOY = 48
+	enemigo2.FrameOX = 48
+	enemigo2.FrameOY = 72 * rand.Intn(4)
 	enemigo2.FrameNum = 1
-	enemigo2.X = float64(screenWidth - 50)
+	enemigo2.X = float64(screenWidth - 100)
 	enemigo2.Y = float64(290)
-	enemigo2.FrameWidth = 32
-	enemigo2.FrameHeight = 48
+	enemigo2.FrameWidth = 48
+	enemigo2.FrameHeight = 72
 	enemigo2.num = rand.Intn(5)
 	enemigo2.cambio = rand.Intn(50) + 100
 
-	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\enemigo2.png`, ebiten.FilterDefault)
+	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cobani.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	rand.Seed(time.Now().UnixNano())
 
-	enemigo3.FrameOX = 0
-	enemigo3.FrameOY = 72
+	enemigo3.FrameOX = 48
+	enemigo3.FrameOY = 72 * rand.Intn(4)
 	enemigo3.FrameNum = 1
 	enemigo3.X = float64(screenWidth - 100)
 	enemigo3.Y = float64(290)
@@ -79,15 +79,18 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
+
 	if ModeGame >= 0 {
 		count++
 	}
 
 	E.FrameNum = 3
+	E.FrameOX = 0
 
 	switch E.num {
 	case 0:
 		E.FrameNum = 1
+		E.FrameOX = 48
 	case 1:
 		E.FrameOY = 72
 		E.X--
@@ -129,10 +132,15 @@ func moverHumanos(E humanos) humanos {
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.65, .51)
-	op.GeoM.Translate(E.X, E.Y)
-	j := (count1 / 7) % E.FrameNum
-	hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY
-	screen.DrawImage(E.img.SubImage(image.Rect(hx, hy, hx+E.FrameWidth, hy+E.FrameHeight)).(*ebiten.Image), op)
+	if ModePause {
+		E.FrameNum = 1
+		E.FrameOX = 0
+	} else {
+		op := &ebiten.DrawImageOptions{}
+		op.GeoM.Scale(.65, .51)
+		op.GeoM.Translate(E.X, E.Y)
+		j := (count1 / 7) % E.FrameNum
+		hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY
+		screen.DrawImage(E.img.SubImage(image.Rect(hx, hy, hx+E.FrameWidth, hy+E.FrameHeight)).(*ebiten.Image), op)
+	}
 }

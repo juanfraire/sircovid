@@ -129,7 +129,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	}
 	switch {
 
-	case ModePause == true:
+	case ModePause:
 
 	case ModeTitle == 0:
 		// intro update
@@ -248,12 +248,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibuja al enemigo
 	if ModeGame == 0 {
-		// dibujarEnemigos(enemigo1, screen)
+		dibujarEnemigos(enemigo1, screen)
 		dibujarEnemigos(enemigo3, screen)
 	}
 	if ModeGame == 1 {
 		dibujarEnemigos(enemigo1, screen)
 		dibujarEnemigos(enemigo2, screen)
+		dibujarEnemigos(enemigo3, screen)
 	}
 
 	// dibujar nube
@@ -293,7 +294,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
 	switch {
-	case ModePause == true:
+	case ModePause:
 		jugadores := fmt.Sprintf("PAUSE")
 		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
 	case ElectNumPlayers == 0:

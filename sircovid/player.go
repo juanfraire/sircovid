@@ -32,7 +32,7 @@ func initPlayer() {
 		log.Fatal(err)
 	}
 	// viejo
-	viejo.FrameOX = 0
+	viejo.FrameOX = 32
 	viejo.FrameOY = 96
 	viejo.FrameNum = 1
 	viejo.X = float64(25)
@@ -47,7 +47,7 @@ func initPlayer() {
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	//player2
-	chica.FrameOX = 0
+	chica.FrameOX = 32
 	chica.FrameOY = 96
 	chica.FrameNum = 1
 	chica.X = float64(25)
@@ -84,6 +84,7 @@ func moverPlayer(p player) player {
 		p.MovX = 1
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyRight) || inpututil.IsKeyJustReleased(ebiten.KeyD) {
+		p.FrameOX = 32
 		p.FrameNum = 1
 		p.MovX = 0
 		p.a = 0
@@ -94,6 +95,7 @@ func moverPlayer(p player) player {
 		p.MovX = 2
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) || inpututil.IsKeyJustReleased(ebiten.KeyA) {
+		p.FrameOX = 32
 		p.FrameNum = 1
 		p.MovX = 0
 		p.b = 0
@@ -104,6 +106,7 @@ func moverPlayer(p player) player {
 		p.MovY = 1
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyUp) || inpututil.IsKeyJustReleased(ebiten.KeyW) {
+		p.FrameOX = 32
 		p.FrameNum = 1
 		p.MovY = 0
 		p.c = 0
@@ -114,6 +117,7 @@ func moverPlayer(p player) player {
 		p.MovY = 2
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyDown) || inpututil.IsKeyJustReleased(ebiten.KeyS) {
+		p.FrameOX = 32
 		p.FrameNum = 1
 		p.MovY = 0
 		p.d = 0
@@ -138,23 +142,26 @@ func moverPlayer(p player) player {
 		p.Y++
 	}
 	p.X, p.Y, ok = obstaculos(p.X, p.Y+32, X1, Y1)
-	if !ok {
-		p.X -= 0
+	switch {
+	case ok:
+		p.FrameOX = 32
+		p.FrameNum = 1
+	case !ok:
 		p.Y -= 32
+		p.FrameOX = 0
 	}
 	return p
 }
 
 func vida(h humanos, p player, b sumVidas) player {
 	//pierde vidas con la nube
-	collisionX := float64(nube1.X * scale)
-	collisionY := float64(nube1.Y * scale)
-	if nube1.Alpha < .3 {
-		collisionX = screenWidth
-	}
-	//pierde vidas con nube
-	if p.X > collisionX && p.X < collisionX+120 && p.Y > collisionY && p.Y < collisionY+120 {
-		p.v++
+	nubX := nube1.X * scale
+	nubY := nube1.Y * scale
+	if nube1.Alpha > .3 {
+		//pierde vidas con nube
+		if p.X > nubX && p.X < nubX+120 && p.Y > nubY && p.Y < nubY+120 {
+			p.v++
+		}
 	}
 	//pierde vidas con humanos
 	if p.X+20 > h.X && p.X < h.X+20 && p.Y+32 > h.Y && p.Y < h.Y+32 {

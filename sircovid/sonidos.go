@@ -13,8 +13,12 @@ import (
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
 
-var vol = float64(1)
-var temp = float64(vol)
+var (
+	vol  = float64(1)
+	temp = float64(vol)
+	up   bool
+	down bool
+)
 
 // Inicio valores de sonido del juego
 func initSonido() {
@@ -69,32 +73,46 @@ func sonido() {
 			vol = temp
 		}
 	}
+
 	// volumen +/-
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) || inpututil.IsKeyJustPressed(ebiten.Key9) && vol < .9 {
-		vol += .1
-		temp = vol
+	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) || inpututil.IsKeyJustPressed(ebiten.Key9) {
+		up = true
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPAdd) || inpututil.IsKeyJustReleased(ebiten.Key9) {
+		up = false
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPSubtract) || inpututil.IsKeyJustPressed(ebiten.Key8) && vol > .1 {
-		vol -= .1
-		temp = vol
+	if inpututil.IsKeyJustPressed(ebiten.KeyKPSubtract) || inpututil.IsKeyJustPressed(ebiten.Key8) {
+		down = true
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPSubtract) || inpututil.IsKeyJustReleased(ebiten.Key8) {
+		down = false
+	}
+	switch {
+	case vol < .99 && up:
+		vol += .01
+	case vol > .01 && down:
+		vol -= .01
 	}
 
 	fondo.SetVolume(vol)
 	deadSound.SetVolume(vol)
 	deadSound2.SetVolume(vol * .4)
 
+	// sonido ModePause
+	if ModePause {
+		fondo.Pause()
+	}
+
 }
 func sonidoGame() {
 	// deadSound.Rewind()
 	deadSound2.Rewind()
 	fondo.Play()
+
 }
 
 func sonidoGameover() {
 	fondo.Pause()
 	fondo.Rewind()
 	time.Sleep(time.Millisecond * 100)
-	// deadSound2.SetVolume(.4)
 	deadSound2.Play()
 
 }

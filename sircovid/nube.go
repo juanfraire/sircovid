@@ -39,7 +39,6 @@ func moverNube(n nube) nube {
 		n.Y = float64(rand.Intn(screenHeight / .4))
 		n.AlphaUp = true
 	} else if n.Alpha > .8 {
-		time.Sleep(10000 * time.Microsecond)
 		n.AlphaUp = false
 	}
 
