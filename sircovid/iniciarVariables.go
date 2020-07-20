@@ -37,7 +37,7 @@ func pasarNivel() {
 	ModeTitle = 2
 	ModeGame = 1
 
-	//para movimiento de player
-	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
-	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
+	// para movimiento de player
+	// player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
+	// player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
 }

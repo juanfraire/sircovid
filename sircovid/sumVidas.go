@@ -37,7 +37,7 @@ func initSumarVidas() {
 
 func dibujarSumVidas(B sumVidas, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.3, .3)
+	op.GeoM.Scale(.2, .2)
 	op.GeoM.Translate(B.X, B.Y)
 	bx, by := B.FrameOX+B.FrameWidth, B.FrameOY
 	screen.DrawImage(B.img.SubImage(image.Rect(bx, by, bx+B.FrameWidth, by+B.FrameHeight)).(*ebiten.Image), op)

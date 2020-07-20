@@ -150,10 +150,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
 			if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
 				if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
-					player1.humanos = chica
+					player1.humanos = player2.humanos
 				}
 				if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
-					player1.humanos = viejo
+					player1.humanos = player1.humanos
 				}
 			}
 			if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -314,7 +314,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	switch {
 	case ModePause:
 
-		fmt.Println(pulso)
+		// fmt.Println(pulso)
 		jugadores := fmt.Sprintf("PAUSE")
 		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
 

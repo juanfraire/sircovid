@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 	"math/rand"
@@ -36,7 +35,7 @@ func randXY() (x float64, y float64) {
 		y = float64(rand.Intn(screenHeight))
 		_, _, obs = obstaculos(x, y, x, y)
 	}
-	fmt.Println(x, y, obs)
+	// fmt.Println(x, y, obs)
 	return
 }
 

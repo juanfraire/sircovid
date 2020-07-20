@@ -17,45 +17,44 @@ type player struct {
 	a, b, c, d int
 }
 
-var chica, viejo humanos
 var player1, player2 player
 
 func initPlayer() {
 	//////////////   Imangen VIEJO  //////////////////////////////
-	viejo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\viejo.png`, ebiten.FilterDefault)
+	player1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 	//imagen chica
-	chica.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\segundoPlayer.png`, ebiten.FilterDefault)
+	player2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	// viejo
-	viejo.FrameOX = 0
-	viejo.FrameOY = 96
-	viejo.FrameNum = 1
-	viejo.X = float64(25)
-	viejo.Y = float64(375)
-	viejo.FrameWidth = 32
-	viejo.FrameHeight = 48
+	// player1
+	player1.FrameOX = 0
+	player1.FrameOY = 96
+	player1.FrameNum = 1
+	player1.X = float64(25)
+	player1.Y = float64(375)
+	player1.FrameWidth = 32
+	player1.FrameHeight = 48
 	//player
-	player1.humanos = viejo
+	// player1.humanos = player1
 	player1.vidas = 3
 	player1.v = 0
 	player1.señalador = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	//player2
-	chica.FrameOX = 0
-	chica.FrameOY = 96
-	chica.FrameNum = 1
-	chica.X = float64(25)
-	chica.Y = float64(415)
-	chica.FrameWidth = 32
-	chica.FrameHeight = 48
+	player2.FrameOX = 0
+	player2.FrameOY = 96
+	player2.FrameNum = 1
+	player2.X = float64(25)
+	player2.Y = float64(415)
+	player2.FrameWidth = 32
+	player2.FrameHeight = 48
 
-	player2.humanos = chica
+	// player2.humanos = chica
 	player2.vidas = 3
 	player2.v = 0
 	player2.señalador = 1
@@ -127,7 +126,7 @@ func moverPlayer(p player) player {
 		p.d = 0
 	}
 
-	// trasladar viejo
+	// trasladar player1
 	if ModeGame == 1 && p.posicionInicial != 1 {
 		p.X = float64(25)
 		p.Y = float64(375)
@@ -188,7 +187,7 @@ func dibujarPlayer(P player, screen *ebiten.Image) {
 		P.FrameOX = 0
 	}
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.7, .7)
+	op.GeoM.Scale(.65, .65)
 	op.GeoM.Translate(P.X, P.Y)
 	i := (count1 / 7) % P.FrameNum
 	sx, sy := P.FrameOX+i*P.FrameWidth, P.FrameOY
