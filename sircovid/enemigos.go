@@ -155,7 +155,7 @@ func moverHumanos(E humanos) humanos {
 		case 4:
 			E.num = 3
 		}
-		E.cambio = count + 50
+		E.cambio = count + 5
 	}
 	return E
 }
