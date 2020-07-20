@@ -178,15 +178,22 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = moverPlayer(player2)
 
 		// vida
-		// player1 = vida(enemigo1, player1, barbijo)
+		player1 = vida(enemigo1, player1, barbijo)
+		player1 = vida(enemigo2, player1, barbijo)
 		player1 = vida(enemigo3, player1, barbijo)
+		player1 = vida(enemigo4, player1, barbijo)
 
 		if Game1.numPlayers == 2 {
 			player2 = vida(enemigo1, player2, barbijo)
+			player2 = vida(enemigo2, player1, barbijo)
+			player2 = vida(enemigo3, player1, barbijo)
+			player2 = vida(enemigo4, player1, barbijo)
 		}
 		//enemigos
 		enemigo1 = moverHumanos(enemigo1)
+		enemigo2 = moverHumanos(enemigo2)
 		enemigo3 = moverHumanos(enemigo3)
+		enemigo4 = moverHumanos(enemigo4)
 
 		//siguiente nivel
 		Game1.siguienteNivel = siguienteNivel(player1)
@@ -207,6 +214,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		// vida
 		player1 = vida(enemigo1, player1, barbijo)
 		player1 = vida(enemigo2, player1, barbijo)
+		player1 = vida(enemigo3, player1, barbijo)
+		player1 = vida(enemigo4, player1, barbijo)
+
 		if Game1.numPlayers == 2 {
 			player2 = vida(enemigo1, player2, barbijo)
 			player2 = vida(enemigo2, player2, barbijo)
@@ -214,6 +224,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//enemigos
 		enemigo1 = moverHumanos(enemigo1)
 		enemigo2 = moverHumanos(enemigo2)
+		enemigo3 = moverHumanos(enemigo3)
+		enemigo4 = moverHumanos(enemigo4)
 
 	case ModeGameOver == 0:
 		sonidoGameover()
@@ -249,12 +261,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibuja al enemigo
 	if ModeGame == 0 {
 		dibujarEnemigos(enemigo1, screen)
+		dibujarEnemigos(enemigo2, screen)
 		dibujarEnemigos(enemigo3, screen)
+		dibujarEnemigos(enemigo4, screen)
 	}
 	if ModeGame == 1 {
 		dibujarEnemigos(enemigo1, screen)
 		dibujarEnemigos(enemigo2, screen)
 		dibujarEnemigos(enemigo3, screen)
+		dibujarEnemigos(enemigo4, screen)
 	}
 
 	// dibujar nube

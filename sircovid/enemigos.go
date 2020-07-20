@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 	"math/rand"
@@ -18,20 +19,35 @@ var (
 	enemigo1 humanos
 	enemigo2 humanos
 	enemigo3 humanos
+	enemigo4 humanos
 	// num      = rand.Intn(5)
 	count int
 	tmp   int
 	ok    bool
+	x     float64
+	y     float64
 )
 
+func randXY() (x float64, y float64) {
+	rand.Seed(time.Now().UnixNano())
+	_, _, obs := obstaculos(x, y, x, y)
+	for obs {
+		x = float64(rand.Intn(screenWidth))
+		y = float64(rand.Intn(screenHeight))
+		_, _, obs = obstaculos(x+15, y+37, x, y)
+	}
+	fmt.Println(x, y, obs)
+	return
+}
+
 func initEnemigos() {
+
 	rand.Seed(time.Now().UnixNano())
 	//enemigo1
 	enemigo1.FrameOX = 48
 	enemigo1.FrameOY = 72 * rand.Intn(4)
 	enemigo1.FrameNum = 1
-	enemigo1.X = float64(350)
-	enemigo1.Y = float64(290)
+	enemigo1.X, enemigo1.Y = randXY()
 	enemigo1.FrameWidth = 48
 	enemigo1.FrameHeight = 72
 	enemigo1.num = rand.Intn(5)
@@ -47,8 +63,7 @@ func initEnemigos() {
 	enemigo2.FrameOX = 48
 	enemigo2.FrameOY = 72 * rand.Intn(4)
 	enemigo2.FrameNum = 1
-	enemigo2.X = float64(screenWidth - 100)
-	enemigo2.Y = float64(290)
+	enemigo2.X, enemigo2.Y = randXY()
 	enemigo2.FrameWidth = 48
 	enemigo2.FrameHeight = 72
 	enemigo2.num = rand.Intn(5)
@@ -64,8 +79,7 @@ func initEnemigos() {
 	enemigo3.FrameOX = 48
 	enemigo3.FrameOY = 72 * rand.Intn(4)
 	enemigo3.FrameNum = 1
-	enemigo3.X = float64(screenWidth - 100)
-	enemigo3.Y = float64(290)
+	enemigo3.X, enemigo3.Y = randXY()
 	enemigo3.FrameWidth = 48
 	enemigo3.FrameHeight = 72
 	enemigo3.num = rand.Intn(5)
@@ -76,6 +90,21 @@ func initEnemigos() {
 		log.Fatal(err)
 	}
 
+	rand.Seed(time.Now().UnixNano())
+
+	enemigo4.FrameOX = 48
+	enemigo4.FrameOY = 72 * rand.Intn(4)
+	enemigo4.FrameNum = 1
+	enemigo4.X, enemigo4.Y = randXY()
+	enemigo4.FrameWidth = 48
+	enemigo4.FrameHeight = 72
+	enemigo4.num = rand.Intn(5)
+	enemigo4.cambio = rand.Intn(50) + 100
+
+	enemigo4.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mujer-pelo-largo.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func moverHumanos(E humanos) humanos {
@@ -113,7 +142,7 @@ func moverHumanos(E humanos) humanos {
 	}
 
 	x1, y1 := E.X, E.Y
-	_, _, ok = obstaculos(E.X, E.Y+32, x1, y1)
+	_, _, ok = obstaculos(E.X+15, E.Y+37, x1, y1)
 
 	if ok {
 		switch E.num {
