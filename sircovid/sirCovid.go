@@ -48,6 +48,8 @@ var (
 	ModeGameOver    int
 	count1          int
 	ModePause       bool
+	pulse           bool
+	pulso           int
 )
 
 var (
@@ -308,10 +310,18 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case player2.vidas == 0 || player1.vidas == 0:
 		texts = []string{"", "", "", "GAME OVER!", "", "TRY AGAIN?", "", "PRESS SPACE KEY"}
 	}
+
+	// fmt.Println(count)
 	switch {
 	case ModePause:
+
+		fmt.Println(pulso)
 		jugadores := fmt.Sprintf("PAUSE")
-		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
+		// fmt.Println(pulse)
+		if !pulse {
+			text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
+		}
+
 	case ElectNumPlayers == 0:
 		jugadores := fmt.Sprintf(" Elija la cantidad de jugadores \n\ncon las flechas y presione la barra espaciadora\n\nJUGADORES:%02d", Game1.numPlayers)
 		text.Draw(screen, jugadores, smallArcadeFont, 140, 250, color.White)

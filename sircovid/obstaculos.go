@@ -2,7 +2,7 @@ package main
 
 func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 
-	objetos := make([][]int, 59)
+	objetos := make([][]int, 63)
 	objetos[0] = []int{0, 81, 0, 302}
 	objetos[1] = []int{83, 110, -2, 129}
 	objetos[2] = []int{212, 46, 96, 44}
@@ -63,10 +63,10 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	objetos[57] = []int{403, 13, 449, 13}
 	objetos[58] = []int{403, 13, 335, 16}
 	//abajo para que no salga de la pantalla
-	objetos[12] = []int{0, 0, 0, screenHeight}
-	objetos[13] = []int{0, screenHeight, 0, 0}
-	objetos[14] = []int{0, screenWidth, screenHeight, 32}
-	objetos[15] = []int{screenWidth, 0, 0, screenHeight}
+	objetos[59] = []int{0, 0, 0, screenHeight}
+	objetos[60] = []int{0, screenHeight, 0, 0}
+	objetos[61] = []int{0, screenWidth, screenHeight, 32}
+	objetos[62] = []int{screenWidth, 0, 0, screenHeight}
 
 	for i := 0; i < len(objetos); i++ {
 		if int(X)+17 >= objetos[i][0] && int(X)+2 <= objetos[i][0]+objetos[i][1] && int(Y) >= objetos[i][2] && int(Y) <= objetos[i][2]+objetos[i][3] {

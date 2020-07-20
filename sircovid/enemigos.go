@@ -34,7 +34,7 @@ func randXY() (x float64, y float64) {
 	for obs {
 		x = float64(rand.Intn(screenWidth))
 		y = float64(rand.Intn(screenHeight))
-		_, _, obs = obstaculos(x+15, y+37, x, y)
+		_, _, obs = obstaculos(x, y+37, x, y)
 	}
 	fmt.Println(x, y, obs)
 	return
@@ -67,7 +67,7 @@ func initEnemigos() {
 	enemigo2.FrameWidth = 48
 	enemigo2.FrameHeight = 72
 	enemigo2.num = rand.Intn(5)
-	enemigo2.cambio = rand.Intn(50) + 100
+	enemigo2.cambio = rand.Intn(50) + 200
 
 	enemigo2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cobani.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -137,12 +137,12 @@ func moverHumanos(E humanos) humanos {
 	if count >= E.cambio {
 		for tmp = E.num; tmp == E.num; tmp = rand.Intn(5) {
 		}
-		E.cambio += rand.Intn(100) + 100
+		E.cambio += rand.Intn(200) + 200
 		E.num = tmp
 	}
 
 	x1, y1 := E.X, E.Y
-	_, _, ok = obstaculos(E.X+15, E.Y+37, x1, y1)
+	_, _, ok = obstaculos(E.X, E.Y+37, x1, y1)
 
 	if ok {
 		switch E.num {
@@ -155,7 +155,7 @@ func moverHumanos(E humanos) humanos {
 		case 4:
 			E.num = 3
 		}
-		E.cambio = count + 10
+		E.cambio = count + 50
 	}
 	return E
 }
@@ -164,12 +164,11 @@ func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	if ModePause {
 		E.FrameNum = 1
 		E.FrameOX = 0
-	} else {
-		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Scale(.65, .51)
-		op.GeoM.Translate(E.X, E.Y)
-		j := (count1 / 7) % E.FrameNum
-		hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY
-		screen.DrawImage(E.img.SubImage(image.Rect(hx, hy, hx+E.FrameWidth, hy+E.FrameHeight)).(*ebiten.Image), op)
 	}
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(.65, .51)
+	op.GeoM.Translate(E.X, E.Y)
+	j := (count1 / 7) % E.FrameNum
+	hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY
+	screen.DrawImage(E.img.SubImage(image.Rect(hx, hy, hx+E.FrameWidth, hy+E.FrameHeight)).(*ebiten.Image), op)
 }

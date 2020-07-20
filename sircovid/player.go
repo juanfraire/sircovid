@@ -157,11 +157,10 @@ func vida(h humanos, p player, b sumVidas) player {
 	//pierde vidas con la nube
 	nubX := nube1.X * scale
 	nubY := nube1.Y * scale
-	if nube1.Alpha > .3 {
-		//pierde vidas con nube
-		if p.X > nubX && p.X < nubX+120 && p.Y > nubY && p.Y < nubY+120 {
-			p.v++
-		}
+
+	//pierde vidas con nube
+	if p.X > nubX && p.X < nubX+120 && p.Y > nubY && p.Y < nubY+120 && nube1.Alpha > .3 {
+		p.v++
 	}
 	//pierde vidas con humanos
 	if p.X+20 > h.X && p.X < h.X+20 && p.Y+32 > h.Y && p.Y < h.Y+32 {
@@ -183,6 +182,10 @@ func vida(h humanos, p player, b sumVidas) player {
 }
 
 func dibujarPlayer(P player, screen *ebiten.Image) {
+	if ModePause {
+		P.FrameNum = 1
+		P.FrameOX = 0
+	}
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(.7, .7)
 	op.GeoM.Translate(P.X, P.Y)

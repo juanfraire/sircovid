@@ -28,24 +28,7 @@ func pasarNivel() {
 
 	//reinciar enemigos
 	count1 = 0
-
-	// viejo
-	viejo.FrameOX = 32
-	viejo.FrameOY = 96
-	viejo.FrameNum = 1
-	viejo.X = float64(25)
-	viejo.Y = float64(375)
-	viejo.FrameWidth = 32
-	viejo.FrameHeight = 48
-
-	//palyer 2
-	chica.FrameOX = 32
-	chica.FrameOY = 96
-	chica.FrameNum = 1
-	chica.X = float64(25)
-	chica.Y = float64(415)
-	chica.FrameWidth = 32
-	chica.FrameHeight = 48
+	initPlayer()
 
 	//nube
 	initNube()

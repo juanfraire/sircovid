@@ -38,7 +38,7 @@ func moverNube(n nube) nube {
 		n.X = float64(rand.Intn(screenWidth / .4))
 		n.Y = float64(rand.Intn(screenHeight / .4))
 		n.AlphaUp = true
-	} else if n.Alpha > .8 {
+	} else if n.Alpha > .9 {
 		n.AlphaUp = false
 	}
 
