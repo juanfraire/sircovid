@@ -17,6 +17,8 @@ type Game struct {
 
 // Game1 es el juego
 var Game1 Game
+var intro1 intro
+
 var (
 	//para saber en qeu parte del juego estamos
 	ModeGame        int
@@ -45,6 +47,20 @@ var (
 	texts           = []string{}
 
 	err error
+)
+
+const (
+	// game
+	screenWidth  = 768
+	screenHeight = 528
+
+	// tiles
+	tileSize = 16
+	tileXNum = 48
+
+	//para start y game Over
+	fontSize      = 32
+	smallFontSize = fontSize / 2
 )
 
 //// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
