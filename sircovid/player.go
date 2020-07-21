@@ -37,8 +37,8 @@ func initPlayer() {
 	player1.FrameOX = 0
 	player1.FrameOY = 96
 	player1.FrameNum = 1
-	player1.X = float64(25)
-	player1.Y = float64(375)
+	player1.X = float64(365)
+	player1.Y = float64(300)
 	player1.FrameWidth = 32
 	player1.FrameHeight = 48
 	player1.MovX = 0
@@ -55,8 +55,8 @@ func initPlayer() {
 	player2.FrameOX = 0
 	player2.FrameOY = 96
 	player2.FrameNum = 1
-	player2.X = float64(25)
-	player2.Y = float64(415)
+	player2.X = float64(365)
+	player2.Y = float64(350)
 	player2.FrameWidth = 32
 	player2.FrameHeight = 48
 	player1.MovX = 0
@@ -73,16 +73,16 @@ func initPlayer() {
 func pasarNivelPlayer() {
 	//player1
 	player1.FrameNum = 1
-	player1.X = float64(25)
-	player1.Y = float64(375)
+	player1.X = float64(365)
+	player1.Y = float64(300)
 	player1.MovX = 0
 	player1.MovY = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	//player2
 	player2.FrameNum = 1
-	player2.X = float64(25)
-	player2.Y = float64(415)
+	player2.X = float64(365)
+	player2.Y = float64(350)
 	player2.MovX = 0
 	player2.MovY = 0
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0

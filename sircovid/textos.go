@@ -79,13 +79,16 @@ func dibujarTextos(screen *ebiten.Image) {
 		jugadores := fmt.Sprintf("PAUSE")
 		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
 
-	case ElectNumPlayers == 0:
-		jugadores := fmt.Sprintf(" Elija la cantidad de jugadores \n\ncon las flechas y presione la barra espaciadora\n\nJUGADORES:%02d", Game1.numPlayers)
-		text.Draw(screen, jugadores, smallArcadeFont, 140, 250, color.White)
+	case ElectNumPlayers == 0 && Game1.numPlayers == 1:
+		jugadores := fmt.Sprintf(">1 PLAYER\n 2 PLAYERS")
+		text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
+	case ElectNumPlayers == 0 && Game1.numPlayers == 2:
+		jugadores := fmt.Sprintf(" 1 PLAYER\n>2 PLAYERS")
+		text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 
 	case ElectPlayer == 0 && Game1.numPlayers == 1:
-		jugadores := fmt.Sprintf("Elija el jugador \n\n con las flechas\n\ny presione la barra espaciadora")
-		text.Draw(screen, jugadores, smallArcadeFont, 250, 250, color.White)
+		jugadores := fmt.Sprintf("CHOICE PLAYER")
+		text.Draw(screen, jugadores, arcadeFont, 180, 250, color.White)
 
 	case ElectNumPlayers == 1:
 		for i, l := range texts {

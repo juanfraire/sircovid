@@ -51,10 +51,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		switch {
 		case ElectNumPlayers == 0:
-			if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+			if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 				Game1.numPlayers = 2
 			}
-			if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+			if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 				Game1.numPlayers = 1
 			}
 			if inpututil.IsKeyJustPressed(ebiten.KeySpace) && (Game1.numPlayers == 1 || Game1.numPlayers == 2) {
@@ -62,10 +62,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			}
 		case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
 			if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
-				if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
+				if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 					player1.humanos.img = humano1.img
 				}
-				if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
+				if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 					player1.humanos.img = humano2.img
 				}
 			}
