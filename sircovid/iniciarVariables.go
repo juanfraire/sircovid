@@ -22,14 +22,14 @@ func iniciarVariables() {
 
 }
 func pasarNivel() {
+
+	pasarNivelPlayer()
+
 	// initSonido()
 	count = 0
 	initEnemigos()
-
 	//reinciar enemigos
 	count1 = 0
-	initPlayer()
-
 	//nube
 	initNube()
 

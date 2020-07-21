@@ -150,10 +150,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
 			if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
 				if inpututil.IsKeyJustPressed(ebiten.KeyRight) {
-					player1.humanos = player2.humanos
+					player1.humanos.img = humano1.img
 				}
 				if inpututil.IsKeyJustPressed(ebiten.KeyLeft) {
-					player1.humanos = player1.humanos
+					player1.humanos.img = humano2.img
 				}
 			}
 			if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -186,9 +186,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 		if Game1.numPlayers == 2 {
 			player2 = vida(enemigo1, player2, barbijo)
-			player2 = vida(enemigo2, player1, barbijo)
-			player2 = vida(enemigo3, player1, barbijo)
-			player2 = vida(enemigo4, player1, barbijo)
+			player2 = vida(enemigo2, player2, barbijo)
+			player2 = vida(enemigo3, player2, barbijo)
+			player2 = vida(enemigo4, player2, barbijo)
 		}
 		//enemigos
 		enemigo1 = moverHumanos(enemigo1)
@@ -221,6 +221,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if Game1.numPlayers == 2 {
 			player2 = vida(enemigo1, player2, barbijo)
 			player2 = vida(enemigo2, player2, barbijo)
+			player2 = vida(enemigo3, player2, barbijo)
+			player2 = vida(enemigo4, player2, barbijo)
 		}
 		//enemigos
 		enemigo1 = moverHumanos(enemigo1)

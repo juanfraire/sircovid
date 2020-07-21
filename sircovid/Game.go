@@ -12,7 +12,6 @@ type Game struct {
 //// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 
 func siguienteNivel(p player) player {
-
 	if p.X >= 746 && p.Y > 450 {
 
 		pasarNivel()

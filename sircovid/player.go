@@ -15,18 +15,21 @@ type player struct {
 	v          int
 	señalador  int
 	a, b, c, d int
+	MovX       int
+	MovY       int
 }
 
 var player1, player2 player
+var humano1, humano2 humanos
 
 func initPlayer() {
 	//////////////   Imangen VIEJO  //////////////////////////////
-	player1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1.png`, ebiten.FilterDefault)
+	humano1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 	//imagen chica
-	player2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player2.png`, ebiten.FilterDefault)
+	humano2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,12 +41,15 @@ func initPlayer() {
 	player1.Y = float64(375)
 	player1.FrameWidth = 32
 	player1.FrameHeight = 48
+	player1.MovX = 0
+	player1.MovY = 0
 	//player
 	// player1.humanos = player1
 	player1.vidas = 3
 	player1.v = 0
 	player1.señalador = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
+	player1.humanos.img = humano1.img
 
 	//player2
 	player2.FrameOX = 0
@@ -53,15 +59,35 @@ func initPlayer() {
 	player2.Y = float64(415)
 	player2.FrameWidth = 32
 	player2.FrameHeight = 48
+	player1.MovX = 0
+	player1.MovY = 0
 
 	// player2.humanos = chica
 	player2.vidas = 3
 	player2.v = 0
 	player2.señalador = 1
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
+	player2.humanos.img = humano2.img
 
 }
+func pasarNivelPlayer() {
+	//player1
+	player1.FrameNum = 1
+	player1.X = float64(25)
+	player1.Y = float64(375)
+	player1.MovX = 0
+	player1.MovY = 0
+	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
+	//player2
+	player2.FrameNum = 1
+	player2.X = float64(25)
+	player2.Y = float64(415)
+	player2.MovX = 0
+	player2.MovY = 0
+	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
+
+}
 func moverPlayer(p player) player {
 	// leer tecla
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyD) && p.señalador == 1 {
@@ -128,8 +154,6 @@ func moverPlayer(p player) player {
 
 	// trasladar player1
 	if ModeGame == 1 && p.posicionInicial != 1 {
-		p.X = float64(25)
-		p.Y = float64(375)
 		p.posicionInicial = 1
 	}
 	var X1 = p.X

@@ -8,8 +8,6 @@ type humanos struct {
 	FrameNum        int
 	X               float64
 	Y               float64
-	MovX            int
-	MovY            int
 	posicionInicial int
 	FrameWidth      int
 	FrameHeight     int
