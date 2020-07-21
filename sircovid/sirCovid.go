@@ -12,7 +12,6 @@ import (
 	// "golang.ge/font"
 
 	"github.com/hajimehoshi/ebiten"
-	"github.com/hajimehoshi/ebiten/audio"
 	"github.com/hajimehoshi/ebiten/ebitenutil"
 	"github.com/hajimehoshi/ebiten/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/inpututil"
@@ -21,9 +20,6 @@ import (
 
 //intro
 var intro1 intro
-
-// Game1 es el juego
-var Game1 Game
 
 const (
 	// game
@@ -37,38 +33,6 @@ const (
 	//para start y game Over
 	fontSize      = 32
 	smallFontSize = fontSize / 2
-)
-
-//Mode Game es el en que parte del juego estamos
-var (
-	ModeGame        int
-	ModeTitle       int
-	ElectNumPlayers int
-	ElectPlayer     int
-	ModeGameOver    int
-	count1          int
-	ModePause       bool
-	pulse           bool
-	pulso           int
-)
-
-var (
-	// imágenes
-	imgTiles *ebiten.Image
-
-	// sonido
-	audioContext *audio.Context
-	deadSound    *audio.Player
-	deadSound2   *audio.Player
-	sonidoFondo  *audio.InfiniteLoop
-	fondo        *audio.Player
-
-	//para start y game over
-	arcadeFont      font.Face
-	smallArcadeFont font.Face
-	texts           = []string{}
-
-	err error
 )
 
 // init carga los datos
