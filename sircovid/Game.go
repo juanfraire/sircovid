@@ -20,7 +20,6 @@ var Game1 Game
 var intro1 intro
 
 var (
-	//para saber en qeu parte del juego estamos
 	ModeGame        int
 	ModeTitle       int
 	ElectNumPlayers int
