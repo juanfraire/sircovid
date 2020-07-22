@@ -196,7 +196,7 @@ func vida(h humanos, p player, b sumVidas) player {
 		barbijo.X = 1000
 	}
 
-	if p.v == 30 {
+	if p.v == 45 {
 		p.vidas--
 		p.v = 0
 		sonidoVidas()
