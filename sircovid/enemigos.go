@@ -160,7 +160,7 @@ func moverHumanos(E humanos) humanos {
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
-	if ModePause {
+	if ModePause || ModeWin {
 		E.FrameNum = 1
 		E.FrameOX = 0
 	}

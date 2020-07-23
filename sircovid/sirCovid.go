@@ -47,6 +47,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	switch {
 	//pausar el juego
 	case ModePause:
+	case ModeWin == true:
 
 		//toda la introduccion con eleccion de players, etc
 	case ModeTitle == 0:
