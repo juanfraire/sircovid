@@ -22,6 +22,8 @@ func iniciarVariables() {
 
 }
 func pasarNivel() {
+	ModeGame++
+	ModeTitle = 1
 
 	pasarNivelPlayer()
 
@@ -32,9 +34,4 @@ func pasarNivel() {
 	count1 = 0
 	//nube
 	initNube()
-
-	//paso de nivel
-	ModeTitle = 2
-	ModeGame = 1
-
 }

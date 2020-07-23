@@ -76,11 +76,11 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
 			ModeTitle = 1
 		}
-	case ModeTitle == 2:
+	case ModeTitle == 1:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-			ModeTitle = 3
+			ModeTitle = 2
 		}
-	case ModeGame == 0 && player1.vidas != 0 && player2.vidas != 0:
+	case player1.vidas != 0 && player2.vidas != 0 && ModeTitle == 2:
 
 		//// sonido ////
 		sonidoGame()
@@ -112,36 +112,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//siguiente nivel
 		Game1.siguienteNivel = siguienteNivel(player1)
 		Game1.siguienteNivel = siguienteNivel(player2)
-
-	case ModeGame == 1 && player1.vidas != 0 && player2.vidas != 0:
-
-		// sonido
-		sonidoGame()
-
-		// nube
-		nube1 = moverNube(nube1)
-
-		// player
-		player1 = moverPlayer(player1)
-		player2 = moverPlayer(player2)
-
-		// vida
-		player1 = vida(enemigo1, player1, barbijo)
-		player1 = vida(enemigo2, player1, barbijo)
-		player1 = vida(enemigo3, player1, barbijo)
-		player1 = vida(enemigo4, player1, barbijo)
-
-		if Game1.numPlayers == 2 {
-			player2 = vida(enemigo1, player2, barbijo)
-			player2 = vida(enemigo2, player2, barbijo)
-			player2 = vida(enemigo3, player2, barbijo)
-			player2 = vida(enemigo4, player2, barbijo)
-		}
-		//enemigos
-		enemigo1 = moverHumanos(enemigo1)
-		enemigo2 = moverHumanos(enemigo2)
-		enemigo3 = moverHumanos(enemigo3)
-		enemigo4 = moverHumanos(enemigo4)
 
 	case ModeGameOver == 0:
 		sonidoGameover()
