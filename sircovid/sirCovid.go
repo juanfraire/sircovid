@@ -168,6 +168,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	screen.DrawImage(imgTiles, op)
 
+	//dibujar barbijo
+	dibujarSumVidas(barbijo, screen)
+	//dibujar nextLevel
+	dibujarSumVidas(nextLevel, screen)
+
 	//dibujar palyers
 	dibujarPlayer(player1, screen)
 	if Game1.numPlayers == 2 {
@@ -191,9 +196,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar nube
 	dibujarNube(nube1, screen)
 
-	// dibujar barbijo
-	dibujarSumVidas(barbijo, screen)
-
 	// dibujar texto
 	dibujarTextos(screen)
 }
@@ -209,7 +211,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
-	ebiten.SetWindowTitle("Sircovid")
+	ebiten.SetWindowTitle("Sir-covid")
 	ebiten.SetWindowResizable(true)
 
 	if err := ebiten.RunGame(&Game{}); err != nil {
