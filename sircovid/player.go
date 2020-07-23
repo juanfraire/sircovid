@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -192,7 +191,6 @@ func moverPlayer(p player) player {
 	case p.Y < -36:
 		p.X = X1
 	}
-	fmt.Println(p.X, p.Y)
 	return p
 }
 
