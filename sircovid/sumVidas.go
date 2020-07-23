@@ -38,8 +38,8 @@ func initSumarVidas() {
 	nextLevel.FrameNum = 1
 	nextLevel.FrameWidth = 240
 	nextLevel.FrameHeight = 240
-	nextLevel.X = float64(680)
-	nextLevel.Y = float64(420)
+	nextLevel.X = float64(695)
+	nextLevel.Y = float64(450)
 	nextLevel.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\NextLevel.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
