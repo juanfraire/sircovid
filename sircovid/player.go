@@ -173,7 +173,15 @@ func moverPlayer(p player) player {
 		p.FrameOX = 32
 		p.FrameNum = 1
 	}
-
+	if p.X > 125 && p.X < 135 && p.Y < 97 && p.Y > 95 {
+		p.Y = -40
+	}
+	if p.Y < -36 && p.Y > -39 {
+		p.Y = 98
+	}
+	if p.Y < -36 {
+		p.X = X1
+	}
 	return p
 }
 
@@ -196,7 +204,7 @@ func vida(h humanos, p player, b sumVidas) player {
 		barbijo.X = 1000
 	}
 
-	if p.v == 45 {
+	if p.v == 30 {
 		p.vidas--
 		p.v = 0
 		sonidoVidas()
