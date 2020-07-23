@@ -46,36 +46,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModePause:
 
 	case ModeTitle == 0:
-		// intro update
-		intro1.updateIntro(screenWidth, screenHeight)
+		introduccion()
 
-		switch {
-		case ElectNumPlayers == 0:
-			if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
-				Game1.numPlayers = 2
-			}
-			if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
-				Game1.numPlayers = 1
-			}
-			if inpututil.IsKeyJustPressed(ebiten.KeySpace) && (Game1.numPlayers == 1 || Game1.numPlayers == 2) {
-				ElectNumPlayers = 1
-			}
-		case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
-			if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
-				if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
-					player1.humanos.img = humano1.img
-				}
-				if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
-					player1.humanos.img = humano2.img
-				}
-			}
-			if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-				ElectPlayer = 1
-			}
-		}
-		if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
-			ModeTitle = 1
-		}
 	case ModeTitle == 1:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 2

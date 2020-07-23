@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/audio"
+	"github.com/hajimehoshi/ebiten/inpututil"
 	"golang.org/x/image/font"
 )
 
@@ -62,7 +63,38 @@ const (
 	smallFontSize = fontSize / 2
 )
 
-//// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
+func introduccion() {
+	// intro update
+	intro1.updateIntro(screenWidth, screenHeight)
+
+	switch {
+	case ElectNumPlayers == 0:
+		if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+			Game1.numPlayers = 2
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+			Game1.numPlayers = 1
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) && (Game1.numPlayers == 1 || Game1.numPlayers == 2) {
+			ElectNumPlayers = 1
+		}
+	case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
+		if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
+			if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+				player1.humanos.img = humano1.img
+			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+				player1.humanos.img = humano2.img
+			}
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ElectPlayer = 1
+		}
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
+		ModeTitle = 1
+	}
+}
 
 func siguienteNivel(p player) player {
 	if p.X >= 746 && p.Y > 450 {
