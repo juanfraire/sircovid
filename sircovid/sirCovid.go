@@ -140,6 +140,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibujar barbijo
 	dibujarSumVidas(barbijo, screen)
+
 	//dibujar nextLevel
 	dibujarSumVidas(nextLevel, screen)
 
@@ -148,20 +149,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if Game1.numPlayers == 2 {
 		dibujarPlayer(player2, screen)
 	}
-
 	//dibuja al enemigo
-	if ModeGame == 0 {
-		dibujarEnemigos(enemigo1, screen)
-		dibujarEnemigos(enemigo2, screen)
-		dibujarEnemigos(enemigo3, screen)
-		dibujarEnemigos(enemigo4, screen)
-	}
-	if ModeGame == 1 {
-		dibujarEnemigos(enemigo1, screen)
-		dibujarEnemigos(enemigo2, screen)
-		dibujarEnemigos(enemigo3, screen)
-		dibujarEnemigos(enemigo4, screen)
-	}
+	dibujarEnemigos(enemigo1, screen)
+	dibujarEnemigos(enemigo2, screen)
+	dibujarEnemigos(enemigo3, screen)
+	dibujarEnemigos(enemigo4, screen)
 
 	// dibujar nube
 	dibujarNube(nube1, screen)
