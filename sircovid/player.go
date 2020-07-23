@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -173,15 +174,25 @@ func moverPlayer(p player) player {
 		p.FrameOX = 32
 		p.FrameNum = 1
 	}
-	if p.X > 125 && p.X < 135 && p.Y < 97 && p.Y > 95 {
+	switch {
+	case (p.X > 125 && p.X < 135 && p.Y < 97 && p.Y > 95) || (p.X > 10 && p.X < 25 && p.Y < 272 && p.Y > 270) || (p.X > 635 && p.X < 645 && p.Y < 47 && p.Y > 44) || (p.X > 415 && p.X < 425 && p.Y < 52 && p.Y > 50) || (p.X > 193 && p.X < 258 && p.Y < 110 && p.Y > 78) || (p.X > 749 && p.X < 751 && p.Y < 222 && p.Y > 220):
 		p.Y = -40
-	}
-	if p.Y < -36 && p.Y > -39 {
+	case p.Y < -36 && p.Y > -39 && p.X > 125 && p.X < 135:
 		p.Y = 98
-	}
-	if p.Y < -36 {
+	case p.Y < -36 && p.Y > -39 && p.X > 10 && p.X < 25:
+		p.Y = 272
+	case p.Y < -36 && p.Y > -39 && p.X > 635 && p.X < 645:
+		p.Y = 46
+	case p.Y < -36 && p.Y > -39 && p.X > 415 && p.X < 425:
+		p.Y = 52
+	case p.Y < -36 && p.Y > -39 && p.X > 193 && p.X < 264:
+		p.Y = 110
+	case p.Y < -36 && p.Y > -39 && p.X > 749 && p.X < 751:
+		p.Y = 223
+	case p.Y < -36:
 		p.X = X1
 	}
+	fmt.Println(p.X, p.Y)
 	return p
 }
 
