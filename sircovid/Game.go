@@ -63,6 +63,7 @@ const (
 	smallFontSize = fontSize / 2
 )
 
+//introduccion es la eleccion de los players, etc
 func introduccion() {
 	// intro update
 	intro1.updateIntro(screenWidth, screenHeight)

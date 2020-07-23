@@ -37,14 +37,18 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	// game counter
 	g.count++
 	count1++
+	if count1 == 60 {
+		count1 = 0
+	}
 	//funcion pausa
 	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
 		ModePause = !ModePause
 	}
 	switch {
-
+	//pausar el juego
 	case ModePause:
 
+		//toda la introduccion con eleccion de players, etc
 	case ModeTitle == 0:
 		introduccion()
 

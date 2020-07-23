@@ -64,8 +64,7 @@ func dibujarTextos(screen *ebiten.Image) {
 	}
 
 	switch {
-	case ModePause:
-
+	case ModePause && count1 < 40:
 		jugadores := fmt.Sprintf("PAUSE")
 		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
 
