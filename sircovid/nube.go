@@ -21,7 +21,7 @@ var nube1 nube
 
 func initNube() {
 	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < nivel*2; i++ {
+	for i := 0; i < nivel; i++ {
 		nube1.X[i] = float64(rand.Intn(screenWidth / .4))
 		nube1.Y[i] = float64(rand.Intn(screenHeight / .4))
 		nube1.Alpha[i] = float64(rand.Intn(11)) * .1
@@ -36,7 +36,7 @@ func initNube() {
 func moverNube(n nube) nube {
 	rand.Seed(time.Now().UnixNano())
 	// creacion de nuevas nubes
-	for i := 0; i < nivel*2; i++ {
+	for i := 0; i < nivel; i++ {
 		if n.Alpha[i] >= 0 {
 			n.X[i]--
 		}
@@ -63,7 +63,7 @@ func moverNube(n nube) nube {
 var scale = float64(.4)
 
 func dibujarNube(n nube, screen *ebiten.Image) {
-	for i := 0; i < nivel*2; i++ {
+	for i := 0; i < nivel; i++ {
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Translate(n.X[i], n.Y[i])
 		op.ColorM.Scale(3, 2, 0, n.Alpha[i])

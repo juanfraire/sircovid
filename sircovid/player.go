@@ -72,8 +72,9 @@ func initPlayer() {
 
 }
 func pasarNivelPlayer() {
-	if nivel < 12 {
-		nivel++
+	nivel *= 2
+	if nivel > 13 {
+		nivel = 13
 	}
 	//player1
 	player1.FrameNum[0] = 1
@@ -201,7 +202,7 @@ func moverPlayer(p player) player {
 
 func vida(h humanos, p player, b sumVidas) player {
 	//pierde vidas con la nube
-	for i := 0; i < 20; i++ {
+	for i := 0; i < nivel; i++ {
 
 		nubX := nube1.X[i] * scale
 		nubY := nube1.Y[i] * scale
@@ -212,7 +213,7 @@ func vida(h humanos, p player, b sumVidas) player {
 		}
 	}
 	//pierde vidas con humanos
-	for i := 0; i < nivel*2; i++ {
+	for i := 0; i < nivel; i++ {
 
 		if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
 			p.v++
