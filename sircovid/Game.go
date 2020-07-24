@@ -99,12 +99,13 @@ func introduccion() {
 }
 
 func siguienteNivel(p player) player {
-	if p.X >= 746 && p.Y > 450 {
+	if p.X[0] >= 746 && p.Y[0] > 450 {
+
 		pasarNivel()
 		fondo.Pause()
 		fondo.Rewind()
 	}
-	if p.X > 350 && p.X < 370 && p.Y < -30 {
+	if p.X[0] > 350 && p.X[0] < 370 && p.Y[0] < -30 {
 		ModeWin = true
 		fondo.Pause()
 	}

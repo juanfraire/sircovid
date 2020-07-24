@@ -25,23 +25,23 @@ var nivel = int(1)
 
 func initPlayer() {
 	//////////////   Imangen VIEJO  //////////////////////////////
-	humano1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1.png`, ebiten.FilterDefault)
+	humano1.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 	//imagen chica
-	humano2.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\player2.png`, ebiten.FilterDefault)
+	humano2.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player2.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 	// player1
-	player1.FrameOX = 0
-	player1.FrameOY = 96
-	player1.FrameNum = 1
-	player1.X = float64(365)
-	player1.Y = float64(300)
-	player1.FrameWidth = 32
-	player1.FrameHeight = 48
+	player1.FrameOX[0] = 0
+	player1.FrameOY[0] = 96
+	player1.FrameNum[0] = 1
+	player1.X[0] = float64(365)
+	player1.Y[0] = float64(300)
+	player1.FrameWidth[0] = 32
+	player1.FrameHeight[0] = 48
 	player1.MovX = 0
 	player1.MovY = 0
 	//player
@@ -53,13 +53,13 @@ func initPlayer() {
 	player1.humanos.img = humano1.img
 
 	//player2
-	player2.FrameOX = 0
-	player2.FrameOY = 96
-	player2.FrameNum = 1
-	player2.X = float64(365)
-	player2.Y = float64(350)
-	player2.FrameWidth = 32
-	player2.FrameHeight = 48
+	player2.FrameOX[0] = 0
+	player2.FrameOY[0] = 96
+	player2.FrameNum[0] = 1
+	player2.X[0] = float64(365)
+	player2.Y[0] = float64(350)
+	player2.FrameWidth[0] = 32
+	player2.FrameHeight[0] = 48
 	player1.MovX = 0
 	player1.MovY = 0
 
@@ -72,21 +72,21 @@ func initPlayer() {
 
 }
 func pasarNivelPlayer() {
-	if nivel < 20 {
+	if nivel < 12 {
 		nivel++
 	}
 	//player1
-	player1.FrameNum = 1
-	player1.X = float64(365)
-	player1.Y = float64(300)
+	player1.FrameNum[0] = 1
+	player1.X[0] = float64(365)
+	player1.Y[0] = float64(300)
 	player1.MovX = 0
 	player1.MovY = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	//player2
-	player2.FrameNum = 1
-	player2.X = float64(365)
-	player2.Y = float64(350)
+	player2.FrameNum[0] = 1
+	player2.X[0] = float64(365)
+	player2.Y[0] = float64(350)
 	player2.MovX = 0
 	player2.MovY = 0
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
@@ -108,93 +108,94 @@ func moverPlayer(p player) player {
 	}
 
 	if p.a == 1 && p.MovY != 1 && p.MovY != 2 {
-		p.FrameOX = 0
-		p.FrameOY = 96
-		p.FrameNum = 3
+		p.FrameOX[0] = 0
+		p.FrameOY[0] = 96
+		p.FrameNum[0] = 3
 		p.MovX = 1
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyRight) || inpututil.IsKeyJustReleased(ebiten.KeyD) {
-		p.FrameOX = 32
-		p.FrameNum = 1
+		p.FrameOX[0] = 32
+		p.FrameNum[0] = 1
 		p.MovX = 0
 		p.a = 0
 	}
 	if p.b == 1 && p.MovY != 1 && p.MovY != 2 {
-		p.FrameOX = 0
-		p.FrameOY = 48
-		p.FrameNum = 3
+		p.FrameOX[0] = 0
+		p.FrameOY[0] = 48
+		p.FrameNum[0] = 3
 		p.MovX = 2
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) || inpututil.IsKeyJustReleased(ebiten.KeyA) {
-		p.FrameOX = 32
-		p.FrameNum = 1
+		p.FrameOX[0] = 32
+		p.FrameNum[0] = 1
 		p.MovX = 0
 		p.b = 0
 	}
 	if p.c == 1 && p.MovX != 1 && p.MovX != 2 {
-		p.FrameOX = 0
-		p.FrameOY = 144
-		p.FrameNum = 3
+		p.FrameOX[0] = 0
+		p.FrameOY[0] = 144
+		p.FrameNum[0] = 3
 		p.MovY = 1
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyUp) || inpututil.IsKeyJustReleased(ebiten.KeyW) {
-		p.FrameOX = 32
-		p.FrameNum = 1
+		p.FrameOX[0] = 32
+		p.FrameNum[0] = 1
 		p.MovY = 0
 		p.c = 0
 	}
 	if p.d == 1 && p.MovX != 1 && p.MovX != 2 {
-		p.FrameOX = 0
-		p.FrameOY = 0
-		p.FrameNum = 3
+		p.FrameOX[0] = 0
+		p.FrameOY[0] = 0
+		p.FrameNum[0] = 3
 		p.MovY = 2
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyDown) || inpututil.IsKeyJustReleased(ebiten.KeyS) {
-		p.FrameOX = 32
-		p.FrameNum = 1
+		p.FrameOX[0] = 32
+		p.FrameNum[0] = 1
 		p.MovY = 0
 		p.d = 0
 	}
 
 	// trasladar player1
-	if ModeGame == 1 && p.posicionInicial != 1 {
-		p.posicionInicial = 1
+	if ModeGame == 1 && p.posicionInicial[0] != 1 {
+		p.posicionInicial[0] = 1
 	}
-	var X1 = p.X
-	var Y1 = p.Y
+	var X1 = p.X[0]
+	var Y1 = p.Y[0]
 	switch {
 	case p.MovX == 1:
-		p.X++
+		p.X[0]++
 	case p.MovX == 2:
-		p.X--
+		p.X[0]--
 	case p.MovY == 1:
-		p.Y--
+		p.Y[0]--
 	case p.MovY == 2:
-		p.Y++
+		p.Y[0]++
 	}
-	p.X, p.Y, ok = obstaculos(p.X, p.Y, X1, Y1)
+	p.X[0], p.Y[0], ok = obstaculos(p.X[0], p.Y[0], X1, Y1)
 	if ok {
-		p.FrameOX = 32
-		p.FrameNum = 1
+		p.FrameOX[0] = 32
+		p.FrameNum[0] = 1
 	}
 	switch {
-	case (p.X > 125 && p.X < 135 && p.Y < 97 && p.Y > 95) || (p.X > 10 && p.X < 25 && p.Y < 272 && p.Y > 270) || (p.X > 635 && p.X < 645 && p.Y < 47 && p.Y > 44) || (p.X > 415 && p.X < 425 && p.Y < 52 && p.Y > 50) || (p.X > 193 && p.X < 258 && p.Y < 110 && p.Y > 78) || (p.X > 749 && p.X < 751 && p.Y < 222 && p.Y > 220):
-		p.Y = -40
-	case p.Y < -36 && p.Y > -39 && p.X > 125 && p.X < 135:
-		p.Y = 98
-	case p.Y < -36 && p.Y > -39 && p.X > 10 && p.X < 25:
-		p.Y = 272
-	case p.Y < -36 && p.Y > -39 && p.X > 635 && p.X < 645:
-		p.Y = 46
-	case p.Y < -36 && p.Y > -39 && p.X > 415 && p.X < 425:
-		p.Y = 52
-	case p.Y < -36 && p.Y > -39 && p.X > 193 && p.X < 264:
-		p.Y = 110
-	case p.Y < -36 && p.Y > -39 && p.X > 749 && p.X < 751:
-		p.Y = 223
-	case p.Y < -36:
-		p.X = X1
+	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 97 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 272 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 47 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 52 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 749 && p.X[0] < 751 && p.Y[0] < 222 && p.Y[0] > 220):
+		p.Y[0] = -40
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 125 && p.X[0] < 135:
+		p.Y[0] = 98
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 10 && p.X[0] < 25:
+		p.Y[0] = 272
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 635 && p.X[0] < 645:
+		p.Y[0] = 46
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 415 && p.X[0] < 425:
+		p.Y[0] = 52
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 264:
+		p.Y[0] = 110
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 749 && p.X[0] < 751:
+		p.Y[0] = 223
+	case p.Y[0] < -36:
+		p.X[0] = X1
 	}
+	// fmt.Println(p.X, p.Y)
 	return p
 }
 
@@ -206,18 +207,21 @@ func vida(h humanos, p player, b sumVidas) player {
 		nubY := nube1.Y[i] * scale
 
 		//pierde vidas con nube
-		if p.X > nubX && p.X < nubX+120 && p.Y > nubY && p.Y < nubY+120 && nube1.Alpha[i] > .3 {
+		if p.X[0] > nubX && p.X[0] < nubX+120 && p.Y[0] > nubY && p.Y[0] < nubY+120 && nube1.Alpha[i] > .3 {
 			p.v += .1
 		}
 	}
 	//pierde vidas con humanos
-	if p.X+20 > h.X && p.X < h.X+20 && p.Y+32 > h.Y && p.Y < h.Y+32 {
-		p.v++
-	}
-	//gana vida con barbijo
-	if p.X > b.X && p.X < b.X+20 && p.Y+32 > b.Y && p.Y < b.Y+32 {
-		p.vidas++
-		barbijo.X = 1000
+	for i := 0; i < nivel*2; i++ {
+
+		if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
+			p.v++
+		}
+		//gana vida con barbijo
+		if p.X[0] > b.X && p.X[0] < b.X+20 && p.Y[0]+32 > b.Y && p.Y[0] < b.Y+32 {
+			p.vidas++
+			barbijo.X = 1000
+		}
 	}
 
 	if p.v >= 30 {
@@ -225,19 +229,19 @@ func vida(h humanos, p player, b sumVidas) player {
 		sonidoVidas()
 		p.v = 0
 	}
-	fmt.Println(p.v)
+	// fmt.Println(p.v)
 	return p
 }
 
 func dibujarPlayer(P player, screen *ebiten.Image) {
 	if ModePause {
-		P.FrameNum = 1
-		P.FrameOX = 0
+		P.FrameNum[0] = 1
+		P.FrameOX[0] = 0
 	}
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(.65, .65)
-	op.GeoM.Translate(P.X, P.Y)
-	i := (count1 / 7) % P.FrameNum
-	sx, sy := P.FrameOX+i*P.FrameWidth, P.FrameOY
-	screen.DrawImage(P.img.SubImage(image.Rect(sx, sy, sx+P.FrameWidth, sy+P.FrameHeight)).(*ebiten.Image), op)
+	op.GeoM.Translate(P.X[0], P.Y[0])
+	i := (count1 / 7) % P.FrameNum[0]
+	sx, sy := P.FrameOX[0]+i*P.FrameWidth[0], P.FrameOY[0]
+	screen.DrawImage(P.img[0].SubImage(image.Rect(sx, sy, sx+P.FrameWidth[0], sy+P.FrameHeight[0])).(*ebiten.Image), op)
 }
