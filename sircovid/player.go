@@ -13,7 +13,7 @@ import (
 type player struct {
 	humanos
 	vidas      int
-	v          int
+	v          float32
 	señalador  int
 	a, b, c, d int
 	MovX       int
@@ -22,6 +22,7 @@ type player struct {
 
 var player1, player2 player
 var humano1, humano2 humanos
+var nivel = int(1)
 
 func initPlayer() {
 	//////////////   Imangen VIEJO  //////////////////////////////
@@ -72,6 +73,9 @@ func initPlayer() {
 
 }
 func pasarNivelPlayer() {
+	if nivel < 20 {
+		nivel++
+	}
 	//player1
 	player1.FrameNum = 1
 	player1.X = float64(365)
@@ -198,12 +202,15 @@ func moverPlayer(p player) player {
 
 func vida(h humanos, p player, b sumVidas) player {
 	//pierde vidas con la nube
-	nubX := nube1.X * scale
-	nubY := nube1.Y * scale
+	for i := 0; i < 20; i++ {
 
-	//pierde vidas con nube
-	if p.X > nubX && p.X < nubX+120 && p.Y > nubY && p.Y < nubY+120 && nube1.Alpha > .3 {
-		p.v++
+		nubX := nube1.X[i] * scale
+		nubY := nube1.Y[i] * scale
+
+		//pierde vidas con nube
+		if p.X > nubX && p.X < nubX+120 && p.Y > nubY && p.Y < nubY+120 && nube1.Alpha[i] > .3 {
+			p.v += .1
+		}
 	}
 	//pierde vidas con humanos
 	if p.X+20 > h.X && p.X < h.X+20 && p.Y+32 > h.Y && p.Y < h.Y+32 {
@@ -215,12 +222,12 @@ func vida(h humanos, p player, b sumVidas) player {
 		barbijo.X = 1000
 	}
 
-	if p.v == 30 {
+	if p.v >= 30 {
 		p.vidas--
-		p.v = 0
 		sonidoVidas()
+		p.v = 0
 	}
-
+	fmt.Println(p.v)
 	return p
 }
 
