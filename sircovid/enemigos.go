@@ -40,7 +40,7 @@ func randXY() (x float64, y float64) {
 func initEnemigos() {
 	rand.Seed(time.Now().UnixNano())
 
-	for i := 0; i < nivel*2; i++ {
+	for i := 0; i < nivel; i++ {
 		en = `sircovid\data\enemigo` + strconv.Itoa(i+1) + `.png`
 		enemigo.FrameOX[i] = 48
 		enemigo.FrameOY[i] = 72 * rand.Intn(4)
@@ -63,7 +63,7 @@ func moverHumanos(E humanos) humanos {
 	if ModeGame >= 0 {
 		count++
 	}
-	for i := 0; i < nivel*2; i++ {
+	for i := 0; i < nivel; i++ {
 
 		E.FrameNum[i] = 3
 		E.FrameOX[i] = 0
@@ -114,7 +114,7 @@ func moverHumanos(E humanos) humanos {
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
-	for i := 0; i < nivel*2; i++ {
+	for i := 0; i < nivel; i++ {
 		if ModePause || ModeWin {
 			E.FrameNum[i] = 1
 			E.FrameOX[i] = 0
