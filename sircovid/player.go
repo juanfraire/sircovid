@@ -225,7 +225,6 @@ func vida(h humanos, p player, b sumVidas) player {
 		sonidoVidas()
 		p.v = 0
 	}
-	fmt.Println(p.v)
 	return p
 }
 
