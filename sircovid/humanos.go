@@ -3,15 +3,15 @@ package main
 import "github.com/hajimehoshi/ebiten"
 
 type humanos struct {
-	FrameOX         int
-	FrameOY         int
-	FrameNum        int
-	X               float64
-	Y               float64
-	posicionInicial int
-	FrameWidth      int
-	FrameHeight     int
-	img             *ebiten.Image
-	num             int
-	cambio          int
+	FrameOX         [20]int
+	FrameOY         [20]int
+	FrameNum        [20]int
+	X               [20]float64
+	Y               [20]float64
+	posicionInicial [20]int
+	FrameWidth      [20]int
+	FrameHeight     [20]int
+	img             [20]*ebiten.Image
+	num             [20]int
+	cambio          [20]int
 }
