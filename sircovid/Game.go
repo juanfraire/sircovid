@@ -98,7 +98,7 @@ func introduccion() {
 }
 
 func siguienteNivel(p player) player {
-	if p.X >= 746 && p.Y > 450 {
+	if p.X[0] >= 746 && p.Y[0] > 450 {
 
 		pasarNivel()
 		fondo.Pause()
