@@ -135,6 +135,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar nube
 	dibujarNube(nube1, screen)
 
+	//dibujar carteles
+	dibujarSumVidas(cartSupermarket, screen)
+	dibujarSumVidas(cartFarmacy, screen)
+	dibujarSumVidas(cartStore, screen)
+
 	// dibujar texto
 	dibujarTextos(screen)
 }
