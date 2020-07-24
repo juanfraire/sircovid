@@ -47,6 +47,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	switch {
 	//pausar el juego
 	case ModePause:
+	case ModeWin == true:
 
 		//toda la introduccion con eleccion de players, etc
 	case ModeTitle == 0:
@@ -122,6 +123,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar nube
 	dibujarNube(nube1, screen)
+
+	//dibujar carteles
+	dibujarSumVidas(cartSupermarket, screen)
+	dibujarSumVidas(cartFarmacy, screen)
+	dibujarSumVidas(cartStore, screen)
 
 	// dibujar texto
 	dibujarTextos(screen)

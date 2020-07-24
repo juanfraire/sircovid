@@ -59,10 +59,12 @@ func dibujarTextos(screen *ebiten.Image) {
 		nivel := fmt.Sprintf("    LEVEL %d\n\nPRESS SPACE KEY", ModeGame)
 		text.Draw(screen, nivel, arcadeFont, 150, 250, color.White)
 	case player2.vidas == 0 || player1.vidas == 0:
-		jugadores := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
-		text.Draw(screen, jugadores, arcadeFont, 200, 200, color.White)
+		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
+		text.Draw(screen, lost, arcadeFont, 200, 200, color.White)
+	case ModeWin == true:
+		win := fmt.Sprintf("YOU ARBIRARILY\n\n      WIN")
+		text.Draw(screen, win, arcadeFont, 150, 200, color.White)
 	}
-
 	switch {
 	case ModePause && count1 < 40:
 		jugadores := fmt.Sprintf("PAUSE")

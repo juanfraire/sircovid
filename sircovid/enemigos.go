@@ -115,7 +115,7 @@ func moverHumanos(E humanos) humanos {
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	for i := 0; i < nivel*2; i++ {
-		if ModePause {
+		if ModePause || ModeWin {
 			E.FrameNum[i] = 1
 			E.FrameOX[i] = 0
 		}

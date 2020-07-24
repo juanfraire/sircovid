@@ -22,6 +22,7 @@ var intro1 intro
 
 var (
 	ModeGame        int
+	ModeWin         bool
 	ModeTitle       int
 	ElectNumPlayers int
 	ElectPlayer     int
@@ -103,6 +104,10 @@ func siguienteNivel(p player) player {
 		pasarNivel()
 		fondo.Pause()
 		fondo.Rewind()
+	}
+	if p.X[0] > 350 && p.X[0] < 370 && p.Y[0] < -30 {
+		ModeWin = true
+		fondo.Pause()
 	}
 	return p
 }
