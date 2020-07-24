@@ -15,6 +15,7 @@ func init() {
 }
 
 var (
+	enemigo  humanos
 	enemigo1 humanos
 	enemigo2 humanos
 	enemigo3 humanos
@@ -25,6 +26,8 @@ var (
 	ok    bool
 	x     float64
 	y     float64
+	m     []int
+	arr   [][]int
 )
 
 func randXY() (x float64, y float64) {
@@ -42,6 +45,7 @@ func randXY() (x float64, y float64) {
 func initEnemigos() {
 
 	rand.Seed(time.Now().UnixNano())
+
 	//enemigo1
 	enemigo1.FrameOX = 48
 	enemigo1.FrameOY = 72 * rand.Intn(4)
@@ -52,10 +56,14 @@ func initEnemigos() {
 	enemigo1.num = rand.Intn(5)
 	enemigo1.cambio = rand.Intn(50) + 100
 
-	enemigo1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\HERO-Jessica-Poses.png`, ebiten.FilterDefault)
+	en := `sircovid\data\HERO-Jessica-Poses.png`
+
+	enemigo1.img, _, err = ebitenutil.NewImageFromFile(en, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// fmt.Println(enemigo1)
 
 	rand.Seed(time.Now().UnixNano())
 	//enemigo2
@@ -107,6 +115,14 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
+
+	// initEnemigos()
+
+	// arr = append(arr, [1]float64)
+	// for i := 0; i < 10; i++ {
+	// arr = enemigos()
+
+	// fmt.Println(arr)
 
 	if ModeGame >= 0 {
 		count++
@@ -171,3 +187,12 @@ func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	hx, hy := E.FrameOX+j*E.FrameWidth, E.FrameOY
 	screen.DrawImage(E.img.SubImage(image.Rect(hx, hy, hx+E.FrameWidth, hy+E.FrameHeight)).(*ebiten.Image), op)
 }
+
+// func enemigos() [][]int {
+// 	var m []int
+// 	x, y := randXY()
+// 	m = append(m, 48, 72*rand.Intn(4), 1, int(x), int(y), 48, 72, rand.Intn(5), rand.Intn(50)+100)
+// 	arr = append(arr, m)
+
+// 	return arr
+// }
