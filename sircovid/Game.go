@@ -88,6 +88,12 @@ func introduccion() {
 			if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 				player1.humanos.img = humano2.img
 			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyW) {
+				player2.humanos.img = humano1.img
+			}
+			if inpututil.IsKeyJustPressed(ebiten.KeyS) {
+				player2.humanos.img = humano2.img
+			}
 		}
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ElectPlayer = 1
