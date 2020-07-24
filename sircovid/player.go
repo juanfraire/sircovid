@@ -229,10 +229,7 @@ func vida(h humanos, p player, b sumVidas) player {
 		sonidoVidas()
 		p.v = 0
 	}
-<<<<<<< HEAD
-=======
 	// fmt.Println(p.v)
->>>>>>> 519eb857524d0d063e13fd5aeb0f1b8800b0b387
 	return p
 }
 
