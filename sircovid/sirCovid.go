@@ -15,7 +15,7 @@ func init() {
 	//inicializa a players
 	initPlayer()
 	//inicia sumarVidas
-	initSumarVidas()
+	initObjetos()
 	//inicia nube
 	initNube()
 	//inicia enemigos
@@ -88,7 +88,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			iniciarVariables()
 			initPlayer()
 			initNube()
-			initSumarVidas()
+			initObjetos()
 			initEnemigos()
 		}
 
@@ -108,10 +108,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(imgTiles, op)
 
 	//dibujar barbijo
-	dibujarSumVidas(barbijo, screen)
+	dibujarObjetos(barbijo, screen)
 
 	//dibujar nextLevel
-	dibujarSumVidas(nextLevel, screen)
+	dibujarObjetos(nextLevel, screen)
 
 	//dibujar palyers
 	dibujarPlayer(player1, screen)
@@ -125,11 +125,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarNube(nube1, screen)
 
 	//dibujar carteles
-	dibujarSumVidas(cartSupermarket, screen)
-	dibujarSumVidas(cartFarmacy, screen)
-	dibujarSumVidas(cartStore, screen)
+	dibujarObjetos(cartSupermarket, screen)
+	dibujarObjetos(cartFarmacy, screen)
+	dibujarObjetos(cartStore, screen)
 
 	// dibujar texto
+	dibujarTextos(screen)
 	dibujarTextos(screen)
 }
 

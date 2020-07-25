@@ -40,7 +40,7 @@ func initTextos() {
 }
 
 func dibujarTextos(screen *ebiten.Image) {
-	// dibujar texto
+	// dibujar vidas
 	lifesP1 := fmt.Sprintf("Vidas:%02d", player1.vidas)
 	text.Draw(screen, lifesP1, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
 
@@ -48,7 +48,15 @@ func dibujarTextos(screen *ebiten.Image) {
 		lifesP2 := fmt.Sprintf("Vidas:%02d", player2.vidas)
 		text.Draw(screen, lifesP2, smallArcadeFont, 600, 40, color.RGBA{35, 27, 190, 0xff})
 	}
-
+	//dibujar inmunidad
+	if player1.Inmune {
+		Inm := fmt.Sprintf("Inmune por:%02d", player1.CountInmune/60)
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 70, color.RGBA{35, 27, 190, 0xff})
+	}
+	if player2.Inmune {
+		Inm := fmt.Sprintf("Inmune por:%02d", player2.CountInmune/60)
+		text.Draw(screen, Inm, smallArcadeFont, 560, 70, color.RGBA{35, 27, 190, 0xff})
+	}
 	switch {
 	case ModeTitle == 0:
 

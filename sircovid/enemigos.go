@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 	"math/rand"
@@ -54,7 +53,6 @@ func initEnemigos() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(en)
 	}
 }
 
