@@ -50,7 +50,7 @@ func dibujarTextos(screen *ebiten.Image) {
 	}
 	//dibujar inmunidad
 	if player1.Inmune {
-		Inm := fmt.Sprintf("Inmune por:%02d", player1.CountInmune/60)
+		Inm := fmt.Sprintf("Inmune for:%02d", player1.CountInmune/60)
 		text.Draw(screen, Inm, smallArcadeFont, fontSize, 70, color.RGBA{35, 27, 190, 0xff})
 	}
 	if player2.Inmune {
