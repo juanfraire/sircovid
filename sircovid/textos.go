@@ -41,11 +41,11 @@ func initTextos() {
 
 func dibujarTextos(screen *ebiten.Image) {
 	// dibujar vidas
-	lifesP1 := fmt.Sprintf("Vidas:%02d", player1.vidas)
+	lifesP1 := fmt.Sprintf("Life:%02d", player1.vidas)
 	text.Draw(screen, lifesP1, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
 
 	if Game1.numPlayers == 2 {
-		lifesP2 := fmt.Sprintf("Vidas:%02d", player2.vidas)
+		lifesP2 := fmt.Sprintf("Life:%02d", player2.vidas)
 		text.Draw(screen, lifesP2, smallArcadeFont, 600, 40, color.RGBA{35, 27, 190, 0xff})
 	}
 	//dibujar inmunidad
@@ -70,7 +70,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
 		text.Draw(screen, lost, arcadeFont, 200, 200, color.White)
 	case ModeWin == true:
-		win := fmt.Sprintf("YOU ARBIRARILY\n\n      WIN")
+		win := fmt.Sprintf("YOU ARBITRARILY\n\n      WIN")
 		text.Draw(screen, win, arcadeFont, 150, 200, color.White)
 	}
 	switch {
@@ -86,7 +86,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 
 	case ElectPlayer == 0 && Game1.numPlayers == 1:
-		jugadores := fmt.Sprintf("CHOICE PLAYER")
+		jugadores := fmt.Sprintf("CHOOSE PLAYER")
 		text.Draw(screen, jugadores, arcadeFont, 180, 250, color.White)
 
 	case ElectNumPlayers == 1:
