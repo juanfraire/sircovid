@@ -221,7 +221,6 @@ func vida(h humanos, p player, b Objetos) player {
 		}
 	}
 	//infmune con barbijo
-
 	if p.X[0] > b.X && p.X[0] < b.X+20 && p.Y[0]+32 > b.Y && p.Y[0] < b.Y+32 {
 		barbijo.X = 1000
 		p.Inmune = true

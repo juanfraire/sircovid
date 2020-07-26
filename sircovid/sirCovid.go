@@ -128,9 +128,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarObjetos(cartSupermarket, screen)
 	dibujarObjetos(cartFarmacy, screen)
 	dibujarObjetos(cartStore, screen)
+	dibujarObjetos(cartBanck, screen)
 
 	// dibujar texto
-	dibujarTextos(screen)
 	dibujarTextos(screen)
 }
 
