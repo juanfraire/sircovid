@@ -19,6 +19,7 @@ type player struct {
 	MovY        int
 	Inmune      bool
 	CountInmune int
+	Coins       int
 }
 
 var player1, player2 player
@@ -238,11 +239,15 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.vidas++
 		pl.X = 1000
 	}
-
 	if p.v >= 30 {
 		p.vidas--
 		sonidoVidas()
 		p.v = 0
+	}
+	//gana monedas
+	if p.X[0]+32 > monedas.X && p.X[0] < monedas.X+20 && p.Y[0]+48 > monedas.Y && p.Y[0] < monedas.Y+32 {
+		monedas.X = 1000
+		p.Coins += 5
 	}
 	return p, b, pl
 }
