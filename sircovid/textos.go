@@ -7,20 +7,12 @@ import (
 
 	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten"
-	"github.com/hajimehoshi/ebiten/ebitenutil"
 	"github.com/hajimehoshi/ebiten/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/text"
 	"golang.org/x/image/font"
 )
 
 func initTextos() {
-
-	intro1.initIntro(screenWidth, screenHeight)
-
-	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\city.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	tt, err := truetype.Parse(fonts.ArcadeN_ttf)
 	if err != nil {
