@@ -120,6 +120,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarObjetos(barbijo, screen)
 	dibujarObjetos(plasma, screen)
 	dibujarObjetos(alchol, screen)
+	dibujarObjetos(monedas, screen)
 
 	//dibujar nextLevel
 	dibujarObjetos(nextLevel, screen)

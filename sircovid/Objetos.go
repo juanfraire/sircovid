@@ -19,7 +19,7 @@ type Objetos struct {
 	img         *ebiten.Image
 }
 
-var barbijo, alchol, plasma, nextLevel Objetos
+var barbijo, alchol, plasma, nextLevel, monedas Objetos
 
 //cartFarmacy, cartSupermarket, cartStore, cartBanck
 
@@ -53,6 +53,15 @@ func initObjetos() {
 	alchol.X = float64(90)
 	alchol.Y = float64(250)
 	alchol.img = barbijo.img
+
+	monedas.FrameOX = 0
+	monedas.FrameOY = 440
+	monedas.FrameNum = 1
+	monedas.FrameWidth = 65
+	monedas.FrameHeight = 80
+	monedas.X = float64(640)
+	monedas.Y = float64(70)
+	monedas.img = barbijo.img
 
 	//carteles
 	nextLevel.FrameOX = 0
