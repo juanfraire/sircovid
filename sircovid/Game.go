@@ -29,8 +29,6 @@ var (
 	ModeGameOver    int
 	count1          int
 	ModePause       bool
-	pulse           bool
-	pulso           int
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -52,8 +50,8 @@ var (
 
 const (
 	// game
-	screenWidth  = 768
-	screenHeight = 528
+	screenWidth  = 66 * 16
+	screenHeight = 33 * 16
 
 	// tiles
 	tileSize = 16
@@ -105,7 +103,7 @@ func introduccion() {
 }
 
 func siguienteNivel(p player) player {
-	if p.X[0] >= 746 && p.Y[0] > 450 {
+	if p.X[0] >= nextLevel.X && p.Y[0] > 450 {
 
 		pasarNivel()
 		fondo.Pause()

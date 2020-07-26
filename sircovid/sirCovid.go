@@ -5,11 +5,19 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/ebitenutil"
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
 
 // init carga los datos
 func init() {
+	//init ciudad img
+	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cidade.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//init intro
+	intro1.initIntro(screenWidth, screenHeight)
 	//inicia los textos
 	initTextos()
 	//inicializa a players
@@ -128,10 +136,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarNube(nube1, screen)
 
 	//dibujar carteles
-	dibujarObjetos(cartSupermarket, screen)
-	dibujarObjetos(cartFarmacy, screen)
-	dibujarObjetos(cartStore, screen)
-	dibujarObjetos(cartBanck, screen)
+	// dibujarObjetos(cartSupermarket, screen)
+	// dibujarObjetos(cartFarmacy, screen)
+	// dibujarObjetos(cartStore, screen)
+	// dibujarObjetos(cartBanck, screen)
 
 	// dibujar texto
 	dibujarTextos(screen)
