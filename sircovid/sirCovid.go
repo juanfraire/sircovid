@@ -73,8 +73,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player1, alchol, plasma = vida(enemigo, player1, alchol, plasma)
 
 		if Game1.numPlayers == 2 {
-			//player2 = vida(enemigo, player2, barbijo, plasma)
-
+			player2, barbijo, plasma = vida(enemigo, player1, barbijo, plasma)
+			player2, alchol, plasma = vida(enemigo, player1, alchol, plasma)
 		}
 		//enemigos
 		enemigo = moverHumanos(enemigo)
