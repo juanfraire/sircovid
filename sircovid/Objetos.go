@@ -19,28 +19,48 @@ type Objetos struct {
 	img         *ebiten.Image
 }
 
-var barbijo, nextLevel, cartFarmacy, cartSupermarket, cartStore Objetos
+var barbijo, alchol, plasma, nextLevel, cartFarmacy, cartSupermarket, cartStore, cartBanck Objetos
 
 func initObjetos() {
+	//objetos
 	barbijo.FrameOX = 0
-	barbijo.FrameOY = 74
+	barbijo.FrameOY = 160
 	barbijo.FrameNum = 1
 	barbijo.FrameWidth = 105
-	barbijo.FrameHeight = 48
-	barbijo.X = float64(630)
+	barbijo.FrameHeight = 40
+	barbijo.X = float64(635)
 	barbijo.Y = float64(150)
-	barbijo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\barbijo.png`, ebiten.FilterDefault)
+	barbijo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\objetos.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	plasma.FrameOX = 0
+	plasma.FrameOY = 200
+	plasma.FrameNum = 1
+	plasma.FrameWidth = 60
+	plasma.FrameHeight = 120
+	plasma.X = float64(30)
+	plasma.Y = float64(450)
+	plasma.img = barbijo.img
+
+	alchol.FrameOX = 0
+	alchol.FrameOY = 320
+	alchol.FrameNum = 1
+	alchol.FrameWidth = 65
+	alchol.FrameHeight = 120
+	alchol.X = float64(90)
+	alchol.Y = float64(250)
+	alchol.img = barbijo.img
+
+	//carteles
 	nextLevel.FrameOX = 0
-	nextLevel.FrameOY = 0
+	nextLevel.FrameOY = 77
 	nextLevel.FrameNum = 1
-	nextLevel.FrameWidth = 240
-	nextLevel.FrameHeight = 240
+	nextLevel.FrameWidth = 170
+	nextLevel.FrameHeight = 120
 	nextLevel.X = float64(695)
-	nextLevel.Y = float64(450)
-	nextLevel.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\NextLevel.png`, ebiten.FilterDefault)
+	nextLevel.Y = float64(440)
+	nextLevel.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\carteles.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -48,32 +68,38 @@ func initObjetos() {
 	cartFarmacy.FrameOX = 0
 	cartFarmacy.FrameOY = 0
 	cartFarmacy.FrameNum = 1
-	cartFarmacy.FrameWidth = 310
-	cartFarmacy.FrameHeight = 135
+	cartFarmacy.FrameWidth = 290
+	cartFarmacy.FrameHeight = 78
 	cartFarmacy.X = float64(380)
-	cartFarmacy.Y = float64(20)
-	cartFarmacy.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\carteles.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
+	cartFarmacy.Y = float64(40)
+	cartFarmacy.img = nextLevel.img
 
-	cartSupermarket.FrameOX = 0
-	cartSupermarket.FrameOY = 260
+	cartSupermarket.FrameOX = 175
+	cartSupermarket.FrameOY = 77
 	cartSupermarket.FrameNum = 1
-	cartSupermarket.FrameWidth = 500
-	cartSupermarket.FrameHeight = 135
-	cartSupermarket.X = float64(160)
-	cartSupermarket.Y = float64(70)
+	cartSupermarket.FrameWidth = 440
+	cartSupermarket.FrameHeight = 78
+	cartSupermarket.X = float64(165)
+	cartSupermarket.Y = float64(80)
 	cartSupermarket.img = cartFarmacy.img
 
-	cartStore.FrameOX = 0
-	cartStore.FrameOY = 135
+	cartStore.FrameOX = 300
+	cartStore.FrameOY = 0
 	cartStore.FrameNum = 1
-	cartStore.FrameWidth = 400
-	cartStore.FrameHeight = 135
-	cartStore.X = float64(-8)
-	cartStore.Y = float64(250)
+	cartStore.FrameWidth = 190
+	cartStore.FrameHeight = 78
+	cartStore.X = float64(0)
+	cartStore.Y = float64(260)
 	cartStore.img = cartFarmacy.img
+
+	cartBanck.FrameOX = 500
+	cartBanck.FrameOY = 0
+	cartBanck.FrameNum = 1
+	cartBanck.FrameWidth = 210
+	cartBanck.FrameHeight = 78
+	cartBanck.X = float64(620)
+	cartBanck.Y = float64(20)
+	cartBanck.img = cartFarmacy.img
 }
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {

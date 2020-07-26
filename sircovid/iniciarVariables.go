@@ -27,6 +27,8 @@ func pasarNivel() {
 
 	pasarNivelPlayer()
 
+	initObjetos()
+
 	// initSonido()
 	count = 0
 	initEnemigos()
