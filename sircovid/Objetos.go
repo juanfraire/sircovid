@@ -8,7 +8,7 @@ import (
 	"github.com/hajimehoshi/ebiten/ebitenutil"
 )
 
-type sumVidas struct {
+type Objetos struct {
 	FrameOX     int
 	FrameOY     int
 	FrameNum    int
@@ -19,9 +19,9 @@ type sumVidas struct {
 	img         *ebiten.Image
 }
 
-var barbijo, nextLevel, cartFarmacy, cartSupermarket, cartStore sumVidas
+var barbijo, nextLevel, cartFarmacy, cartSupermarket, cartStore Objetos
 
-func initSumarVidas() {
+func initObjetos() {
 	barbijo.FrameOX = 0
 	barbijo.FrameOY = 74
 	barbijo.FrameNum = 1
@@ -76,7 +76,7 @@ func initSumarVidas() {
 	cartStore.img = cartFarmacy.img
 }
 
-func dibujarSumVidas(B sumVidas, screen *ebiten.Image) {
+func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(.3, .3)
 	op.GeoM.Translate(B.X, B.Y)

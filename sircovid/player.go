@@ -11,12 +11,14 @@ import (
 
 type player struct {
 	humanos
-	vidas      int
-	v          float32
-	señalador  int
-	a, b, c, d int
-	MovX       int
-	MovY       int
+	vidas       int
+	v           float32
+	señalador   int
+	a, b, c, d  int
+	MovX        int
+	MovY        int
+	Inmune      bool
+	CountInmune int
 }
 
 var player1, player2 player
@@ -200,30 +202,43 @@ func moverPlayer(p player) player {
 	return p
 }
 
-func vida(h humanos, p player, b sumVidas) player {
-	//pierde vidas con la nube
-	for i := 0; i < nivel; i++ {
-
-		nubX := nube1.X[i] * scale
-		nubY := nube1.Y[i] * scale
-
-		//pierde vidas con nube
-		if p.X[0] > nubX && p.X[0] < nubX+120 && p.Y[0] > nubY && p.Y[0] < nubY+120 && nube1.Alpha[i] > .3 {
-			p.v += .1
+func vida(h humanos, p player, b Objetos) player {
+	if p.Inmune != true {
+		//pierde vidas con la nube
+		for i := 0; i < nivel; i++ {
+			nubX := nube1.X[i] * scale
+			nubY := nube1.Y[i] * scale
+			//pierde vidas con nube
+			if p.X[0] > nubX && p.X[0] < nubX+120 && p.Y[0] > nubY && p.Y[0] < nubY+120 && nube1.Alpha[i] > .3 {
+				p.v += .1
+			}
+		}
+		//pierde vidas con humanos
+		for i := 0; i < nivel; i++ {
+			if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
+				p.v++
+			}
 		}
 	}
-	//pierde vidas con humanos
-	for i := 0; i < nivel; i++ {
+	//infmune con barbijo
 
-		if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
-			p.v++
-		}
-		//gana vida con barbijo
-		if p.X[0] > b.X && p.X[0] < b.X+20 && p.Y[0]+32 > b.Y && p.Y[0] < b.Y+32 {
-			p.vidas++
-			barbijo.X = 1000
-		}
+	if p.X[0] > b.X && p.X[0] < b.X+20 && p.Y[0]+32 > b.Y && p.Y[0] < b.Y+32 {
+		barbijo.X = 1000
+		p.Inmune = true
+		p.CountInmune = 300
 	}
+	if p.Inmune == true {
+		p.CountInmune--
+	}
+	if p.CountInmune == 0 {
+		p.Inmune = false
+	}
+
+	//gana vida
+	// if p.X[0] > b.X && p.X[0] < b.X+20 && p.Y[0]+32 > b.Y && p.Y[0] < b.Y+32 {
+	// 	p.vidas++
+	// 	barbijo.X = 1000
+	// }
 
 	if p.v >= 30 {
 		p.vidas--

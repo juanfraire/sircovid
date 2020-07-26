@@ -53,7 +53,6 @@ func initEnemigos() {
 		if err != nil {
 			log.Fatal(err)
 		}
-
 	}
 }
 
