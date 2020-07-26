@@ -202,7 +202,7 @@ func moverPlayer(p player) player {
 	return p
 }
 
-func vida(h humanos, p player, b Objetos, pl Objetos) player {
+func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos) {
 	if p.Inmune != true {
 		//pierde vidas con la nube
 		for i := 0; i < nivel; i++ {
@@ -220,9 +220,9 @@ func vida(h humanos, p player, b Objetos, pl Objetos) player {
 			}
 		}
 	}
-	//infmune con barbijo
+	//infmune con barbijo o alchol en gel
 	if p.X[0]+32 > b.X && p.X[0] < b.X+20 && p.Y[0]+48 > b.Y && p.Y[0] < b.Y+32 {
-		barbijo.X = 1000
+		b.X = 1000
 		p.Inmune = true
 		p.CountInmune = 300
 	}
@@ -236,7 +236,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) player {
 	//gana vida
 	if p.X[0]+32 > pl.X && p.X[0] < pl.X+60 && p.Y[0]+48 > pl.Y && p.Y[0] < pl.Y+120 {
 		p.vidas++
-		plasma.X = 1000
+		pl.X = 1000
 	}
 
 	if p.v >= 30 {
@@ -244,8 +244,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) player {
 		sonidoVidas()
 		p.v = 0
 	}
-	// fmt.Println(p.v)
-	return p
+	return p, b, pl
 }
 
 func dibujarPlayer(P player, screen *ebiten.Image) {
