@@ -19,7 +19,7 @@ var (
 	enemigo humanos
 	count   int
 	tmp     int
-	ok      bool
+	obs     bool
 	x       float64
 	y       float64
 	en      string
@@ -66,6 +66,8 @@ func moverHumanos(E humanos) humanos {
 		E.FrameNum[i] = 3
 		E.FrameOX[i] = 0
 
+		x1, y1 := E.X[i], E.Y[i]
+
 		switch E.num[i] {
 		case 0:
 			E.FrameNum[i] = 1
@@ -91,10 +93,9 @@ func moverHumanos(E humanos) humanos {
 			E.num[i] = tmp
 		}
 
-		x1, y1 := E.X[i], E.Y[i]
-		_, _, ok = obstaculos(E.X[i], E.Y[i], x1, y1)
+		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], x1, y1)
 
-		if ok {
+		if obs {
 			switch E.num[i] {
 			case 1:
 				E.num[i] = 2

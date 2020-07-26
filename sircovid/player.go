@@ -175,8 +175,8 @@ func moverPlayer(p player) player {
 	case p.MovY == 2:
 		p.Y[0]++
 	}
-	p.X[0], p.Y[0], ok = obstaculos(p.X[0], p.Y[0], X1, Y1)
-	if ok {
+	p.X[0], p.Y[0], obs = obstaculos(p.X[0], p.Y[0], X1, Y1)
+	if obs {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 	}
