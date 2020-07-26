@@ -19,20 +19,40 @@ type Objetos struct {
 	img         *ebiten.Image
 }
 
-var barbijo, nextLevel, cartFarmacy, cartSupermarket, cartStore, cartBanck Objetos
+var barbijo, alchol, plasma, nextLevel, cartFarmacy, cartSupermarket, cartStore, cartBanck Objetos
 
 func initObjetos() {
+	//objetos
 	barbijo.FrameOX = 0
-	barbijo.FrameOY = 74
+	barbijo.FrameOY = 160
 	barbijo.FrameNum = 1
 	barbijo.FrameWidth = 105
-	barbijo.FrameHeight = 48
-	barbijo.X = float64(630)
+	barbijo.FrameHeight = 40
+	barbijo.X = float64(635)
 	barbijo.Y = float64(150)
-	barbijo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\barbijo.png`, ebiten.FilterDefault)
+	barbijo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\objetos.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+	plasma.FrameOX = 0
+	plasma.FrameOY = 200
+	plasma.FrameNum = 1
+	plasma.FrameWidth = 60
+	plasma.FrameHeight = 120
+	plasma.X = float64(30)
+	plasma.Y = float64(450)
+	plasma.img = barbijo.img
+
+	alchol.FrameOX = 0
+	alchol.FrameOY = 320
+	alchol.FrameNum = 1
+	alchol.FrameWidth = 65
+	alchol.FrameHeight = 120
+	alchol.X = float64(90)
+	alchol.Y = float64(250)
+	alchol.img = barbijo.img
+
+	//carteles
 	nextLevel.FrameOX = 0
 	nextLevel.FrameOY = 77
 	nextLevel.FrameNum = 1

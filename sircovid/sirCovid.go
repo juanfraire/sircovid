@@ -69,10 +69,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		player2 = moverPlayer(player2)
 
 		// vida
-		player1 = vida(enemigo, player1, barbijo)
+		player1 = vida(enemigo, player1, barbijo, plasma)
 
 		if Game1.numPlayers == 2 {
-			player2 = vida(enemigo, player2, barbijo)
+			player2 = vida(enemigo, player2, barbijo, plasma)
 
 		}
 		//enemigos
@@ -109,6 +109,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibujar barbijo
 	dibujarObjetos(barbijo, screen)
+	dibujarObjetos(plasma, screen)
+	dibujarObjetos(alchol, screen)
 
 	//dibujar nextLevel
 	dibujarObjetos(nextLevel, screen)
