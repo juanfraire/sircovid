@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -198,7 +199,7 @@ func moverPlayer(p player) player {
 		p.FrameNum[0] = 1
 	}
 	switch {
-	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 752 && p.X[0] < 762 && p.Y[0] < 437 && p.Y[0] > 435):
+	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 752 && p.X[0] < 762 && p.Y[0] < 437 && p.Y[0] > 435) || (p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 79):
 		p.Y[0] = -40
 		//edificio arriba izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 125 && p.X[0] < 135:
@@ -220,10 +221,17 @@ func moverPlayer(p player) player {
 		p.Y[0] = 230
 		p.Fast = true
 		p.CountPoder = 600
-		//Vuelta a la realidad
+		//Pharmacy
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 275 && p.X[0] < 285:
+		p.Y[0] = 82
+	//meter aca una funcion eleccion de cosas para comprar
+
+	//Vuelta a la realidad
 	case p.Y[0] < -36:
 		p.X[0] = X1
 	}
+
+	fmt.Println(p.X, p.Y)
 	return p
 }
 
