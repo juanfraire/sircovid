@@ -126,8 +126,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarObjetos(nextLevel, screen)
 	//dibujar palyers
 	dibujarPlayer(player1, screen)
-
 	if Game1.numPlayers == 2 {
+
 		dibujarPlayer(player2, screen)
 	}
 	//dibuja al enemigo
