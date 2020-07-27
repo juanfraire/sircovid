@@ -49,12 +49,21 @@ func dibujarTextos(screen *ebiten.Image) {
 	}
 	//dibujar inmunidad
 	if player1.Inmune {
-		Inm := fmt.Sprintf("Inmune for:%02d", player1.CountInmune/60)
+		Inm := fmt.Sprintf("Inmune for:%02d", player1.CountPoder/60)
 		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.RGBA{35, 27, 190, 0xff})
 	}
 	if player2.Inmune {
-		Inm := fmt.Sprintf("Inmune por:%02d", player2.CountInmune/60)
+		Inm := fmt.Sprintf("Inmune por:%02d", player2.CountPoder/60)
 		text.Draw(screen, Inm, smallArcadeFont, 840, 100, color.RGBA{35, 27, 190, 0xff})
+	}
+	//dibujar Fast
+	if player1.Fast {
+		Inm := fmt.Sprintf("Fast for:%02d", player1.CountPoder/60)
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.RGBA{35, 27, 190, 0xff})
+	}
+	if player2.Fast {
+		Inm := fmt.Sprintf("Fast for:%02d", player1.CountPoder/60)
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.RGBA{35, 27, 190, 0xff})
 	}
 	switch {
 	case ModeTitle == 0:

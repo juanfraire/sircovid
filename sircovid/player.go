@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -12,15 +11,16 @@ import (
 
 type player struct {
 	humanos
-	vidas       int
-	v           float32
-	señalador   int
-	a, b, c, d  int
-	MovX        int
-	MovY        int
-	Inmune      bool
-	CountInmune int
-	Coins       int
+	vidas      int
+	v          float32
+	señalador  int
+	a, b, c, d int
+	MovX       int
+	MovY       int
+	Inmune     bool
+	CountPoder int
+	Coins      int
+	Fast       bool
 }
 
 var (
@@ -174,6 +174,15 @@ func moverPlayer(p player) player {
 	var X1 = p.X[0]
 	var Y1 = p.Y[0]
 	switch {
+	case p.MovX == 1 && p.Fast:
+		p.X[0] = p.X[0] + 2
+	case p.MovX == 2 && p.Fast:
+		p.X[0] = p.X[0] - 2
+	case p.MovY == 1 && p.Fast:
+		p.Y[0] = p.Y[0] - 2
+	case p.MovY == 2 && p.Fast:
+		p.Y[0] = p.Y[0] + 2
+
 	case p.MovX == 1:
 		p.X[0]++
 	case p.MovX == 2:
@@ -206,14 +215,15 @@ func moverPlayer(p player) player {
 		//tienda a la derecha del edeficio arriba a la izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 264:
 		p.Y[0] = 110
-		//bakery
+		//mart
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 813 && p.X[0] < 823:
 		p.Y[0] = 230
+		p.Fast = true
+		p.CountPoder = 600
 		//Vuelta a la realidad
 	case p.Y[0] < -36:
 		p.X[0] = X1
 	}
-	fmt.Println(p.X, p.Y)
 	return p
 }
 
@@ -250,13 +260,14 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt > b.Y && p.Y[0]+hgt < b.Y+barHScale {
 		b.X = 1500
 		p.Inmune = true
-		p.CountInmune = 300
+		p.CountPoder = 600
 	}
-	if p.Inmune == true {
-		p.CountInmune--
+	if p.Inmune == true || p.Fast {
+		p.CountPoder--
 	}
-	if p.CountInmune == 0 {
+	if p.CountPoder == 0 {
 		p.Inmune = false
+		p.Fast = false
 	}
 
 	//gana vida
