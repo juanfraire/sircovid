@@ -22,6 +22,14 @@ type Objetos struct {
 var (
 	barbijo, alchol, plasma, nextLevel, monedas Objetos
 	objScale                                    = .3
+	barHScale                                   float64
+	barWscale                                   float64
+	coinHScale                                  float64
+	coinWscale                                  float64
+	plasmaHScale                                float64
+	plasmaWScale                                float64
+	// alcholHScale := float64(alchol.FrameHeight) * objScale
+	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
 
 //cartFarmacy, cartSupermarket, cartStore, cartBanck

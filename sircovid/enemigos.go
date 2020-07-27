@@ -96,16 +96,7 @@ func moverHumanos(E humanos) humanos {
 		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], x1, y1)
 
 		if obs {
-			switch E.num[i] {
-			case 1:
-				E.num[i] = 2
-			case 2:
-				E.num[i] = 1
-			case 3:
-				E.num[i] = 4
-			case 4:
-				E.num[i] = 3
-			}
+			E.num[i] = 0
 			E.cambio[i] = count + 5
 		}
 	}

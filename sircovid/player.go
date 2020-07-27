@@ -27,6 +27,8 @@ var (
 	humano1, humano2 humanos
 	nivel            = int(1)
 	plyrScale        = .65
+	hgt              float64
+	wth              float64
 )
 
 func initPlayer() {
@@ -208,16 +210,16 @@ func moverPlayer(p player) player {
 }
 
 func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos) {
-	barHScale := float64(barbijo.FrameHeight) * objScale
-	barWscale := float64(barbijo.FrameWidth) * objScale
-	coinHScale := float64(monedas.FrameHeight) * objScale
-	coinWscale := float64(monedas.FrameWidth) * objScale
+	barHScale = float64(barbijo.FrameHeight) * objScale
+	barWscale = float64(barbijo.FrameWidth) * objScale
+	coinHScale = float64(monedas.FrameHeight) * objScale
+	coinWscale = float64(monedas.FrameWidth) * objScale
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
-	plasmaHScale := float64(plasma.FrameHeight) * objScale
-	plasmaWScale := float64(plasma.FrameWidth) * objScale
-	hgt := float64(p.FrameHeight[0]) * plyrScale
-	wth := float64(p.FrameWidth[0]) * plyrScale
+	plasmaHScale = float64(plasma.FrameHeight) * objScale
+	plasmaWScale = float64(plasma.FrameWidth) * objScale
+	hgt = float64(p.FrameHeight[0])*plyrScale - 2
+	wth = float64(p.FrameWidth[0])*plyrScale - 6
 
 	if p.Inmune != true {
 		//pierde vidas con la nube
