@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 
 	objetos := make([][]int, 55)
@@ -62,7 +60,6 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	objetos[53] = []int{0, screenWidth, screenHeight, 32}
 	objetos[54] = []int{0, screenWidth, 30, 0}
 
-	fmt.Println(player1.X, player1.Y)
 	for i := 0; i < len(objetos); i++ {
 		if int(X+wth) >= objetos[i][0] && int(X)+2 <= objetos[i][0]+objetos[i][1] && int(Y+hgt) >= objetos[i][2] && int(Y+hgt) <= objetos[i][2]+objetos[i][3] {
 			X = X1
