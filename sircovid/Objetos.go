@@ -41,8 +41,8 @@ func initObjetos() {
 	barbijo.FrameNum = 1
 	barbijo.FrameWidth = 105
 	barbijo.FrameHeight = 40
-	barbijo.X = float64(635)
-	barbijo.Y = float64(150)
+	barbijo.X = float64(300)
+	barbijo.Y = float64(500)
 	barbijo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\objetos.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -52,8 +52,8 @@ func initObjetos() {
 	plasma.FrameNum = 1
 	plasma.FrameWidth = 60
 	plasma.FrameHeight = 120
-	plasma.X = float64(30)
-	plasma.Y = float64(450)
+	plasma.X = float64(90)
+	plasma.Y = float64(250)
 	plasma.img = barbijo.img
 
 	alchol.FrameOX = 0
@@ -61,8 +61,8 @@ func initObjetos() {
 	alchol.FrameNum = 1
 	alchol.FrameWidth = 65
 	alchol.FrameHeight = 120
-	alchol.X = float64(90)
-	alchol.Y = float64(250)
+	alchol.X = float64(1000)
+	alchol.Y = float64(30)
 	alchol.img = barbijo.img
 
 	monedas.FrameOX = 0
