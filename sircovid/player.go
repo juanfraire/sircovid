@@ -209,6 +209,7 @@ func moverPlayer(p player) player {
 		//bakery
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 813 && p.X[0] < 823:
 		p.Y[0] = 230
+		//Vuelta a la realidad
 	case p.Y[0] < -36:
 		p.X[0] = X1
 	}

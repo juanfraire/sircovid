@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, nextLevel, monedas Objetos
-	objScale                                    = .3
-	barHScale                                   float64
-	barWscale                                   float64
-	coinHScale                                  float64
-	coinWscale                                  float64
-	plasmaHScale                                float64
-	plasmaWScale                                float64
+	barbijo, alchol, plasma, nextLevel, home, monedas Objetos
+	objScale                                          = .3
+	barHScale                                         float64
+	barWscale                                         float64
+	coinHScale                                        float64
+	coinWscale                                        float64
+	plasmaHScale                                      float64
+	plasmaWScale                                      float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -86,6 +86,15 @@ func initObjetos() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	home.FrameOX = 0
+	home.FrameOY = 195
+	home.FrameNum = 1
+	home.FrameWidth = 190
+	home.FrameHeight = 120
+	home.X = float64(0)
+	home.Y = float64(260)
+	home.img = nextLevel.img
+
 	//carteles
 	// cartFarmacy.FrameOX = 0
 	// cartFarmacy.FrameOY = 0

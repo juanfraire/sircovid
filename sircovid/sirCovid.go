@@ -64,6 +64,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModeTitle == 1:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitle = 2
+			player1.X[0] = 15
+			player1.Y[0] = -40
+			player2.X[0] = 15
+			player2.Y[0] = -40
 		}
 	case player1.vidas != 0 && player2.vidas != 0 && ModeTitle == 2:
 
@@ -116,14 +120,16 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	screen.DrawImage(imgTiles, op)
 
-	//dibujar barbijo
+	//dibujar objetos
 	dibujarObjetos(barbijo, screen)
 	dibujarObjetos(plasma, screen)
 	dibujarObjetos(alchol, screen)
 	dibujarObjetos(monedas, screen)
 
-	//dibujar nextLevel
+	//dibujar carteles
 	dibujarObjetos(nextLevel, screen)
+	dibujarObjetos(home, screen)
+
 	//dibujar palyers
 	dibujarPlayer(player1, screen)
 	if Game1.numPlayers == 2 {
