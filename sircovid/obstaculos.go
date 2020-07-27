@@ -34,7 +34,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	objetos[28] = []int{193, 158, 2, 106}
 	objetos[29] = []int{211, 45, 100, 33}
 	objetos[30] = []int{77, 114, 1, 124}
-	objetos[31] = []int{1, 68, 3, 283}
+	objetos[31] = []int{0, 68, 0, 283}
 	objetos[32] = []int{1, 63, 280, 22}
 	objetos[33] = []int{450, 12, 391, 26}
 	objetos[34] = []int{581, 11, 392, 23}
@@ -61,7 +61,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	objetos[54] = []int{0, screenWidth, 30, 0}
 
 	for i := 0; i < len(objetos); i++ {
-		if int(X+wth) >= objetos[i][0] && int(X)+2 <= objetos[i][0]+objetos[i][1] && int(Y+hgt) >= objetos[i][2] && int(Y+hgt) <= objetos[i][2]+objetos[i][3] {
+		if int(X+17) >= objetos[i][0] && int(X)+2 <= objetos[i][0]+objetos[i][1] && int(Y+30) >= objetos[i][2] && int(Y+30) <= objetos[i][2]+objetos[i][3] {
 			X = X1
 			Y = Y1
 			return X, Y, true

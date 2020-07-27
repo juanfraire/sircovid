@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 	"math/rand"
@@ -26,6 +27,19 @@ var (
 	en      string
 )
 
+func randXY() (x float64, y float64) {
+	rand.Seed(time.Now().UnixNano())
+	// x, y = 10, 10
+	_, _, obs := obstaculos(x, y, x, y)
+	for obs {
+		x = float64(rand.Intn(screenWidth))
+		y = float64(rand.Intn(screenHeight))
+		_, _, obs = obstaculos(x, y, x, y)
+	}
+	fmt.Println(x, y)
+	return
+}
+
 func initEnemigos() {
 	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < nivel; i++ {
@@ -46,6 +60,7 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
+
 	rand.Seed(time.Now().UnixNano())
 	if ModeGame >= 0 {
 		count++
@@ -83,7 +98,7 @@ func moverHumanos(E humanos) humanos {
 		}
 
 		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], x1, y1)
-		match = encuentro(E.X[i], E.Y[i], i)
+		// match = encuentro(E.X[i], E.Y[i], i)
 
 		if obs {
 			E.num[i] = 0
@@ -95,25 +110,14 @@ func moverHumanos(E humanos) humanos {
 	return E
 }
 
-func randXY() (x float64, y float64) {
-	rand.Seed(time.Now().UnixNano())
-	_, _, obs := obstaculos(x, y, x, y)
-	for obs {
-		x = float64(rand.Intn(screenWidth))
-		y = float64(rand.Intn(screenHeight))
-		_, _, obs = obstaculos(x, y, x, y)
-	}
-	return
-}
-
-func encuentro(x, y float64, i int) bool {
-	for j := 0; j < nivel; j++ {
-		if i != j && enemigo.X[i]+wth >= enemigo.X[j]-wth && enemigo.X[i] <= enemigo.X[j]+wth && enemigo.Y[i]+hgt >= enemigo.Y[j] && enemigo.Y[i]+hgt <= enemigo.Y[j]+hgt {
-			return true
-		}
-	}
-	return false
-}
+// func encuentro(x, y float64, i int) bool {
+// 	for j := 0; j < nivel; j++ {
+// 		if i != j && enemigo.X[i]+wth >= enemigo.X[j]-wth && enemigo.X[i] <= enemigo.X[j]+wth && enemigo.Y[i]+hgt >= enemigo.Y[j] && enemigo.Y[i]+hgt <= enemigo.Y[j]+hgt {
+// 			return true
+// 		}
+// 	}
+// 	return false
+// }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	for i := 0; i < nivel; i++ {
