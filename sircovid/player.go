@@ -26,10 +26,10 @@ type player struct {
 var (
 	player1, player2 player
 	humano1, humano2 humanos
-	nivel            = int(1)
-	plyrScale        = .65
-	hgt              float64
-	wth              float64
+	// nivel            = int(1)
+	plyrScale = .65
+	hgt       float64
+	wth       float64
 )
 
 func initPlayer() {
@@ -82,10 +82,6 @@ func initPlayer() {
 
 }
 func pasarNivelPlayer() {
-	nivel *= 2
-	if nivel > 13 {
-		nivel = 13
-	}
 	//player1
 	player1.FrameNum[0] = 1
 	player1.X[0] = float64(365)

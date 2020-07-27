@@ -1,17 +1,10 @@
 package main
 
-import (
-	"math/rand"
-	"time"
-)
-
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
+var nivel = int(1)
 
 func iniciarVariables() {
 	count = 0
-
+	nivel = 1
 	//cosas de Game
 	ModeGame = 0
 	ModeTitle = 0
@@ -24,6 +17,7 @@ func iniciarVariables() {
 func pasarNivel() {
 	ModeGame++
 	ModeTitle = 1
+	nivel = ModeGame * 2
 
 	pasarNivelPlayer()
 

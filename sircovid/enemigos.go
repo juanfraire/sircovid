@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	rand.Seed(time.Now().UnixNano())
+
 }
 
 var (
@@ -20,25 +20,14 @@ var (
 	count   int
 	tmp     int
 	obs     bool
+	match   bool
 	x       float64
 	y       float64
 	en      string
 )
 
-func randXY() (x float64, y float64) {
-	rand.Seed(time.Now().UnixNano())
-	_, _, obs := obstaculos(x, y, x, y)
-	for obs {
-		x = float64(rand.Intn(screenWidth))
-		y = float64(rand.Intn(screenHeight))
-		_, _, obs = obstaculos(x, y, x, y)
-	}
-	return
-}
-
 func initEnemigos() {
 	rand.Seed(time.Now().UnixNano())
-
 	for i := 0; i < nivel; i++ {
 		en = `sircovid\data\enemigo` + strconv.Itoa(i+1) + `.png`
 		enemigo.FrameOX[i] = 48
@@ -57,7 +46,7 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
-
+	rand.Seed(time.Now().UnixNano())
 	if ModeGame >= 0 {
 		count++
 	}
@@ -65,6 +54,13 @@ func moverHumanos(E humanos) humanos {
 
 		E.FrameNum[i] = 3
 		E.FrameOX[i] = 0
+
+		if count >= E.cambio[i] {
+			for tmp = E.num[i]; tmp == E.num[i]; tmp = rand.Intn(5) {
+			}
+			E.cambio[i] += rand.Intn(200) + 200
+			E.num[i] = tmp
+		}
 
 		x1, y1 := E.X[i], E.Y[i]
 
@@ -86,21 +82,37 @@ func moverHumanos(E humanos) humanos {
 			E.Y[i]++
 		}
 
-		if count >= E.cambio[i] {
-			for tmp = E.num[i]; tmp == E.num[i]; tmp = rand.Intn(5) {
-			}
-			E.cambio[i] += rand.Intn(200) + 200
-			E.num[i] = tmp
-		}
-
 		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], x1, y1)
+		match = encuentro(E.X[i], E.Y[i], i)
 
 		if obs {
 			E.num[i] = 0
-			E.cambio[i] = count + 5
+			E.cambio[i] = count + 50
+
 		}
 	}
+
 	return E
+}
+
+func randXY() (x float64, y float64) {
+	rand.Seed(time.Now().UnixNano())
+	_, _, obs := obstaculos(x, y, x, y)
+	for obs {
+		x = float64(rand.Intn(screenWidth))
+		y = float64(rand.Intn(screenHeight))
+		_, _, obs = obstaculos(x, y, x, y)
+	}
+	return
+}
+
+func encuentro(x, y float64, i int) bool {
+	for j := 0; j < nivel; j++ {
+		if i != j && enemigo.X[i]+wth >= enemigo.X[j]-wth && enemigo.X[i] <= enemigo.X[j]+wth && enemigo.Y[i]+hgt >= enemigo.Y[j] && enemigo.Y[i]+hgt <= enemigo.Y[j]+hgt {
+			return true
+		}
+	}
+	return false
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
