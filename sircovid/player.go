@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -188,24 +189,30 @@ func moverPlayer(p player) player {
 		p.FrameNum[0] = 1
 	}
 	switch {
-	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 97 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 272 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 47 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 52 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 749 && p.X[0] < 751 && p.Y[0] < 222 && p.Y[0] > 220):
+	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220):
 		p.Y[0] = -40
+		//edificio arriba izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 125 && p.X[0] < 135:
-		p.Y[0] = 98
+		p.Y[0] = 99
+		//edificio abajo a la izquieda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 10 && p.X[0] < 25:
-		p.Y[0] = 272
+		p.Y[0] = 276
+		//banco
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 635 && p.X[0] < 645:
-		p.Y[0] = 46
+		p.Y[0] = 51
+		//local a la izquieda del banco
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 415 && p.X[0] < 425:
-		p.Y[0] = 52
+		p.Y[0] = 57
+		//tienda a la derecha del edeficio arriba a la izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 264:
 		p.Y[0] = 110
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 749 && p.X[0] < 751:
-		p.Y[0] = 223
+		//bakery
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 813 && p.X[0] < 823:
+		p.Y[0] = 230
 	case p.Y[0] < -36:
 		p.X[0] = X1
 	}
-	// fmt.Println(p.X, p.Y)
+	fmt.Println(p.X, p.Y)
 	return p
 }
 

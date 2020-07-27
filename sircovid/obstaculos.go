@@ -58,7 +58,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	objetos[51] = []int{0, 0, 0, screenHeight}
 	objetos[52] = []int{0, screenHeight, 0, 0}
 	objetos[53] = []int{0, screenWidth, screenHeight, 32}
-	objetos[54] = []int{0, screenWidth, 0, 30}
+	objetos[54] = []int{0, screenWidth, 30, 0}
 
 	for i := 0; i < len(objetos); i++ {
 		if int(X+wth) >= objetos[i][0] && int(X)+2 <= objetos[i][0]+objetos[i][1] && int(Y+hgt) >= objetos[i][2] && int(Y+hgt) <= objetos[i][2]+objetos[i][3] {
