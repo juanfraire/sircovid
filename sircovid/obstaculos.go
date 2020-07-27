@@ -56,7 +56,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	objetos[50] = []int{35, 42, 3, 271}
 	//abajo para que no salga de la pantalla
 	objetos[51] = []int{0, 0, 0, screenHeight}
-	objetos[52] = []int{0, screenHeight, 0, 0}
+	objetos[52] = []int{screenWidth, 0, 0, screenHeight}
 	objetos[53] = []int{0, screenWidth, screenHeight, 32}
 	objetos[54] = []int{0, screenWidth, 30, 0}
 

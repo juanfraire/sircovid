@@ -49,12 +49,21 @@ func dibujarTextos(screen *ebiten.Image) {
 	}
 	//dibujar inmunidad
 	if player1.Inmune {
-		Inm := fmt.Sprintf("Inmune for:%02d", player1.CountInmune/60)
+		Inm := fmt.Sprintf("Inmune for:%02d", player1.CountPoder/60)
 		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.RGBA{35, 27, 190, 0xff})
 	}
 	if player2.Inmune {
-		Inm := fmt.Sprintf("Inmune por:%02d", player2.CountInmune/60)
+		Inm := fmt.Sprintf("Inmune por:%02d", player2.CountPoder/60)
 		text.Draw(screen, Inm, smallArcadeFont, 840, 100, color.RGBA{35, 27, 190, 0xff})
+	}
+	//dibujar Fast
+	if player1.Fast {
+		Inm := fmt.Sprintf("Fast for:%02d", player1.CountPoder/60)
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.RGBA{35, 27, 190, 0xff})
+	}
+	if player2.Fast {
+		Inm := fmt.Sprintf("Fast for:%02d", player1.CountPoder/60)
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.RGBA{35, 27, 190, 0xff})
 	}
 	switch {
 	case ModeTitle == 0:
@@ -64,29 +73,29 @@ func dibujarTextos(screen *ebiten.Image) {
 
 	case ModeTitle == 1:
 		nivel := fmt.Sprintf("    LEVEL %d\n\nPRESS SPACE KEY", ModeGame)
-		text.Draw(screen, nivel, arcadeFont, 150, 250, color.White)
+		text.Draw(screen, nivel, arcadeFont, 310, 250, color.White)
 	case player2.vidas == 0 || player1.vidas == 0:
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
-		text.Draw(screen, lost, arcadeFont, 200, 200, color.White)
+		text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
 	case ModeWin == true:
 		win := fmt.Sprintf("YOU ARBITRARILY\n\n      WIN")
-		text.Draw(screen, win, arcadeFont, 150, 200, color.White)
+		text.Draw(screen, win, arcadeFont, 300, 200, color.White)
 	}
 	switch {
 	case ModePause && count1 < 40:
 		jugadores := fmt.Sprintf("PAUSE")
-		text.Draw(screen, jugadores, arcadeFont, 300, 200, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 450, 200, color.White)
 
 	case ElectNumPlayers == 0 && Game1.numPlayers == 1:
 		jugadores := fmt.Sprintf(">1 PLAYER\n 2 PLAYERS")
-		text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 360, 250, color.White)
 	case ElectNumPlayers == 0 && Game1.numPlayers == 2:
 		jugadores := fmt.Sprintf(" 1 PLAYER\n>2 PLAYERS")
-		text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 360, 250, color.White)
 
 	case ElectPlayer == 0:
 		jugadores := fmt.Sprintf("CHOOSE PLAYER")
-		text.Draw(screen, jugadores, arcadeFont, 180, 250, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 330, 250, color.White)
 
 	case ElectNumPlayers == 1:
 		for i, l := range texts {
