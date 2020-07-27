@@ -238,7 +238,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 	//inmune con barbijo o alchol en gel
 	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt > b.Y && p.Y[0]+hgt < b.Y+barHScale {
-		b.X = 1000
+		b.X = 1500
 		p.Inmune = true
 		p.CountInmune = 300
 	}
@@ -252,7 +252,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	//gana vida
 	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale {
 		p.vidas++
-		pl.X = 1000
+		pl.X = 1500
 	}
 	if p.v >= 30 {
 		p.vidas--
@@ -261,7 +261,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 	//gana monedas
 	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y && p.Y[0]+hgt < monedas.Y+coinHScale {
-		monedas.X = 1000
+		monedas.X = 1500
 		p.Coins += 5
 	}
 	return p, b, pl
