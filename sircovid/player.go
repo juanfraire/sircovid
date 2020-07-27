@@ -22,11 +22,15 @@ type player struct {
 	Coins       int
 }
 
-var player1, player2 player
-var humano1, humano2 humanos
-var nivel = int(1)
+var (
+	player1, player2 player
+	humano1, humano2 humanos
+	nivel            = int(1)
+	plyrScale        = .65
+)
 
 func initPlayer() {
+
 	//////////////   Imangen VIEJO  //////////////////////////////
 	humano1.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -204,25 +208,36 @@ func moverPlayer(p player) player {
 }
 
 func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos) {
+	barHScale := float64(barbijo.FrameHeight) * objScale
+	barWscale := float64(barbijo.FrameWidth) * objScale
+	coinHScale := float64(monedas.FrameHeight) * objScale
+	coinWscale := float64(monedas.FrameWidth) * objScale
+	// alcholHScale := float64(alchol.FrameHeight) * objScale
+	// alcholWScale := float64(alchol.FrameWidth) * objScale
+	plasmaHScale := float64(plasma.FrameHeight) * objScale
+	plasmaWScale := float64(plasma.FrameWidth) * objScale
+	hgt := float64(p.FrameHeight[0]) * plyrScale
+	wth := float64(p.FrameWidth[0]) * plyrScale
+
 	if p.Inmune != true {
 		//pierde vidas con la nube
 		for i := 0; i < nivel; i++ {
-			nubX := nube1.X[i] * scale
-			nubY := nube1.Y[i] * scale
+			nubX := nube1.X[i] * nubScale
+			nubY := nube1.Y[i] * nubScale
 			//pierde vidas con nube
-			if p.X[0] > nubX && p.X[0] < nubX+120 && p.Y[0] > nubY && p.Y[0] < nubY+120 && nube1.Alpha[i] > .3 {
+			if p.X[0]+wth > nubX && p.X[0] < nubX+nubFrameWith && p.Y[0]+hgt > nubY && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
 				p.v += .1
 			}
 		}
 		//pierde vidas con humanos
 		for i := 0; i < nivel; i++ {
 			if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
-				p.v++
+				p.v += .5
 			}
 		}
 	}
-	//infmune con barbijo o alchol en gel
-	if p.X[0]+32 > b.X && p.X[0] < b.X+20 && p.Y[0]+48 > b.Y && p.Y[0] < b.Y+32 {
+	//inmune con barbijo o alchol en gel
+	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt > b.Y && p.Y[0]+hgt < b.Y+barHScale {
 		b.X = 1000
 		p.Inmune = true
 		p.CountInmune = 300
@@ -235,7 +250,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 
 	//gana vida
-	if p.X[0]+32 > pl.X && p.X[0] < pl.X+60 && p.Y[0]+48 > pl.Y && p.Y[0] < pl.Y+120 {
+	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale {
 		p.vidas++
 		pl.X = 1000
 	}
@@ -245,7 +260,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.v = 0
 	}
 	//gana monedas
-	if p.X[0]+32 > monedas.X && p.X[0] < monedas.X+20 && p.Y[0]+48 > monedas.Y && p.Y[0] < monedas.Y+32 {
+	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y && p.Y[0]+hgt < monedas.Y+coinHScale {
 		monedas.X = 1000
 		p.Coins += 5
 	}
@@ -258,7 +273,7 @@ func dibujarPlayer(P player, screen *ebiten.Image) {
 		P.FrameOX[0] = 0
 	}
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.65, .65)
+	op.GeoM.Scale(plyrScale, plyrScale)
 	op.GeoM.Translate(P.X[0], P.Y[0])
 	i := (count1 / 7) % P.FrameNum[0]
 	sx, sy := P.FrameOX[0]+i*P.FrameWidth[0], P.FrameOY[0]

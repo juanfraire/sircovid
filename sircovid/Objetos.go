@@ -19,7 +19,10 @@ type Objetos struct {
 	img         *ebiten.Image
 }
 
-var barbijo, alchol, plasma, nextLevel, monedas Objetos
+var (
+	barbijo, alchol, plasma, nextLevel, monedas Objetos
+	objScale                                    = .3
+)
 
 //cartFarmacy, cartSupermarket, cartStore, cartBanck
 
@@ -115,7 +118,7 @@ func initObjetos() {
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(.3, .3)
+	op.GeoM.Scale(objScale, objScale)
 	op.GeoM.Translate(B.X, B.Y)
 	bx, by := B.FrameOX, B.FrameOY
 	screen.DrawImage(B.img.SubImage(image.Rect(bx, by, bx+B.FrameWidth, by+B.FrameHeight)).(*ebiten.Image), op)

@@ -17,9 +17,15 @@ type nube struct {
 	img     *ebiten.Image
 }
 
-var nube1 nube
+var (
+	nube1         nube
+	nubScale      = float64(.4)
+	nubFrameHight = float64(300) * nubScale
+	nubFrameWith  = float64(300) * nubScale
+)
 
 func initNube() {
+
 	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < nivel; i++ {
 		nube1.X[i] = float64(rand.Intn(screenWidth / .4))
@@ -42,8 +48,8 @@ func moverNube(n nube) nube {
 		}
 
 		if n.Alpha[i] <= 0 {
-			n.X[i] = float64(rand.Intn(screenWidth)) / scale
-			n.Y[i] = float64(rand.Intn(screenHeight)) / scale
+			n.X[i] = float64(rand.Intn(screenWidth)) / nubScale
+			n.Y[i] = float64(rand.Intn(screenHeight)) / nubScale
 			n.AlphaUp[i] = true
 		} else if n.Alpha[i] > .9 {
 			n.AlphaUp[i] = false
@@ -60,14 +66,12 @@ func moverNube(n nube) nube {
 	return n
 }
 
-var scale = float64(.4)
-
 func dibujarNube(n nube, screen *ebiten.Image) {
 	for i := 0; i < nivel; i++ {
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Translate(n.X[i], n.Y[i])
 		op.ColorM.Scale(3, 2, 0, n.Alpha[i])
-		op.GeoM.Scale(scale, scale)
+		op.GeoM.Scale(nubScale, nubScale)
 		screen.DrawImage(n.img, op)
 	}
 }
