@@ -77,8 +77,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		nube1 = moverNube(nube1)
 
 		// palyer
-		player1 = moverPlayer(player1)
-		player2 = moverPlayer(player2)
+		player1 = moverPlayer(player1, player2)
+		// if Game1.numPlayers == 2 {
+		// 	player2 = moverPlayer(player1, player2)
+		// }
 
 		// vida
 		player1, barbijo, plasma = vida(enemigo, player1, barbijo, plasma)
