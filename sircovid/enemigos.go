@@ -17,14 +17,15 @@ func init() {
 }
 
 var (
-	enemigo humanos
-	count   int
-	tmp     int
-	obs     bool
-	match   bool
-	x       float64
-	y       float64
-	en      string
+	enemigo  humanos
+	count    int
+	tmp      int
+	obs      bool
+	match    bool
+	contagio = true
+	x        float64
+	y        float64
+	en       string
 )
 
 func randXY() (x float64, y float64) {
@@ -75,6 +76,7 @@ func moverHumanos(E humanos) humanos {
 			}
 			E.cambio[i] += rand.Intn(200) + 200
 			E.num[i] = tmp
+			contagio = true
 		}
 
 		x1, y1 := E.X[i], E.Y[i]
@@ -98,26 +100,28 @@ func moverHumanos(E humanos) humanos {
 		}
 
 		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], x1, y1)
-		// match = encuentro(E.X[i], E.Y[i], i)
+		match = encuentro(E.X[i], E.Y[i], i)
 
-		if obs {
+		if obs || match {
 			E.num[i] = 0
 			E.cambio[i] = count + 50
+			match = false
+			contagio = false
 
 		}
 	}
 
-	return E
+	return E, E.X[i], E.Y[i]
 }
 
-// func encuentro(x, y float64, i int) bool {
-// 	for j := 0; j < nivel; j++ {
-// 		if i != j && enemigo.X[i]+wth >= enemigo.X[j]-wth && enemigo.X[i] <= enemigo.X[j]+wth && enemigo.Y[i]+hgt >= enemigo.Y[j] && enemigo.Y[i]+hgt <= enemigo.Y[j]+hgt {
-// 			return true
-// 		}
-// 	}
-// 	return false
-// }
+func encuentro(x, y float64, i int) bool {
+	for j := 0; j < nivel; j++ {
+		if i != j && !contagio && enemigo.X[i]+wth >= enemigo.X[j]-wth && enemigo.X[i] <= enemigo.X[j]+wth && enemigo.Y[i]+hgt >= enemigo.Y[j] && enemigo.Y[i]+hgt <= enemigo.Y[j]+hgt {
+			return true
+		}
+	}
+	return false
+}
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	for i := 0; i < nivel; i++ {

@@ -236,11 +236,11 @@ func moverPlayer(p player) player {
 	}
 	switch {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
-		p.Fast = true
-	case inpututil.IsKeyJustReleased(ebiten.KeyF):
-		p.Fast = false
-	case hack && inpututil.IsKeyJustPressed(ebiten.KeyE):
+		p.Fast = !p.Fast
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyN):
 		pasarNivel()
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
+		p.Inmune = !p.Inmune
 	}
 
 	// fmt.Println(p.X, p.Y)
