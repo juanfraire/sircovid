@@ -66,7 +66,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModeTitle = 2
 			player1.X[0] = 15
 			player1.Y[0] = -40
-			player2.X[0] = 15
+			player2.X[0] = 130
 			player2.Y[0] = -40
 		}
 	case player1.vidas != 0 && player2.vidas != 0 && ModeTitle == 2:
