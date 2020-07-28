@@ -18,13 +18,22 @@ var (
 	temp = float64(vol)
 	up   bool
 	down bool
+	// sonido
+	audioContext *audio.Context
+	deadSound    *audio.Player
+	deadSound2   *audio.Player
+	sonidoFondo  *audio.InfiniteLoop
+	fondo        *audio.Player
+	sonidoIntro  *audio.InfiniteLoop
+	sIntro       *audio.Player
 )
 
 // Inicio valores de sonido del juego
 func initSonido() {
 
 	audioContext, _ = audio.NewContext(44100)
-	s, err := os.Open(`sircovid\data\SIR-COVID.wav`)
+	// sonido fondo
+	s, err := os.Open(`sircovid\data\audio\SIR-COVID sin moneditas (1).wav`)
 	if err != nil {
 		panic(err)
 	}
@@ -43,6 +52,26 @@ func initSonido() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// sonido intro
+	// sInt, err := os.Open(`sircovid\data\audio\introconteclas.wav`)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// defer sInt.Close()
+	// dataInt := make([]byte, 11491250)
+	// cInt, err := s.Read(dataInt)
+	// introD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(dataInt))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// sonidoIntro = audio.NewInfiniteLoop(introD, int64(cInt))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// sIntro, err = audio.NewPlayer(audioContext, sonidoIntro)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
 	if err != nil {

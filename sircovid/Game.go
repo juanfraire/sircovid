@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten"
-	"github.com/hajimehoshi/ebiten/audio"
 	"github.com/hajimehoshi/ebiten/inpututil"
 	"golang.org/x/image/font"
 )
@@ -34,11 +33,13 @@ var (
 	imgTiles *ebiten.Image
 
 	// sonido
-	audioContext *audio.Context
-	deadSound    *audio.Player
-	deadSound2   *audio.Player
-	sonidoFondo  *audio.InfiniteLoop
-	fondo        *audio.Player
+	// audioContext *audio.Context
+	// deadSound    *audio.Player
+	// deadSound2   *audio.Player
+	// sonidoFondo  *audio.InfiniteLoop
+	// fondo        *audio.Player
+	// sonidoIntro  *audio.InfiniteLoop
+	// sIntro       *audio.Player
 
 	//para start y game over
 	arcadeFont      font.Face
