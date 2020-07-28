@@ -37,6 +37,7 @@ type intro struct {
 }
 
 func (i *intro) initIntro(screenWidth int, screenHeight int) {
+	// sIntro.Play()
 
 	// logo
 	i.logoX = screenWidth / 2

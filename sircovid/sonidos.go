@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -18,19 +19,30 @@ var (
 	temp = float64(vol)
 	up   bool
 	down bool
+	// sonido
+	audioContext *audio.Context
+	deadSound    *audio.Player
+	deadSound2   *audio.Player
+	sonidoFondo  *audio.InfiniteLoop
+	fondo        *audio.Player
+	sonidoIntro  *audio.InfiniteLoop
+	sIntro       *audio.Player
 )
 
 // Inicio valores de sonido del juego
 func initSonido() {
 
 	audioContext, _ = audio.NewContext(44100)
-	s, err := os.Open(`sircovid\data\SIR-COVID.wav`)
+	// sonido fondo
+	s, err := os.Open(`sircovid\data\audio\SIR-COVID sin moneditas (1).wav`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
 	data := make([]byte, 11491248)
 	c, err := s.Read(data)
+	fmt.Println(c)
+
 	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
@@ -40,6 +52,27 @@ func initSonido() {
 		log.Fatal(err)
 	}
 	fondo, err = audio.NewPlayer(audioContext, sonidoFondo)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// sonido intro
+	s, err = os.Open(`sircovid\data\audio\introconteclas.wav`)
+	if err != nil {
+		panic(err)
+	}
+	defer s.Close()
+	data = make([]byte, 8178592)
+	c, err = s.Read(data)
+	fmt.Println(c)
+	introD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	if err != nil {
+		log.Fatal(err)
+	}
+	sonidoIntro = audio.NewInfiniteLoop(introD, int64(c))
+	if err != nil {
+		log.Fatal(err)
+	}
+	sIntro, err = audio.NewPlayer(audioContext, sonidoIntro)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -101,8 +134,14 @@ func sonido() {
 		fondo.Pause()
 	}
 
+	if ModeTitle >= 0 {
+		sIntro.Play()
+	}
+
 }
 func sonidoGame() {
+	sIntro.Pause()
+	sIntro.Rewind()
 	// deadSound.Rewind()
 	deadSound2.Rewind()
 	fondo.Play()
