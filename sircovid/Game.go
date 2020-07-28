@@ -1,9 +1,13 @@
 package main
 
 import (
+	"fmt"
+	"image/color"
+
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/audio"
 	"github.com/hajimehoshi/ebiten/inpututil"
+	"github.com/hajimehoshi/ebiten/text"
 	"golang.org/x/image/font"
 )
 
@@ -29,6 +33,8 @@ var (
 	ModeGameOver    int
 	count1          int
 	ModePause       bool
+	aspirina        bool
+	plasma1         bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -114,4 +120,48 @@ func siguienteNivel(p player) player {
 		fondo.Pause()
 	}
 	return p
+}
+func compar(p player) player {
+
+	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 {
+		aspirina = true
+		plasma1 = false
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 2 {
+		plasma1 = true
+		aspirina = false
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		if plasma1 || !aspirina {
+			p.Coins = p.Coins - 3
+			p.vidas++
+		}
+		if aspirina {
+			p.Coins = p.Coins - 2
+			p.Fast = true
+			p.CountPoder = 600
+		}
+		p.Compras = false
+	}
+	return p
+}
+func dibujarTextoCompras(p player, screen *ebiten.Image) {
+	if p.Compras {
+		if p.Coins < 2 {
+			jugadores := fmt.Sprintf("YOU DONT HAVE MONEY\n  COME BACK SOON")
+			text.Draw(screen, jugadores, arcadeFont, 230, 200, color.White)
+		}
+		if p.Coins >= 2 && !aspirina && !plasma1 {
+			jugadores := fmt.Sprintf(">ASPIRIN -GO FAST-\n PLASMA -GET LIFE-")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+		}
+		if aspirina && !plasma1 {
+			jugadores := fmt.Sprintf(">ASPIRIN -GO FAST-\n PLASMA -GET LIFE-")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+		}
+		if plasma1 && !aspirina {
+			jugadores := fmt.Sprintf(" ASPIRIN -GO FAST-\n>PLASMA -GET LIFE-")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+		}
+	}
 }
