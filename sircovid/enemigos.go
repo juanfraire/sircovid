@@ -22,7 +22,7 @@ var (
 	tmp      int
 	obs      bool
 	match    bool
-	contagio = true
+	contagio bool
 	x        float64
 	y        float64
 	en       string
@@ -76,7 +76,6 @@ func moverHumanos(E humanos) humanos {
 			}
 			E.cambio[i] += rand.Intn(200) + 200
 			E.num[i] = tmp
-			contagio = true
 		}
 
 		x1, y1 := E.X[i], E.Y[i]
@@ -105,18 +104,17 @@ func moverHumanos(E humanos) humanos {
 		if obs || match {
 			E.num[i] = 0
 			E.cambio[i] = count + 50
-			match = false
-			contagio = false
 
 		}
 	}
-
-	return E, E.X[i], E.Y[i]
+	fmt.Println(contagio)
+	return E
 }
 
 func encuentro(x, y float64, i int) bool {
 	for j := 0; j < nivel; j++ {
-		if i != j && !contagio && enemigo.X[i]+wth >= enemigo.X[j]-wth && enemigo.X[i] <= enemigo.X[j]+wth && enemigo.Y[i]+hgt >= enemigo.Y[j] && enemigo.Y[i]+hgt <= enemigo.Y[j]+hgt {
+		if i != j && !contagio && enemigo.X[i]+wth > enemigo.X[j]-wth && enemigo.X[i]-wth < enemigo.X[j]+wth && enemigo.Y[i]+hgt > enemigo.Y[j] && enemigo.Y[i] < enemigo.Y[j]+hgt {
+			contagio = true
 			return true
 		}
 	}
