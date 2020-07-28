@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -235,7 +234,6 @@ func moverPlayer(p player) player {
 	} else if inpututil.IsKeyJustReleased(ebiten.KeyControl) {
 		hack = false
 	}
-	fmt.Println(hack)
 	switch {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
 		p.Fast = true
@@ -245,7 +243,7 @@ func moverPlayer(p player) player {
 		pasarNivel()
 	}
 
-	fmt.Println(p.X, p.Y)
+	// fmt.Println(p.X, p.Y)
 	return p
 }
 
