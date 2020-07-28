@@ -31,6 +31,7 @@ var (
 	plyrScale = .65
 	hgt       float64
 	wth       float64
+	hack      bool
 )
 
 func initPlayer() {
@@ -225,6 +226,23 @@ func moverPlayer(p player) player {
 	//Vuelta a la realidad
 	case p.Y[0] < -36:
 		p.X[0] = X1
+	}
+
+	// coder shortcuts
+
+	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {
+		hack = true
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyControl) {
+		hack = false
+	}
+	fmt.Println(hack)
+	switch {
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
+		p.Fast = true
+	case inpututil.IsKeyJustReleased(ebiten.KeyF):
+		p.Fast = false
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyE):
+		pasarNivel()
 	}
 
 	fmt.Println(p.X, p.Y)
