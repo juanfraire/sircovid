@@ -116,10 +116,6 @@ func siguienteNivel(p player) player {
 		fondo.Pause()
 		fondo.Rewind()
 	}
-	if p.X[0] > 751 && p.X[0] < 763 && p.Y[0] < -40 {
-		ModeWin = true
-		fondo.Pause()
-	}
 	return p
 }
 func compar(p player) player {
