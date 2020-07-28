@@ -110,7 +110,6 @@ func moverHumanos(E humanos) humanos {
 
 		}
 	}
-
 	return E
 }
 

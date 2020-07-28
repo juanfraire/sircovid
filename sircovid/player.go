@@ -231,8 +231,6 @@ func moverPlayer(p player) player {
 
 	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {
 		hack = true
-	} else if inpututil.IsKeyJustReleased(ebiten.KeyControl) {
-		hack = false
 	}
 	switch {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
