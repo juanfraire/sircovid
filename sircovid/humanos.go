@@ -14,4 +14,5 @@ type humanos struct {
 	img             [20]*ebiten.Image
 	num             [20]int
 	cambio          [20]int
+	// contagio        [20]bool
 }

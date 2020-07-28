@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"math/rand"
 	"time"
@@ -32,8 +31,7 @@ func posicionNube() (float64, float64) {
 		nube1.X[i], nube1.Y[i] = float64(rand.Intn(screenWidth/.4)), float64(rand.Intn(screenHeight/.4)) // enemigo.Y[i] //
 		nube1.Alpha[i] = float64(rand.Intn(11)) * .1
 		x, y = nube1.X[i], nube1.Y[i]
-		fmt.Println(nube1.X[i], nube1.Y[i], "\n", enemigo.X[i], enemigo.Y[i])
-
+		// fmt.Println(nube1.X[i], nube1.Y[i], "\n", enemigo.X[i], enemigo.Y[i])
 	}
 
 	return x, y
@@ -63,6 +61,13 @@ func moverNube(n nube) nube {
 		if n.Alpha[i] >= 0 {
 			n.X[i]--
 		}
+		// if nube1.AlphaUp[i] {
+		// 	n.X[i], n.Y[i] = posicionNube()
+		// 	// n.AlphaUp[i] = true
+		// } else if n.Alpha[i] > .9 {
+		// 	n.AlphaUp[i] = false
+		// }
+		// fmt.Println(n.AlphaUp)
 
 		if n.Alpha[i] <= 0 {
 			n.X[i], n.Y[i] = posicionNube() //float64(rand.Intn(screenWidth)) / nubScale

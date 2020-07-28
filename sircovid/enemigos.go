@@ -26,6 +26,7 @@ var (
 	x        float64
 	y        float64
 	en       string
+	i        int
 )
 
 func randXY() (x float64, y float64) {
@@ -54,6 +55,7 @@ func initEnemigos() {
 		enemigo.num[i] = rand.Intn(5)
 		enemigo.cambio[i] = rand.Intn(50) + 100
 		enemigo.img[i], _, err = ebitenutil.NewImageFromFile(en, ebiten.FilterDefault)
+		// enemigo.contagio[i] = false
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -61,7 +63,7 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
-	var i int
+	// var i int
 	rand.Seed(time.Now().UnixNano())
 	if ModeGame >= 0 {
 		count++
@@ -76,6 +78,10 @@ func moverHumanos(E humanos) humanos {
 			}
 			E.cambio[i] += rand.Intn(200) + 200
 			E.num[i] = tmp
+			// E.contagio[i] = false
+		}
+		if count > E.cambio[i]+7 {
+			// E.contagio[i] = false
 		}
 
 		x1, y1 := E.X[i], E.Y[i]
@@ -97,28 +103,38 @@ func moverHumanos(E humanos) humanos {
 			E.FrameOY[i] = 0
 			E.Y[i]++
 		}
-
+		// if !E.contagio[i] {
+		// }
 		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], x1, y1)
-		match = encuentro(E.X[i], E.Y[i], i)
+		// E.X[i], E.Y[i], match = encuentro(E.X[i], E.Y[i], x1, y1, i)
 
-		if obs || match {
+		// if match {
+		// 	obs = true
+		// }
+		// if !E.contagio[i] {
+
+		// }
+		// if match {
+		// 	E.contagio[i] = true
+		// 	E.num[i] = 0
+		// 	E.cambio[i] = count + 10
+		// }
+
+		// if !obs {
+		// 	E.contagio[0] = false
+		// }
+		if E.X[i]+wth > player1.X[0] && E.X[i] < player1.X[0]+wth && E.Y[i]+hgt > player1.Y[0] && E.Y[i] < player1.Y[0]+hgt {
+			E.X[i], E.Y[i] = x1, y1
+			obs = true
+		}
+
+		if obs {
 			E.num[i] = 0
-			E.cambio[i] = count + 50
-
+			E.cambio[i] = count + 10
 		}
 	}
-	fmt.Println(contagio)
+	// fmt.Println(E.contagio)
 	return E
-}
-
-func encuentro(x, y float64, i int) bool {
-	for j := 0; j < nivel; j++ {
-		if i != j && !contagio && enemigo.X[i]+wth > enemigo.X[j]-wth && enemigo.X[i]-wth < enemigo.X[j]+wth && enemigo.Y[i]+hgt > enemigo.Y[j] && enemigo.Y[i] < enemigo.Y[j]+hgt {
-			contagio = true
-			return true
-		}
-	}
-	return false
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
