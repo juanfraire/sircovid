@@ -61,12 +61,12 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
-
+	var i int
 	rand.Seed(time.Now().UnixNano())
 	if ModeGame >= 0 {
 		count++
 	}
-	for i := 0; i < nivel; i++ {
+	for i = 0; i < nivel; i++ {
 
 		E.FrameNum[i] = 3
 		E.FrameOX[i] = 0
@@ -111,7 +111,7 @@ func moverHumanos(E humanos) humanos {
 		}
 	}
 
-	return E, E.X[i], E.Y[i]
+	return E
 }
 
 func encuentro(x, y float64, i int) bool {

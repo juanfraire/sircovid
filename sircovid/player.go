@@ -121,7 +121,7 @@ func moverPlayer(p player) player {
 		p.FrameNum[0] = 3
 		p.MovX = 1
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyRight) || inpututil.IsKeyJustReleased(ebiten.KeyD) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyRight) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyD) && p.señalador == 1 {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 		p.MovX = 0
@@ -133,7 +133,7 @@ func moverPlayer(p player) player {
 		p.FrameNum[0] = 3
 		p.MovX = 2
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) || inpututil.IsKeyJustReleased(ebiten.KeyA) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyA) && p.señalador == 1 {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 		p.MovX = 0
@@ -145,7 +145,7 @@ func moverPlayer(p player) player {
 		p.FrameNum[0] = 3
 		p.MovY = 1
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyUp) || inpututil.IsKeyJustReleased(ebiten.KeyW) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyUp) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyW) && p.señalador == 1 {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 		p.MovY = 0
@@ -157,7 +157,7 @@ func moverPlayer(p player) player {
 		p.FrameNum[0] = 3
 		p.MovY = 2
 	}
-	if inpututil.IsKeyJustReleased(ebiten.KeyDown) || inpututil.IsKeyJustReleased(ebiten.KeyS) {
+	if inpututil.IsKeyJustReleased(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyS) && p.señalador == 1 {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 		p.MovY = 0
@@ -243,7 +243,6 @@ func moverPlayer(p player) player {
 		p.Inmune = !p.Inmune
 	}
 
-	// fmt.Println(p.X, p.Y)
 	return p
 }
 
