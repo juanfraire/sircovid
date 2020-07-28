@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -40,6 +41,8 @@ func initSonido() {
 	defer s.Close()
 	data := make([]byte, 11491248)
 	c, err := s.Read(data)
+	fmt.Println(c)
+
 	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
@@ -53,25 +56,26 @@ func initSonido() {
 		log.Fatal(err)
 	}
 	// sonido intro
-	// sInt, err := os.Open(`sircovid\data\audio\introconteclas.wav`)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer sInt.Close()
-	// dataInt := make([]byte, 11491250)
-	// cInt, err := s.Read(dataInt)
-	// introD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(dataInt))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// sonidoIntro = audio.NewInfiniteLoop(introD, int64(cInt))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// sIntro, err = audio.NewPlayer(audioContext, sonidoIntro)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	s, err = os.Open(`sircovid\data\audio\introconteclas.wav`)
+	if err != nil {
+		panic(err)
+	}
+	defer s.Close()
+	data = make([]byte, 8178592)
+	c, err = s.Read(data)
+	fmt.Println(c)
+	introD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	if err != nil {
+		log.Fatal(err)
+	}
+	sonidoIntro = audio.NewInfiniteLoop(introD, int64(c))
+	if err != nil {
+		log.Fatal(err)
+	}
+	sIntro, err = audio.NewPlayer(audioContext, sonidoIntro)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	jumpD, err := vorbis.Decode(audioContext, audio.BytesReadSeekCloser(raudio.Jump_ogg))
 	if err != nil {
@@ -130,8 +134,14 @@ func sonido() {
 		fondo.Pause()
 	}
 
+	if ModeTitle >= 0 {
+		sIntro.Play()
+	}
+
 }
 func sonidoGame() {
+	sIntro.Pause()
+	sIntro.Rewind()
 	// deadSound.Rewind()
 	deadSound2.Rewind()
 	fondo.Play()
