@@ -34,7 +34,12 @@ var (
 	ModePause       bool
 	aspirina        bool
 	plasma1         bool
+	medicina        bool
 	farmacia        bool
+	cafe            bool
+	pan             bool
+	bakery          bool
+	completeLevel   bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -123,33 +128,44 @@ func siguienteNivel(p player) player {
 }
 func compar(p player) player {
 	//compras en farmacia
-	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && farmacia {
+
+	switch {
+	case inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && plasma1 && farmacia:
 		aspirina = true
 		plasma1 = false
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && farmacia {
+		medicina = false
+	case (inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && !aspirina && !medicina && !plasma1 && farmacia) || (inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && aspirina && !plasma1 && farmacia) || (inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && medicina && !plasma1 && farmacia):
 		plasma1 = true
 		aspirina = false
+		medicina = false
+	case inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && plasma1 && farmacia:
+		plasma1 = false
+		aspirina = false
+		medicina = true
 	}
 	//compras en bakery
-	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && farmacia {
-		aspirina = true
-		plasma1 = false
+	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && bakery {
+		cafe = true
+		pan = false
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && farmacia {
-		plasma1 = true
-		aspirina = false
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && bakery {
+		pan = true
+		cafe = false
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		if plasma1 || !aspirina {
+		if plasma1 || (!aspirina && !medicina) {
 			p.Coins = p.Coins - 3
 			p.vidas++
 		}
-		if aspirina {
+		if aspirina || cafe {
 			p.Coins = p.Coins - 2
 			p.Fast = true
 			p.CountPoder = 600
+		}
+		if (medicina && ModeGame == 0) || (pan && ModeGame == 1) {
+			p.Coins = p.Coins - 2
+			completeLevel = true
 		}
 		farmacia = false
 		p.Compras = false
@@ -162,17 +178,43 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 			jugadores := fmt.Sprintf("YOU DONT HAVE MONEY\n  COME BACK SOON")
 			text.Draw(screen, jugadores, arcadeFont, 230, 200, color.White)
 		}
-		if p.Coins >= 2 && !aspirina && !plasma1 {
-			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-")
+		//EN FARMACIA
+		if p.Coins >= 2 && farmacia && !aspirina && !plasma1 && !medicina {
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			fmt.Println("esta aca")
+
+		}
+		if aspirina {
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			fmt.Println("1esta aca")
+		}
+		if plasma1 {
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			fmt.Println("2esta aca")
+
+		}
+		if medicina {
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n>$2 MEDICINE")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			fmt.Println("3esta aca")
+
+		}
+		//EN BAKERY
+		if p.Coins >= 2 && bakery && !pan && !cafe {
+			jugadores := fmt.Sprintf(">$2-CAFE -GO FAST-\n $2-BREAD")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
-		if aspirina && !plasma1 {
-			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-")
+		if cafe {
+			jugadores := fmt.Sprintf(">$2-CAFE -GO FAST-\n $2-BREAD")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
-		if plasma1 && !aspirina {
-			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-")
+		if pan {
+			jugadores := fmt.Sprintf(" $2-CAFE -GO FAST-\n>$2-BREAD")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+
 		}
 	}
 }

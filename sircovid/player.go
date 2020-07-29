@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -196,7 +195,7 @@ func moverPlayer(p player) player {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 	}
-	//entrar a puertas
+	///ENTRADAS a puertas///
 	switch {
 	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 436 && p.Y[0] > 434):
 		p.Y[0] = -40
@@ -205,24 +204,24 @@ func moverPlayer(p player) player {
 		//pharmacy
 	case p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 77:
 		p.Y[0] = -40
-		p.b = 0
-		p.a = 0
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Compras = true
 		farmacia = true
 		//bakery
 	case p.X[0] > 945 && p.X[0] < 955 && p.Y[0] < 228 && p.Y[0] > 224:
-		p.b = 0
-		p.a = 0
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
 		p.Compras = true
-		farmacia = true
+		bakery = true
 		//para WIN
 	case p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
 		p.Y[0] = -40
 		ModeWin = true
 		fondo.Pause()
+
+		///SALIDAS///
 		//edificio arriba izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 124 && p.X[0] < 136:
 		p.Y[0] = 99
@@ -276,7 +275,6 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
-	fmt.Println(p.X, p.Y, p.a, p.b, p.c, p.d)
 	return p
 }
 
