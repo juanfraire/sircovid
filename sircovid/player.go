@@ -241,12 +241,14 @@ func moverPlayer(p player) player {
 	//supermarket
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 845 && p.X[0] < 855:
 		p.Y[0] = 436
-
+	}
 	//Vuelta a la realidad
-	case p.Y[0] < -36:
+	if p.Y[0] < -36 {
 		p.X[0] = X1
 	}
-
+	if p.Y[0] < -40 {
+		p.Y[0] = -40
+	}
 	// coder shortcuts
 
 	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {

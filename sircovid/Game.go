@@ -151,15 +151,15 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 			text.Draw(screen, jugadores, arcadeFont, 230, 200, color.White)
 		}
 		if p.Coins >= 2 && !aspirina && !plasma1 {
-			jugadores := fmt.Sprintf(">ASPIRIN -GO FAST-\n PLASMA -GET LIFE-")
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
 		if aspirina && !plasma1 {
-			jugadores := fmt.Sprintf(">ASPIRIN -GO FAST-\n PLASMA -GET LIFE-")
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
 		if plasma1 && !aspirina {
-			jugadores := fmt.Sprintf(" ASPIRIN -GO FAST-\n>PLASMA -GET LIFE-")
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>3-PLASMA -GET LIFE-")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
 	}
