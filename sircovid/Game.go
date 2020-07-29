@@ -34,6 +34,7 @@ var (
 	ModePause       bool
 	aspirina        bool
 	plasma1         bool
+	farmacia        bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -121,15 +122,25 @@ func siguienteNivel(p player) player {
 	return p
 }
 func compar(p player) player {
-
-	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 {
+	//compras en farmacia
+	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && farmacia {
 		aspirina = true
 		plasma1 = false
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 2 {
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && farmacia {
 		plasma1 = true
 		aspirina = false
 	}
+	//compras en bakery
+	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && farmacia {
+		aspirina = true
+		plasma1 = false
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && farmacia {
+		plasma1 = true
+		aspirina = false
+	}
+
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		if plasma1 || !aspirina {
 			p.Coins = p.Coins - 3
@@ -140,6 +151,7 @@ func compar(p player) player {
 			p.Fast = true
 			p.CountPoder = 600
 		}
+		farmacia = false
 		p.Compras = false
 	}
 	return p
@@ -159,7 +171,7 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
 		if plasma1 && !aspirina {
-			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>3-PLASMA -GET LIFE-")
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
 	}
