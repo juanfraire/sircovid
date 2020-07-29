@@ -140,7 +140,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarObjetos(monedas, screen)
 
 	//dibujar carteles
-	dibujarObjetos(nextLevel, screen)
+	if Game1.numPlayers == 2 {
+		dibujarObjetos(home1, screen)
+	}
 	dibujarObjetos(home, screen)
 
 	//dibujar palyers

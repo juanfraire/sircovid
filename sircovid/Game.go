@@ -39,7 +39,6 @@ var (
 	cafe            bool
 	pan             bool
 	bakery          bool
-	completeLevel   bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -116,8 +115,10 @@ func introduccion() {
 }
 
 func siguienteNivel(p player) player {
-	if p.X[0] >= nextLevel.X && p.Y[0] > 450 {
+	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40 || p.X[0] >= home1.X && p.X[0] <= home1.X+40 && p.Y[0] == -40 && Game1.numPlayers == 2) {
+		fmt.Println(p.CompleteLevel)
 
+		p.CompleteLevel = false
 		pasarNivel()
 		fondo.Pause()
 		fondo.Rewind()
@@ -157,15 +158,19 @@ func compar(p player) player {
 		if plasma1 || (!aspirina && !medicina) {
 			p.Coins = p.Coins - 3
 			p.vidas++
+			plasma1 = false
 		}
 		if aspirina || cafe {
 			p.Coins = p.Coins - 2
 			p.Fast = true
 			p.CountPoder = 600
+			aspirina = false
 		}
 		if (medicina && ModeGame == 0) || (pan && ModeGame == 1) {
 			p.Coins = p.Coins - 2
-			completeLevel = true
+			medicina = false
+			pan = false
+			p.CompleteLevel = true
 		}
 		farmacia = false
 		p.Compras = false
@@ -182,24 +187,20 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 		if p.Coins >= 2 && farmacia && !aspirina && !plasma1 && !medicina {
 			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-			fmt.Println("esta aca")
 
 		}
 		if aspirina {
 			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-			fmt.Println("1esta aca")
 		}
 		if plasma1 {
 			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-\n $2 MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-			fmt.Println("2esta aca")
 
 		}
 		if medicina {
 			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n>$2 MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-			fmt.Println("3esta aca")
 
 		}
 		//EN BAKERY

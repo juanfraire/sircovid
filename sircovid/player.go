@@ -11,17 +11,18 @@ import (
 
 type player struct {
 	humanos
-	vidas      int
-	v          float32
-	señalador  int
-	a, b, c, d int
-	MovX       int
-	MovY       int
-	Inmune     bool
-	CountPoder int
-	Coins      int
-	Fast       bool
-	Compras    bool
+	vidas         int
+	v             float32
+	señalador     int
+	a, b, c, d    int
+	MovX          int
+	MovY          int
+	Inmune        bool
+	CountPoder    int
+	Coins         int
+	Fast          bool
+	Compras       bool
+	CompleteLevel bool
 }
 
 var (
