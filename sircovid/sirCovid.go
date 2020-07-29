@@ -111,6 +111,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 	case ModeGameOver == 0:
 		sonidoGameover()
+		for i := 0; i < nivel; i++ {
+			enemigo.FrameNum[i] = 1
+			enemigo.FrameOX[i] = 0
+		}
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			iniciarVariables()
 			initPlayer()
