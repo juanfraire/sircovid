@@ -21,6 +21,7 @@ type player struct {
 	CountPoder int
 	Coins      int
 	Fast       bool
+	Compras    bool
 }
 
 var (
@@ -194,11 +195,21 @@ func moverPlayer(p player) player {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 	}
+	//entrar a puertas
 	switch {
-	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 752 && p.X[0] < 762 && p.Y[0] < 437 && p.Y[0] > 435) || (p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 79) || (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 436 && p.Y[0] > 434):
+	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 436 && p.Y[0] > 434):
 		p.Y[0] = -40
+		//pharmacy
 		sPuerta.Play()
 		sPuerta.Rewind()
+	case p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 79:
+		p.Y[0] = -40
+		p.Compras = true
+		//para WIN
+	case p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
+		p.Y[0] = -40
+		ModeWin = true
+		fondo.Pause()
 		//edificio arriba izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 125 && p.X[0] < 135:
 		p.Y[0] = 99
@@ -214,6 +225,7 @@ func moverPlayer(p player) player {
 		//tienda a la derecha del edeficio arriba a la izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 264:
 		p.Y[0] = 110
+
 		//mart
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 813 && p.X[0] < 823:
 		p.Y[0] = 230
@@ -224,7 +236,7 @@ func moverPlayer(p player) player {
 		//Pharmacy
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 275 && p.X[0] < 285:
 		p.Y[0] = 82
-	//meter aca una funcion eleccion de cosas para comprar
+		p.c = 0
 
 	//supermarket
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 845 && p.X[0] < 855:

@@ -69,6 +69,20 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			player2.X[0] = 130
 			player2.Y[0] = -40
 		}
+	case player1.Compras:
+		if player1.Coins >= 2 {
+			player1 = compar(player1)
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			player1.Compras = false
+		}
+	case player2.Compras:
+		if player2.Coins >= 2 {
+			player2 = compar(player2)
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			player2.Compras = false
+		}
 	case player1.vidas != 0 && player2.vidas != 0 && ModeTitle == 2:
 
 		//// sonido ////
@@ -104,7 +118,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			initObjetos()
 			initEnemigos()
 		}
-
 	}
 	return nil
 }
@@ -149,6 +162,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar texto
 	dibujarTextos(screen)
+
+	//dibujar textos compras
+	dibujarTextoCompras(player1, screen)
+	dibujarTextoCompras(player2, screen)
+
 }
 
 // Layout maneja las dimensiones de pantalla
