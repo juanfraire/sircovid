@@ -34,6 +34,11 @@ var (
 	ModePause       bool
 	aspirina        bool
 	plasma1         bool
+	medicina        bool
+	farmacia        bool
+	cafe            bool
+	pan             bool
+	bakery          bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -110,8 +115,10 @@ func introduccion() {
 }
 
 func siguienteNivel(p player) player {
-	if p.X[0] >= nextLevel.X && p.Y[0] > 450 {
+	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40 || p.X[0] >= home1.X && p.X[0] <= home1.X+40 && p.Y[0] == -40 && Game1.numPlayers == 2) {
+		fmt.Println(p.CompleteLevel)
 
+		p.CompleteLevel = false
 		pasarNivel()
 		fondo.Pause()
 		fondo.Rewind()
@@ -121,25 +128,51 @@ func siguienteNivel(p player) player {
 	return p
 }
 func compar(p player) player {
+	//compras en farmacia
 
-	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 {
+	switch {
+	case inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && plasma1 && farmacia:
 		aspirina = true
 		plasma1 = false
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 2 {
+		medicina = false
+	case (inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && !aspirina && !medicina && !plasma1 && farmacia) || (inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && aspirina && !plasma1 && farmacia) || (inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && medicina && !plasma1 && farmacia):
 		plasma1 = true
 		aspirina = false
+		medicina = false
+	case inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && plasma1 && farmacia:
+		plasma1 = false
+		aspirina = false
+		medicina = true
 	}
+	//compras en bakery
+	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && bakery {
+		cafe = true
+		pan = false
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && bakery {
+		pan = true
+		cafe = false
+	}
+
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		if plasma1 || !aspirina {
+		if plasma1 || (!aspirina && !medicina) {
 			p.Coins = p.Coins - 3
 			p.vidas++
+			plasma1 = false
 		}
-		if aspirina {
+		if aspirina || cafe {
 			p.Coins = p.Coins - 2
 			p.Fast = true
 			p.CountPoder = 600
+			aspirina = false
 		}
+		if (medicina && ModeGame == 0) || (pan && ModeGame == 1) {
+			p.Coins = p.Coins - 2
+			medicina = false
+			pan = false
+			p.CompleteLevel = true
+		}
+		farmacia = false
 		p.Compras = false
 	}
 	return p
@@ -150,17 +183,39 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 			jugadores := fmt.Sprintf("YOU DONT HAVE MONEY\n  COME BACK SOON")
 			text.Draw(screen, jugadores, arcadeFont, 230, 200, color.White)
 		}
-		if p.Coins >= 2 && !aspirina && !plasma1 {
-			jugadores := fmt.Sprintf(">ASPIRIN -GO FAST-\n PLASMA -GET LIFE-")
+		//EN FARMACIA
+		if p.Coins >= 2 && farmacia && !aspirina && !plasma1 && !medicina {
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+
+		}
+		if aspirina {
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
-		if aspirina && !plasma1 {
-			jugadores := fmt.Sprintf(">ASPIRIN -GO FAST-\n PLASMA -GET LIFE-")
+		if plasma1 {
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+
+		}
+		if medicina {
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n>$2 MEDICINE")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+
+		}
+		//EN BAKERY
+		if p.Coins >= 2 && bakery && !pan && !cafe {
+			jugadores := fmt.Sprintf(">$2-CAFE -GO FAST-\n $2-BREAD")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
-		if plasma1 && !aspirina {
-			jugadores := fmt.Sprintf(" ASPIRIN -GO FAST-\n>PLASMA -GET LIFE-")
+		if cafe {
+			jugadores := fmt.Sprintf(">$2-CAFE -GO FAST-\n $2-BREAD")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+		}
+		if pan {
+			jugadores := fmt.Sprintf(" $2-CAFE -GO FAST-\n>$2-BREAD")
+			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+
 		}
 	}
 }

@@ -11,17 +11,18 @@ import (
 
 type player struct {
 	humanos
-	vidas      int
-	v          float32
-	señalador  int
-	a, b, c, d int
-	MovX       int
-	MovY       int
-	Inmune     bool
-	CountPoder int
-	Coins      int
-	Fast       bool
-	Compras    bool
+	vidas         int
+	v             float32
+	señalador     int
+	a, b, c, d    int
+	MovX          int
+	MovY          int
+	Inmune        bool
+	CountPoder    int
+	Coins         int
+	Fast          bool
+	Compras       bool
+	CompleteLevel bool
 }
 
 var (
@@ -195,58 +196,73 @@ func moverPlayer(p player) player {
 		p.FrameOX[0] = 32
 		p.FrameNum[0] = 1
 	}
-	//entrar a puertas
+	///ENTRADAS a puertas///
 	switch {
 	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 436 && p.Y[0] > 434):
 		p.Y[0] = -40
-		//pharmacy
 		sPuerta.Play()
 		sPuerta.Rewind()
-	case p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 79:
+		//pharmacy
+	case p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 77:
+		p.Y[0] = -40
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
+		p.MovX = 0
+		p.Compras = true
+		farmacia = true
+		//bakery
+	case p.X[0] > 945 && p.X[0] < 955 && p.Y[0] < 228 && p.Y[0] > 224:
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
+		p.MovX = 0
 		p.Y[0] = -40
 		p.Compras = true
+		bakery = true
 		//para WIN
 	case p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
 		p.Y[0] = -40
 		ModeWin = true
 		fondo.Pause()
+
+		///SALIDAS///
 		//edificio arriba izquierda
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 125 && p.X[0] < 135:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 124 && p.X[0] < 136:
 		p.Y[0] = 99
 		//edificio abajo a la izquieda
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 10 && p.X[0] < 25:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
 		p.Y[0] = 276
 		//banco
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 635 && p.X[0] < 645:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 634 && p.X[0] < 646:
 		p.Y[0] = 51
 		//local a la izquieda del banco
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 415 && p.X[0] < 425:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 414 && p.X[0] < 426:
 		p.Y[0] = 57
 		//tienda a la derecha del edeficio arriba a la izquierda
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 264:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 265:
 		p.Y[0] = 110
 
 		//mart
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 813 && p.X[0] < 823:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 824:
 		p.Y[0] = 230
 		p.Fast = true
 		p.CountPoder = 600
 		sFast.Play()
 		sFast.Rewind()
 		//Pharmacy
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 275 && p.X[0] < 285:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 274 && p.X[0] < 286:
 		p.Y[0] = 82
-		p.c = 0
-
+		//salida de Bakery
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 943 && p.X[0] < 957:
+		p.Y[0] = 229
 	//supermarket
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 845 && p.X[0] < 855:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 844 && p.X[0] < 856:
 		p.Y[0] = 436
-
+	}
 	//Vuelta a la realidad
-	case p.Y[0] < -36:
+	if p.Y[0] < 0 {
 		p.X[0] = X1
 	}
-
+	if p.Y[0] < -40 {
+		p.Y[0] = -40
+	}
 	// coder shortcuts
 
 	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {

@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, nextLevel, home, monedas Objetos
-	objScale                                          = .3
-	barHScale                                         float64
-	barWscale                                         float64
-	coinHScale                                        float64
-	coinWscale                                        float64
-	plasmaHScale                                      float64
-	plasmaWScale                                      float64
+	barbijo, alchol, plasma, home1, home, monedas Objetos
+	objScale                                      = .3
+	barHScale                                     float64
+	barWscale                                     float64
+	coinHScale                                    float64
+	coinWscale                                    float64
+	plasmaHScale                                  float64
+	plasmaWScale                                  float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -75,17 +75,6 @@ func initObjetos() {
 	monedas.img = barbijo.img
 
 	//carteles
-	nextLevel.FrameOX = 0
-	nextLevel.FrameOY = 77
-	nextLevel.FrameNum = 1
-	nextLevel.FrameWidth = 170
-	nextLevel.FrameHeight = 120
-	nextLevel.X = float64(screenWidth) - float64(nextLevel.FrameWidth)*.3
-	nextLevel.Y = float64(440)
-	nextLevel.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\carteles.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
 	home.FrameOX = 0
 	home.FrameOY = 195
 	home.FrameNum = 1
@@ -93,7 +82,18 @@ func initObjetos() {
 	home.FrameHeight = 120
 	home.X = float64(0)
 	home.Y = float64(260)
-	home.img = nextLevel.img
+	home.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\carteles.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	home1.FrameOX = 0
+	home1.FrameOY = 195
+	home1.FrameNum = 1
+	home1.FrameWidth = 190
+	home1.FrameHeight = 120
+	home1.X = float64(110)
+	home1.Y = float64(85)
+	home1.img = home.img
 
 	//carteles
 	// cartFarmacy.FrameOX = 0
