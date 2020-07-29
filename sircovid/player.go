@@ -203,58 +203,61 @@ func moverPlayer(p player) player {
 		sPuerta.Play()
 		sPuerta.Rewind()
 		//pharmacy
-	case p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 79:
+	case p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 77:
 		p.Y[0] = -40
+		p.b = 0
+		p.a = 0
+		p.MovX = 0
 		p.Compras = true
 		farmacia = true
 		//bakery
 	case p.X[0] > 945 && p.X[0] < 955 && p.Y[0] < 228 && p.Y[0] > 224:
+		p.b = 0
+		p.a = 0
+		p.MovX = 0
 		p.Y[0] = -40
 		p.Compras = true
 		farmacia = true
-
 		//para WIN
 	case p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
 		p.Y[0] = -40
 		ModeWin = true
 		fondo.Pause()
 		//edificio arriba izquierda
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 125 && p.X[0] < 135:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 124 && p.X[0] < 136:
 		p.Y[0] = 99
 		//edificio abajo a la izquieda
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 10 && p.X[0] < 25:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
 		p.Y[0] = 276
 		//banco
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 635 && p.X[0] < 645:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 634 && p.X[0] < 646:
 		p.Y[0] = 51
 		//local a la izquieda del banco
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 415 && p.X[0] < 425:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 414 && p.X[0] < 426:
 		p.Y[0] = 57
 		//tienda a la derecha del edeficio arriba a la izquierda
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 264:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 265:
 		p.Y[0] = 110
 
 		//mart
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 813 && p.X[0] < 823:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 824:
 		p.Y[0] = 230
 		p.Fast = true
 		p.CountPoder = 600
 		sFast.Play()
 		sFast.Rewind()
 		//Pharmacy
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 275 && p.X[0] < 285:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 274 && p.X[0] < 286:
 		p.Y[0] = 82
-		p.c = 0
 		//salida de Bakery
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 944 && p.X[0] < 956:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 943 && p.X[0] < 957:
 		p.Y[0] = 229
-		p.c = 0
 	//supermarket
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 845 && p.X[0] < 855:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 844 && p.X[0] < 856:
 		p.Y[0] = 436
 	}
 	//Vuelta a la realidad
-	if p.Y[0] < -36 {
+	if p.Y[0] < 0 {
 		p.X[0] = X1
 	}
 	if p.Y[0] < -40 {
@@ -273,7 +276,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
-	fmt.Println(p.X, p.Y)
+	fmt.Println(p.X, p.Y, p.a, p.b, p.c, p.d)
 	return p
 }
 
