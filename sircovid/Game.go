@@ -109,6 +109,8 @@ func siguienteNivel(p player) player {
 		pasarNivel()
 		fondo.Pause()
 		fondo.Rewind()
+		sLevelUp.Play()
+		sLevelUp.Rewind()
 	}
 	if p.X[0] > 751 && p.X[0] < 763 && p.Y[0] < -40 {
 		ModeWin = true

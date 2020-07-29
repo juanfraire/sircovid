@@ -197,6 +197,8 @@ func moverPlayer(p player) player {
 	switch {
 	case (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 752 && p.X[0] < 762 && p.Y[0] < 437 && p.Y[0] > 435) || (p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 79) || (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 436 && p.Y[0] > 434):
 		p.Y[0] = -40
+		sPuerta.Play()
+		sPuerta.Rewind()
 		//edificio arriba izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 125 && p.X[0] < 135:
 		p.Y[0] = 99
@@ -217,6 +219,8 @@ func moverPlayer(p player) player {
 		p.Y[0] = 230
 		p.Fast = true
 		p.CountPoder = 600
+		sFast.Play()
+		sFast.Rewind()
 		//Pharmacy
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 275 && p.X[0] < 285:
 		p.Y[0] = 82
@@ -278,11 +282,14 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 	//inmune con barbijo o alchol en gel
 	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt > b.Y && p.Y[0]+hgt < b.Y+barHScale {
+		sBarbijo.Play()
+		sBarbijo.Rewind()
 		b.X = 1500
 		p.Inmune = true
 		p.CountPoder = 600
 	}
 	if p.Inmune == true || p.Fast {
+
 		p.CountPoder--
 	}
 	if p.CountPoder == 0 {
@@ -290,7 +297,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.Fast = false
 	}
 
-	//gana vida
+	//gana/pierde vida
 	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale {
 		p.vidas++
 		pl.X = 1500
@@ -304,6 +311,9 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y && p.Y[0]+hgt < monedas.Y+coinHScale {
 		monedas.X = 1500
 		p.Coins += 5
+		sPuerta.Pause()
+		sDinero.Play()
+		sDinero.Rewind()
 	}
 	return p, b, pl
 }
