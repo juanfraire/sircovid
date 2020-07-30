@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	vol  = float64(1)
+	vol  float64
 	temp = float64(vol)
 	up   bool
 	down bool
@@ -199,7 +199,7 @@ func initSonido() {
 	}
 	defer s.Close()
 	data = make([]byte, 178704)
-	c, err = s.Read(data)
+	_, err = s.Read(data)
 	// fmt.Println(c)
 	jabD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -244,7 +244,13 @@ func sonido() {
 
 	fondo.SetVolume(vol)
 	deadSound.SetVolume(vol)
-	deadSound2.SetVolume(vol * .4)
+	deadSound2.SetVolume(vol)
+	sBarbijo.SetVolume(vol)
+	sDinero.SetVolume(vol)
+	sFast.SetVolume(vol)
+	sIntro.SetVolume(vol)
+	sLevelUp.SetVolume(vol)
+	sPuerta.SetVolume(vol)
 
 	// sonido ModePause
 	if ModePause {
@@ -252,6 +258,8 @@ func sonido() {
 	}
 
 	if ModeTitle >= 0 {
+		fadeIn()
+		fondo.Pause()
 		sIntro.Play()
 	}
 
@@ -259,11 +267,8 @@ func sonido() {
 func sonidoGame() {
 	sIntro.Pause()
 	sIntro.Rewind()
-	// deadSound.Rewind()
 	deadSound2.Rewind()
-	// sPuerta.Rewind()
 	fondo.Play()
-
 }
 
 func sonidoGameover() {
@@ -271,11 +276,15 @@ func sonidoGameover() {
 	fondo.Rewind()
 	deadSound.Pause()
 	deadSound2.Play()
-	// time.Sleep(time.Millisecond * 1000)
-
 }
 
 func sonidoVidas() {
 	deadSound.Play()
 	deadSound.Rewind()
+}
+
+func fadeIn() {
+	if vol < .9 {
+		vol += .01
+	}
 }
