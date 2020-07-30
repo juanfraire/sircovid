@@ -24,20 +24,20 @@ var Game1 Game
 var intro1 intro
 
 var (
-	Relato          bool
-	ModeGame        int
-	ModeWin         bool
-	ModeTitle       int
-	ElectNumPlayers int
-	ElectPlayer     int
-	ModeGameOver    int
-	count1          int
-	ModePause       bool
-	elecCompras     int
-	farmacia        bool
-	mart            bool
-	bakery          bool
-	supermarket     bool
+	Relato                    bool
+	ModeGame                  int
+	ModeWin                   bool
+	ModeTitle                 int
+	ElectNumPlayers           int
+	ElectPlayer               int
+	ModeGameOver              int
+	count1                    int
+	ModePause                 bool
+	elecCompras               int
+	farmacia, farmacia1       bool
+	mart, mart1               bool
+	bakery, bakery1           bool
+	supermarket, supermarket1 bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -117,6 +117,7 @@ func siguienteNivel(p player) player {
 	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40 || p.X[0] >= home1.X && p.X[0] <= home1.X+40 && p.Y[0] == -40 && Game1.numPlayers == 2) {
 		player1.CompleteLevel = false
 		player2.CompleteLevel = false
+		farmacia, mart, supermarket, bakery = false, false, false, false
 		pasarNivel()
 		fondo.Pause()
 		fondo.Rewind()
@@ -160,12 +161,43 @@ func compar(p player) player {
 			p.Fast = true
 			p.CountPoder = 600
 		}
-		if elecCompras == 2 {
+		switch {
+		case elecCompras == 2 && bakery:
 			p.Coins = p.Coins - 2
+			bakery1 = true
+		case elecCompras == 2 && farmacia:
+			p.Coins = p.Coins - 2
+			farmacia1 = true
+		case elecCompras == 2 && mart:
+			p.Coins = p.Coins - 2
+			mart1 = true
+		case elecCompras == 2 && supermarket:
+			p.Coins = p.Coins - 2
+			supermarket1 = true
 		}
-		if (farmacia && elecCompras == 2 && ModeGame == 0) || (bakery && elecCompras == 2 && ModeGame == 1) || (mart && elecCompras == 2 && ModeGame == 2) || (supermarket && elecCompras == 2 && ModeGame == 3) {
+		switch {
+		case farmacia && elecCompras == 2 && ModeGame == 0:
+			p.CompleteLevel = true
+		case bakery && elecCompras == 2 && ModeGame == 1:
+			p.CompleteLevel = true
+		case mart && elecCompras == 2 && ModeGame == 2:
+			p.CompleteLevel = true
+		case supermarket && elecCompras == 2 && ModeGame == 3:
+			p.CompleteLevel = true
+		case farmacia1 && bakery1 && ModeGame == 4:
+			p.CompleteLevel = true
+		case farmacia1 && supermarket1 && ModeGame == 5:
+			p.CompleteLevel = true
+		case mart1 && bakery1 && ModeGame == 5:
+			p.CompleteLevel = true
+		case farmacia1 && mart1 && ModeGame == 6:
+			p.CompleteLevel = true
+		case supermarket1 && mart1 && ModeGame == 7:
+			p.CompleteLevel = true
+		case supermarket1 && bakery1 && ModeGame == 8:
 			p.CompleteLevel = true
 		}
+
 		farmacia, mart, supermarket, bakery = false, false, false, false
 		p.Compras = false
 	}
