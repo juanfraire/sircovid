@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	vol  float64
+	vol  = float64(1)
 	temp = float64(vol)
 	up   bool
 	down bool
@@ -258,7 +258,7 @@ func sonido() {
 	}
 
 	if ModeTitle >= 0 {
-		fadeIn()
+		// fadeIn()
 		fondo.Pause()
 		sIntro.Play()
 	}
@@ -283,8 +283,8 @@ func sonidoVidas() {
 	deadSound.Rewind()
 }
 
-func fadeIn() {
-	if vol < .9 {
-		vol += .01
-	}
-}
+// func fadeIn() {
+// 	if vol < .9 {
+// 		vol += .01
+// 	}
+// }
