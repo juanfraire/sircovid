@@ -160,12 +160,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar nube
 	dibujarNube(nube1, screen)
 
-	//dibujar carteles
-	// dibujarObjetos(cartSupermarket, screen)
-	// dibujarObjetos(cartFarmacy, screen)
-	// dibujarObjetos(cartStore, screen)
-	// dibujarObjetos(cartBanck, screen)
-
 	// dibujar texto
 	dibujarTextos(screen)
 
