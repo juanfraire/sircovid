@@ -198,7 +198,7 @@ func moverPlayer(p player) player {
 	}
 	///ENTRADAS a puertas///
 	switch {
-	case p.c == 1 && ((p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78) || (p.X[0] > 813 && p.X[0] < 823 && p.Y[0] < 228 && p.Y[0] > 220) || (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 436 && p.Y[0] > 434)):
+	case p.c == 1 && ((p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78)):
 		p.Y[0] = -40
 		sPuerta.Play()
 		sPuerta.Rewind()
@@ -221,6 +221,20 @@ func moverPlayer(p player) player {
 		p.Y[0] = -40
 		ModeWin = true
 		fondo.Pause()
+		//PARA MART
+	case p.c == 1 && (p.X[0] > 810 && p.X[0] < 820 && p.Y[0] < 228 && p.Y[0] > 224):
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
+		p.MovX = 0
+		p.Y[0] = -40
+		p.Compras = true
+		mart = true
+		//SUPERMAKET
+	case p.c == 1 && (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 437 && p.Y[0] > 434):
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
+		p.MovX = 0
+		p.Y[0] = -40
+		p.Compras = true
+		supermarket = true
 
 		///SALIDAS///
 		//edificio arriba izquierda
@@ -242,10 +256,6 @@ func moverPlayer(p player) player {
 		//mart
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 824:
 		p.Y[0] = 230
-		p.Fast = true
-		p.CountPoder = 600
-		sFast.Play()
-		sFast.Rewind()
 		//Pharmacy
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 274 && p.X[0] < 286:
 		p.Y[0] = 82
