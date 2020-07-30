@@ -200,6 +200,7 @@ func moverPlayer(p player) player {
 	switch {
 	case p.c == 1 && ((p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78)):
 		p.Y[0] = -40
+		fondo.Pause()
 		sPuerta.Play()
 		sPuerta.Rewind()
 		//pharmacy
