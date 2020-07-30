@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, home1, home, monedas Objetos
-	objScale                                      = .3
-	barHScale                                     float64
-	barWscale                                     float64
-	coinHScale                                    float64
-	coinWscale                                    float64
-	plasmaHScale                                  float64
-	plasmaWScale                                  float64
+	barbijo, alchol, plasma, home1, home, monedas, relato Objetos
+	objScale                                              = .3
+	barHScale                                             float64
+	barWscale                                             float64
+	coinHScale                                            float64
+	coinWscale                                            float64
+	plasmaHScale                                          float64
+	plasmaWScale                                          float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -95,6 +95,18 @@ func initObjetos() {
 	home1.Y = float64(85)
 	home1.img = home.img
 
+	//realto inicio juego
+	relato.FrameOX = 0
+	relato.FrameOY = 0
+	relato.FrameNum = 1
+	relato.FrameWidth = 1500
+	relato.FrameHeight = 2500
+	relato.X = float64(30)
+	relato.Y = float64(100)
+	relato.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\relato1.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
 	//carteles
 	// cartFarmacy.FrameOX = 0
 	// cartFarmacy.FrameOY = 0
@@ -135,7 +147,9 @@ func initObjetos() {
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(objScale, objScale)
+	if B != relato {
+		op.GeoM.Scale(objScale, objScale)
+	}
 	op.GeoM.Translate(B.X, B.Y)
 	bx, by := B.FrameOX, B.FrameOY
 	screen.DrawImage(B.img.SubImage(image.Rect(bx, by, bx+B.FrameWidth, by+B.FrameHeight)).(*ebiten.Image), op)

@@ -24,6 +24,7 @@ var Game1 Game
 var intro1 intro
 
 var (
+	Relato          bool
 	ModeGame        int
 	ModeWin         bool
 	ModeTitle       int
