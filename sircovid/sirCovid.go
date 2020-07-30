@@ -54,10 +54,15 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	}
 	switch {
 	//pausar el juego
+
 	case ModePause:
 	case ModeWin == true:
 
 		//toda la introduccion con eleccion de players, etc
+	case Relato:
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			Relato = false
+		}
 	case ModeTitle == 0:
 		introduccion()
 
@@ -161,12 +166,20 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarNube(nube1, screen)
 
 	// dibujar texto
-	dibujarTextos(screen)
+	if !Relato {
+		dibujarTextos(screen)
+	}
 
 	//dibujar textos compras
 	dibujarTextoCompras(player1, screen)
 	dibujarTextoCompras(player2, screen)
 
+	//Dibujar relato
+	if Relato {
+		dibujarObjetos(relato, screen)
+		relato.Y = relato.Y - .2
+
+	}
 }
 
 // Layout maneja las dimensiones de pantalla

@@ -3,6 +3,7 @@ package main
 var nivel = int(1)
 
 func iniciarVariables() {
+	Relato = true
 	count = 0
 	nivel = 1
 	//cosas de Game
