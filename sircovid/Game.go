@@ -146,11 +146,11 @@ func compar(p player) player {
 			p.vidas++
 		}
 		if mart && elecCompras == 1 {
-			p.Coins = -5
+			p.Coins = p.Coins - 5
 			pasarNivel()
 		}
 		if mart && elecCompras == 0 {
-			p.Coins = -2
+			p.Coins = p.Coins - 2
 			p.Inmune = true
 			p.CountPoder = 600
 		}
