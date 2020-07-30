@@ -58,7 +58,7 @@ func initSonido() {
 		log.Fatal(err)
 	}
 	// sonido intro
-	s, err = os.Open(`sircovid\data\audio\introsinteclas.wav`)
+	s, err = os.Open(`sircovid\data\audio\introconteclas.wav`)
 	if err != nil {
 		panic(err)
 	}
