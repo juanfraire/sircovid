@@ -64,39 +64,19 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		if int(X+17) >= objetos[i][0] && int(X)+2 <= objetos[i][0]+objetos[i][1] && int(Y+30) >= objetos[i][2] && int(Y+30) <= objetos[i][2]+objetos[i][3] {
 			X = X1
 			Y = Y1
-			// enemigo.contagio[0] = true
+
 			return X, Y, true
 		}
 
 	}
 	for j := 0; j < nivel; j++ {
 		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+hgt-15 && Y+hgt-15 < enemigo.Y[j]+hgt {
-			// enemigo.num[i], enemigo.num[j] = 0, 0
-			// enemigo.contagio[i], enemigo.contagio[j] = true, true
-			// enemigo.X[j], enemigo.Y[j] = X1, Y1
 			X = X1
 			Y = Y1
 
-			// enemigo.contagio[j] = true
 			return X, Y, true
 		}
 	}
 
 	return X, Y, false
 }
-
-// func encuentro(X float64, Y float64, X1 float64, Y1 float64, i int) (float64, float64, bool) {
-// 	for j := 0; j < nivel; j++ {
-// 		if i != j && enemigo.X[i]+wth > enemigo.X[j]-wth && enemigo.X[i]-wth < enemigo.X[j]+wth && enemigo.Y[i]+hgt > enemigo.Y[j] && enemigo.Y[i] < enemigo.Y[j]+hgt {
-// 			// enemigo.num[i], enemigo.num[j] = 0, 0
-// 			// enemigo.contagio[i], enemigo.contagio[j] = true, true
-// 			X = X1
-// 			Y = Y1
-
-// 			// enemigo.contagio[j] = true
-// 			return X, Y, true
-// 		}
-// 	}
-// 	// enemigo.contagio[0] = true
-// 	return X, Y, false
-// }
