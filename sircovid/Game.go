@@ -116,14 +116,14 @@ func introduccion() {
 
 func siguienteNivel(p player) player {
 	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40 || p.X[0] >= home1.X && p.X[0] <= home1.X+40 && p.Y[0] == -40 && Game1.numPlayers == 2) {
-		fmt.Println(p.CompleteLevel)
-
-		p.CompleteLevel = false
+		player1.CompleteLevel = false
+		player2.CompleteLevel = false
 		pasarNivel()
 		fondo.Pause()
 		fondo.Rewind()
 		sLevelUp.Play()
 		sLevelUp.Rewind()
+
 	}
 	return p
 }
@@ -131,15 +131,15 @@ func compar(p player) player {
 	//compras en farmacia
 
 	switch {
-	case inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && plasma1 && farmacia:
+	case ((inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.señalador == 0) || (inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1)) && p.Coins >= 2 && plasma1 && farmacia:
 		aspirina = true
 		plasma1 = false
 		medicina = false
-	case (inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && !aspirina && !medicina && !plasma1 && farmacia) || (inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && aspirina && !plasma1 && farmacia) || (inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.Coins >= 2 && medicina && !plasma1 && farmacia):
+	case (((inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0) || (inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1)) && p.Coins >= 3 && !aspirina && !medicina && !plasma1 && farmacia) || (((inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0) || (inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1)) && p.Coins >= 3 && aspirina && !plasma1 && farmacia) || (((inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.señalador == 0) || (inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1)) && p.Coins >= 2 && medicina && !plasma1 && farmacia):
 		plasma1 = true
 		aspirina = false
 		medicina = false
-	case inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.Coins >= 3 && plasma1 && farmacia:
+	case ((inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0) || (inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1)) && p.Coins >= 3 && plasma1 && farmacia:
 		plasma1 = false
 		aspirina = false
 		medicina = true
@@ -185,21 +185,21 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 		}
 		//EN FARMACIA
 		if p.Coins >= 2 && farmacia && !aspirina && !plasma1 && !medicina {
-			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2-MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 
 		}
 		if aspirina {
-			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2-MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 		}
 		if plasma1 {
-			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-\n $2 MEDICINE")
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-\n $2-MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 
 		}
 		if medicina {
-			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n>$2 MEDICINE")
+			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n>$2-MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 
 		}
