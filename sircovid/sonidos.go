@@ -244,7 +244,13 @@ func sonido() {
 
 	fondo.SetVolume(vol)
 	deadSound.SetVolume(vol)
-	deadSound2.SetVolume(vol * .4)
+	deadSound2.SetVolume(vol)
+	sBarbijo.SetVolume(vol)
+	sDinero.SetVolume(vol)
+	sFast.SetVolume(vol)
+	sIntro.SetVolume(vol)
+	sLevelUp.SetVolume(vol)
+	sPuerta.SetVolume(vol)
 
 	// sonido ModePause
 	if ModePause {
