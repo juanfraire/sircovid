@@ -34,8 +34,9 @@ var (
 	ModePause       bool
 	elecCompras     int
 	farmacia        bool
-
-	bakery bool
+	mart            bool
+	bakery          bool
+	supermarket     bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -140,20 +141,29 @@ func compar(p player) player {
 		elecCompras = 0
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		if farmacia && elecCompras == 0 {
+		if (farmacia || bakery) && elecCompras == 0 {
 			p.Coins = p.Coins - 3
 			p.vidas++
 		}
-		if (farmacia || bakery) && elecCompras == 1 {
+		if mart && elecCompras == 1 {
+			p.Coins = -5
+			pasarNivel()
+		}
+		if mart && elecCompras == 0 {
+			p.Coins = -2
+			p.Inmune = true
+			p.CountPoder = 600
+		}
+		if elecCompras == 1 && (farmacia || supermarket || bakery) {
 			p.Coins = p.Coins - 2
 			p.Fast = true
 			p.CountPoder = 600
 		}
-		if (farmacia && elecCompras == 2 && ModeGame == 0) || (bakery && elecCompras == 2 && ModeGame == 1) {
+		if (farmacia && elecCompras == 2 && ModeGame == 0) || (bakery && elecCompras == 2 && ModeGame == 1) || (mart && elecCompras == 2 && ModeGame == 2) || (supermarket && elecCompras == 2 && ModeGame == 3) {
 			p.Coins = p.Coins - 2
 			p.CompleteLevel = true
 		}
-		farmacia = false
+		farmacia, mart, supermarket, bakery = false, false, false, false
 		p.Compras = false
 	}
 	return p
@@ -167,30 +177,47 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 		//EN FARMACIA
 		switch {
 		case farmacia && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">$2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n $2-MEDICINE")
+			jugadores := fmt.Sprintf(">$3-PLASMA -GET LIFE-\n $2-ASPIRIN -GO FAST-\n $2-MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-
 		case farmacia && elecCompras == 1 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n>$3-PLASMA -GET LIFE-\n $2-MEDICINE")
+			jugadores := fmt.Sprintf(" $3-PLASMA -GET LIFE-\n>$2-ASPIRIN -GO FAST-\n $2-MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-
 		case farmacia && elecCompras == 2 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $2-ASPIRIN -GO FAST-\n $3-PLASMA -GET LIFE-\n>$2-MEDICINE")
+			jugadores := fmt.Sprintf(" $3-PLASMA -GET LIFE-\n $2-ASPIRIN -GO FAST-\n>$2-MEDICINE")
 			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
 
 			//EN BAKERY
 		case bakery && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">PONER ALGO\n $2-CAFE -GO FAST-\n $2-BREAD")
-			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-
+			jugadores := fmt.Sprintf(">$3-CRIOLLOS-GET LIFE-\n $2-CAFE -GO FAST-\n $2-BREAD")
+			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
 		case bakery && elecCompras == 1 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" PONER ALGO\n>$2-CAFE -GO FAST-\n $2-BREAD")
-			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
-
+			jugadores := fmt.Sprintf(" $3-CRIOLLOS-GET LIFE-\n>$2-CAFE -GO FAST-\n $2-BREAD")
+			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
 		case bakery && elecCompras == 2 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" PONER ALGO\n $2-CAFE -GO FAST-\n>$2-BREAD")
-			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			jugadores := fmt.Sprintf(" $3-CRIOLLOS-GET LIFE-\n $2-CAFE -GO FAST-\n>$2-BREAD")
+			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
 
+			//EN MART
+		case mart && elecCompras == 0 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(">$2-MOUTH COVER-GET INMUNE-\n $5-HAT\n $2-CLOTHES")
+			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
+		case mart && elecCompras == 1 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE-\n>$5-HAT\n $2-CLOTHES")
+			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
+		case mart && elecCompras == 2 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE-\n $5-HAT\n>$2-CLOTHES")
+			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
+
+			//en SUPERMARKET
+		case supermarket && elecCompras == 0 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(">$3-FOOD-GET LIFE-\n $2-ENERGIZING -GO FAST-\n $2-WATER")
+			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
+		case supermarket && elecCompras == 1 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(" $3-FOOD-GET LIFE-\n>$2-ENERGIZING -GO FAST-\n $2-WATER")
+			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
+		case supermarket && elecCompras == 2 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(" $3-FOOD-GET LIFE-\n $2-ENERGIZING -GO FAST-\n>$2-WATER")
+			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 		}
 	}
 }
