@@ -159,8 +159,10 @@ func compar(p player) player {
 			p.Fast = true
 			p.CountPoder = 600
 		}
-		if (farmacia && elecCompras == 2 && ModeGame == 0) || (bakery && elecCompras == 2 && ModeGame == 1) || (mart && elecCompras == 2 && ModeGame == 2) || (supermarket && elecCompras == 2 && ModeGame == 3) {
+		if elecCompras == 2 {
 			p.Coins = p.Coins - 2
+		}
+		if (farmacia && elecCompras == 2 && ModeGame == 0) || (bakery && elecCompras == 2 && ModeGame == 1) || (mart && elecCompras == 2 && ModeGame == 2) || (supermarket && elecCompras == 2 && ModeGame == 3) {
 			p.CompleteLevel = true
 		}
 		farmacia, mart, supermarket, bakery = false, false, false, false
