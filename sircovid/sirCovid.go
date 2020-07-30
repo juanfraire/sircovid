@@ -177,7 +177,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//Dibujar relato
 	if Relato {
 		dibujarObjetos(relato, screen)
-		relato.Y = relato.Y - .2
+		relato.Y = relato.Y - .3
 
 	}
 }
