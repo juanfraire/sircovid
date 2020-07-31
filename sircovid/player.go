@@ -257,15 +257,19 @@ func moverPlayer(p player) player {
 		//mart
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 824:
 		p.Y[0] = 230
+		mart = false
 		//Pharmacy
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 274 && p.X[0] < 286:
 		p.Y[0] = 82
+		farmacia = false
 		//salida de Bakery
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 943 && p.X[0] < 957:
 		p.Y[0] = 229
+		bakery = false
 	//supermarket
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 844 && p.X[0] < 856:
 		p.Y[0] = 436
+		supermarket = false
 	}
 	//Vuelta a la realidad
 	if p.Y[0] < 0 {
