@@ -76,13 +76,9 @@ func moverHumanos(E humanos) humanos {
 			}
 			E.cambio[i] += rand.Intn(200) + 200
 			E.num[i] = tmp
-			// E.contagio[i] = false
-		}
-		if count > E.cambio[i]+7 {
-			// E.contagio[i] = false
 		}
 
-		x1, y1 := E.X[i], E.Y[i]
+		E.X1[i], E.Y1[i] = E.X[i], E.Y[i]
 
 		switch E.num[i] {
 		case 0:
@@ -101,28 +97,21 @@ func moverHumanos(E humanos) humanos {
 			E.FrameOY[i] = 0
 			E.Y[i]++
 		}
-		// if !E.contagio[i] {
-		// }
-		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], x1, y1)
-		// E.X[i], E.Y[i], match = encuentro(E.X[i], E.Y[i], x1, y1, i)
 
-		// if match {
-		// 	obs = true
-		// }
-		// if !E.contagio[i] {
+		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], E.X1[i], E.Y1[i])
+		for j := 0; j < nivel; j++ {
+			if i != j && E.X[i]+wth > E.X[j] && E.X[i] < E.X[j]+wth && E.Y[i]+hgt > E.Y[j]+hgt-15 && E.Y[i]+hgt-15 < E.Y[j]+hgt {
+				E.X[i] = E.X1[i]
+				E.Y[i] = E.Y1[i]
+				E.X[j] = E.X1[j]
+				E.Y[j] = E.Y1[j]
+				E.num[i] = 0
+				E.num[j] = 0
+			}
+		}
 
-		// }
-		// if match {
-		// 	E.contagio[i] = true
-		// 	E.num[i] = 0
-		// 	E.cambio[i] = count + 10
-		// }
-
-		// if !obs {
-		// 	E.contagio[0] = false
-		// }
 		if E.X[i]+wth > player1.X[0] && E.X[i] < player1.X[0]+wth && E.Y[i]+hgt > player1.Y[0] && E.Y[i] < player1.Y[0]+hgt {
-			E.X[i], E.Y[i] = x1, y1
+			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
 			obs = true
 		}
 
@@ -131,7 +120,6 @@ func moverHumanos(E humanos) humanos {
 			E.cambio[i] = count + 10
 		}
 	}
-	// fmt.Println(E.contagio)
 	return E
 }
 

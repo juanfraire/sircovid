@@ -67,7 +67,6 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 
 			return X, Y, true
 		}
-
 	}
 	for j := 0; j < nivel; j++ {
 		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+hgt-15 && Y+hgt-15 < enemigo.Y[j]+hgt {
