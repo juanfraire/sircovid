@@ -56,7 +56,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	//pausar el juego
 
 	case ModePause:
-	case ModeWin == true:
+	case ModeWin:
 
 		//toda la introduccion con eleccion de players, etc
 	case Relato:
@@ -140,6 +140,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dubujar fondo
 	op := &ebiten.DrawImageOptions{}
+	// op.GeoM.Scale(2, 2)
+	// op.GeoM.Translate(player1.X[0], player1.Y[0])
 	screen.DrawImage(imgTiles, op)
 
 	//dibujar objetos
