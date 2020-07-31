@@ -142,6 +142,7 @@ func compar(p player) player {
 	if elecCompras < 0 {
 		elecCompras = 0
 	}
+
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		if (farmacia || bakery) && elecCompras == 0 {
 			p.Coins = p.Coins - 3
@@ -204,6 +205,7 @@ func compar(p player) player {
 	return p
 }
 func dibujarTextoCompras(p player, screen *ebiten.Image) {
+
 	if p.Compras {
 		if p.Coins < 2 {
 			jugadores := fmt.Sprintf("YOU DONT HAVE MONEY\n  COME BACK SOON")
