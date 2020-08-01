@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, home1, home, monedas, relato Objetos
-	objScale                                              = .3
-	barHScale                                             float64
-	barWscale                                             float64
-	coinHScale                                            float64
-	coinWscale                                            float64
-	plasmaHScale                                          float64
-	plasmaWScale                                          float64
+	barbijo, alchol, plasma, home1, home, monedas, relato, ciudad Objetos
+	objScale                                                      = .3
+	barHScale                                                     float64
+	barWscale                                                     float64
+	coinHScale                                                    float64
+	coinWscale                                                    float64
+	plasmaHScale                                                  float64
+	plasmaWScale                                                  float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -104,6 +104,18 @@ func initObjetos() {
 	relato.X = float64(30)
 	relato.Y = float64(100)
 	relato.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\relato1.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ciudad.FrameOX = 0
+	ciudad.FrameOY = 0
+	ciudad.FrameNum = 1
+	ciudad.FrameWidth = 1500
+	ciudad.FrameHeight = 2500
+	ciudad.X = float64(30)
+	ciudad.Y = float64(100)
+	ciudad.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\relato1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
