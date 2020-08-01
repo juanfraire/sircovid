@@ -152,7 +152,7 @@ func compar(p player) player {
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		if (farmacia || bakery) && elecCompras == 0 {
+		if (farmacia || bakery || supermarket) && elecCompras == 0 {
 			p.Coins = p.Coins - 3
 			p.vidas++
 		}
@@ -255,13 +255,13 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 
 			//en SUPERMARKET
 		case supermarket && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">$3-FOOD-GET LIFE-\n $2-ENERGIZING -GO FAST-\n $2-WATER")
+			jugadores := fmt.Sprintf(">$3-FOOD-GET LIFE-\n $2-ENERGIZING -GO FAST-\n $2-TOILET PAPER")
 			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 		case supermarket && elecCompras == 1 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $3-FOOD-GET LIFE-\n>$2-ENERGIZING -GO FAST-\n $2-WATER")
+			jugadores := fmt.Sprintf(" $3-FOOD-GET LIFE-\n>$2-ENERGIZING -GO FAST-\n $2-TOILET PAPER")
 			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 		case supermarket && elecCompras == 2 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $3-FOOD-GET LIFE-\n $2-ENERGIZING -GO FAST-\n>$2-WATER")
+			jugadores := fmt.Sprintf(" $3-FOOD-GET LIFE-\n $2-ENERGIZING -GO FAST-\n>$2-TOILET PAPER")
 			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 		}
 	}

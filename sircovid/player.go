@@ -174,22 +174,22 @@ func moverPlayer(p player) player {
 	var Y1 = p.Y[0]
 	switch {
 	case p.MovX == 1 && p.Fast:
-		p.X[0] = p.X[0] + 2
+		p.X[0] = p.X[0] + 2.3
 	case p.MovX == 2 && p.Fast:
-		p.X[0] = p.X[0] - 2
+		p.X[0] = p.X[0] - 2.3
 	case p.MovY == 1 && p.Fast:
-		p.Y[0] = p.Y[0] - 2
+		p.Y[0] = p.Y[0] - 2.3
 	case p.MovY == 2 && p.Fast:
-		p.Y[0] = p.Y[0] + 2
+		p.Y[0] = p.Y[0] + 2.3
 
 	case p.MovX == 1:
-		p.X[0]++
+		p.X[0] += 1.5
 	case p.MovX == 2:
-		p.X[0]--
+		p.X[0] -= 1.5
 	case p.MovY == 1:
-		p.Y[0]--
+		p.Y[0] -= 1.5
 	case p.MovY == 2:
-		p.Y[0]++
+		p.Y[0] += 1.5
 	}
 	p.X[0], p.Y[0], obs = obstaculos(p.X[0], p.Y[0], X1, Y1)
 	if obs {
