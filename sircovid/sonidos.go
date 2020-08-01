@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/audio"
+	"github.com/hajimehoshi/ebiten/audio/mp3"
 	"github.com/hajimehoshi/ebiten/audio/wav"
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
@@ -18,6 +20,7 @@ var (
 	fade bool
 	// sonido
 	audioContext *audio.Context
+	audiomp3     *audio.Context
 	deadSound    *audio.Player
 	deadSound2   *audio.Player
 	sonidoFondo  *audio.InfiniteLoop
@@ -35,7 +38,8 @@ var (
 // Inicio valores de sonido del juego
 func initSonido() {
 
-	audioContext, _ = audio.NewContext(44100)
+	audioContext, _ = audio.NewContext(32000)
+	// audiomp3, _ = audio.NewContext(32000)
 	// sonido fondo
 	s, err := os.Open(`sircovid\data\audio\SIR-COVID sin moneditas (1).wav`)
 	if err != nil {
@@ -59,23 +63,24 @@ func initSonido() {
 		log.Fatal(err)
 	}
 	// sonido intro
-	s, err = os.Open(`sircovid\data\audio\introconteclas.wav`)
+	s, err = os.Open(`sircovid\data\audio\introconteclas (mp3).mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 8178592)
+	data = make([]byte, 371565)
 	c, err = s.Read(data)
-	// fmt.Println(c)
-	introD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	fmt.Println(c)
+
+	introD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
-	sonidoIntro = audio.NewInfiniteLoop(introD, int64(c))
+	sonidoFondo = audio.NewInfiniteLoop(introD, int64(c)*20)
 	if err != nil {
 		log.Fatal(err)
 	}
-	sIntro, err = audio.NewPlayer(audioContext, sonidoIntro)
+	sIntro, err = audio.NewPlayer(audioContext, sonidoFondo)
 	if err != nil {
 		log.Fatal(err)
 	}
