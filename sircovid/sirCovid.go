@@ -66,14 +66,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModeTitle:
 		introduccion()
 
-	// case ModeTitle == 1:
-	// 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-	// 		ModeTitle = 2
-	// 		player1.X[0] = 15
-	// 		player1.Y[0] = -40
-	// 		player2.X[0] = 130
-	// 		player2.Y[0] = -40
-	// 	}
+	case ModeTitleLevel:
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ModeTitleLevel = false
+			ModeGame = true
+		}
+
 	case player1.Compras:
 		if player1.Coins >= 2 {
 			player1 = compar(player1)

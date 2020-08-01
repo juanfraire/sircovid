@@ -67,11 +67,10 @@ func dibujarTextos(screen *ebiten.Image) {
 	}
 	switch {
 	case ModeTitle:
-
 		// intro draw
 		intro1.drawIntro(screen, screenWidth, screenHeight)
 
-	case ModeTitle:
+	case ModeTitleLevel:
 		nivel := fmt.Sprintf("    LEVEL %d\n\nPRESS SPACE KEY", Level)
 		text.Draw(screen, nivel, arcadeFont, 310, 250, color.White)
 	case player2.vidas == 0 || player1.vidas == 0:

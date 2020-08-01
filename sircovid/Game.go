@@ -26,6 +26,7 @@ var intro1 intro
 var (
 	Relato                    bool
 	ModeGame                  bool
+	ModeTitleLevel            bool
 	Level                     int
 	ModeWin                   bool
 	ModeTitle                 bool
@@ -115,7 +116,7 @@ func introduccion() {
 		player1.Y[0] = -40
 		player2.X[0] = 130
 		player2.Y[0] = -40
-		ModeGame = true
+		ModeTitleLevel = true
 	}
 
 }
