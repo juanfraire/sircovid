@@ -57,7 +57,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 	case ModePause:
 	case ModeWin:
-
 		//toda la introduccion con eleccion de players, etc
 	case Relato:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -67,6 +66,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		introduccion()
 
 	case ModeTitleLevel:
+
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitleLevel = false
 			ModeGame = true
@@ -148,12 +148,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarObjetos(alchol, screen)
 	dibujarObjetos(monedas, screen)
 
-	//dibujar carteles
-	if Game1.numPlayers == 2 {
-		dibujarObjetos(home1, screen)
-	}
-	dibujarObjetos(home, screen)
-
 	//dibujar palyers
 	dibujarPlayer(player1, screen)
 	if Game1.numPlayers == 2 {
@@ -179,6 +173,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		dibujarObjetos(relato, screen)
 		relato.Y = relato.Y - .3
 
+	}
+	if ModeTitleLevel {
+		dibujarObjetos(mhome, screen)
+		dibujarObjetos(money, screen)
+		if Game1.numPlayers == 2 {
+			dibujarObjetos(mhome1, screen)
+		}
 	}
 }
 

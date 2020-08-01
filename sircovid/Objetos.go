@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, home1, home, monedas, relato, ciudad Objetos
-	objScale                                                      = .3
-	barHScale                                                     float64
-	barWscale                                                     float64
-	coinHScale                                                    float64
-	coinWscale                                                    float64
-	plasmaHScale                                                  float64
-	plasmaWScale                                                  float64
+	barbijo, alchol, plasma, home1, home, monedas, relato, ciudad, tpaper, money, meds, mmeds, mhome, mhome1, bread Objetos
+	objScale                                                                                                        = .3
+	barHScale                                                                                                       float64
+	barWscale                                                                                                       float64
+	coinHScale                                                                                                      float64
+	coinWscale                                                                                                      float64
+	plasmaHScale                                                                                                    float64
+	plasmaWScale                                                                                                    float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -75,25 +75,6 @@ func initObjetos() {
 	monedas.img = barbijo.img
 
 	//carteles
-	home.FrameOX = 0
-	home.FrameOY = 195
-	home.FrameNum = 1
-	home.FrameWidth = 190
-	home.FrameHeight = 120
-	home.X = float64(0)
-	home.Y = float64(260)
-	home.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\carteles.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	home1.FrameOX = 0
-	home1.FrameOY = 195
-	home1.FrameNum = 1
-	home1.FrameWidth = 190
-	home1.FrameHeight = 120
-	home1.X = float64(110)
-	home1.Y = float64(85)
-	home1.img = home.img
 
 	//realto inicio juego
 	relato.FrameOX = 0
@@ -120,6 +101,50 @@ func initObjetos() {
 		log.Fatal(err)
 	}
 
+	mhome.FrameOX = 0
+	mhome.FrameOY = 0
+	mhome.FrameNum = 1
+	mhome.FrameWidth = 388
+	mhome.FrameHeight = 757
+	mhome.X = float64(0)
+	mhome.Y = float64(250)
+	mhome.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-home.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	mhome1.FrameOX = 0
+	mhome1.FrameOY = 0
+	mhome1.FrameNum = 1
+	mhome1.FrameWidth = 388
+	mhome1.FrameHeight = 757
+	mhome1.X = float64(80)
+	mhome1.Y = float64(50)
+	mhome1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-home.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	money.FrameOX = 0
+	money.FrameOY = 0
+	money.FrameNum = 1
+	money.FrameWidth = 994
+	money.FrameHeight = 538
+	money.X = float64(410)
+	money.Y = float64(10)
+	money.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-money.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// money.FrameOX = 0
+	// money.FrameOY = 0
+	// money.FrameNum = 1
+	// money.FrameWidth = 994
+	// money.FrameHeight = 538
+	// money.X = float64(410)
+	// money.Y = float64(10)
+	// money.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-money.png`, ebiten.FilterDefault)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 }
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
