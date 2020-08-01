@@ -87,7 +87,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			player2.Compras = false
 		}
 	case ModeGame:
-
 		//// sonido ////
 		sonidoGame()
 		// nube
@@ -124,6 +123,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			initNube()
 			initObjetos()
 			initEnemigos()
+			ModeGameOver = false
 		}
 	}
 	return nil

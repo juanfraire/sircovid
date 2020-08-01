@@ -362,6 +362,12 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		sDinero.Play()
 		sDinero.Rewind()
 	}
+	//PIERDE POR falta de plata
+	if p.Coins < 2 && !p.CompleteLevel && monedas.X == 1500 {
+		ModeGame = false
+		ModeGameOver = true
+	}
+
 	return p, b, pl
 }
 
