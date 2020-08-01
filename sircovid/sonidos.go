@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -13,7 +12,7 @@ import (
 
 var (
 	vol  float64
-	temp = float64(vol)
+	temp float64
 	up   bool
 	down bool
 	fade bool
@@ -217,6 +216,7 @@ func initSonido() {
 func sonido() {
 
 	// volumen on/off
+
 	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
 		switch {
 		case vol != .01:
@@ -240,10 +240,11 @@ func sonido() {
 	switch {
 	case vol < .99 && up:
 		vol += .01
+		temp = vol
 	case vol > .01 && down:
 		vol -= .01
+		temp = vol
 	}
-	fmt.Println(vol)
 
 	fondo.SetVolume(vol)
 	deadSound.SetVolume(vol)
@@ -261,7 +262,7 @@ func sonido() {
 	}
 
 	if ModeTitle || ModeGame {
-		// fadeIn()
+		fadeIn()
 		fondo.Pause()
 		sIntro.Play()
 	}
