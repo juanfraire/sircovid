@@ -63,17 +63,17 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			Relato = false
 		}
-	case ModeTitle == 0:
+	case ModeTitle:
 		introduccion()
 
-	case ModeTitle == 1:
-		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-			ModeTitle = 2
-			player1.X[0] = 15
-			player1.Y[0] = -40
-			player2.X[0] = 130
-			player2.Y[0] = -40
-		}
+	// case ModeTitle == 1:
+	// 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+	// 		ModeTitle = 2
+	// 		player1.X[0] = 15
+	// 		player1.Y[0] = -40
+	// 		player2.X[0] = 130
+	// 		player2.Y[0] = -40
+	// 	}
 	case player1.Compras:
 		if player1.Coins >= 2 {
 			player1 = compar(player1)
@@ -88,7 +88,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			player2.Compras = false
 		}
-	case player1.vidas != 0 && player2.vidas != 0 && ModeTitle == 2:
+	case ModeGame:
 
 		//// sonido ////
 		sonidoGame()
@@ -114,7 +114,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		Game1.siguienteNivel = siguienteNivel(player1)
 		Game1.siguienteNivel = siguienteNivel(player2)
 
-	case ModeGameOver == 0:
+	case ModeGameOver:
 		sonidoGameover()
 		for i := 0; i < nivel; i++ {
 			enemigo.FrameNum[i] = 1

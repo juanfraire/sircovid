@@ -167,7 +167,7 @@ func moverPlayer(p player) player {
 	}
 
 	// trasladar player1
-	if ModeGame == 1 && p.posicionInicial[0] != 1 {
+	if Level == 2 && p.posicionInicial[0] != 1 {
 		p.posicionInicial[0] = 1
 	}
 	var X1 = p.X[0]
@@ -349,6 +349,10 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.vidas--
 		sonidoVidas()
 		p.v = 0
+	}
+	if p.vidas == 0 {
+		ModeGameOver = true
+		ModeGame = false
 	}
 	//gana monedas
 	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y && p.Y[0]+hgt < monedas.Y+coinHScale {

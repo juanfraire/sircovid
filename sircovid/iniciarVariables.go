@@ -6,18 +6,19 @@ func iniciarVariables() {
 	Relato = true
 	count = 0
 	nivel = 1
+	Level = 1
 	//cosas de Game
-	ModeGame = 0
-	ModeTitle = 0
-	ModeGameOver = 0
+	//ModeGame
+	ModeTitle = true
+	//	ModeGameOver = 0
 	ElectNumPlayers = 0
 	ElectPlayer = 0
 	Game1.numPlayers = 1
 
 }
 func pasarNivel() {
-	ModeGame++
-	ModeTitle = 1
+	Level++
+	ModeTitle = true
 	nivel *= 2
 	if nivel > 13 {
 		nivel = 13

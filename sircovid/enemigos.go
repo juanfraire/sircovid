@@ -63,7 +63,7 @@ func initEnemigos() {
 func moverHumanos(E humanos) humanos {
 	// var i int
 	rand.Seed(time.Now().UnixNano())
-	if ModeGame >= 0 {
+	if Level >= 0 {
 		count++
 	}
 	for i = 0; i < nivel; i++ {

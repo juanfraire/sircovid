@@ -257,7 +257,7 @@ func sonido() {
 		fondo.Pause()
 	}
 
-	if ModeTitle >= 0 {
+	if ModeTitle || ModeGame {
 		// fadeIn()
 		fondo.Pause()
 		sIntro.Play()

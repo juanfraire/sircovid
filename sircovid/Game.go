@@ -25,12 +25,13 @@ var intro1 intro
 
 var (
 	Relato                    bool
-	ModeGame                  int
+	ModeGame                  bool
+	Level                     int
 	ModeWin                   bool
-	ModeTitle                 int
+	ModeTitle                 bool
 	ElectNumPlayers           int
 	ElectPlayer               int
-	ModeGameOver              int
+	ModeGameOver              bool
 	count1                    int
 	ModePause                 bool
 	elecCompras               int
@@ -109,8 +110,14 @@ func introduccion() {
 		}
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
-		ModeTitle = 1
+		ModeTitle = false
+		player1.X[0] = 15
+		player1.Y[0] = -40
+		player2.X[0] = 130
+		player2.Y[0] = -40
+		ModeGame = true
 	}
+
 }
 
 func siguienteNivel(p player) player {
@@ -177,25 +184,25 @@ func compar(p player) player {
 			supermarket1 = true
 		}
 		switch {
-		case farmacia && elecCompras == 2 && ModeGame == 0:
+		case farmacia && elecCompras == 2 && Level == 1:
 			p.CompleteLevel = true
-		case bakery && elecCompras == 2 && ModeGame == 1:
+		case bakery && elecCompras == 2 && Level == 2:
 			p.CompleteLevel = true
-		case mart && elecCompras == 2 && ModeGame == 2:
+		case mart && elecCompras == 2 && Level == 3:
 			p.CompleteLevel = true
-		case supermarket && elecCompras == 2 && ModeGame == 3:
+		case supermarket && elecCompras == 2 && Level == 4:
 			p.CompleteLevel = true
-		case farmacia1 && bakery1 && ModeGame == 4:
+		case farmacia1 && bakery1 && Level == 5:
 			p.CompleteLevel = true
-		case farmacia1 && supermarket1 && ModeGame == 5:
+		case farmacia1 && supermarket1 && Level == 6:
 			p.CompleteLevel = true
-		case mart1 && bakery1 && ModeGame == 5:
+		case mart1 && bakery1 && Level == 7:
 			p.CompleteLevel = true
-		case farmacia1 && mart1 && ModeGame == 6:
+		case farmacia1 && mart1 && Level == 8:
 			p.CompleteLevel = true
-		case supermarket1 && mart1 && ModeGame == 7:
+		case supermarket1 && mart1 && Level == 9:
 			p.CompleteLevel = true
-		case supermarket1 && bakery1 && ModeGame == 8:
+		case supermarket1 && bakery1 && Level == 10:
 			p.CompleteLevel = true
 		}
 
