@@ -378,7 +378,9 @@ func dibujarPlayer(P player, screen *ebiten.Image) {
 		P.FrameOX[0] = 0
 	}
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(plyrScale, plyrScale)
+	if !ModeTitle {
+		op.GeoM.Scale(plyrScale, plyrScale)
+	}
 	op.GeoM.Translate(P.X[0], P.Y[0])
 	i := (count1 / 7) % P.FrameNum[0]
 	sx, sy := P.FrameOX[0]+i*P.FrameWidth[0], P.FrameOY[0]
