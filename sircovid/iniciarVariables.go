@@ -8,9 +8,7 @@ func iniciarVariables() {
 	nivel = 1
 	Level = 1
 	//cosas de Game
-	//ModeGame
 	ModeTitle = true
-	//	ModeGameOver = 0
 	ElectNumPlayers = 0
 	ElectPlayer = 0
 	Game1.numPlayers = 1
@@ -18,14 +16,13 @@ func iniciarVariables() {
 }
 func pasarNivel() {
 	Level++
-	ModeTitle = true
+	ModeTitleLevel = true
 	nivel++
 	if nivel > 13 {
 		nivel = 13
 	}
 
 	pasarNivelPlayer()
-
 	initObjetos()
 
 	// initSonido()

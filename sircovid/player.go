@@ -48,11 +48,12 @@ func initPlayer() {
 		log.Fatal(err)
 	}
 	// player1
+
 	player1.FrameOX[0] = 0
 	player1.FrameOY[0] = 96
 	player1.FrameNum[0] = 1
-	player1.X[0] = float64(365)
-	player1.Y[0] = float64(300)
+	player1.X[0] = 15
+	player1.Y[0] = -40
 	player1.FrameWidth[0] = 32
 	player1.FrameHeight[0] = 48
 	player1.MovX = 0
@@ -69,14 +70,13 @@ func initPlayer() {
 	player2.FrameOX[0] = 0
 	player2.FrameOY[0] = 96
 	player2.FrameNum[0] = 1
-	player2.X[0] = float64(365)
-	player2.Y[0] = float64(350)
+	player2.X[0] = 130
+	player2.Y[0] = -40
 	player2.FrameWidth[0] = 32
 	player2.FrameHeight[0] = 48
 	player1.MovX = 0
 	player1.MovY = 0
 
-	// player2.humanos = chica
 	player2.vidas = 3
 	player2.v = 0
 	player2.señalador = 1
@@ -85,18 +85,19 @@ func initPlayer() {
 
 }
 func pasarNivelPlayer() {
+
 	//player1
 	player1.FrameNum[0] = 1
-	player1.X[0] = float64(365)
-	player1.Y[0] = float64(300)
+	player1.X[0] = 15
+	player1.Y[0] = -40
 	player1.MovX = 0
 	player1.MovY = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	//player2
 	player2.FrameNum[0] = 1
-	player2.X[0] = float64(365)
-	player2.Y[0] = float64(350)
+	player2.X[0] = 130
+	player2.Y[0] = -40
 	player2.MovX = 0
 	player2.MovY = 0
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
