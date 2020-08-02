@@ -150,7 +150,7 @@ func initObjetos() {
 	bread.FrameNum = 1
 	bread.FrameWidth = 1047
 	bread.FrameHeight = 503
-	bread.X = float64(690)
+	bread.X = float64(710)
 	bread.Y = float64(190)
 	bread.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-bread.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -159,11 +159,22 @@ func initObjetos() {
 	clothes.FrameOX = 0
 	clothes.FrameOY = 0
 	clothes.FrameNum = 1
-	clothes.FrameWidth = 1047
+	clothes.FrameWidth = 1079
 	clothes.FrameHeight = 503
-	clothes.X = float64(570)
+	clothes.X = float64(560)
 	clothes.Y = float64(190)
 	clothes.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-clothes.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	tpaper.FrameOX = 0
+	tpaper.FrameOY = 0
+	tpaper.FrameNum = 1
+	tpaper.FrameWidth = 1151
+	tpaper.FrameHeight = 388
+	tpaper.X = float64(570)
+	tpaper.Y = float64(400)
+	tpaper.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-tpaper.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -175,16 +186,18 @@ func dibujarNiveles(screen *ebiten.Image) {
 	if Game1.numPlayers == 2 {
 		dibujarObjetos(mhome1, screen)
 	}
-	switch {
-	case Level == 1:
+	if Level == 1 || Level == 5 || Level == 6 || Level == 8 {
 		dibujarObjetos(meds, screen)
-	case Level == 2:
-		dibujarObjetos(bread, screen)
-	case Level == 3:
-		dibujarObjetos(clothes, screen)
-
 	}
-
+	if Level == 2 || Level == 5 || Level == 7 || Level == 10 {
+		dibujarObjetos(bread, screen)
+	}
+	if Level == 3 || Level == 7 || Level == 8 || Level == 9 {
+		dibujarObjetos(clothes, screen)
+	}
+	if Level == 4 || Level == 6 || Level == 9 || Level == 10 {
+		dibujarObjetos(tpaper, screen)
+	}
 }
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
