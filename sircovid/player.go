@@ -50,7 +50,7 @@ func initPlayer() {
 	// player1
 
 	player1.FrameOX[0] = 0
-	player1.FrameOY[0] = 96
+	player1.FrameOY[0] = 0
 	player1.FrameNum[0] = 1
 	player1.X[0] = 15
 	player1.Y[0] = -40
@@ -68,7 +68,7 @@ func initPlayer() {
 
 	//player2
 	player2.FrameOX[0] = 0
-	player2.FrameOY[0] = 96
+	player2.FrameOY[0] = 0
 	player2.FrameNum[0] = 1
 	player2.X[0] = 130
 	player2.Y[0] = -40
