@@ -223,7 +223,7 @@ func moverPlayer(p player) player {
 		ModeWin = true
 		fondo.Pause()
 		//PARA MART
-	case p.c == 1 && (p.X[0] > 810 && p.X[0] < 820 && p.Y[0] < 228 && p.Y[0] > 224):
+	case p.c == 1 && p.X[0] > 810 && p.X[0] < 820 && p.Y[0] < 228 && p.Y[0] > 224:
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
@@ -255,7 +255,7 @@ func moverPlayer(p player) player {
 		p.Y[0] = 110
 
 		//mart
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 824:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 828:
 		p.Y[0] = 230
 		mart = false
 		//Pharmacy
