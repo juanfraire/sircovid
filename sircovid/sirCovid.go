@@ -175,12 +175,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	}
 	if ModeTitleLevel {
-		dibujarObjetos(mhome, screen)
-		dibujarObjetos(money, screen)
-		if Game1.numPlayers == 2 {
-			dibujarObjetos(mhome1, screen)
-		}
+		dibujarNiveles(screen)
 	}
+
 }
 
 // Layout maneja las dimensiones de pantalla

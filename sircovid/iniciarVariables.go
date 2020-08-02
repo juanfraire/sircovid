@@ -19,7 +19,7 @@ func iniciarVariables() {
 func pasarNivel() {
 	Level++
 	ModeTitle = true
-	nivel *= 2
+	nivel++
 	if nivel > 13 {
 		nivel = 13
 	}
