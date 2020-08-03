@@ -101,18 +101,6 @@ func initObjetos() {
 		log.Fatal(err)
 	}
 
-	// ciudad.FrameOX = 0
-	// ciudad.FrameOY = 0
-	// ciudad.FrameNum = 1
-	// ciudad.FrameWidth = 1500
-	// ciudad.FrameHeight = 2500
-	// ciudad.X = float64(30)
-	// ciudad.Y = float64(100)
-	// ciudad.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\relato1.png`, ebiten.FilterDefault)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
 	mhome.FrameOX = 0
 	mhome.FrameOY = 0
 	mhome.FrameNum = 1
