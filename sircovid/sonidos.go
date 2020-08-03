@@ -16,6 +16,7 @@ var (
 	up   bool
 	down bool
 	fade bool
+	tmpS = 1
 	// sonido
 	audioContext *audio.Context
 	audiomp3     *audio.Context
@@ -33,11 +34,107 @@ var (
 	sLevelUp     *audio.Player
 )
 
-// Inicio valores de sonido del juego
+// Inicio valores de sonido del juego al final
+
+// sonidos
+func sonido(p player) {
+
+	switch {
+	case ModePause:
+		fondo.Pause()
+
+	case Level > tmpS:
+		fondo.Pause()
+		fondo.Rewind()
+		sLevelUp.Play()
+		sLevelUp.Rewind()
+		tmpS = Level
+
+	case ModeTitle:
+		fadeIn()
+		fondo.Pause()
+		sIntro.Play()
+
+	case ModeGame:
+		sIntro.Pause()
+		sIntro.Rewind()
+		deadSound2.Rewind()
+		fondo.Play()
+
+	case ModeGameOver:
+		fondo.Pause()
+		fondo.Rewind()
+		deadSound.Pause()
+		deadSound2.Play()
+		sIntro.Play()
+	}
+
+	// volumen on/off
+	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
+		fade = false
+		switch {
+		case vol != .001:
+			vol = .001
+		case vol == .001:
+			vol = temp
+		}
+	}
+	// volumen +/-
+	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) || inpututil.IsKeyJustPressed(ebiten.Key9) {
+		up = true
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPAdd) || inpututil.IsKeyJustReleased(ebiten.Key9) {
+		up = false
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyKPSubtract) || inpututil.IsKeyJustPressed(ebiten.Key8) {
+		down = true
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPSubtract) || inpututil.IsKeyJustReleased(ebiten.Key8) {
+		down = false
+	}
+	switch {
+	case vol < .99 && up:
+		vol += .01
+		temp = vol
+	case vol > .01 && down:
+		vol -= .01
+		temp = vol
+	}
+	// set volume
+	fondo.SetVolume(vol)
+	deadSound.SetVolume(vol)
+	deadSound2.SetVolume(vol)
+	sBarbijo.SetVolume(vol)
+	sDinero.SetVolume(vol)
+	sFast.SetVolume(vol)
+	sIntro.SetVolume(vol)
+	sLevelUp.SetVolume(vol)
+	sPuerta.SetVolume(vol)
+}
+
+func sonidoVidas() {
+	deadSound.Play()
+	deadSound.Rewind()
+}
+func sonidomonedas() {
+	sPuerta.Pause()
+	sDinero.Play()
+	sDinero.Rewind()
+}
+
+func fadeIn() {
+	if vol == 0 {
+		fade = true
+	} else if vol > .99 {
+		fade = false
+	}
+	if fade {
+		vol += .01
+	}
+}
+
 func initSonido() {
 
 	audioContext, _ = audio.NewContext(32000)
-	// audiomp3, _ = audio.NewContext(32000)
+
 	// sonido fondo
 	s, err := os.Open(`sircovid\data\audio\SIR-COVID.mp3`)
 	if err != nil {
@@ -216,89 +313,4 @@ func initSonido() {
 		log.Fatal(err)
 	}
 
-}
-
-func sonido() {
-
-	// volumen on/off
-
-	if inpututil.IsKeyJustPressed(ebiten.KeyX) {
-		switch {
-		case vol != .01:
-			vol = .01
-		case vol == .01:
-			vol = temp
-		}
-	}
-
-	// volumen +/-
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) || inpututil.IsKeyJustPressed(ebiten.Key9) {
-		up = true
-	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPAdd) || inpututil.IsKeyJustReleased(ebiten.Key9) {
-		up = false
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPSubtract) || inpututil.IsKeyJustPressed(ebiten.Key8) {
-		down = true
-	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPSubtract) || inpututil.IsKeyJustReleased(ebiten.Key8) {
-		down = false
-	}
-	switch {
-	case vol < .99 && up:
-		vol += .01
-		temp = vol
-	case vol > .01 && down:
-		vol -= .01
-		temp = vol
-	}
-
-	fondo.SetVolume(vol)
-	deadSound.SetVolume(vol)
-	deadSound2.SetVolume(vol)
-	sBarbijo.SetVolume(vol)
-	sDinero.SetVolume(vol)
-	sFast.SetVolume(vol)
-	sIntro.SetVolume(vol)
-	sLevelUp.SetVolume(vol)
-	sPuerta.SetVolume(vol)
-
-	// sonido ModePause
-	if ModePause {
-		fondo.Pause()
-	}
-
-	if ModeTitle || ModeGame {
-		fadeIn()
-		fondo.Pause()
-		sIntro.Play()
-	}
-
-}
-func sonidoGame() {
-	sIntro.Pause()
-	sIntro.Rewind()
-	deadSound2.Rewind()
-	fondo.Play()
-}
-
-func sonidoGameover() {
-	fondo.Pause()
-	fondo.Rewind()
-	deadSound.Pause()
-	deadSound2.Play()
-}
-
-func sonidoVidas() {
-	deadSound.Play()
-	deadSound.Rewind()
-}
-
-func fadeIn() {
-	if vol == 0 {
-		fade = true
-	} else if vol > .99 {
-		fade = false
-	}
-	if fade {
-		vol += .01
-	}
 }

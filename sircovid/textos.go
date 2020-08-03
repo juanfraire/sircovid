@@ -72,7 +72,7 @@ func dibujarTextos(screen *ebiten.Image) {
 
 	case ModeTitleLevel:
 		nivel := fmt.Sprintf("    LEVEL %d\n\nPRESS SPACE KEY", Level)
-		text.Draw(screen, nivel, arcadeFont, 310, 250, color.White)
+		text.Draw(screen, nivel, arcadeFont, 320, 300, color.White)
 	case ModeGameOver:
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
 		text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
@@ -88,15 +88,15 @@ func dibujarTextos(screen *ebiten.Image) {
 		//elegir numero de jugadores
 	case ElectNumPlayers == 0 && Game1.numPlayers == 1:
 		jugadores := fmt.Sprintf(">1 PLAYER\n 2 PLAYERS")
-		text.Draw(screen, jugadores, arcadeFont, 360, 250, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 400, 340, color.White)
 	case ElectNumPlayers == 0 && Game1.numPlayers == 2:
 		jugadores := fmt.Sprintf(" 1 PLAYER\n>2 PLAYERS")
-		text.Draw(screen, jugadores, arcadeFont, 360, 250, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 400, 340, color.White)
 
 		//elegir jugador
 	case ElectPlayer == 0:
 		jugadores := fmt.Sprintf("CHOOSE PLAYER")
-		text.Draw(screen, jugadores, arcadeFont, 330, 250, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 400, 340, color.White)
 
 	case ElectNumPlayers == 1:
 		for i, l := range texts {

@@ -41,8 +41,9 @@ func init() {
 
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
-	sonido()
 	// game counter
+
+	sonido(player1)
 	g.count++
 	count1++
 	if count1 == 60 {
@@ -87,8 +88,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			player2.Compras = false
 		}
 	case ModeGame:
-		//// sonido ////
-		sonidoGame()
 		// nube
 		nube1 = moverNube(nube1)
 
@@ -112,7 +111,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		Game1.siguienteNivel = siguienteNivel(player2)
 
 	case ModeGameOver:
-		sonidoGameover()
 		for i := 0; i < nivel; i++ {
 			enemigo.FrameNum[i] = 1
 			enemigo.FrameOX[i] = 0

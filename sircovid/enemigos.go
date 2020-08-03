@@ -30,7 +30,6 @@ var (
 
 func randXY() (x float64, y float64) {
 	rand.Seed(time.Now().UnixNano())
-	// x, y = 10, 10
 	_, _, obs := obstaculos(x, y, x, y)
 	for obs {
 		x = float64(rand.Intn(screenWidth))
@@ -63,7 +62,7 @@ func initEnemigos() {
 func moverHumanos(E humanos) humanos {
 	// var i int
 	rand.Seed(time.Now().UnixNano())
-	if Level >= 0 {
+	if ModeGame {
 		count++
 	}
 	for i = 0; i < nivel; i++ {

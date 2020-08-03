@@ -131,10 +131,6 @@ func siguienteNivel(p player) player {
 		player2.CompleteLevel = false
 		farmacia, mart, supermarket, bakery = false, false, false, false
 		pasarNivel()
-		fondo.Pause()
-		fondo.Rewind()
-		sLevelUp.Play()
-		sLevelUp.Rewind()
 
 	}
 	return p
@@ -173,6 +169,8 @@ func compar(p player) player {
 			p.Coins = p.Coins - 2
 			p.Fast = true
 			p.CountPoder = 600
+			sFast.Play()
+			sFast.Rewind()
 		}
 		switch {
 		case elecCompras == 2 && bakery:
