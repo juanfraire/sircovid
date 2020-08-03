@@ -256,7 +256,7 @@ func moverPlayer(p player) player {
 		p.Y[0] = 110
 
 		//mart
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 828:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 809 && p.X[0] < 828:
 		p.Y[0] = 230
 		mart = false
 		//Pharmacy
