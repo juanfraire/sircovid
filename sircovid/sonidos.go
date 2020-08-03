@@ -1,14 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/audio"
 	"github.com/hajimehoshi/ebiten/audio/mp3"
-	"github.com/hajimehoshi/ebiten/audio/wav"
 	"github.com/hajimehoshi/ebiten/inpututil"
 )
 
@@ -41,20 +39,20 @@ func initSonido() {
 	audioContext, _ = audio.NewContext(32000)
 	// audiomp3, _ = audio.NewContext(32000)
 	// sonido fondo
-	s, err := os.Open(`sircovid\data\audio\SIR-COVID sin moneditas (1).wav`)
+	s, err := os.Open(`sircovid\data\audio\SIR-COVID.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data := make([]byte, 11491248)
+	data := make([]byte, 521901)
 	c, err := s.Read(data)
 	// fmt.Println(c)
 
-	fondoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	fondoD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
-	sonidoFondo = audio.NewInfiniteLoop(fondoD, int64(c))
+	sonidoFondo = audio.NewInfiniteLoop(fondoD, int64(c)*20)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -63,14 +61,14 @@ func initSonido() {
 		log.Fatal(err)
 	}
 	// sonido intro
-	s, err = os.Open(`sircovid\data\audio\introconteclas (mp3).mp3`)
+	s, err = os.Open(`sircovid\data\audio\introconteclas.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
 	data = make([]byte, 371565)
 	c, err = s.Read(data)
-	fmt.Println(c)
+	// fmt.Println(c)
 
 	introD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -86,16 +84,16 @@ func initSonido() {
 	}
 
 	//sonido Puerta
-	s, err = os.Open(`sircovid\data\audio\puertas ingresos.wav`)
+	s, err = os.Open(`sircovid\data\audio\puertas ingresos.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 86668)
+	data = make([]byte, 4653)
 	c, err = s.Read(data)
-	// fmt.Println(c)
+	// fmt.Println("puerta", c)
 
-	puertaD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	puertaD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -105,16 +103,16 @@ func initSonido() {
 	}
 
 	//sonido Monedas
-	s, err = os.Open(`sircovid\data\audio\DINERO.wav`)
+	s, err = os.Open(`sircovid\data\audio\DINERO.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 194948)
+	data = make([]byte, 9549)
 	c, err = s.Read(data)
-	// fmt.Println(c)
+	// fmt.Println("dinero", c)
 
-	dineroD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	dineroD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -123,16 +121,16 @@ func initSonido() {
 		log.Fatal(err)
 	}
 	// sonido Fast
-	s, err = os.Open(`sircovid\data\audio\ALRIGHT! COFFE.wav`)
+	s, err = os.Open(`sircovid\data\audio\ALRIGHT! COFFE.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 151636)
+	data = make([]byte, 7533)
 	c, err = s.Read(data)
-	// fmt.Println(c)
+	// fmt.Println("cofee", c)
 
-	fastD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	fastD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -143,16 +141,16 @@ func initSonido() {
 
 	// sonido barbijo o alcohol
 
-	s, err = os.Open(`sircovid\data\audio\ponerse barbijo.wav`)
+	s, err = os.Open(`sircovid\data\audio\ponerse barbijo.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 151636)
+	data = make([]byte, 4653)
 	c, err = s.Read(data)
-	// fmt.Println(c)
+	// fmt.Println("barbijo", c)
 
-	barbijoD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	barbijoD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -163,15 +161,16 @@ func initSonido() {
 
 	//sonido Pasar Nivel
 
-	s, err = os.Open(`sircovid\data\audio\PASAR DE NIVEL.wav`)
+	s, err = os.Open(`sircovid\data\audio\PASAR DE NIVEL.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 99346536)
+	data = make([]byte, 9549)
 	c, err = s.Read(data)
+	// fmt.Println("pasar nivel", c)
 
-	levelD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	levelD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -181,15 +180,16 @@ func initSonido() {
 	}
 
 	// sonido perder vida
-	s, err = os.Open(`sircovid\data\audio\tos1.wav`)
+	s, err = os.Open(`sircovid\data\audio\tos1.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 346536)
+	data = make([]byte, 16461)
 	c, err = s.Read(data)
+	// fmt.Println("tos", c)
 
-	tosD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	tosD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -199,15 +199,15 @@ func initSonido() {
 	}
 
 	// sonido muerte
-	s, err = os.Open(`sircovid\data\audio\sonido muerte o daño por nube.wav`)
+	s, err = os.Open(`sircovid\data\audio\sonido muerte o daño por nube.mp3`)
 	if err != nil {
 		panic(err)
 	}
 	defer s.Close()
-	data = make([]byte, 178704)
+	data = make([]byte, 16461)
 	_, err = s.Read(data)
-	// fmt.Println(c)
-	jabD, err := wav.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	// fmt.Println("nube", c)
+	jabD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)
 	}
