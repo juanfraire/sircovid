@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -229,7 +228,6 @@ func moverPlayer(p player) player {
 
 		//PARA MART
 	case p.c == 1 && p.X[0] > 810 && p.X[0] < 820 && p.Y[0] < 228 && p.Y[0] > 224:
-		fmt.Println("hola agus")
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
