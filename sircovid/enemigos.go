@@ -16,16 +16,15 @@ func init() {
 }
 
 var (
-	enemigo  humanos
-	count    int
-	tmp      int
-	obs      bool
-	match    bool
-	contagio bool
-	x        float64
-	y        float64
-	en       string
-	i        int
+	enemigo humanos
+	count   int
+	tmp     int
+	obs     bool
+	match   bool
+	x       float64
+	y       float64
+	en      string
+	i       int
 )
 
 func randXY() (x float64, y float64) {
@@ -52,7 +51,6 @@ func initEnemigos() {
 		enemigo.num[i] = rand.Intn(5)
 		enemigo.cambio[i] = rand.Intn(50) + 100
 		enemigo.img[i], _, err = ebitenutil.NewImageFromFile(en, ebiten.FilterDefault)
-		// enemigo.contagio[i] = false
 		if err != nil {
 			log.Fatal(err)
 		}

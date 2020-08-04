@@ -44,15 +44,6 @@ var (
 	// imágenes
 	imgTiles *ebiten.Image
 
-	// sonido
-	// audioContext *audio.Context
-	// deadSound    *audio.Player
-	// deadSound2   *audio.Player
-	// sonidoFondo  *audio.InfiniteLoop
-	// fondo        *audio.Player
-	// sonidoIntro  *audio.InfiniteLoop
-	// sIntro       *audio.Player
-
 	//para start y game over
 	arcadeFont      font.Face
 	smallArcadeFont font.Face
@@ -246,7 +237,7 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 
 			//EN MART
 		case mart && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">$2-MOUTH COVER-GET INMUNE-\n $5-HAT\n $2-CLOTHES")
+			jugadores := fmt.Sprintf(">$2-FACE MASK-GET INMUNE-\n $5-HAT\n $2-CLOTHES")
 			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
 		case mart && elecCompras == 1 && p.Coins >= 2:
 			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE-\n>$5-HAT\n $2-CLOTHES")

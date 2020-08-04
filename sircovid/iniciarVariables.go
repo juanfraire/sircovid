@@ -18,8 +18,8 @@ func pasarNivel() {
 	Level++
 	ModeTitleLevel = true
 	nivel = Level * 2
-	if nivel > 13 {
-		nivel = 13
+	if nivel > 20 {
+		nivel = 20
 	}
 
 	pasarNivelPlayer()

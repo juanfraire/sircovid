@@ -201,9 +201,7 @@ func moverPlayer(p player) player {
 	switch {
 	case p.c == 1 && ((p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78)):
 		p.Y[0] = -40
-		fondo.Pause()
-		sPuerta.Play()
-		sPuerta.Rewind()
+		sonidoPuerta()
 		//pharmacy
 	case p.c == 1 && p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 77:
 		p.Y[0] = -40
@@ -211,6 +209,8 @@ func moverPlayer(p player) player {
 		p.MovX = 0
 		p.Compras = true
 		farmacia = true
+		sonidoPuerta()
+
 		//bakery
 	case p.c == 1 && p.X[0] > 945 && p.X[0] < 955 && p.Y[0] < 228 && p.Y[0] > 224:
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
@@ -218,11 +218,14 @@ func moverPlayer(p player) player {
 		p.Y[0] = -40
 		p.Compras = true
 		bakery = true
+		sonidoPuerta()
+
 		//para WIN
 	case p.c == 1 && p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
 		p.Y[0] = -40
 		ModeWin = true
-		fondo.Pause()
+		sonidoPuerta()
+
 		//PARA MART
 	case p.c == 1 && p.X[0] > 810 && p.X[0] < 820 && p.Y[0] < 228 && p.Y[0] > 224:
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
@@ -230,6 +233,8 @@ func moverPlayer(p player) player {
 		p.Y[0] = -40
 		p.Compras = true
 		mart = true
+		sonidoPuerta()
+
 		//SUPERMAKET
 	case p.c == 1 && (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 437 && p.Y[0] > 434):
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
@@ -237,41 +242,51 @@ func moverPlayer(p player) player {
 		p.Y[0] = -40
 		p.Compras = true
 		supermarket = true
+		sonidoPuerta()
 
 		///SALIDAS///
 		//edificio arriba izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 124 && p.X[0] < 136:
 		p.Y[0] = 99
+		sonidoPuerta()
 		//edificio abajo a la izquieda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
 		p.Y[0] = 276
+		sonidoPuerta()
 		//banco
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 634 && p.X[0] < 646:
 		p.Y[0] = 51
+		sonidoPuerta()
 		//local a la izquieda del banco
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 414 && p.X[0] < 426:
 		p.Y[0] = 57
+		sonidoPuerta()
 		//tienda a la derecha del edeficio arriba a la izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 265:
 		p.Y[0] = 110
-
+		sonidoPuerta()
 		//mart
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 809 && p.X[0] < 828:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 828:
 		p.Y[0] = 230
 		mart = false
+		sonidoPuerta()
 		//Pharmacy
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 274 && p.X[0] < 286:
 		p.Y[0] = 82
 		farmacia = false
+		sonidoPuerta()
 		//salida de Bakery
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 943 && p.X[0] < 957:
 		p.Y[0] = 229
 		bakery = false
-	//supermarket
+		sonidoPuerta()
+		//supermarket
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 844 && p.X[0] < 856:
 		p.Y[0] = 436
 		supermarket = false
+		sonidoPuerta()
 	}
+
 	//Vuelta a la realidad
 	if p.Y[0] < 0 {
 		p.X[0] = X1
@@ -307,7 +322,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	hgt = float64(p.FrameHeight[0])*plyrScale - 2
 	wth = float64(p.FrameWidth[0])*plyrScale - 6
 
-	if p.Inmune != true {
+	if !p.Inmune {
 		//pierde vidas con la nube
 		for i := 0; i < nivel; i++ {
 			nubX := nube1.X[i] * nubScale
@@ -332,7 +347,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.Inmune = true
 		p.CountPoder = 600
 	}
-	if p.Inmune == true || p.Fast {
+	if p.Inmune || p.Fast {
 
 		p.CountPoder--
 	}
@@ -359,9 +374,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y && p.Y[0]+hgt < monedas.Y+coinHScale {
 		monedas.X = 1500
 		p.Coins += 5
-		sPuerta.Pause()
-		sDinero.Play()
-		sDinero.Rewind()
+		sonidomonedas()
 	}
 	//PIERDE POR falta de plata
 	if p.Coins < 2 && !p.CompleteLevel && monedas.X == 1500 {
