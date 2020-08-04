@@ -109,7 +109,10 @@ func sonido(p player) {
 	sLevelUp.SetVolume(vol)
 	sPuerta.SetVolume(vol)
 }
-
+func sonidoPuerta() {
+	sPuerta.Play()
+	sPuerta.Rewind()
+}
 func sonidoVidas() {
 	deadSound.Play()
 	deadSound.Rewind()
