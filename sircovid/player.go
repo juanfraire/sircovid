@@ -199,9 +199,23 @@ func moverPlayer(p player) player {
 	}
 	///ENTRADAS a puertas///
 	switch {
-	case p.c == 1 && ((p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95) || (p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270) || (p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78)):
+	case p.c == 1 && ((p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78)):
 		p.Y[0] = -40
 		sonidoPuerta()
+		//home
+	case p.c == 1 && p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270:
+		p.Y[0] = -40
+		sonidoPuerta()
+		ModeTitleLevel = true
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
+		p.MovX = 0
+		//home1
+	case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95):
+		p.Y[0] = -40
+		sonidoPuerta()
+		ModeTitleLevel = true
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
+		p.MovX = 0
 		//pharmacy
 	case p.c == 1 && p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 77:
 		p.Y[0] = -40
@@ -245,11 +259,11 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 
 		///SALIDAS///
-		//edificio arriba izquierda
+		//home1
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 124 && p.X[0] < 136:
 		p.Y[0] = 99
 		sonidoPuerta()
-		//edificio abajo a la izquieda
+		//home
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
 		p.Y[0] = 276
 		sonidoPuerta()
