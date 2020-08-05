@@ -34,36 +34,36 @@ func initTextos() {
 func dibujarTextos(screen *ebiten.Image) {
 	// dibujar vidas
 	lifesP1 := fmt.Sprintf("Life:%02d", player1.vidas)
-	text.Draw(screen, lifesP1, smallArcadeFont, fontSize, 40, color.RGBA{35, 27, 190, 0xff})
+	text.Draw(screen, lifesP1, smallArcadeFont, fontSize, 40, color.White)
 	if Game1.numPlayers == 2 {
 		lifesP2 := fmt.Sprintf("Life:%02d", player2.vidas)
-		text.Draw(screen, lifesP2, smallArcadeFont, 900, 40, color.RGBA{35, 27, 190, 0xff})
+		text.Draw(screen, lifesP2, smallArcadeFont, 900, 40, color.White)
 	}
 	//dibujar monedas
 	CoinsP1 := fmt.Sprintf("Coins:%d", player1.Coins)
-	text.Draw(screen, CoinsP1, smallArcadeFont, fontSize, 70, color.RGBA{35, 27, 190, 0xff})
+	text.Draw(screen, CoinsP1, smallArcadeFont, fontSize, 70, color.White)
 
 	if Game1.numPlayers == 2 {
 		CoinsP1 := fmt.Sprintf("Coins:%d", player2.Coins)
-		text.Draw(screen, CoinsP1, smallArcadeFont, 900, 70, color.RGBA{35, 27, 190, 0xff})
+		text.Draw(screen, CoinsP1, smallArcadeFont, 900, 70, color.White)
 	}
 	//dibujar inmunidad
 	if player1.Inmune {
 		Inm := fmt.Sprintf("Inmune for:%02d", player1.CountPoder/60)
-		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.RGBA{35, 27, 190, 0xff})
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 100, color.White)
 	}
 	if player2.Inmune {
 		Inm := fmt.Sprintf("Inmune for:%02d", player2.CountPoder/60)
-		text.Draw(screen, Inm, smallArcadeFont, 840, 100, color.RGBA{35, 27, 190, 0xff})
+		text.Draw(screen, Inm, smallArcadeFont, 840, 100, color.White)
 	}
 	//dibujar Fast
 	if player1.Fast {
 		Inm := fmt.Sprintf("Fast for:%02d", player1.CountPoder/60)
-		text.Draw(screen, Inm, smallArcadeFont, fontSize, 130, color.RGBA{35, 27, 190, 0xff})
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 130, color.White)
 	}
 	if player2.Fast {
 		Inm := fmt.Sprintf("Fast for:%02d", player2.CountPoder/60)
-		text.Draw(screen, Inm, smallArcadeFont, 840, 130, color.RGBA{35, 27, 190, 0xff})
+		text.Draw(screen, Inm, smallArcadeFont, 840, 130, color.White)
 	}
 	switch {
 	case ModeTitle:
@@ -103,5 +103,14 @@ func dibujarTextos(screen *ebiten.Image) {
 			x := (screenWidth - len(l)*fontSize) / 2
 			text.Draw(screen, l, arcadeFont, x, (i+5)*fontSize, color.White)
 		}
+	}
+	//dibujar carteles indicadores primer nivel
+	if Level == 1 {
+		plasmaVida := fmt.Sprintf(">>GET\n  LIFE")
+		text.Draw(screen, plasmaVida, smallArcadeFont, 110, 270, color.White)
+		alcholInmune := fmt.Sprintf("GET INMUNE>>")
+		text.Draw(screen, alcholInmune, smallArcadeFont, 810, 60, color.White)
+		barbijoInmune := fmt.Sprintf("<<GET INMUNE")
+		text.Draw(screen, barbijoInmune, smallArcadeFont, 330, 510, color.White)
 	}
 }

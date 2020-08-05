@@ -212,6 +212,7 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 			jugadores := fmt.Sprintf("YOU DONT HAVE MONEY\n  COME BACK SOON")
 			text.Draw(screen, jugadores, arcadeFont, 230, 200, color.White)
 		}
+
 		//EN FARMACIA
 		switch {
 		case farmacia && elecCompras == 0 && p.Coins >= 2:
