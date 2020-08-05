@@ -384,18 +384,17 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		ModeGameOver = true
 		ModeGame = false
 	}
+	//PIERDE POR falta de plata
+	if player1.Coins < 2 && player2.Coins < 2 && !p.CompleteLevel && monedas.X == 1500 {
+		ModeGame = false
+		ModeGameOver = true
+	}
 	//gana monedas
 	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y && p.Y[0]+hgt < monedas.Y+coinHScale {
 		monedas.X = 1500
 		p.Coins += 5
 		sonidomonedas()
 	}
-	//PIERDE POR falta de plata
-	if p.Coins < 2 && !p.CompleteLevel && monedas.X == 1500 {
-		ModeGame = false
-		ModeGameOver = true
-	}
-
 	return p, b, pl
 }
 
