@@ -134,10 +134,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 // Draw dibuja la pantalla 60 veces por segundo
 func (g *Game) Draw(screen *ebiten.Image) {
 
-	// dubujar fondo
+	// dibujar fondo
 	op := &ebiten.DrawImageOptions{}
-	// op.GeoM.Scale(2, 2)
-	// op.GeoM.Translate(player1.X[0], player1.Y[0])
+
 	screen.DrawImage(imgTiles, op)
 
 	//dibujar objetos
@@ -146,26 +145,29 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	dibujarObjetos(alchol, screen)
 	dibujarObjetos(monedas, screen)
 
-	//dibujar palyers
-	dibujarPlayer(player1, screen)
-	if Game1.numPlayers == 2 {
-		dibujarPlayer(player2, screen)
-	}
 	//dibuja al enemigo
 	dibujarEnemigos(enemigo, screen)
 
 	// dibujar nube
 	dibujarNube(nube1, screen)
-
+	if ModeTitle {
+		dibujarObjetos(fondoNegro, screen)
+	}
 	// dibujar texto
 	if !Relato {
 		dibujarTextos(screen)
 	}
+	//dibujar fondo negro
 
 	//dibujar textos compras
 	dibujarTextoCompras(player1, screen)
 	dibujarTextoCompras(player2, screen)
 
+	//dibujar palyers
+	dibujarPlayer(player1, screen)
+	if Game1.numPlayers == 2 {
+		dibujarPlayer(player2, screen)
+	}
 	//Dibujar relato
 
 	if Relato {

@@ -70,9 +70,9 @@ const (
 func introduccion() {
 	// intro update
 	intro1.updateIntro(screenWidth, screenHeight)
-	player1.X[0] = float64(365)
-	player1.Y[0] = float64(300)
-	player2.X[0] = float64(365)
+	player1.X[0] = float64(390)
+	player1.Y[0] = float64(350)
+	player2.X[0] = float64(605)
 	player2.Y[0] = float64(350)
 
 	switch {
