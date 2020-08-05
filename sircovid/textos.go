@@ -76,6 +76,10 @@ func dibujarTextos(screen *ebiten.Image) {
 	case ModeGameOver:
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
 		text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
+		if player1.Coins < 2 && player2.Coins < 2 && monedas.X == 1500 {
+			noMoney := fmt.Sprintf("YOU CAN NOT COMPLETE THE LEVEL")
+			text.Draw(screen, noMoney, arcadeFont, 50, 150, color.White)
+		}
 	case ModeWin == true:
 		win := fmt.Sprintf("YOU ARBITRARILY\n\n      WIN")
 		text.Draw(screen, win, arcadeFont, 300, 200, color.White)
@@ -109,7 +113,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		plasmaVida := fmt.Sprintf(">>GET\n  LIFE")
 		text.Draw(screen, plasmaVida, smallArcadeFont, 110, 270, color.White)
 		alcholInmune := fmt.Sprintf("GET INMUNE>>")
-		text.Draw(screen, alcholInmune, smallArcadeFont, 810, 60, color.White)
+		text.Draw(screen, alcholInmune, smallArcadeFont, 810, 130, color.White)
 		barbijoInmune := fmt.Sprintf("<<GET INMUNE")
 		text.Draw(screen, barbijoInmune, smallArcadeFont, 330, 510, color.White)
 	}
