@@ -63,6 +63,7 @@ func initPlayer() {
 	player1.vidas = 3
 	player1.v = 0
 	player1.señalador = 0
+	player1.Coins = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 	player1.humanos.img = humano1.img
 
@@ -80,6 +81,7 @@ func initPlayer() {
 	player2.vidas = 3
 	player2.v = 0
 	player2.señalador = 1
+	player2.Coins = 0
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
 	player2.humanos.img = humano2.img
 
