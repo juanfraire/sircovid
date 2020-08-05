@@ -40,6 +40,7 @@ var (
 	mart, mart1               bool
 	bakery, bakery1           bool
 	supermarket, supermarket1 bool
+	vacunatorio               bool
 
 	// imágenes
 	imgTiles *ebiten.Image
@@ -120,9 +121,8 @@ func siguienteNivel(p player) player {
 	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40 || p.X[0] >= home1.X && p.X[0] <= home1.X+40 && p.Y[0] == -40 && Game1.numPlayers == 2) {
 		player1.CompleteLevel = false
 		player2.CompleteLevel = false
-		farmacia, mart, supermarket, bakery = false, false, false, false
+		farmacia, mart, supermarket, bakery, vacunatorio = false, false, false, false, false
 		pasarNivel()
-
 	}
 	return p
 }
@@ -137,6 +137,9 @@ func compar(p player) player {
 	}
 	if elecCompras > 2 {
 		elecCompras = 2
+	}
+	if elecCompras > 1 && bakery && vacunatorio {
+		elecCompras = 1
 	}
 	if elecCompras < 0 {
 		elecCompras = 0
@@ -163,6 +166,10 @@ func compar(p player) player {
 			sFast.Play()
 			sFast.Rewind()
 		}
+		if elecCompras == 0 && vacunatorio {
+			ModeWin = true
+		}
+
 		switch {
 		case elecCompras == 2 && bakery:
 			p.Coins = p.Coins - 2
@@ -179,6 +186,8 @@ func compar(p player) player {
 		}
 		switch {
 		case farmacia && elecCompras == 2 && Level == 1:
+			p.CompleteLevel = true
+		case vacunatorio && elecCompras == 1 && Level >= 10:
 			p.CompleteLevel = true
 		case bakery && elecCompras == 2 && Level == 2:
 			p.CompleteLevel = true
@@ -227,13 +236,10 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 
 			//EN BAKERY
 		case bakery && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">$3-CRIOLLOS-GET LIFE-\n $2-CAFE -GO FAST-\n $2-BREAD")
+			jugadores := fmt.Sprintf(">$2-CAFE -GO FAST-\n $2-BREAD")
 			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
 		case bakery && elecCompras == 1 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $3-CRIOLLOS-GET LIFE-\n>$2-CAFE -GO FAST-\n $2-BREAD")
-			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
-		case bakery && elecCompras == 2 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $3-CRIOLLOS-GET LIFE-\n $2-CAFE -GO FAST-\n>$2-BREAD")
+			jugadores := fmt.Sprintf(" $2-CAFE -GO FAST-\n>$2-BREAD")
 			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
 
 			//EN MART
@@ -256,6 +262,13 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 		case supermarket && elecCompras == 2 && p.Coins >= 2:
 			jugadores := fmt.Sprintf(" $3-FOOD-GET LIFE-\n $2-ENERGIZING -GO FAST-\n>$2-TOILET PAPER")
+			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
+			//en SUPERMARKET
+		case vacunatorio && elecCompras == 0 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(">$10-VACCINE-\n    -LEAVE-")
+			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
+		case vacunatorio && elecCompras == 1 && p.Coins >= 2:
+			jugadores := fmt.Sprintf(" $10-VACCINE-\n>   -LEAVE-")
 			text.Draw(screen, jugadores, arcadeFont, 200, 250, color.White)
 		}
 	}

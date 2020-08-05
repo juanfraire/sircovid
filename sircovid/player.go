@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -204,11 +205,21 @@ func moverPlayer(p player) player {
 	case p.c == 1 && ((p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78)):
 		p.Y[0] = -40
 		sonidoPuerta()
+		//vacunatorio
+	case Level >= 10 && p.c == 1 && p.X[0] > 810 && p.X[0] < 825 && p.Y[0] < 50 && p.Y[0] > 47:
+		p.Y[0] = -40
+		p.a, p.b, p.c, p.d = 0, 0, 0, 0
+		p.MovX = 0
+		p.Compras = true
+		vacunatorio = true
+		sonidoPuerta()
 		//home
 	case p.c == 1 && p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270:
 		p.Y[0] = -40
 		sonidoPuerta()
-		ModeTitleLevel = true
+		if !p.CompleteLevel {
+			ModeTitleLevel = true
+		}
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		//home1
@@ -269,6 +280,10 @@ func moverPlayer(p player) player {
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
 		p.Y[0] = 276
 		sonidoPuerta()
+		//vacunatorio
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 809 && p.X[0] < 826:
+		p.Y[0] = 51
+		sonidoPuerta()
 		//banco
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 634 && p.X[0] < 646:
 		p.Y[0] = 51
@@ -323,6 +338,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
+	fmt.Println(p.X, p.Y)
 	return p
 }
 

@@ -113,7 +113,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		plasmaVida := fmt.Sprintf(">>GET\n  LIFE")
 		text.Draw(screen, plasmaVida, smallArcadeFont, 110, 270, color.White)
 		alcholInmune := fmt.Sprintf("GET INMUNE>>")
-		text.Draw(screen, alcholInmune, smallArcadeFont, 810, 130, color.White)
+		text.Draw(screen, alcholInmune, smallArcadeFont, 810, 500, color.White)
 		barbijoInmune := fmt.Sprintf("<<GET INMUNE")
 		text.Draw(screen, barbijoInmune, smallArcadeFont, 330, 510, color.White)
 	}
