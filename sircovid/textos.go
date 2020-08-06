@@ -109,12 +109,12 @@ func dibujarTextos(screen *ebiten.Image) {
 		}
 	}
 	//dibujar carteles indicadores primer nivel
-	if Level == 1 {
-		plasmaVida := fmt.Sprintf(">>GET\n  LIFE")
-		text.Draw(screen, plasmaVida, smallArcadeFont, 110, 270, color.White)
-		alcholInmune := fmt.Sprintf("GET INMUNE>>")
-		text.Draw(screen, alcholInmune, smallArcadeFont, 810, 500, color.White)
-		barbijoInmune := fmt.Sprintf("<<GET INMUNE")
-		text.Draw(screen, barbijoInmune, smallArcadeFont, 330, 510, color.White)
-	}
+	// if Level == 1 {
+	// 	plasmaVida := fmt.Sprintf(">>GET\n  LIFE")
+	// 	text.Draw(screen, plasmaVida, smallArcadeFont, 110, 270, color.White)
+	// 	alcholInmune := fmt.Sprintf("GET INMUNE>>")
+	// 	text.Draw(screen, alcholInmune, smallArcadeFont, 810, 500, color.White)
+	// 	barbijoInmune := fmt.Sprintf("<<GET INMUNE")
+	// 	text.Draw(screen, barbijoInmune, smallArcadeFont, 330, 510, color.White)
+	// }
 }
