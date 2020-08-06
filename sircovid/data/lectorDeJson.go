@@ -9,16 +9,16 @@ import (
 var jsonText string
 
 type Objetos struct {
-	Y      int
-	Height int
-	X      int
-	Width  int
+	Y      float64
+	Height float64
+	X      float64
+	Width  float64
 }
 
 var decoded []Objetos
 
 func main() {
-	fJSON, err := ioutil.ReadFile("sircovid/data/ciudad larga.json")
+	fJSON, err := ioutil.ReadFile("sircovid/data/ciudadFere.json")
 	if err != nil {
 		panic(err)
 	}
@@ -28,10 +28,10 @@ func main() {
 	objeto := make([][4]int, len(decoded))
 
 	for i := 0; i < len(decoded); i++ {
-		objeto[i][0] = decoded[i].X
-		objeto[i][1] = decoded[i].Width
-		objeto[i][2] = decoded[i].Y
-		objeto[i][3] = decoded[i].Height
+		objeto[i][0] = int(decoded[i].X)
+		objeto[i][1] = int(decoded[i].Width)
+		objeto[i][2] = int(decoded[i].Y)
+		objeto[i][3] = int(decoded[i].Height)
 	}
 
 	fmt.Println("objetos := make([][]int,", len(objeto), ")")

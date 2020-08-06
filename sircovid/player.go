@@ -30,7 +30,7 @@ var (
 	player1, player2 player
 	humano1, humano2 humanos
 	// nivel            = int(1)
-	plyrScale = .65
+	plyrScale = .50
 	hgt       float64
 	wth       float64
 	hack      bool
@@ -351,8 +351,8 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 	plasmaHScale = float64(plasma.FrameHeight) * objScale
 	plasmaWScale = float64(plasma.FrameWidth) * objScale
-	hgt = float64(p.FrameHeight[0])*plyrScale - 2
-	wth = float64(p.FrameWidth[0])*plyrScale - 6
+	hgt = float64(p.FrameHeight[0])*plyrScale - 3
+	wth = float64(p.FrameWidth[0])*plyrScale - 8
 
 	if !p.Inmune {
 		//pierde vidas con la nube
