@@ -141,6 +141,9 @@ func compar(p player) player {
 	if elecCompras > 1 && bakery && vacunatorio {
 		elecCompras = 1
 	}
+	if vacunatorio && p.Coins < 10 {
+		elecCompras = 1
+	}
 	if elecCompras < 0 {
 		elecCompras = 0
 	}

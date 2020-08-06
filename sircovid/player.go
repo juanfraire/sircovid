@@ -248,12 +248,11 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 
 		//para WIN
-	case p.c == 1 && p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
-		p.Y[0] = -40
-		ModeWin = true
-		sonidoPuerta()
+	// case p.c == 1 && p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
+	// 	p.Y[0] = -40
+	// 	sonidoPuerta()
 
-		//PARA MART
+	//PARA MART
 	case p.c == 1 && p.X[0] > 810 && p.X[0] < 820 && p.Y[0] < 228 && p.Y[0] > 224:
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
