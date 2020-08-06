@@ -151,8 +151,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibuja al enemigo
 	dibujarEnemigos(enemigo, screen)
 
-	// dibujar nube
-	dibujarNube(nube1, screen)
 	if ModeTitle {
 		dibujarObjetos(fondoNegro, screen)
 	}
@@ -171,8 +169,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if Game1.numPlayers == 2 {
 		dibujarPlayer(player2, screen)
 	}
-	//Dibujar relato
 
+	// dibujar nube
+	dibujarNube(nube1, screen)
+
+	//Dibujar relato
 	if Relato {
 		dibujarObjetos(papiro, screen)
 		dibujarObjetos(relato, screen)
