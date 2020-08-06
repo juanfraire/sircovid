@@ -30,7 +30,7 @@ var (
 	player1, player2 player
 	humano1, humano2 humanos
 	// nivel            = int(1)
-	plyrScale = .50
+	plyrScale = .55
 	hgt       float64
 	wth       float64
 	hack      bool
@@ -213,8 +213,9 @@ func moverPlayer(p player) player {
 		p.Compras = true
 		vacunatorio = true
 		sonidoPuerta()
-		//home
-	case p.c == 1 && p.X[0] > 10 && p.X[0] < 25 && p.Y[0] < 275 && p.Y[0] > 270:
+
+	//home1
+	case p.c == 1 && p.X[0] > 9 && p.X[0] < 17 && p.Y[0] < 223:
 		p.Y[0] = -40
 		sonidoPuerta()
 		if !p.CompleteLevel {
@@ -222,14 +223,16 @@ func moverPlayer(p player) player {
 		}
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-		//home1
+
+	//home2
 	case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95):
 		p.Y[0] = -40
 		sonidoPuerta()
 		ModeTitleLevel = true
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-		//pharmacy
+
+	//pharmacy
 	case p.c == 1 && p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 77:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
@@ -272,14 +275,16 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 
 		///SALIDAS///
-		//home1
+	//home1
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
+		p.Y[0] = 222
+		sonidoPuerta()
+
+	//home2
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 124 && p.X[0] < 136:
 		p.Y[0] = 99
 		sonidoPuerta()
-		//home
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
-		p.Y[0] = 276
-		sonidoPuerta()
+
 		//vacunatorio
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 809 && p.X[0] < 826:
 		p.Y[0] = 51
@@ -351,8 +356,8 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 	plasmaHScale = float64(plasma.FrameHeight) * objScale
 	plasmaWScale = float64(plasma.FrameWidth) * objScale
-	hgt = float64(p.FrameHeight[0])*plyrScale - 3
-	wth = float64(p.FrameWidth[0])*plyrScale - 8
+	hgt = float64(p.FrameHeight[0])*plyrScale - 2
+	wth = float64(p.FrameWidth[0])*plyrScale - 6
 
 	if !p.Inmune {
 		//pierde vidas con la nube
