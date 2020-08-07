@@ -60,16 +60,15 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	objetos[54] = []int{538, 25, 285, 11}
 	objetos[55] = []int{370, 107, 132, 23}
 	//abajo para que no salga de la pantalla
-	objetos[56] = []int{0, 0, 0, screenHeight}
-	objetos[57] = []int{screenWidth, 0, 0, screenHeight}
-	objetos[58] = []int{0, screenWidth, screenHeight, 32}
-	objetos[59] = []int{0, screenWidth, 30, 0}
+	objetos[56] = []int{0, 0, 0, screenHeight + 165}
+	objetos[57] = []int{screenWidth + 365, 0, 0, screenHeight + 165}
+	objetos[58] = []int{0, screenWidth + 365, screenHeight + 165, 32}
+	objetos[59] = []int{0, screenWidth + 365, 30, 0}
 
 	for i := 0; i < len(objetos); i++ {
-		if int(X+wth) >= objetos[i][0] && int(X) <= objetos[i][0]+objetos[i][1] && int(Y+hgt) >= objetos[i][2] && int(Y+hgt) <= objetos[i][2]+objetos[i][3] {
+		if int(X+wth) >= -ciudad1.FrameOX+objetos[i][0] && int(X) <= -ciudad1.FrameOX+objetos[i][0]+objetos[i][1] && int(Y+hgt) >= objetos[i][2]-ciudad1.FrameOY && int(Y+hgt) <= objetos[i][2]-ciudad1.FrameOY+objetos[i][3] {
 			X = X1
 			Y = Y1
-
 			return X, Y, true
 		}
 	}

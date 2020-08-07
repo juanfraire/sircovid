@@ -187,13 +187,29 @@ func moverPlayer(p player) player {
 		p.Y[0] = p.Y[0] + 2.3
 
 	case p.MovX == 1:
-		p.X[0] += 1.5
+		if p.X[0] > 220 && p.X[0] < 440 {
+			p.X[0] += .7
+		} else {
+			p.X[0] += 1.5
+		}
 	case p.MovX == 2:
-		p.X[0] -= 1.5
+		if p.X[0] > 220 && p.X[0] < 440 {
+			p.X[0] -= .7
+		} else {
+			p.X[0] -= 1.5
+		}
 	case p.MovY == 1:
-		p.Y[0] -= 1.5
+		if p.Y[0] > 100 && p.Y[0] < 200 {
+			p.Y[0] -= .7
+		} else {
+			p.Y[0] -= 1.5
+		}
 	case p.MovY == 2:
-		p.Y[0] += 1.5
+		if p.Y[0] > 100 && p.Y[0] < 200 {
+			p.Y[0] += .7
+		} else {
+			p.Y[0] += 1.5
+		}
 	}
 	p.X[0], p.Y[0], obs = obstaculos(p.X[0], p.Y[0], X1, Y1)
 	if obs {
@@ -275,9 +291,10 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 
 		///SALIDAS///
-	//home1
+	//home1 modificado
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
-		p.Y[0] = 222
+		p.Y[0] = 99
+		p.X[0] = 125
 		sonidoPuerta()
 
 	//home2

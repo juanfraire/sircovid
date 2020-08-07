@@ -55,8 +55,8 @@ var (
 
 const (
 	// game
-	screenWidth  = 66 * 16
-	screenHeight = 33 * 16
+	screenWidth  = 640
+	screenHeight = 320
 
 	// tiles
 	tileSize = 16
@@ -71,10 +71,10 @@ const (
 func introduccion() {
 	// intro update
 	intro1.updateIntro(screenWidth, screenHeight)
-	player1.X[0] = float64(390)
-	player1.Y[0] = float64(350)
-	player2.X[0] = float64(605)
-	player2.Y[0] = float64(350)
+	// player1.X[0] = float64(390)
+	// player1.Y[0] = float64(350)
+	// player2.X[0] = float64(605)
+	// player2.Y[0] = float64(350)
 
 	switch {
 	case ElectNumPlayers == 0:

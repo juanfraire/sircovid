@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	_ "image/png"
 	"log"
 
@@ -135,9 +136,17 @@ func (g *Game) Update(screen *ebiten.Image) error {
 func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar fondo
-	op := &ebiten.DrawImageOptions{}
+	// op := &ebiten.DrawImageOptions{
+	// screen.DrawImage(imgTiles, op)
+	dibujarObjetos(ciudad1, screen)
 
-	screen.DrawImage(imgTiles, op)
+	if player1.X[0] > 220 && player1.X[0] < 440 {
+		ciudad1.FrameOX = int((player1.X[0] - 220) * 1.7)
+	}
+	if player1.Y[0] > 100 && player1.Y[0] < 200 {
+		ciudad1.FrameOY = int((player1.Y[0] - 100) * 1.7)
+		fmt.Println(ciudad.FrameOY)
+	}
 
 	//dibujar objetos
 	dibujarObjetos(barbijo, screen)
