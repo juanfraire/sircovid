@@ -52,8 +52,8 @@ func initObjetos() {
 	plasma.FrameNum = 1
 	plasma.FrameWidth = 60
 	plasma.FrameHeight = 120
-	plasma.X = float64(90)
-	plasma.Y = float64(250)
+	plasma.X = float64(489)
+	plasma.Y = float64(73)
 	plasma.img = barbijo.img
 
 	alchol.FrameOX = 0
