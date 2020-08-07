@@ -247,6 +247,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		//PARA MART
 	case p.c == 1 && p.X[0] > 318 && p.X[0] < 330 && p.Y[0] < 51 && p.Y[0] > 46:
+
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
