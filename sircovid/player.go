@@ -259,7 +259,7 @@ func moverPlayer(p player) player {
 	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 845 && p.Y[0] < 174 && p.Y[0] > 171):
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-		p.Y[0] = -40
+		p.Y[0] = -80
 		p.Compras = true
 		supermarket = true
 		sonidoPuerta()
@@ -301,7 +301,7 @@ func moverPlayer(p player) player {
 		bakery = false
 		sonidoPuerta()
 		//supermarket
-	case p.Y[0] < -36 && p.Y[0] > -39 && (p.X[0] > 795 && p.X[0] < 846):
+	case p.Y[0] < -76 && p.Y[0] > -79 && (p.X[0] > 795 && p.X[0] < 846):
 		p.Y[0] = 175
 		supermarket = false
 		sonidoPuerta()
@@ -312,8 +312,12 @@ func moverPlayer(p player) player {
 	if p.Y[0] < 0 {
 		p.X[0] = X1
 	}
-	if p.Y[0] < -40 {
+	if p.Y[0] < -40 && p.Y[0] > -60 {
 		p.Y[0] = -40
+	}
+	//porque coincide la salida del vacunatorio con la del super esto es necesario
+	if p.Y[0] < -80 {
+		p.Y[0] = -80
 	}
 	// coder shortcuts
 
