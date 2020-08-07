@@ -150,7 +150,7 @@ func compar(p player) player {
 	}
 
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		if (farmacia || bakery || supermarket) && elecCompras == 0 {
+		if (farmacia || supermarket) && elecCompras == 0 {
 			p.Coins = p.Coins - 3
 			p.vidas++
 		}
@@ -163,7 +163,7 @@ func compar(p player) player {
 			p.Inmune = true
 			p.CountPoder = 600
 		}
-		if elecCompras == 1 && (farmacia || supermarket || bakery) {
+		if (elecCompras == 1 && (farmacia || supermarket)) || (elecCompras == 0 && bakery) {
 			p.Coins = p.Coins - 2
 			p.Fast = true
 			p.CountPoder = 600
@@ -175,7 +175,7 @@ func compar(p player) player {
 		}
 
 		switch {
-		case elecCompras == 2 && bakery:
+		case elecCompras == 1 && bakery:
 			p.Coins = p.Coins - 2
 			bakery1 = true
 		case elecCompras == 2 && farmacia:
@@ -191,9 +191,7 @@ func compar(p player) player {
 		switch {
 		case farmacia && elecCompras == 2 && Level == 1:
 			p.CompleteLevel = true
-		case vacunatorio && elecCompras == 1 && Level >= 10:
-			p.CompleteLevel = true
-		case bakery && elecCompras == 2 && Level == 2:
+		case bakery && elecCompras == 1 && Level == 2:
 			p.CompleteLevel = true
 		case mart && elecCompras == 2 && Level == 3:
 			p.CompleteLevel = true
@@ -211,6 +209,9 @@ func compar(p player) player {
 			p.CompleteLevel = true
 		case supermarket1 && bakery1 && Level == 10:
 			p.CompleteLevel = true
+		case vacunatorio && elecCompras == 1 && Level > 10:
+			p.CompleteLevel = true
+
 		}
 
 		farmacia, mart, supermarket, bakery = false, false, false, false

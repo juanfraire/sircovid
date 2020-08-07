@@ -98,7 +98,7 @@ func pasarNivelPlayer() {
 
 	//player2
 	player2.FrameNum[0] = 1
-	player2.X[0] = 130
+	player2.X[0] = 295
 	player2.Y[0] = -40
 	player2.MovX = 0
 	player2.MovY = 0
@@ -239,9 +239,9 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		//comida china
 	case p.c == 1 && p.X[0] > 1000 && p.X[0] < 1020 && p.Y[0] < 186 && p.Y[0] > 183:
+		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-		p.Y[0] = -40
 		p.Compras = true
 		bakery = true
 		sonidoPuerta()
