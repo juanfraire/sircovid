@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, fondoNegro, home1, home, monedas, relato, papiro, ciudad, tpaper, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
-	objScale                                                                                                                                           = .3
-	barHScale                                                                                                                                          float64
-	barWscale                                                                                                                                          float64
-	coinHScale                                                                                                                                         float64
-	coinWscale                                                                                                                                         float64
-	plasmaHScale                                                                                                                                       float64
-	plasmaWScale                                                                                                                                       float64
+	barbijo, alchol, plasma, fondoNegro, fondoNegroCompras, home1, home, monedas, relato, papiro, ciudad, tpaper, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
+	objScale                                                                                                                                                              = .3
+	barHScale                                                                                                                                                             float64
+	barWscale                                                                                                                                                             float64
+	coinHScale                                                                                                                                                            float64
+	coinWscale                                                                                                                                                            float64
+	plasmaHScale                                                                                                                                                          float64
+	plasmaWScale                                                                                                                                                          float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -122,6 +122,18 @@ func initObjetos() {
 	fondoNegro.X = float64(165)
 	fondoNegro.Y = float64(170)
 	fondoNegro.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\fondoNegro.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fondoNegroCompras.FrameOX = 0
+	fondoNegroCompras.FrameOX = 0
+	fondoNegroCompras.FrameOY = 0
+	fondoNegroCompras.FrameNum = 1
+	fondoNegroCompras.FrameWidth = 1100
+	fondoNegroCompras.FrameHeight = 300
+	fondoNegroCompras.X = float64(30)
+	fondoNegroCompras.Y = float64(100)
+	fondoNegroCompras.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\fondoNegro1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -226,7 +238,7 @@ func dibujarNiveles(screen *ebiten.Image) {
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	if B != relato && B != papiro && B != fondoNegro {
+	if B != relato && B != papiro && B != fondoNegro && B != fondoNegroCompras {
 		op.GeoM.Scale(objScale, objScale)
 	}
 	op.GeoM.Translate(B.X, B.Y)

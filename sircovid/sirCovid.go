@@ -153,6 +153,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if ModeTitle || ModeTitleLevel {
 		dibujarObjetos(fondoNegro, screen)
 	}
+	if player1.Compras || player2.Compras {
+		dibujarObjetos(fondoNegroCompras, screen)
+	}
 	// dibujar texto
 	if !Relato {
 		dibujarTextos(screen)

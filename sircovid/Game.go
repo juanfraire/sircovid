@@ -222,20 +222,20 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 	if p.Compras {
 		if p.Coins < 2 {
 			jugadores := fmt.Sprintf("YOU DONT HAVE MONEY\n  COME BACK SOON")
-			text.Draw(screen, jugadores, arcadeFont, 230, 200, color.White)
+			text.Draw(screen, jugadores, arcadeFont, 235, 250, color.White)
 		}
 
 		//EN FARMACIA
 		switch {
 		case farmacia && elecCompras == 0 && p.Coins >= 2:
 			jugadores := fmt.Sprintf(">$3-PLASMA -GET LIFE-\n $2-ASPIRIN -GO FAST-\n $2-MEDICINE")
-			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			text.Draw(screen, jugadores, arcadeFont, 220, 250, color.White)
 		case farmacia && elecCompras == 1 && p.Coins >= 2:
 			jugadores := fmt.Sprintf(" $3-PLASMA -GET LIFE-\n>$2-ASPIRIN -GO FAST-\n $2-MEDICINE")
-			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			text.Draw(screen, jugadores, arcadeFont, 220, 250, color.White)
 		case farmacia && elecCompras == 2 && p.Coins >= 2:
 			jugadores := fmt.Sprintf(" $3-PLASMA -GET LIFE-\n $2-ASPIRIN -GO FAST-\n>$2-MEDICINE")
-			text.Draw(screen, jugadores, arcadeFont, 300, 250, color.White)
+			text.Draw(screen, jugadores, arcadeFont, 220, 250, color.White)
 
 			//EN BAKERY
 		case bakery && elecCompras == 0 && p.Coins >= 2:
@@ -247,14 +247,14 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 
 			//EN MART
 		case mart && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">$2-MOUTH COVER-GET INMUNE-\n $5-HAT\n $2-CLOTHES")
-			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
+			jugadores := fmt.Sprintf(">$2-MOUTH COVER-GET INMUNE\n $5-HAT\n $2-CLOTHES")
+			text.Draw(screen, jugadores, arcadeFont, 130, 250, color.White)
 		case mart && elecCompras == 1 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE-\n>$5-HAT\n $2-CLOTHES")
-			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
+			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE\n>$5-HAT\n $2-CLOTHES")
+			text.Draw(screen, jugadores, arcadeFont, 130, 250, color.White)
 		case mart && elecCompras == 2 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE-\n $5-HAT\n>$2-CLOTHES")
-			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
+			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE\n $5-HAT\n>$2-CLOTHES")
+			text.Draw(screen, jugadores, arcadeFont, 130, 250, color.White)
 
 			//en SUPERMARKET
 		case supermarket && elecCompras == 0 && p.Coins >= 2:
