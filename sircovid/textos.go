@@ -72,7 +72,7 @@ func dibujarTextos(screen *ebiten.Image) {
 
 	case ModeTitleLevel:
 		nivel := fmt.Sprintf("    LEVEL %d\n\nPRESS SPACE KEY", Level)
-		text.Draw(screen, nivel, arcadeFont, 320, 300, color.White)
+		text.Draw(screen, nivel, arcadeFont, 300, 280, color.White)
 	case ModeGameOver:
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
 		text.Draw(screen, lost, arcadeFont, 310, 200, color.White)

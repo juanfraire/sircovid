@@ -70,8 +70,8 @@ func initObjetos() {
 	monedas.FrameNum = 1
 	monedas.FrameWidth = 65
 	monedas.FrameHeight = 80
-	monedas.X = float64(640)
-	monedas.Y = float64(70)
+	monedas.X = float64(99)
+	monedas.Y = float64(99)
 	monedas.img = barbijo.img
 
 	//carteles
@@ -106,8 +106,8 @@ func initObjetos() {
 	cruz.FrameNum = 1
 	cruz.FrameWidth = 862
 	cruz.FrameHeight = 370
-	cruz.X = float64(775)
-	cruz.Y = float64(5)
+	cruz.X = float64(785)
+	cruz.Y = float64(330)
 	cruz.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cruz.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)

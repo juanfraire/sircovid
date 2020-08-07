@@ -110,7 +110,7 @@ func introduccion() {
 		ModeTitle = false
 		player1.X[0] = 15
 		player1.Y[0] = -40
-		player2.X[0] = 130
+		player2.X[0] = 295
 		player2.Y[0] = -40
 		ModeTitleLevel = true
 	}
@@ -139,6 +139,9 @@ func compar(p player) player {
 		elecCompras = 2
 	}
 	if elecCompras > 1 && bakery && vacunatorio {
+		elecCompras = 1
+	}
+	if elecCompras == 0 && vacunatorio && p.Coins < 10 {
 		elecCompras = 1
 	}
 	if elecCompras < 0 {
@@ -244,7 +247,7 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 
 			//EN MART
 		case mart && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">$2-FACE MASK-GET INMUNE-\n $5-HAT\n $2-CLOTHES")
+			jugadores := fmt.Sprintf(">$2-MOUTH COVER-GET INMUNE-\n $5-HAT\n $2-CLOTHES")
 			text.Draw(screen, jugadores, arcadeFont, 150, 250, color.White)
 		case mart && elecCompras == 1 && p.Coins >= 2:
 			jugadores := fmt.Sprintf(" $2-MOUTH COVER-GET INMUNE-\n>$5-HAT\n $2-CLOTHES")

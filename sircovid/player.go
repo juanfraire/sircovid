@@ -72,7 +72,7 @@ func initPlayer() {
 	player2.FrameOX[0] = 0
 	player2.FrameOY[0] = 0
 	player2.FrameNum[0] = 1
-	player2.X[0] = 130
+	player2.X[0] = 295
 	player2.Y[0] = -40
 	player2.FrameWidth[0] = 32
 	player2.FrameHeight[0] = 48
@@ -202,19 +202,19 @@ func moverPlayer(p player) player {
 	}
 	///ENTRADAS a puertas///
 	switch {
-	case p.c == 1 && ((p.X[0] > 635 && p.X[0] < 645 && p.Y[0] < 50 && p.Y[0] > 44) || (p.X[0] > 415 && p.X[0] < 425 && p.Y[0] < 56 && p.Y[0] > 50) || (p.X[0] > 193 && p.X[0] < 258 && p.Y[0] < 110 && p.Y[0] > 78)):
+	//banco
+	case p.c == 1 && (p.X[0] > 95 && p.X[0] < 103 && p.Y[0] < 88 && p.Y[0] > 85):
 		p.Y[0] = -40
 		sonidoPuerta()
 		//vacunatorio
-	case Level >= 10 && p.c == 1 && p.X[0] > 810 && p.X[0] < 825 && p.Y[0] < 50 && p.Y[0] > 47:
+	case Level >= 10 && p.c == 1 && p.X[0] > 814 && p.X[0] < 834 && p.Y[0] < 363 && p.Y[0] > 359:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Compras = true
 		vacunatorio = true
 		sonidoPuerta()
-
-	//home1
+		//home1
 	case p.c == 1 && p.X[0] > 9 && p.X[0] < 17 && p.Y[0] < 223:
 		p.Y[0] = -40
 		sonidoPuerta()
@@ -223,50 +223,39 @@ func moverPlayer(p player) player {
 		}
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-
-	//home2
-	case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 125 && p.X[0] < 135 && p.Y[0] < 98 && p.Y[0] > 95):
+		//home2
+	case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 285 && p.X[0] < 296 && p.Y[0] < 203 && p.Y[0] > 201):
 		p.Y[0] = -40
 		sonidoPuerta()
 		ModeTitleLevel = true
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-
-	//pharmacy
-	case p.c == 1 && p.X[0] > 275 && p.X[0] < 285 && p.Y[0] < 81 && p.Y[0] > 77:
+		//pharmacy
+	case p.c == 1 && p.X[0] > 470 && p.X[0] < 485 && p.Y[0] < 364 && p.Y[0] > 361:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Compras = true
 		farmacia = true
 		sonidoPuerta()
-
-		//bakery
-	case p.c == 1 && p.X[0] > 945 && p.X[0] < 955 && p.Y[0] < 228 && p.Y[0] > 224:
+		//comida china
+	case p.c == 1 && p.X[0] > 1000 && p.X[0] < 1020 && p.Y[0] < 186 && p.Y[0] > 183:
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
 		p.Compras = true
 		bakery = true
 		sonidoPuerta()
-
-		//para WIN
-	case p.c == 1 && p.X[0] > 753 && p.X[0] < 763 && p.Y[0] < 439 && p.Y[0] > 430:
-		p.Y[0] = -40
-		ModeWin = true
-		sonidoPuerta()
-
 		//PARA MART
-	case p.c == 1 && p.X[0] > 810 && p.X[0] < 820 && p.Y[0] < 228 && p.Y[0] > 224:
+	case p.c == 1 && p.X[0] > 318 && p.X[0] < 330 && p.Y[0] < 51 && p.Y[0] > 46:
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
 		p.Compras = true
 		mart = true
 		sonidoPuerta()
-
 		//SUPERMAKET
-	case p.c == 1 && (p.X[0] > 845 && p.X[0] < 855 && p.Y[0] < 437 && p.Y[0] > 434):
+	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 845 && p.Y[0] < 174 && p.Y[0] > 171):
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
@@ -275,50 +264,44 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 
 		///SALIDAS///
-	//home1
+		//home1
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
 		p.Y[0] = 222
 		sonidoPuerta()
-
-	//home2
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 124 && p.X[0] < 136:
-		p.Y[0] = 99
+		//home2
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 285 && p.X[0] < 296:
+		p.Y[0] = 204
 		sonidoPuerta()
-
 		//vacunatorio
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 809 && p.X[0] < 826:
-		p.Y[0] = 51
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 814 && p.X[0] < 834:
+		p.Y[0] = 364
 		sonidoPuerta()
-		//banco
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 634 && p.X[0] < 646:
-		p.Y[0] = 51
-		sonidoPuerta()
-		//local a la izquieda del banco
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 414 && p.X[0] < 426:
-		p.Y[0] = 57
+		// banco
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 94 && p.X[0] < 104:
+		p.Y[0] = 89
 		sonidoPuerta()
 		//tienda a la derecha del edeficio arriba a la izquierda
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 265:
 		p.Y[0] = 110
 		sonidoPuerta()
 		//mart
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 812 && p.X[0] < 828:
-		p.Y[0] = 230
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 318 && p.X[0] < 330:
+		p.Y[0] = 52
 		mart = false
 		sonidoPuerta()
 		//Pharmacy
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 274 && p.X[0] < 286:
-		p.Y[0] = 82
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 469 && p.X[0] < 486:
+		p.Y[0] = 365
 		farmacia = false
 		sonidoPuerta()
-		//salida de Bakery
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 943 && p.X[0] < 957:
-		p.Y[0] = 229
+		//salida de Comida China
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 1000 && p.X[0] < 1020:
+		p.Y[0] = 187
 		bakery = false
 		sonidoPuerta()
 		//supermarket
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 844 && p.X[0] < 856:
-		p.Y[0] = 436
+	case p.Y[0] < -36 && p.Y[0] > -39 && (p.X[0] > 795 && p.X[0] < 846):
+		p.Y[0] = 175
 		supermarket = false
 		sonidoPuerta()
 	}

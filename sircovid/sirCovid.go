@@ -136,7 +136,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar fondo
 	op := &ebiten.DrawImageOptions{}
-
 	screen.DrawImage(imgTiles, op)
 
 	//dibujar objetos
@@ -153,7 +152,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar nube
 	dibujarNube(nube1, screen)
-	if ModeTitle {
+	if ModeTitle || ModeTitleLevel {
 		dibujarObjetos(fondoNegro, screen)
 	}
 	// dibujar texto
