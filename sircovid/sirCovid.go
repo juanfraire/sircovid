@@ -150,7 +150,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibuja al enemigo
 	dibujarEnemigos(enemigo, screen)
 
-	if ModeTitle {
+	if ModeTitle || ModeTitleLevel {
 		dibujarObjetos(fondoNegro, screen)
 	}
 	// dibujar texto
