@@ -2,66 +2,71 @@ package main
 
 func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 
-	objetos := make([][]int, 55)
-	objetos[0] = []int{304, 192, 145, 125}
-	objetos[1] = []int{496, 79, 162, 108}
-	objetos[2] = []int{480, 66, 383, 17}
-	objetos[3] = []int{496, 33, 366, 58}
-	objetos[4] = []int{507, 12, 363, 8}
-	objetos[5] = []int{488, 50, 374, 41}
-	objetos[6] = []int{607, 17, 434, 25}
-	objetos[7] = []int{403, 18, 438, 23}
-	objetos[8] = []int{594, 15, 259, 16}
-	objetos[9] = []int{716, 17, 265, 20}
-	objetos[10] = []int{689, 14, 173, 13}
-	objetos[11] = []int{257, 15, 265, 16}
-	objetos[12] = []int{273, 15, 198, 48}
-	objetos[13] = []int{178, 14, 198, 51}
-	objetos[14] = []int{145, 15, 162, 138}
-	objetos[15] = []int{113, 15, 161, 139}
-	objetos[16] = []int{85, 42, 288, 12}
-	objetos[17] = []int{145, 48, 288, 13}
-	objetos[18] = []int{403, 13, 337, 18}
-	objetos[19] = []int{609, 16, 339, 15}
-	objetos[20] = []int{704, 192, 354, 110}
-	objetos[21] = []int{915, 12, 374, 25}
-	objetos[22] = []int{915, 12, 423, 22}
-	objetos[23] = []int{578, 31, 66, 84}
-	objetos[24] = []int{688, 32, 63, 86}
-	objetos[25] = []int{668, 17, 56, 59}
-	objetos[26] = []int{615, 16, 56, 58}
-	objetos[27] = []int{382, 16, 62, 20}
-	objetos[28] = []int{193, 158, 2, 106}
-	objetos[29] = []int{211, 45, 100, 33}
-	objetos[30] = []int{77, 114, 1, 124}
-	objetos[31] = []int{0, 68, 0, 283}
-	objetos[32] = []int{1, 63, 280, 22}
-	objetos[33] = []int{450, 12, 391, 26}
-	objetos[34] = []int{581, 11, 392, 23}
-	objetos[35] = []int{454, 138, 434, 12}
-	objetos[36] = []int{455, 134, 338, 13}
-	objetos[37] = []int{384, 79, 0, 63}
-	objetos[38] = []int{387, 71, 65, 7}
-	objetos[39] = []int{410, 29, 59, 24}
-	objetos[40] = []int{465, 494, 0, 77}
-	objetos[41] = []int{955, 18, 1, 60}
-	objetos[42] = []int{957, 10, 61, 11}
-	objetos[43] = []int{998, 41, 17, 13}
-	objetos[44] = []int{724, 283, 161, 94}
-	objetos[45] = []int{1029, 10, 197, 26}
-	objetos[46] = []int{964, 28, 339, 23}
-	objetos[47] = []int{1027, 28, 340, 21}
-	objetos[48] = []int{81, 191, 417, 111}
-	objetos[49] = []int{924, 72, 149, 16}
-	objetos[50] = []int{35, 42, 3, 271}
+	objetos := make([][]int, 60)
+	objetos[0] = []int{237, 79, 125, 99}
+	objetos[1] = []int{235, 5, 310, 33}
+	objetos[2] = []int{147, 124, 26, 68}
+	objetos[3] = []int{55, 89, 30, 80}
+	objetos[4] = []int{0, 59, 0, 245}
+	objetos[5] = []int{68, 29, 129, 116}
+	objetos[6] = []int{115, 31, 134, 111}
+	objetos[7] = []int{148, 9, 220, 35}
+	objetos[8] = []int{15, 44, 329, 82}
+	objetos[9] = []int{335, 67, 285, 151}
+	objetos[10] = []int{357, 38, 450, 82}
+	objetos[11] = []int{443, 70, 317, 69}
+	objetos[12] = []int{456, 54, 303, 13}
+	objetos[13] = []int{471, 20, 295, 23}
+	objetos[14] = []int{520, 100, 292, 237}
+	objetos[15] = []int{455, 64, 445, 85}
+	objetos[16] = []int{355, 127, 145, 72}
+	objetos[17] = []int{482, 122, 133, 80}
+	objetos[18] = []int{522, 100, 28, 171}
+	objetos[19] = []int{298, 62, 23, 42}
+	objetos[20] = []int{316, 23, 61, 11}
+	objetos[21] = []int{690, 49, 291, 240}
+	objetos[22] = []int{795, 70, 309, 75}
+	objetos[23] = []int{874, 101, 293, 237}
+	objetos[24] = []int{810, 69, 441, 89}
+	objetos[25] = []int{682, 3, 351, 28}
+	objetos[26] = []int{241, 11, 353, 66}
+	objetos[27] = []int{238, 23, 392, 20}
+	objetos[28] = []int{16, 42, 458, 73}
+	objetos[29] = []int{31, 14, 447, 11}
+	objetos[30] = []int{96, 89, 320, 59}
+	objetos[31] = []int{147, 38, 379, 146}
+	objetos[32] = []int{92, 93, 459, 69}
+	objetos[33] = []int{715, 341, 0, 177}
+	objetos[34] = []int{698, 16, 1, 144}
+	objetos[35] = []int{705, 11, 146, 33}
+	objetos[36] = []int{710, 4, 181, 21}
+	objetos[37] = []int{717, 77, 179, 26}
+	objetos[38] = []int{800, 11, 200, 10}
+	objetos[39] = []int{892, 33, 176, 33}
+	objetos[40] = []int{795, 101, 179, 16}
+	objetos[41] = []int{362, 162, 23, 35}
+	objetos[42] = []int{603, 9, 200, 6}
+	objetos[43] = []int{25, 613, 0, 28}
+	objetos[44] = []int{638, 30, 0, 15}
+	objetos[45] = []int{638, 18, 13, 11}
+	objetos[46] = []int{925, 131, 176, 30}
+	objetos[47] = []int{1039, 17, 301, 225}
+	objetos[48] = []int{1012, 29, 330, 196}
+	objetos[49] = []int{1023, 17, 312, 18}
+	objetos[50] = []int{809, 40, 294, 13}
+	objetos[51] = []int{891, 26, 283, 12}
+	objetos[52] = []int{943, 21, 286, 13}
+	objetos[53] = []int{699, 15, 283, 11}
+	objetos[54] = []int{538, 25, 285, 11}
+	objetos[55] = []int{370, 107, 132, 23}
 	//abajo para que no salga de la pantalla
-	objetos[51] = []int{0, 0, 0, screenHeight}
-	objetos[52] = []int{screenWidth, 0, 0, screenHeight}
-	objetos[53] = []int{0, screenWidth, screenHeight, 32}
-	objetos[54] = []int{0, screenWidth, 30, 0}
+	objetos[56] = []int{0, 0, 0, screenHeight}
+	objetos[57] = []int{screenWidth, 0, 0, screenHeight}
+	objetos[58] = []int{0, screenWidth, screenHeight, 32}
+	objetos[59] = []int{0, screenWidth, 30, 0}
 
 	for i := 0; i < len(objetos); i++ {
-		if int(X+17) >= objetos[i][0] && int(X)+2 <= objetos[i][0]+objetos[i][1] && int(Y+30) >= objetos[i][2] && int(Y+30) <= objetos[i][2]+objetos[i][3] {
+		if int(X+wth) >= objetos[i][0] && int(X) <= objetos[i][0]+objetos[i][1] && int(Y+hgt) >= objetos[i][2] && int(Y+hgt) <= objetos[i][2]+objetos[i][3] {
 			X = X1
 			Y = Y1
 
@@ -69,7 +74,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		}
 	}
 	for j := 0; j < nivel; j++ {
-		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+hgt-15 && Y+hgt-15 < enemigo.Y[j]+hgt {
+		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+hgt && Y+hgt < enemigo.Y[j]+hgt {
 			X = X1
 			Y = Y1
 

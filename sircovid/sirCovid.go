@@ -12,7 +12,7 @@ import (
 // init carga los datos
 func init() {
 	//init ciudad img
-	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cidade.png`, ebiten.FilterDefault)
+	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\ciudadFere.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -136,7 +136,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// dibujar fondo
 	op := &ebiten.DrawImageOptions{}
-
 	screen.DrawImage(imgTiles, op)
 
 	//dibujar objetos
@@ -150,6 +149,19 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//dibuja al enemigo
 	dibujarEnemigos(enemigo, screen)
+
+	if ModeTitle || ModeTitleLevel {
+		dibujarObjetos(fondoNegro, screen)
+	}
+	if player1.Compras || player2.Compras {
+		dibujarObjetos(fondoNegroCompras, screen)
+	}
+	// dibujar texto
+	if !Relato {
+		dibujarTextos(screen)
+	}
+	//dibujar fondo negro
+
 
 	//dibujar textos compras
 	dibujarTextoCompras(player1, screen)
@@ -167,10 +179,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar nube
 	dibujarNube(nube1, screen)
 
-	// dibujar texto
-	if !Relato {
-		dibujarTextos(screen)
-	}
 	//Dibujar relato
 	if Relato {
 		dibujarObjetos(papiro, screen)

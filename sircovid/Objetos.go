@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, fondoNegro, home1, home, monedas, relato, papiro, ciudad, tpaper, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
-	objScale                                                                                                                                           = .3
-	barHScale                                                                                                                                          float64
-	barWscale                                                                                                                                          float64
-	coinHScale                                                                                                                                         float64
-	coinWscale                                                                                                                                         float64
-	plasmaHScale                                                                                                                                       float64
-	plasmaWScale                                                                                                                                       float64
+	barbijo, alchol, plasma, fondoNegro, fondoNegroCompras, home1, home, monedas, relato, papiro, ciudad, tpaper, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
+	objScale                                                                                                                                                              = .3
+	barHScale                                                                                                                                                             float64
+	barWscale                                                                                                                                                             float64
+	coinHScale                                                                                                                                                            float64
+	coinWscale                                                                                                                                                            float64
+	plasmaHScale                                                                                                                                                          float64
+	plasmaWScale                                                                                                                                                          float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -52,8 +52,8 @@ func initObjetos() {
 	plasma.FrameNum = 1
 	plasma.FrameWidth = 60
 	plasma.FrameHeight = 120
-	plasma.X = float64(90)
-	plasma.Y = float64(250)
+	plasma.X = float64(489)
+	plasma.Y = float64(73)
 	plasma.img = barbijo.img
 
 	alchol.FrameOX = 0
@@ -61,7 +61,7 @@ func initObjetos() {
 	alchol.FrameNum = 1
 	alchol.FrameWidth = 65
 	alchol.FrameHeight = 120
-	alchol.X = float64(1010)
+	alchol.X = float64(1000)
 	alchol.Y = float64(470)
 	alchol.img = barbijo.img
 
@@ -70,8 +70,8 @@ func initObjetos() {
 	monedas.FrameNum = 1
 	monedas.FrameWidth = 65
 	monedas.FrameHeight = 80
-	monedas.X = float64(640)
-	monedas.Y = float64(70)
+	monedas.X = float64(99)
+	monedas.Y = float64(99)
 	monedas.img = barbijo.img
 
 	//carteles
@@ -106,8 +106,8 @@ func initObjetos() {
 	cruz.FrameNum = 1
 	cruz.FrameWidth = 862
 	cruz.FrameHeight = 370
-	cruz.X = float64(775)
-	cruz.Y = float64(5)
+	cruz.X = float64(785)
+	cruz.Y = float64(330)
 	cruz.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cruz.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -122,6 +122,18 @@ func initObjetos() {
 	fondoNegro.X = float64(165)
 	fondoNegro.Y = float64(170)
 	fondoNegro.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\fondoNegro.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fondoNegroCompras.FrameOX = 0
+	fondoNegroCompras.FrameOX = 0
+	fondoNegroCompras.FrameOY = 0
+	fondoNegroCompras.FrameNum = 1
+	fondoNegroCompras.FrameWidth = 1100
+	fondoNegroCompras.FrameHeight = 300
+	fondoNegroCompras.X = float64(30)
+	fondoNegroCompras.Y = float64(100)
+	fondoNegroCompras.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\fondoNegro1.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -205,28 +217,28 @@ func initObjetos() {
 }
 
 func dibujarNiveles(screen *ebiten.Image) {
-	dibujarObjetos(mhome, screen)
-	dibujarObjetos(money, screen)
-	if Game1.numPlayers == 2 {
-		dibujarObjetos(mhome1, screen)
-	}
-	if Level == 1 || Level == 5 || Level == 6 || Level == 8 {
-		dibujarObjetos(meds, screen)
-	}
-	if Level == 2 || Level == 5 || Level == 7 || Level == 10 {
-		dibujarObjetos(bread, screen)
-	}
-	if Level == 3 || Level == 7 || Level == 8 || Level == 9 {
-		dibujarObjetos(clothes, screen)
-	}
-	if Level == 4 || Level == 6 || Level == 9 || Level == 10 {
-		dibujarObjetos(tpaper, screen)
-	}
+	// dibujarObjetos(mhome, screen)
+	// dibujarObjetos(money, screen)
+	// if Game1.numPlayers == 2 {
+	// 	dibujarObjetos(mhome1, screen)
+	// }
+	// if Level == 1 || Level == 5 || Level == 6 || Level == 8 {
+	// 	dibujarObjetos(meds, screen)
+	// }
+	// if Level == 2 || Level == 5 || Level == 7 || Level == 10 {
+	// 	dibujarObjetos(bread, screen)
+	// }
+	// if Level == 3 || Level == 7 || Level == 8 || Level == 9 {
+	// 	dibujarObjetos(clothes, screen)
+	// }
+	// if Level == 4 || Level == 6 || Level == 9 || Level == 10 {
+	// 	dibujarObjetos(tpaper, screen)
+	// }
 }
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	if B != relato && B != papiro && B != fondoNegro {
+	if B != relato && B != papiro && B != fondoNegro && B != fondoNegroCompras {
 		op.GeoM.Scale(objScale, objScale)
 	}
 	op.GeoM.Translate(B.X, B.Y)
