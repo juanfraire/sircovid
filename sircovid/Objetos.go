@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, fondoNegro, fondoNegroCompras, home1, home, monedas, relato, papiro, ciudad, tpaper, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
-	objScale                                                                                                                                                              = .3
-	barHScale                                                                                                                                                             float64
-	barWscale                                                                                                                                                             float64
-	coinHScale                                                                                                                                                            float64
-	coinWscale                                                                                                                                                            float64
-	plasmaHScale                                                                                                                                                          float64
-	plasmaWScale                                                                                                                                                          float64
+	barbijo, alchol, plasma, fondoNegro, fondoNegroCompras, home1, home, monedas, relato, papiro, ciudad, tpaper, vaccine, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
+	objScale                                                                                                                                                                       = .3
+	barHScale                                                                                                                                                                      float64
+	barWscale                                                                                                                                                                      float64
+	coinHScale                                                                                                                                                                     float64
+	coinWscale                                                                                                                                                                     float64
+	plasmaHScale                                                                                                                                                                   float64
+	plasmaWScale                                                                                                                                                                   float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -143,7 +143,7 @@ func initObjetos() {
 	mhome.FrameWidth = 388
 	mhome.FrameHeight = 757
 	mhome.X = float64(0)
-	mhome.Y = float64(250)
+	mhome.Y = float64(200)
 	mhome.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-home.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -153,8 +153,8 @@ func initObjetos() {
 	mhome1.FrameNum = 1
 	mhome1.FrameWidth = 388
 	mhome1.FrameHeight = 757
-	mhome1.X = float64(80)
-	mhome1.Y = float64(50)
+	mhome1.X = float64(220)
+	mhome1.Y = float64(200)
 	mhome1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-home.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -162,10 +162,10 @@ func initObjetos() {
 	money.FrameOX = 0
 	money.FrameOY = 0
 	money.FrameNum = 1
-	money.FrameWidth = 994
-	money.FrameHeight = 538
-	money.X = float64(410)
-	money.Y = float64(10)
+	money.FrameWidth = 1070
+	money.FrameHeight = 423
+	money.X = float64(50)
+	money.Y = float64(50)
 	money.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-money.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -175,8 +175,8 @@ func initObjetos() {
 	meds.FrameNum = 1
 	meds.FrameWidth = 945
 	meds.FrameHeight = 759
-	meds.X = float64(90)
-	meds.Y = float64(20)
+	meds.X = float64(230)
+	meds.Y = float64(310)
 	meds.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-meds.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -186,8 +186,8 @@ func initObjetos() {
 	bread.FrameNum = 1
 	bread.FrameWidth = 1047
 	bread.FrameHeight = 503
-	bread.X = float64(710)
-	bread.Y = float64(190)
+	bread.X = float64(750)
+	bread.Y = float64(145)
 	bread.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-bread.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -195,10 +195,10 @@ func initObjetos() {
 	clothes.FrameOX = 0
 	clothes.FrameOY = 0
 	clothes.FrameNum = 1
-	clothes.FrameWidth = 1079
-	clothes.FrameHeight = 503
-	clothes.X = float64(560)
-	clothes.Y = float64(190)
+	clothes.FrameWidth = 941
+	clothes.FrameHeight = 694
+	clothes.X = float64(270)
+	clothes.Y = float64(0)
 	clothes.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-clothes.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -208,32 +208,57 @@ func initObjetos() {
 	tpaper.FrameNum = 1
 	tpaper.FrameWidth = 1151
 	tpaper.FrameHeight = 388
-	tpaper.X = float64(570)
-	tpaper.Y = float64(400)
+	tpaper.X = float64(560)
+	tpaper.Y = float64(135)
 	tpaper.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-tpaper.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	tpaper.FrameOX = 0
+	tpaper.FrameOY = 0
+	tpaper.FrameNum = 1
+	tpaper.FrameWidth = 1151
+	tpaper.FrameHeight = 388
+	tpaper.X = float64(560)
+	tpaper.Y = float64(135)
+	tpaper.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-tpaper.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	vaccine.FrameOX = 0
+	vaccine.FrameOY = 0
+	vaccine.FrameNum = 1
+	vaccine.FrameWidth = 1106
+	vaccine.FrameHeight = 468
+	vaccine.X = float64(560)
+	vaccine.Y = float64(335)
+	vaccine.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-vaccine.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func dibujarNiveles(screen *ebiten.Image) {
-	// dibujarObjetos(mhome, screen)
-	// dibujarObjetos(money, screen)
-	// if Game1.numPlayers == 2 {
-	// 	dibujarObjetos(mhome1, screen)
-	// }
-	// if Level == 1 || Level == 5 || Level == 6 || Level == 8 {
-	// 	dibujarObjetos(meds, screen)
-	// }
-	// if Level == 2 || Level == 5 || Level == 7 || Level == 10 {
-	// 	dibujarObjetos(bread, screen)
-	// }
-	// if Level == 3 || Level == 7 || Level == 8 || Level == 9 {
-	// 	dibujarObjetos(clothes, screen)
-	// }
-	// if Level == 4 || Level == 6 || Level == 9 || Level == 10 {
-	// 	dibujarObjetos(tpaper, screen)
-	// }
+	dibujarObjetos(mhome, screen)
+	dibujarObjetos(money, screen)
+	if Game1.numPlayers == 2 {
+		dibujarObjetos(mhome1, screen)
+	}
+	if Level == 1 || Level == 5 || Level == 6 || Level == 8 {
+		dibujarObjetos(meds, screen)
+	}
+	if Level == 2 || Level == 5 || Level == 7 || Level == 10 {
+		dibujarObjetos(bread, screen)
+	}
+	if Level == 3 || Level == 7 || Level == 8 || Level == 9 {
+		dibujarObjetos(clothes, screen)
+	}
+	if Level == 4 || Level == 6 || Level == 9 || Level == 10 {
+		dibujarObjetos(tpaper, screen)
+	}
+	if Level > 10 {
+		dibujarObjetos(vaccine, screen)
+	}
 }
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
