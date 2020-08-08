@@ -124,7 +124,6 @@ func siguienteNivel(p player) player {
 		player2.CompleteLevel = false
 		farmacia, mart, supermarket, bakery, vacunatorio = false, false, false, false, false
 	}
-	fmt.Println(p.X[0], player1.X[0])
 	return p
 }
 func compar(p player) player {
