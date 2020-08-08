@@ -213,7 +213,7 @@ func moverPlayer(p player) player {
 		vacunatorio = true
 		sonidoPuerta()
 		//home1
-	case p.c == 1 && p.X[0] > 9 && p.X[0] < 19 && p.Y[0] < 224:
+	case p.c == 1 && p.X[0] > 0 && p.X[0] < 19 && p.Y[0] < 224:
 		p.Y[0] = -40
 		sonidoPuerta()
 		if !p.CompleteLevel {
@@ -229,7 +229,7 @@ func moverPlayer(p player) player {
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		//pharmacy
-	case p.c == 1 && p.X[0] > 470 && p.X[0] < 485 && p.Y[0] < 364 && p.Y[0] > 361:
+	case p.c == 1 && p.X[0] > 470 && p.X[0] < 485 && p.Y[0] < 364 && p.Y[0] > 350:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -237,7 +237,7 @@ func moverPlayer(p player) player {
 		farmacia = true
 		sonidoPuerta()
 		//comida china
-	case p.c == 1 && p.X[0] > 1000 && p.X[0] < 1020 && p.Y[0] < 186 && p.Y[0] > 183:
+	case p.c == 1 && p.X[0] > 1000 && p.X[0] < 1020 && p.Y[0] < 186 && p.Y[0] > 170:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -246,24 +246,24 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		//PARA MART
 	case p.c == 1 && p.X[0] > 318 && p.X[0] < 330 && p.Y[0] < 51 && p.Y[0] > 46:
+		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-		p.Y[0] = -40
 		p.Compras = true
 		mart = true
 		sonidoPuerta()
 		//SUPERMAKET
 	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 845 && p.Y[0] < 174 && p.Y[0] > 171):
+		p.Y[0] = -80
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-		p.Y[0] = -80
 		p.Compras = true
 		supermarket = true
 		sonidoPuerta()
 
 		///SALIDAS///
 		//home1
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 0 && p.X[0] < 26:
 		p.Y[0] = 225
 		sonidoPuerta()
 		//home2
