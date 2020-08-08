@@ -213,7 +213,7 @@ func moverPlayer(p player) player {
 		vacunatorio = true
 		sonidoPuerta()
 		//home1
-	case p.c == 1 && p.X[0] > 9 && p.X[0] < 17 && p.Y[0] < 223:
+	case p.c == 1 && p.X[0] > 9 && p.X[0] < 19 && p.Y[0] < 224:
 		p.Y[0] = -40
 		sonidoPuerta()
 		if !p.CompleteLevel {
@@ -264,7 +264,7 @@ func moverPlayer(p player) player {
 		///SALIDAS///
 		//home1
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 9 && p.X[0] < 26:
-		p.Y[0] = 222
+		p.Y[0] = 225
 		sonidoPuerta()
 		//home2
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 285 && p.X[0] < 296:

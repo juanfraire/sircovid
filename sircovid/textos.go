@@ -77,7 +77,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
 		text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
 		if player1.Coins < 2 && player2.Coins < 2 && monedas.X == 1500 {
-			noMoney := fmt.Sprintf("YOU CAN NOT COMPLETE THE LEVEL")
+			noMoney := fmt.Sprintf("NOT COMPLETE LEVEL")
 			text.Draw(screen, noMoney, arcadeFont, 50, 150, color.White)
 		}
 	case ModeWin == true:
