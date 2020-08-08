@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -201,7 +202,7 @@ func moverPlayer(p player) player {
 	///ENTRADAS a puertas///
 	switch {
 	//banco
-	case p.c == 1 && (p.X[0] > 95 && p.X[0] < 103 && p.Y[0] < 88 && p.Y[0] > 85):
+	case p.c == 1 && (p.X[0] > 95 && p.X[0] < 103 && p.Y[0] < 89 && p.Y[0] > 85):
 		p.Y[0] = -40
 		sonidoPuerta()
 		//vacunatorio
@@ -229,7 +230,7 @@ func moverPlayer(p player) player {
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		//pharmacy
-	case p.c == 1 && p.X[0] > 470 && p.X[0] < 485 && p.Y[0] < 364 && p.Y[0] > 350:
+	case p.c == 1 && p.X[0] > 460 && p.X[0] < 485 && p.Y[0] < 365 && p.Y[0] > 350:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -237,7 +238,7 @@ func moverPlayer(p player) player {
 		farmacia = true
 		sonidoPuerta()
 		//comida china
-	case p.c == 1 && p.X[0] > 1000 && p.X[0] < 1020 && p.Y[0] < 186 && p.Y[0] > 170:
+	case p.c == 1 && p.X[0] > 990 && p.X[0] < 1020 && p.Y[0] < 186 && p.Y[0] > 170:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -253,7 +254,7 @@ func moverPlayer(p player) player {
 		mart = true
 		sonidoPuerta()
 		//SUPERMAKET
-	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 845 && p.Y[0] < 174 && p.Y[0] > 171):
+	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 855 && p.Y[0] < 174 && p.Y[0] > 171):
 		p.Y[0] = -80
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -276,7 +277,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		// banco
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 94 && p.X[0] < 104:
-		p.Y[0] = 89
+		p.Y[0] = 90
 		sonidoPuerta()
 		//mart
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 318 && p.X[0] < 330:
@@ -284,17 +285,17 @@ func moverPlayer(p player) player {
 		mart = false
 		sonidoPuerta()
 		//Pharmacy
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 469 && p.X[0] < 486:
-		p.Y[0] = 365
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 460 && p.X[0] < 486:
+		p.Y[0] = 366
 		farmacia = false
 		sonidoPuerta()
 		//salida de Comida China
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 1000 && p.X[0] < 1020:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 990 && p.X[0] < 1020:
 		p.Y[0] = 187
 		bakery = false
 		sonidoPuerta()
 		//supermarket
-	case p.Y[0] < -76 && p.Y[0] > -79 && (p.X[0] > 795 && p.X[0] < 846):
+	case p.Y[0] < -76 && p.Y[0] > -79 && (p.X[0] > 795 && p.X[0] < 856):
 		p.Y[0] = 175
 		supermarket = false
 		sonidoPuerta()
@@ -325,6 +326,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
+	fmt.Println(p.Y)
 	return p
 }
 
