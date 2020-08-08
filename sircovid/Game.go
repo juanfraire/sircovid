@@ -119,11 +119,12 @@ func introduccion() {
 
 func siguienteNivel(p player) player {
 	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40 || p.X[0] >= home1.X && p.X[0] <= home1.X+40 && p.Y[0] == -40 && Game1.numPlayers == 2) {
+		pasarNivel()
 		player1.CompleteLevel = false
 		player2.CompleteLevel = false
 		farmacia, mart, supermarket, bakery, vacunatorio = false, false, false, false, false
-		pasarNivel()
 	}
+	fmt.Println(p.X[0], player1.X[0])
 	return p
 }
 func compar(p player) player {

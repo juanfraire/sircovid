@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -87,7 +88,6 @@ func initPlayer() {
 
 }
 func pasarNivelPlayer() {
-
 	//player1
 	player1.FrameNum[0] = 1
 	player1.X[0] = 15
@@ -247,7 +247,6 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		//PARA MART
 	case p.c == 1 && p.X[0] > 318 && p.X[0] < 330 && p.Y[0] < 51 && p.Y[0] > 46:
-
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		p.Y[0] = -40
@@ -279,10 +278,6 @@ func moverPlayer(p player) player {
 		// banco
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 94 && p.X[0] < 104:
 		p.Y[0] = 89
-		sonidoPuerta()
-		//tienda a la derecha del edeficio arriba a la izquierda
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 193 && p.X[0] < 265:
-		p.Y[0] = 110
 		sonidoPuerta()
 		//mart
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 318 && p.X[0] < 330:
@@ -318,8 +313,8 @@ func moverPlayer(p player) player {
 	if p.Y[0] < -80 {
 		p.Y[0] = -80
 	}
-	// coder shortcuts
 
+	// coder shortcuts
 	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {
 		hack = true
 	}
@@ -331,6 +326,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
+	fmt.Println(p.X)
 	return p
 }
 

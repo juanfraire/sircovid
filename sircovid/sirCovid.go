@@ -185,7 +185,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if ModeTitleLevel {
 		dibujarNiveles(screen)
 	}
-
 }
 
 // Layout maneja las dimensiones de pantalla
