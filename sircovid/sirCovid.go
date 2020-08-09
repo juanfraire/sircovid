@@ -63,16 +63,21 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			Relato = false
 		}
+		//introduccion al juego
 	case ModeTitle:
 		introduccion()
-
+		//escribe en que nivel estas
 	case ModeTitleLevel:
-
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitleLevel = false
+			ModeMissions = true
+		}
+		//te muestra cual es tu mision
+	case ModeMissions:
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ModeMissions = false
 			ModeGame = true
 		}
-
 	case player1.Compras:
 		if player1.Coins >= 2 {
 			player1 = compar(player1)
@@ -87,6 +92,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			player2.Compras = false
 		}
+		//Game estas jugando
 	case ModeGame:
 		// nube
 		nube1 = moverNube(nube1)
@@ -182,7 +188,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		relato.Y = relato.Y - .3
 
 	}
-	if ModeTitleLevel {
+	if ModeMissions {
 		dibujarNiveles(screen)
 	}
 }

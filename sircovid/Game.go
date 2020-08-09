@@ -30,6 +30,7 @@ var (
 	Level                     int
 	ModeWin                   bool
 	ModeTitle                 bool
+	ModeMissions              bool
 	ElectNumPlayers           int
 	ElectPlayer               int
 	ModeGameOver              bool
