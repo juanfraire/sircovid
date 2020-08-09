@@ -78,7 +78,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
 		if player1.Coins < 2 && player2.Coins < 2 && monedas.X == 1500 {
 			noMoney := fmt.Sprintf("(NOT COMPLETE LEVEL)")
-			text.Draw(screen, noMoney, arcadeFont, 250, 370, color.White)
+			text.Draw(screen, noMoney, arcadeFont, 230, 370, color.White)
 		}
 	case ModeWin == true:
 		win := fmt.Sprintf("YOU WIN")
@@ -87,7 +87,7 @@ func dibujarTextos(screen *ebiten.Image) {
 	switch {
 	case ModePause && count1 < 40:
 		jugadores := fmt.Sprintf("PAUSE")
-		text.Draw(screen, jugadores, arcadeFont, 450, 200, color.White)
+		text.Draw(screen, jugadores, arcadeFont, 450, 300, color.White)
 
 		//elegir numero de jugadores
 	case ElectNumPlayers == 0 && Game1.numPlayers == 1:

@@ -49,16 +49,15 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	if count1 == 60 {
 		count1 = 0
 	}
-	//funcion pausa
-	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
-		ModePause = !ModePause
-		ModeMissions = !ModeMissions
-	}
 
 	switch {
 	//pausar el juego
 
 	case ModePause:
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ModePause = !ModePause
+			ModeMissions = !ModeMissions
+		}
 	case ModeWin:
 	//toda la introduccion con eleccion de players, etc
 	case Relato:
@@ -96,6 +95,11 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 		//Game estas jugando
 	case ModeGame:
+		//para mode pause y muestra los niveles
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			ModePause = !ModePause
+			ModeMissions = !ModeMissions
+		}
 		// nube
 		nube1 = moverNube(nube1)
 
@@ -158,7 +162,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibuja al enemigo
 	dibujarEnemigos(enemigo, screen)
 
-	if ModeTitle || ModeTitleLevel {
+	if ModeTitle || ModeTitleLevel || ModePause {
 		dibujarObjetos(fondoNegro, screen)
 	}
 	if player1.Compras || player2.Compras || ModeGameOver {
