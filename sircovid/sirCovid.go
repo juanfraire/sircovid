@@ -52,10 +52,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	//funcion pausa
 	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
 		ModePause = !ModePause
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyM) {
 		ModeMissions = !ModeMissions
 	}
+
 	switch {
 	//pausar el juego
 
