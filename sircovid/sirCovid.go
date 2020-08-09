@@ -162,8 +162,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibuja al enemigo
 	dibujarEnemigos(enemigo, screen)
 
-	if ModeTitle || ModeTitleLevel || ModePause {
+	if ModeTitle || ModeTitleLevel {
 		dibujarObjetos(fondoNegro, screen)
+	}
+	if ModePause {
+		dibujarObjetos(fondoNegroPause, screen)
 	}
 	if player1.Compras || player2.Compras || ModeGameOver {
 		dibujarObjetos(fondoNegroCompras, screen)
