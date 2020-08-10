@@ -22,12 +22,13 @@ var (
 	nubScale      = float64(.4)
 	nubFrameHight = float64(300) * nubScale
 	nubFrameWith  = float64(300) * nubScale
+	numNube       = 2
 )
 
 func posicionNube() (float64, float64) {
 	rand.Seed(time.Now().UnixNano())
 	var x, y float64
-	for i := 0; i < nivel; i++ {
+	for i := 0; i < numNube; i++ {
 		nube1.X[i], nube1.Y[i] = float64(rand.Intn(screenWidth/.4)), float64(rand.Intn(screenHeight/.4)) // enemigo.Y[i] //
 		nube1.Alpha[i] = float64(rand.Intn(11)) * .1
 		x, y = nube1.X[i], nube1.Y[i]
@@ -37,9 +38,19 @@ func posicionNube() (float64, float64) {
 	return x, y
 }
 func initNube() {
+	switch {
+	case banco:
+		numNube = 0
+	default:
+		numNube = Level * 2
+		if numNube > 15 {
+			numNube = 20
+		}
+	}
+
 	posicionNube()
 	//rand.Seed(time.Now().UnixNano())
-	// for i := 0; i < nivel; i++ {
+	// for i := 0; i < numNube; i++ {
 	// 	nube1.X[i] = float64(rand.Intn(screenWidth / .4))  // enemigo.X[i] //
 	// 	nube1.Y[i] = float64(rand.Intn(screenHeight / .4)) // enemigo.Y[i] //
 	// 	nube1.Alpha[i] = 1                                 //float64(rand.Intn(11)) * .1
@@ -57,7 +68,7 @@ func initNube() {
 func moverNube(n nube) nube {
 	rand.Seed(time.Now().UnixNano())
 	// creacion de nuevas nubes
-	for i := 0; i < nivel; i++ {
+	for i := 0; i < numNube; i++ {
 		if n.Alpha[i] >= 0 {
 			n.X[i]--
 		}
@@ -89,7 +100,7 @@ func moverNube(n nube) nube {
 }
 
 func dibujarNube(n nube, screen *ebiten.Image) {
-	for i := 0; i < nivel; i++ {
+	for i := 0; i < numNube; i++ {
 		op := &ebiten.DrawImageOptions{}
 		op.GeoM.Translate(n.X[i], n.Y[i])
 		op.ColorM.Scale(3, 2, 0, n.Alpha[i])

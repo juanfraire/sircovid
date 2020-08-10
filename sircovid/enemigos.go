@@ -16,15 +16,18 @@ func init() {
 }
 
 var (
-	enemigo humanos
-	count   int
-	tmp     int
-	obs     bool
-	match   bool
-	x       float64
-	y       float64
-	en      string
-	i       int
+	enemigo    humanos
+	count      int
+	tmp        int
+	obs        bool
+	match      bool
+	x          float64
+	y          float64
+	en         string
+	i          int
+	eScaleW    float64
+	eScaleH    float64
+	numEnemigo = 2
 )
 
 func randXY() (x float64, y float64) {
@@ -39,8 +42,13 @@ func randXY() (x float64, y float64) {
 }
 
 func initEnemigos() {
+	numEnemigo = Level * 2
+	if banco && numEnemigo > 4 {
+		numEnemigo = 4
+	}
+
 	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < nivel; i++ {
+	for i := 0; i < numEnemigo; i++ {
 		en = `sircovid\data\enemigo` + strconv.Itoa(i+1) + `.png`
 		enemigo.FrameOX[i] = 48
 		enemigo.FrameOY[i] = 72 * rand.Intn(4)
@@ -63,7 +71,7 @@ func moverHumanos(E humanos) humanos {
 	if ModeGame {
 		count++
 	}
-	for i = 0; i < nivel; i++ {
+	for i = 0; i < numEnemigo; i++ {
 
 		E.FrameNum[i] = 3
 		E.FrameOX[i] = 0
@@ -96,7 +104,7 @@ func moverHumanos(E humanos) humanos {
 		}
 
 		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], E.X1[i], E.Y1[i])
-		for j := 0; j < nivel; j++ {
+		for j := 0; j < numEnemigo; j++ {
 			if i != j && E.X[i]+wth > E.X[j] && E.X[i] < E.X[j]+wth && E.Y[i]+hgt > E.Y[j]+hgt-15 && E.Y[i]+hgt-15 < E.Y[j]+hgt {
 				E.X[i] = E.X1[i]
 				E.Y[i] = E.Y1[i]
@@ -121,13 +129,13 @@ func moverHumanos(E humanos) humanos {
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
-	for i := 0; i < nivel; i++ {
+	for i := 0; i < numEnemigo; i++ {
 		if ModePause || ModeWin {
 			E.FrameNum[i] = 1
 			E.FrameOX[i] = 0
 		}
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Scale(.50, .40)
+		op.GeoM.Scale(eScaleW, eScaleW)
 		op.GeoM.Translate(E.X[i], E.Y[i])
 		j := (count1 / 7) % E.FrameNum[i]
 		hx, hy := E.FrameOX[i]+j*E.FrameWidth[i], E.FrameOY[i]

@@ -11,11 +11,13 @@ import (
 
 // init carga los datos
 func init() {
+
 	//init ciudad img
 	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\ciudadFere.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	//init intro
 	intro1.initIntro(screenWidth, screenHeight)
 	//inicia los textos
@@ -42,13 +44,13 @@ func init() {
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 	// game counter
-
-	sonido(player1)
 	g.count++
 	count1++
 	if count1 == 60 {
 		count1 = 0
 	}
+	//func sonido
+	sonido(player1)
 
 	switch {
 	//pausar el juego
@@ -95,6 +97,11 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 		//Game estas jugando
 	case ModeGame:
+		if !inicio {
+			initEnemigos()
+			initNube()
+			inicio = true
+		}
 		//para mode pause y muestra los niveles
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
@@ -200,6 +207,17 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if ModeMissions {
 		dibujarNiveles(screen)
 	}
+
+	if banco {
+		screen.DrawImage(imgBanco, op)
+		dibujarEnemigos(enemigo, screen)
+		dibujarPlayer(player1, screen)
+		if Game1.numPlayers == 2 {
+			dibujarPlayer(player2, screen)
+		}
+		screen.DrawImage(imgCintas, op)
+	}
+
 }
 
 // Layout maneja las dimensiones de pantalla

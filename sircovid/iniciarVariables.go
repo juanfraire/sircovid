@@ -1,6 +1,6 @@
 package main
 
-var nivel = int(1)
+var nivel int
 
 func iniciarVariables() {
 	//Relato = true
@@ -12,6 +12,9 @@ func iniciarVariables() {
 	ElectNumPlayers = 0
 	ElectPlayer = 0
 	Game1.numPlayers = 1
+	eScaleW = .5
+	eScaleH = .4
+	plyrScale = .55
 
 }
 func pasarNivel() {

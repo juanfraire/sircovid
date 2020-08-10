@@ -18,7 +18,7 @@ type Objetos struct {
 var decoded []Objetos
 
 func main() {
-	fJSON, err := ioutil.ReadFile("sircovid/data/ciudadFere.json")
+	fJSON, err := ioutil.ReadFile("sircovid/data/banco.json")
 	if err != nil {
 		panic(err)
 	}

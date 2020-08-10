@@ -27,7 +27,7 @@ var (
 	Relato                    bool
 	ModeGame                  bool
 	ModeTitleLevel            bool
-	Level                     int
+	Level                     = 1
 	ModeWin                   bool
 	ModeTitle                 bool
 	ModeMissions              bool
@@ -42,9 +42,12 @@ var (
 	bakery, bakery1           bool
 	supermarket, supermarket1 bool
 	vacunatorio               bool
+	inicio                    bool
 
 	// imágenes
-	imgTiles *ebiten.Image
+	imgTiles  *ebiten.Image
+	imgBanco  *ebiten.Image
+	imgCintas *ebiten.Image
 
 	//para start y game over
 	arcadeFont      font.Face
@@ -220,6 +223,7 @@ func compar(p player) player {
 	}
 	return p
 }
+
 func dibujarTextoCompras(p player, screen *ebiten.Image) {
 
 	if p.Compras {
