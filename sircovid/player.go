@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -270,7 +269,6 @@ func moverPlayer(p player) player {
 		///SALIDAS///
 		// banco
 	case p.Y[0] > 364 && p.X[0] > 480 && p.X[0] < 542:
-		fmt.Println(p.X, p.Y)
 		p.Y[0] = 90
 		p.X[0] = 95
 		sonidoPuerta()
@@ -336,7 +334,6 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
-	fmt.Println(p.X, p.Y)
 	return p
 }
 
@@ -412,7 +409,6 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.Coins += 5
 		sonidomonedas()
 	}
-	fmt.Println(p.Y[0]+hgt, monedas.Y+40)
 	return p, b, pl
 }
 

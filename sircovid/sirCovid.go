@@ -155,60 +155,61 @@ func (g *Game) Update(screen *ebiten.Image) error {
 
 // Draw dibuja la pantalla 60 veces por segundo
 func (g *Game) Draw(screen *ebiten.Image) {
-
 	// dibujar fondo
 	op := &ebiten.DrawImageOptions{}
-	screen.DrawImage(imgTiles, op)
+	if !banco {
 
-	//dibujar objetos
-	dibujarObjetos(barbijo, screen)
-	dibujarObjetos(plasma, screen)
-	//dibujarObjetos(alchol, screen)
-	//dibujarObjetos(monedas, screen)
-	if Level > 10 {
-		dibujarObjetos(cruz, screen)
-	}
+		screen.DrawImage(imgTiles, op)
 
-	//dibuja al enemigo
-	dibujarEnemigos(enemigo, screen)
+		//dibujar objetos
+		dibujarObjetos(barbijo, screen)
+		dibujarObjetos(plasma, screen)
+		//dibujarObjetos(alchol, screen)
+		//dibujarObjetos(monedas, screen)
+		if Level > 10 {
+			dibujarObjetos(cruz, screen)
+		}
 
-	if ModeTitle || ModeTitleLevel {
-		dibujarObjetos(fondoNegro, screen)
-	}
-	if ModePause {
-		dibujarObjetos(fondoNegroPause, screen)
-	}
-	if player1.Compras || player2.Compras || ModeGameOver {
-		dibujarObjetos(fondoNegroCompras, screen)
-	}
-	// dibujar texto
-	if !Relato {
-		dibujarTextos(screen)
-	}
-	//dibujar textos compras
-	dibujarTextoCompras(player1, screen)
-	dibujarTextoCompras(player2, screen)
+		//dibuja al enemigo
+		dibujarEnemigos(enemigo, screen)
 
-	//dibujar palyers
-	dibujarPlayer(player1, screen)
-	if Game1.numPlayers == 2 {
-		dibujarPlayer(player2, screen)
+		if ModeTitle || ModeTitleLevel {
+			dibujarObjetos(fondoNegro, screen)
+		}
+		if ModePause {
+			dibujarObjetos(fondoNegroPause, screen)
+		}
+		if player1.Compras || player2.Compras || ModeGameOver {
+			dibujarObjetos(fondoNegroCompras, screen)
+		}
+		// dibujar texto
+		if !Relato {
+			dibujarTextos(screen)
+		}
+		//dibujar textos compras
+		dibujarTextoCompras(player1, screen)
+		dibujarTextoCompras(player2, screen)
+
+		//dibujar palyers
+		dibujarPlayer(player1, screen)
+		if Game1.numPlayers == 2 {
+			dibujarPlayer(player2, screen)
+		}
+
+		// dibujar nube
+		dibujarNube(nube1, screen)
+
+		//Dibujar relato
+		if Relato {
+			dibujarObjetos(papiro, screen)
+			dibujarObjetos(relato, screen)
+			relato.Y = relato.Y - .3
+
+		}
+		if ModeMissions {
+			dibujarNiveles(screen)
+		}
 	}
-
-	// dibujar nube
-	dibujarNube(nube1, screen)
-
-	//Dibujar relato
-	if Relato {
-		dibujarObjetos(papiro, screen)
-		dibujarObjetos(relato, screen)
-		relato.Y = relato.Y - .3
-
-	}
-	if ModeMissions {
-		dibujarNiveles(screen)
-	}
-
 	if banco {
 		screen.DrawImage(imgBanco, op)
 		dibujarTextos(screen)
