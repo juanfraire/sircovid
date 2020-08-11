@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -202,7 +203,7 @@ func moverPlayer(p player) player {
 	///ENTRADAS a puertas///
 	switch {
 	//banco
-	case p.c == 1 && (p.X[0] > 95 && p.X[0] < 103 && p.Y[0] < 89 && p.Y[0] > 85):
+	case p.c == 1 && (p.X[0] > 90 && p.X[0] < 103 && p.Y[0] < 89 && p.Y[0] > 85):
 		p.Y[0] = 363
 		p.X[0] = 507
 		sonidoPuerta()
@@ -268,7 +269,8 @@ func moverPlayer(p player) player {
 
 		///SALIDAS///
 		// banco
-	case p.Y[0] > 365 && p.X[0] > 500 && p.X[0] < 520:
+	case p.Y[0] > 364 && p.X[0] > 480 && p.X[0] < 542:
+		fmt.Println(p.X, p.Y)
 		p.Y[0] = 90
 		p.X[0] = 95
 		sonidoPuerta()
@@ -333,7 +335,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
-	// fmt.Println(p.Y, p.X)
+	fmt.Println(p.X, p.Y)
 	return p
 }
 
