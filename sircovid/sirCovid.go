@@ -213,15 +213,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if banco {
 		screen.DrawImage(imgBanco, op)
 		dibujarTextos(screen)
-		dibujarObjetos(alchol, screen)
 		dibujarObjetos(monedas, screen)
-
 		dibujarEnemigos(enemigo, screen)
 		dibujarPlayer(player1, screen)
 		if Game1.numPlayers == 2 {
 			dibujarPlayer(player2, screen)
 		}
 		screen.DrawImage(imgCintas, op)
+		dibujarObjetos(alchol, screen)
+
 	}
 
 }
