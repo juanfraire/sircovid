@@ -108,7 +108,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModeMissions = !ModeMissions
 		}
 		// nube
-		nube1 = moverNube(nube1)
+		if !banco {
+			nube1 = moverNube(nube1)
+		}
 
 		// palyer
 		player1 = moverPlayer(player1)
@@ -140,6 +142,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			initNube()
 			initObjetos()
 			initEnemigos()
+			banco = false
 			ModeGameOver = false
 		}
 	}
@@ -160,7 +163,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibujar objetos
 	dibujarObjetos(barbijo, screen)
 	dibujarObjetos(plasma, screen)
-	dibujarObjetos(alchol, screen)
+	//dibujarObjetos(alchol, screen)
 	dibujarObjetos(monedas, screen)
 	if Level > 10 {
 		dibujarObjetos(cruz, screen)
@@ -182,8 +185,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if !Relato {
 		dibujarTextos(screen)
 	}
-	//dibujar fondo negro
-
 	//dibujar textos compras
 	dibujarTextoCompras(player1, screen)
 	dibujarTextoCompras(player2, screen)
@@ -210,6 +211,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	if banco {
 		screen.DrawImage(imgBanco, op)
+		dibujarTextos(screen)
+		dibujarObjetos(alchol, screen)
 		dibujarEnemigos(enemigo, screen)
 		dibujarPlayer(player1, screen)
 		if Game1.numPlayers == 2 {

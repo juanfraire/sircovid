@@ -68,7 +68,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		objetos[59] = []int{0, screenWidth, 30, 0}
 
 	case banco:
-		objetos = make([][]int, 31)
+		objetos = make([][]int, 35)
 		objetos[0] = []int{455, 128, 212, 55}
 		objetos[1] = []int{615, 66, 262, 4}
 		objetos[2] = []int{555, 94, 212, 22}
@@ -85,6 +85,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		objetos[13] = []int{420, 54, 293, 23}
 		objetos[14] = []int{614, 2, 265, 30}
 		objetos[15] = []int{542, 146, 157, 1}
+		//limite
 		objetos[16] = []int{0, 1057, -1, 159}
 		objetos[17] = []int{704, 353, 157, 398}
 		objetos[18] = []int{0, 350, 157, 394}
@@ -100,6 +101,11 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		objetos[28] = []int{690, 10, 310, 26}
 		objetos[29] = []int{673, 28, 324, 9}
 		objetos[30] = []int{353, 14, 308, 18}
+
+		objetos[31] = []int{0, 0, 0, screenHeight}
+		objetos[32] = []int{screenWidth, 0, 0, screenHeight}
+		objetos[33] = []int{0, screenWidth, screenHeight, 32}
+		objetos[34] = []int{0, screenWidth, 30, 0}
 	}
 
 	for i := 0; i < len(objetos); i++ {
