@@ -163,7 +163,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	//dibujar objetos
 	dibujarObjetos(barbijo, screen)
 	dibujarObjetos(plasma, screen)
-	dibujarObjetos(alchol, screen)
+	//dibujarObjetos(alchol, screen)
 	dibujarObjetos(monedas, screen)
 	if Level > 10 {
 		dibujarObjetos(cruz, screen)
@@ -212,6 +212,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if banco {
 		screen.DrawImage(imgBanco, op)
 		dibujarTextos(screen)
+		dibujarObjetos(alchol, screen)
 		dibujarEnemigos(enemigo, screen)
 		dibujarPlayer(player1, screen)
 		if Game1.numPlayers == 2 {
