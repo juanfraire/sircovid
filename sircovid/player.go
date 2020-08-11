@@ -332,6 +332,7 @@ func moverPlayer(p player) player {
 		p.Fast = !p.Fast
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyN):
 		pasarNivel()
+		banco = false
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
@@ -398,6 +399,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	if p.vidas == 0 {
 		ModeGameOver = true
 		ModeGame = false
+		banco = false
 	}
 	//PIERDE POR falta de plata
 	if player1.Coins < 2 && player2.Coins < 2 && !p.CompleteLevel && monedas.X == 1500 {

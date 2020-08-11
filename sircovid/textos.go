@@ -109,7 +109,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		}
 	}
 	//dibujar carteles indicadores primer nivel
-	if Level == 1 {
+	if Level == 1 && !banco {
 		plasmaVida := fmt.Sprintf("GET LIFE>>")
 		text.Draw(screen, plasmaVida, smallArcadeFont, 325, 95, color.White)
 		alcholInmune := fmt.Sprintf("GET INMUNE>>")
