@@ -70,8 +70,8 @@ func initObjetos() {
 	monedas.FrameNum = 1
 	monedas.FrameWidth = 65
 	monedas.FrameHeight = 80
-	monedas.X = float64(99)
-	monedas.Y = float64(99)
+	monedas.X = float64(590)
+	monedas.Y = float64(130)
 	monedas.img = barbijo.img
 
 	//carteles
