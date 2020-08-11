@@ -61,7 +61,7 @@ func initObjetos() {
 	alchol.FrameNum = 1
 	alchol.FrameWidth = 65
 	alchol.FrameHeight = 120
-	alchol.X = float64(540)
+	alchol.X = float64(545)
 	alchol.Y = float64(360)
 	alchol.img = barbijo.img
 
