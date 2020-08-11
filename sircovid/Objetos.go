@@ -61,8 +61,8 @@ func initObjetos() {
 	alchol.FrameNum = 1
 	alchol.FrameWidth = 65
 	alchol.FrameHeight = 120
-	alchol.X = float64(545)
-	alchol.Y = float64(360)
+	alchol.X = float64(353)
+	alchol.Y = float64(268)
 	alchol.img = barbijo.img
 
 	monedas.FrameOX = 0
@@ -70,7 +70,7 @@ func initObjetos() {
 	monedas.FrameNum = 1
 	monedas.FrameWidth = 65
 	monedas.FrameHeight = 80
-	monedas.X = float64(590)
+	monedas.X = float64(433)
 	monedas.Y = float64(130)
 	monedas.img = barbijo.img
 
