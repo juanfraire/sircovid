@@ -24,7 +24,7 @@ var Game1 Game
 var intro1 intro
 
 var (
-	Relato                    bool
+	Commands                  bool
 	ModeGame                  bool
 	ModeTitleLevel            bool
 	Level                     = 1

@@ -62,9 +62,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 	case ModeWin:
 	//toda la introduccion con eleccion de players, etc
-	case Relato:
-		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-			Relato = false
+	case Commands:
+		if inpututil.IsKeyJustPressed(ebiten.KeyC) {
+			Commands = !Commands
 		}
 		//introduccion al juego
 	case ModeTitle:
@@ -106,6 +106,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
 			ModeMissions = !ModeMissions
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyC) {
+			Commands = !Commands
 		}
 		// nube
 		if !banco {
@@ -182,10 +185,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if player1.Compras || player2.Compras || ModeGameOver {
 			dibujarObjetos(fondoNegroCompras, screen)
 		}
-		// dibujar texto
-		if !Relato {
-			dibujarTextos(screen)
+		if Commands {
+			dibujarObjetos(fondoNegroCommans, screen)
 		}
+		// dibujar texto
+		dibujarTextos(screen)
+
 		//dibujar textos compras
 		dibujarTextoCompras(player1, screen)
 		dibujarTextoCompras(player2, screen)
@@ -199,13 +204,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		// dibujar nube
 		dibujarNube(nube1, screen)
 
-		//Dibujar relato
-		if Relato {
-			dibujarObjetos(papiro, screen)
-			dibujarObjetos(relato, screen)
-			relato.Y = relato.Y - .3
-
-		}
 		if ModeMissions {
 			dibujarNiveles(screen)
 		}

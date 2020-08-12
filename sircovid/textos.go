@@ -42,6 +42,9 @@ func dibujarTextos(screen *ebiten.Image) {
 	//dibujar monedas
 	CoinsP1 := fmt.Sprintf("Coins:%d", player1.Coins)
 	text.Draw(screen, CoinsP1, smallArcadeFont, fontSize, 70, color.White)
+	//cartel para llamar a comandos
+	Comandos := fmt.Sprintf("Commans: Key C")
+	text.Draw(screen, Comandos, smallArcadeFont, 10, screenHeight-10, color.White)
 
 	if Game1.numPlayers == 2 {
 		CoinsP1 := fmt.Sprintf("Coins:%d", player2.Coins)
@@ -108,13 +111,14 @@ func dibujarTextos(screen *ebiten.Image) {
 			text.Draw(screen, l, arcadeFont, x, (i+5)*fontSize, color.White)
 		}
 	}
-	//dibujar carteles indicadores primer nivel
-	// if Level == 1 && !banco {
-	// 	plasmaVida := fmt.Sprintf("GET LIFE>>")
-	// 	text.Draw(screen, plasmaVida, smallArcadeFont, 325, 95, color.White)
-	// 	alcholInmune := fmt.Sprintf("GET INMUNE>>")
-	// 	text.Draw(screen, alcholInmune, smallArcadeFont, 810, 500, color.White)
-	// 	barbijoInmune := fmt.Sprintf("<<GET INMUNE")
-	// 	text.Draw(screen, barbijoInmune, smallArcadeFont, 330, 510, color.White)
-	// }
+	//dibujar Comandos
+	if Commands {
+		plasmaVida := fmt.Sprintf("Player 1 Keys:\nUp: Key Up\nDow: Key Down\nRigth: Key Rigth\nLeft: Key Left")
+		text.Draw(screen, plasmaVida, smallArcadeFont, 325, 150, color.White)
+		alcholInmune := fmt.Sprintf("Player 2 Keys:\nUp: Key W\nDow: Key S\nRigth: Key D\nLeft: Key A")
+		text.Draw(screen, alcholInmune, smallArcadeFont, 325, 250, color.White)
+		barbijoInmune := fmt.Sprintf("Pause: P\nSilence: X\nVolume Up: Ctrl Key Up\nVolume Down: Ctrl Key Down")
+		text.Draw(screen, barbijoInmune, smallArcadeFont, 325, 350, color.White)
+
+	}
 }

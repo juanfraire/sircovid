@@ -20,14 +20,14 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, fondoNegro, fondoNegroCompras, fondoNegroPause, home1, home, monedas, relato, papiro, ciudad, tpaper, vaccine, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
-	objScale                                                                                                                                                                                        = .3
-	barHScale                                                                                                                                                                                       float64
-	barWscale                                                                                                                                                                                       float64
-	coinHScale                                                                                                                                                                                      float64
-	coinWscale                                                                                                                                                                                      float64
-	plasmaHScale                                                                                                                                                                                    float64
-	plasmaWScale                                                                                                                                                                                    float64
+	barbijo, alchol, plasma, fondoNegro, fondoNegroCommans, fondoNegroCompras, fondoNegroPause, home1, home, monedas, relato, papiro, ciudad, tpaper, vaccine, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
+	objScale                                                                                                                                                                                                           = .3
+	barHScale                                                                                                                                                                                                          float64
+	barWscale                                                                                                                                                                                                          float64
+	coinHScale                                                                                                                                                                                                         float64
+	coinWscale                                                                                                                                                                                                         float64
+	plasmaHScale                                                                                                                                                                                                       float64
+	plasmaWScale                                                                                                                                                                                                       float64
 	// alcholHScale := float64(alchol.FrameHeight) * objScale
 	// alcholWScale := float64(alchol.FrameWidth) * objScale
 )
@@ -118,9 +118,9 @@ func initObjetos() {
 	fondoNegro.FrameOY = 0
 	fondoNegro.FrameNum = 1
 	fondoNegro.FrameWidth = 862
-	fondoNegro.FrameHeight = 250
+	fondoNegro.FrameHeight = 290
 	fondoNegro.X = float64(165)
-	fondoNegro.Y = float64(170)
+	fondoNegro.Y = float64(120)
 	fondoNegro.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\fondoNegro.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
@@ -130,10 +130,22 @@ func initObjetos() {
 	fondoNegroPause.FrameOY = 0
 	fondoNegroPause.FrameNum = 1
 	fondoNegroPause.FrameWidth = 862
-	fondoNegroPause.FrameHeight = 250
+	fondoNegroPause.FrameHeight = 280
 	fondoNegroPause.X = float64(415)
-	fondoNegroPause.Y = float64(215)
+	fondoNegroPause.Y = float64(200)
 	fondoNegroPause.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\fondoNegro.png`, ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fondoNegroCommans.FrameOX = 0
+	fondoNegroCommans.FrameOX = 0
+	fondoNegroCommans.FrameOY = 0
+	fondoNegroCommans.FrameNum = 1
+	fondoNegroCommans.FrameWidth = 600
+	fondoNegroCommans.FrameHeight = 500
+	fondoNegroCommans.X = float64(180)
+	fondoNegroCommans.Y = float64(0)
+	fondoNegroCommans.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\fondoNegro.png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -275,7 +287,7 @@ func dibujarNiveles(screen *ebiten.Image) {
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	if B != relato && B != papiro && B != fondoNegro && B != fondoNegroCompras {
+	if B != relato && B != papiro && B != fondoNegro && B != fondoNegroCompras && B != fondoNegroCommans {
 		op.GeoM.Scale(objScale, objScale)
 	}
 	op.GeoM.Translate(B.X, B.Y)
