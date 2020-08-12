@@ -268,7 +268,7 @@ func moverPlayer(p player) player {
 
 		///SALIDAS///
 		// banco
-	case p.Y[0] > 364 && p.X[0] > 480 && p.X[0] < 542:
+	case p.Y[0] > 364 && p.X[0] > 480 && p.X[0] < 542 && banco:
 		p.Y[0] = 90
 		p.X[0] = 95
 		sonidoPuerta()
@@ -350,17 +350,19 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	wth = float64(p.FrameWidth[0])*plyrScale - 6
 
 	if !p.Inmune {
+
 		//pierde vidas con la nube
-		for i := 0; i < nivel; i++ {
+		for i := 0; i < numNube; i++ {
 			nubX := nube1.X[i] * nubScale
 			nubY := nube1.Y[i] * nubScale
-			//pierde vidas con nube
+
 			if p.X[0]+wth > nubX && p.X[0] < nubX+nubFrameWith && p.Y[0]+hgt > nubY && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
 				p.v += .1
 			}
 		}
+
 		//pierde vidas con humanos
-		for i := 0; i < nivel; i++ {
+		for i := 0; i < numEnemigo; i++ {
 			if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
 				p.v += .5
 			}
