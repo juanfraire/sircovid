@@ -222,7 +222,7 @@ func moverPlayer(p player) player {
 		p.Y[0] = -40
 		sonidoPuerta()
 		if !p.CompleteLevel {
-			ModeMissions = true
+			ModeTitleLevel = true
 		}
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -230,7 +230,7 @@ func moverPlayer(p player) player {
 	case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 285 && p.X[0] < 296 && p.Y[0] < 203 && p.Y[0] > 201):
 		p.Y[0] = -40
 		sonidoPuerta()
-		ModeMissions = true
+		ModeTitleLevel = true
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		//pharmacy
