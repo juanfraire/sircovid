@@ -98,11 +98,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 		//Game estas jugando
 	case ModeGame:
-		if !inicio {
-			initEnemigos()
-			initNube()
-			inicio = true
-		}
+
 		//para mode pause y muestra los niveles
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
@@ -161,8 +157,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar fondo
 	op := &ebiten.DrawImageOptions{}
-	if !banco {
-
+	switch banco {
+	case false:
 		screen.DrawImage(imgTiles, op)
 
 		//dibujar objetos
@@ -208,8 +204,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if ModeTitleLevel {
 			dibujarNiveles(screen)
 		}
-	}
-	if banco {
+	case true:
 		screen.DrawImage(imgBanco, op)
 		dibujarTextos(screen)
 		dibujarObjetos(monedas, screen)

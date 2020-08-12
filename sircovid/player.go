@@ -342,8 +342,8 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	barWscale = float64(barbijo.FrameWidth) * objScale
 	coinHScale = float64(monedas.FrameHeight) * objScale
 	coinWscale = float64(monedas.FrameWidth) * objScale
-	// alcholHScale := float64(alchol.FrameHeight) * objScale
-	// alcholWScale := float64(alchol.FrameWidth) * objScale
+	alcholHScale = float64(alchol.FrameHeight) * objScale
+	alcholWScale = float64(alchol.FrameWidth) * objScale
 	plasmaHScale = float64(plasma.FrameHeight) * objScale
 	plasmaWScale = float64(plasma.FrameWidth) * objScale
 	hgt = float64(p.FrameHeight[0])*plyrScale - 2
@@ -362,7 +362,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		}
 
 		//pierde vidas con humanos
-		for i := 0; i < numEnemigo; i++ {
+		for i := randNum; i < numEnemigo+randNum; i++ {
 			if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
 				p.v += .5
 			}

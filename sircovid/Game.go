@@ -42,7 +42,6 @@ var (
 	bakery, bakery1           bool
 	supermarket, supermarket1 bool
 	vacunatorio               bool
-	inicio                    bool
 
 	// imágenes
 	imgTiles  *ebiten.Image

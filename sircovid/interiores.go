@@ -20,8 +20,6 @@ func interior() {
 	}
 	initEnemigos()
 	initNube()
-	inicio = false
-	// nivel = 6
 	eScaleW = .6
 	eScaleH = .45
 	plyrScale = .75

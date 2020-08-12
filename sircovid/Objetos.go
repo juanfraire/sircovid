@@ -28,8 +28,8 @@ var (
 	coinWscale                                                                                                                                                                                                         float64
 	plasmaHScale                                                                                                                                                                                                       float64
 	plasmaWScale                                                                                                                                                                                                       float64
-	// alcholHScale := float64(alchol.FrameHeight) * objScale
-	// alcholWScale := float64(alchol.FrameWidth) * objScale
+	alcholHScale                                                                                                                                                                                                       float64
+	alcholWScale                                                                                                                                                                                                       float64
 )
 
 //cartFarmacy, cartSupermarket, cartStore, cartBanck

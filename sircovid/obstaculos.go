@@ -116,7 +116,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		}
 	}
 
-	for j := 0; j < numEnemigo; j++ {
+	for j := randNum; j < numEnemigo+randNum; j++ {
 		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+hgt && Y+hgt < enemigo.Y[j]+hgt {
 			X = X1
 			Y = Y1
