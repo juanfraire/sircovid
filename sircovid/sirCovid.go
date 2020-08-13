@@ -58,7 +58,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModePause:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
-			//ModeMissions = !ModeMissions
 		}
 	case ModeWin:
 	//toda la introduccion con eleccion de players, etc
@@ -178,6 +177,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		}
 		if ModePause {
 			dibujarObjetos(fondoNegroPause, screen)
+
 		}
 		if player1.Compras || player2.Compras || ModeGameOver {
 			dibujarObjetos(fondoNegroCompras, screen)
@@ -201,7 +201,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		// dibujar nube
 		dibujarNube(nube1, screen)
 
-		if ModeTitleLevel {
+		if ModeTitleLevel || ModePause {
 			dibujarNiveles(screen)
 		}
 	case true:
