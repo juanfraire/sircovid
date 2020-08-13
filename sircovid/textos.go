@@ -74,8 +74,54 @@ func dibujarTextos(screen *ebiten.Image) {
 		intro1.drawIntro(screen, screenWidth, screenHeight)
 
 	case ModeTitleLevel:
-		nivel := fmt.Sprintf("    LEVEL %d\n\nPRESS SPACE KEY", Level)
+		nivel := fmt.Sprintf("    LEVEL %d\n\n\nPRESS SPACE KEY", Level)
 		text.Draw(screen, nivel, arcadeFont, 300, 280, color.White)
+
+		if Level == 1 {
+			nivel := fmt.Sprintf("MISSION: GET MEDS")
+			text.Draw(screen, nivel, smallArcadeFont, 400, 320, color.White)
+		}
+		if Level == 2 {
+			nivel := fmt.Sprintf("MISSION: GET BREAD")
+			text.Draw(screen, nivel, smallArcadeFont, 390, 320, color.White)
+		}
+		if Level == 3 {
+			nivel := fmt.Sprintf("MISSION GET CLOTHES")
+			text.Draw(screen, nivel, smallArcadeFont, 380, 320, color.White)
+		}
+		if Level == 4 {
+			nivel := fmt.Sprintf("MISSION: GET TOLIET PAPER")
+			text.Draw(screen, nivel, smallArcadeFont, 350, 320, color.White)
+		}
+		if Level == 5 {
+			nivel := fmt.Sprintf("MISSION: GET MEDS AND BREAD")
+			text.Draw(screen, nivel, smallArcadeFont, 330, 320, color.White)
+		}
+		if Level == 6 {
+			nivel := fmt.Sprintf("MISSION: GET TOLET PAPER AND MEDS")
+			text.Draw(screen, nivel, smallArcadeFont, 280, 320, color.White)
+		}
+		if Level == 7 {
+			nivel := fmt.Sprintf("MISSION: GET GLOTHES AND BREAD")
+			text.Draw(screen, nivel, smallArcadeFont, 300, 320, color.White)
+		}
+		if Level == 8 {
+			nivel := fmt.Sprintf("MISSION: GET MEDS AND CLOTHES")
+			text.Draw(screen, nivel, smallArcadeFont, 320, 320, color.White)
+		}
+		if Level == 9 {
+			nivel := fmt.Sprintf("MISSION GET TOILET PAPER AND CLOTHES")
+			text.Draw(screen, nivel, smallArcadeFont, 240, 320, color.White)
+		}
+		if Level == 10 {
+			nivel := fmt.Sprintf("MISSION: GET BREAD AND TOILET PAPER")
+			text.Draw(screen, nivel, smallArcadeFont, 260, 320, color.White)
+		}
+		if Level > 10 {
+			nivel := fmt.Sprintf("MISSION: GET VACCINE")
+			text.Draw(screen, nivel, smallArcadeFont, 400, 320, color.White)
+		}
+
 	case ModeGameOver:
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
 		text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
@@ -118,7 +164,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		alcholInmune := fmt.Sprintf("\nPlayer 2 movements:\n\n Up: W\n Dow: S\n Rigth: D\n Left: A")
 		text.Draw(screen, alcholInmune, smallArcadeFont, 325, 250, color.White)
 		barbijoInmune := fmt.Sprintf("\nPause: Space Bar\n\nMute: X\n\nVolume Up: Ctrl+Arrow Up\nVolume Down: Ctrl+Arrow Down")
-		text.Draw(screen, barbijoInmune, smallArcadeFont, 325, 350, color.White)
+		text.Draw(screen, barbijoInmune, smallArcadeFont, 325, 360, color.White)
 
 	}
 }

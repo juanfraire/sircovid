@@ -270,18 +270,23 @@ func dibujarNiveles(screen *ebiten.Image) {
 	}
 	if Level == 1 || Level == 5 || Level == 6 || Level == 8 {
 		dibujarObjetos(meds, screen)
+
 	}
 	if Level == 2 || Level == 5 || Level == 7 || Level == 10 {
 		dibujarObjetos(bread, screen)
+
 	}
 	if Level == 3 || Level == 7 || Level == 8 || Level == 9 {
 		dibujarObjetos(clothes, screen)
+
 	}
 	if Level == 4 || Level == 6 || Level == 9 || Level == 10 {
 		dibujarObjetos(tpaper, screen)
+
 	}
 	if Level > 10 {
 		dibujarObjetos(vaccine, screen)
+
 	}
 }
 
