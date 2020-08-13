@@ -14,7 +14,7 @@ func iniciarVariables() {
 	Game1.numPlayers = 1
 	eScaleW = .5
 	eScaleH = .4
-	plyrScale = .55
+	plyrScale = .65
 
 }
 func pasarNivel() {
