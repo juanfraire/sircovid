@@ -2,6 +2,8 @@ package main
 
 import "github.com/hajimehoshi/ebiten"
 
+var hScaleW, hScaleH, hgt, wth float64
+
 type humanos struct {
 	FrameOX         [20]int
 	FrameOY         [20]int

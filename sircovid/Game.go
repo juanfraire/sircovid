@@ -112,7 +112,7 @@ func introduccion() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
 		ModeTitle = false
 		player1.X[0] = 15
-		player1.Y[0] = -40
+		player1.Y[0] = 290
 		player2.X[0] = 295
 		player2.Y[0] = -40
 		ModeTitleLevel = true

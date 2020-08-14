@@ -20,16 +20,16 @@ func interior() {
 	}
 	initEnemigos()
 	initNube()
-	eScaleW = .6
-	eScaleH = .45
-	plyrScale = .75
+	hScaleW = .65
+	hScaleH = .55
+	// plyrScale = .75
 }
 func salida() {
 	if banco {
 		banco = false
-		eScaleW = .5
-		eScaleH = .4
-		plyrScale = .6
+		hScaleW = .53
+		hScaleH = .45
+		// plyrScale = .6
 		initNube()
 		initEnemigos()
 	}

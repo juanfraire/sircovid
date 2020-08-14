@@ -16,17 +16,17 @@ func init() {
 }
 
 var (
-	enemigo    humanos
-	count      int
-	tmp        int
-	obs        bool
-	match      bool
-	x          float64
-	y          float64
-	en         string
-	i          int
-	eScaleW    float64
-	eScaleH    float64
+	enemigo humanos
+	count   int
+	tmp     int
+	obs     bool
+	match   bool
+	x       float64
+	y       float64
+	en      string
+	i       int
+	// eScaleW    float64
+	// eScaleH    float64
 	numEnemigo = 2
 	randNum    int
 )
@@ -141,10 +141,10 @@ func dibujarEnemigos(E humanos, screen *ebiten.Image) {
 	for i := randNum; i < numEnemigo+randNum; i++ {
 		if ModePause || ModeWin {
 			E.FrameNum[i] = 1
-			E.FrameOX[i] = 0
+			E.FrameOX[i] = 48
 		}
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Scale(eScaleW, eScaleH)
+		op.GeoM.Scale(hScaleW, hScaleH)
 		op.GeoM.Translate(E.X[i], E.Y[i])
 		j := (count1 / 7) % E.FrameNum[i]
 		hx, hy := E.FrameOX[i]+j*E.FrameWidth[i], E.FrameOY[i]

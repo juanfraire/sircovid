@@ -109,7 +109,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	}
 
 	for i := 0; i < len(objetos); i++ {
-		if int(X+wth) >= objetos[i][0] && int(X) <= objetos[i][0]+objetos[i][1] && int(Y+hgt) >= objetos[i][2] && int(Y+hgt) <= objetos[i][2]+objetos[i][3] {
+		if int(X+wth-5) > objetos[i][0] && int(X+7) < objetos[i][0]+objetos[i][1] && int(Y+hgt) > objetos[i][2] && int(Y+hgt-5) < objetos[i][2]+objetos[i][3] {
 			X = X1
 			Y = Y1
 			return X, Y, true

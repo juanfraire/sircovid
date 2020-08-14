@@ -12,9 +12,11 @@ func iniciarVariables() {
 	ElectNumPlayers = 0
 	ElectPlayer = 0
 	Game1.numPlayers = 1
-	eScaleW = .5
-	eScaleH = .4
-	plyrScale = .65
+	hScaleW = .53
+	hScaleH = .45
+	hgt = float64(player1.FrameHeight[0]) * hScaleH
+	wth = float64(player1.FrameWidth[0]) * hScaleW
+	// plyrScale = .65
 
 }
 func pasarNivel() {

@@ -29,34 +29,33 @@ var (
 	player1, player2 player
 	humano1, humano2 humanos
 	// nivel            = int(1)
-	plyrScale float64
-	hgt       float64
-	wth       float64
-	hack      bool
-	banco     bool
+	// plyrScale float64
+
+	hack  bool
+	banco bool
 )
 
 func initPlayer() {
 
 	//////////////   Imangen VIEJO  //////////////////////////////
-	humano1.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player3.png`, ebiten.FilterDefault)
+	humano1.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1 (2).png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 	//imagen chica
-	humano2.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player4.png`, ebiten.FilterDefault)
+	humano2.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player2 (2).png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
 	// player1
 
-	player1.FrameOX[0] = 0
-	player1.FrameOY[0] = 0
+	player1.FrameOX[0] = 48
+	player1.FrameOY[0] = 72
 	player1.FrameNum[0] = 1
 	player1.X[0] = 15
-	player1.Y[0] = -40
-	player1.FrameWidth[0] = 32
-	player1.FrameHeight[0] = 48
+	player1.Y[0] = 200
+	player1.FrameWidth[0] = 48
+	player1.FrameHeight[0] = 72
 	player1.MovX = 0
 	player1.MovY = 0
 	//player
@@ -69,13 +68,13 @@ func initPlayer() {
 	player1.humanos.img = humano1.img
 
 	//player2
-	player2.FrameOX[0] = 0
-	player2.FrameOY[0] = 0
+	player2.FrameOX[0] = 48
+	player2.FrameOY[0] = 72
 	player2.FrameNum[0] = 1
 	player2.X[0] = 295
 	player2.Y[0] = -40
-	player2.FrameWidth[0] = 32
-	player2.FrameHeight[0] = 48
+	player2.FrameWidth[0] = 48
+	player2.FrameHeight[0] = 72
 	player1.MovX = 0
 	player1.MovY = 0
 
@@ -122,36 +121,36 @@ func moverPlayer(p player) player {
 
 	if p.a == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOX[0] = 0
-		p.FrameOY[0] = 96
+		p.FrameOY[0] = 144
 		p.FrameNum[0] = 3
 		p.MovX = 1
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyRight) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyD) && p.señalador == 1 {
-		p.FrameOX[0] = 32
+		p.FrameOX[0] = 48
 		p.FrameNum[0] = 1
 		p.MovX = 0
 		p.a = 0
 	}
 	if p.b == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOX[0] = 0
-		p.FrameOY[0] = 48
+		p.FrameOY[0] = 72
 		p.FrameNum[0] = 3
 		p.MovX = 2
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyLeft) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyA) && p.señalador == 1 {
-		p.FrameOX[0] = 32
+		p.FrameOX[0] = 48
 		p.FrameNum[0] = 1
 		p.MovX = 0
 		p.b = 0
 	}
 	if p.c == 1 && p.MovX != 1 && p.MovX != 2 {
 		p.FrameOX[0] = 0
-		p.FrameOY[0] = 144
+		p.FrameOY[0] = 216
 		p.FrameNum[0] = 3
 		p.MovY = 1
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyUp) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyW) && p.señalador == 1 {
-		p.FrameOX[0] = 32
+		p.FrameOX[0] = 48
 		p.FrameNum[0] = 1
 		p.MovY = 0
 		p.c = 0
@@ -163,7 +162,7 @@ func moverPlayer(p player) player {
 		p.MovY = 2
 	}
 	if inpututil.IsKeyJustReleased(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustReleased(ebiten.KeyS) && p.señalador == 1 {
-		p.FrameOX[0] = 32
+		p.FrameOX[0] = 48
 		p.FrameNum[0] = 1
 		p.MovY = 0
 		p.d = 0
@@ -196,13 +195,13 @@ func moverPlayer(p player) player {
 	}
 	p.X[0], p.Y[0], obs = obstaculos(p.X[0], p.Y[0], X1, Y1)
 	if obs {
-		p.FrameOX[0] = 32
+		p.FrameOX[0] = 48
 		p.FrameNum[0] = 1
 	}
 	///ENTRADAS a puertas///
 	switch {
 	//banco
-	case p.c == 1 && (p.X[0] > 90 && p.X[0] < 103 && p.Y[0] < 89 && p.Y[0] > 85):
+	case p.c == 1 && (p.X[0] > 90 && p.X[0] < 103 && p.Y[0] < 89): //&& p.Y[0] > 85):
 		p.Y[0] = 363
 		p.X[0] = 507
 		sonidoPuerta()
@@ -346,8 +345,6 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	alcholWScale = float64(alchol.FrameWidth) * objScale
 	plasmaHScale = float64(plasma.FrameHeight) * objScale
 	plasmaWScale = float64(plasma.FrameWidth) * objScale
-	hgt = float64(p.FrameHeight[0])*plyrScale - 2
-	wth = float64(p.FrameWidth[0])*plyrScale - 6
 
 	if !p.Inmune {
 
@@ -417,11 +414,11 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 func dibujarPlayer(P player, screen *ebiten.Image) {
 	if ModePause {
 		P.FrameNum[0] = 1
-		P.FrameOX[0] = 0
+		P.FrameOX[0] = 48
 	}
 	op := &ebiten.DrawImageOptions{}
 	if !ModeTitle {
-		op.GeoM.Scale(plyrScale, plyrScale)
+		op.GeoM.Scale(hScaleW, hScaleH)
 	}
 	op.GeoM.Translate(P.X[0], P.Y[0])
 	i := (count1 / 7) % P.FrameNum[0]
