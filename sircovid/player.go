@@ -23,6 +23,7 @@ type player struct {
 	Fast          bool
 	Compras       bool
 	CompleteLevel bool
+	enBanco       bool
 }
 
 var (
@@ -206,6 +207,7 @@ func moverPlayer(p player) player {
 		p.X[0] = 507
 		sonidoPuerta()
 		banco = true
+		p.enBanco = true
 		interior()
 
 		//vacunatorio
@@ -273,6 +275,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		salida()
 		banco = false
+		p.enBanco = false
 		//home1
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 0 && p.X[0] < 26:
 		p.Y[0] = 225
@@ -366,7 +369,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		}
 	}
 	//inmune con barbijo o alchol en gel
-	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt > b.Y && p.Y[0]+hgt < b.Y+barHScale {
+	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt-30 > b.Y && p.Y[0]+hgt-30 < b.Y+barHScale {
 		sBarbijo.Play()
 		sBarbijo.Rewind()
 		b.X = 1500

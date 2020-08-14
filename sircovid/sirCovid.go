@@ -209,9 +209,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		dibujarTextos(screen)
 		dibujarObjetos(monedas, screen)
 		dibujarEnemigos(enemigo, screen)
-		dibujarPlayer(player1, screen)
-		if Game1.numPlayers == 2 {
-			dibujarPlayer(player2, screen)
+		if player1.enBanco == true {
+			dibujarPlayer(player1, screen)
+		}
+		if player2.enBanco == true {
+			if Game1.numPlayers == 2 {
+				dibujarPlayer(player2, screen)
+			}
 		}
 		screen.DrawImage(imgCintas, op)
 		dibujarObjetos(alchol, screen)
