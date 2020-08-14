@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -380,7 +379,6 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.Inmune = true
 		p.CountPoder = 1200
 	}
-	fmt.Println(p.Y[0]+hgt-30, b.Y)
 	if p.Inmune || p.Fast {
 
 		p.CountPoder--
