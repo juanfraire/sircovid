@@ -16,6 +16,8 @@ func iniciarVariables() {
 	hScaleH = .45
 	hgt = float64(player1.FrameHeight[0]) * hScaleH
 	wth = float64(player1.FrameWidth[0]) * hScaleW
+	player1.señaladorBool = false
+	player2.señaladorBool = false
 	// plyrScale = .65
 
 }

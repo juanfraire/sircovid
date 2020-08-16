@@ -42,6 +42,7 @@ var (
 	bakery, bakery1           bool
 	supermarket, supermarket1 bool
 	vacunatorio               bool
+	senia                     bool
 
 	// imágenes
 	imgTiles  *ebiten.Image
@@ -94,15 +95,20 @@ func introduccion() {
 		if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
 			if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 				player1.humanos.img = humano1.img
+				player1.señaladorBool = false
 			}
 			if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 				player1.humanos.img = humano2.img
+				player1.señaladorBool = true
 			}
 			if inpututil.IsKeyJustPressed(ebiten.KeyW) {
 				player2.humanos.img = humano1.img
+				player2.señaladorBool = false
+
 			}
 			if inpututil.IsKeyJustPressed(ebiten.KeyS) {
 				player2.humanos.img = humano2.img
+				player2.señaladorBool = true
 			}
 		}
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -112,7 +118,7 @@ func introduccion() {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
 		ModeTitle = false
 		player1.X[0] = 15
-		player1.Y[0] = 290
+		player1.Y[0] = -40
 		player2.X[0] = 295
 		player2.Y[0] = -40
 		ModeTitleLevel = true

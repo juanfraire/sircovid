@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -18,20 +19,22 @@ var (
 	fade bool
 	tmpS = 1
 	// sonido
-	audioContext *audio.Context
-	audiomp3     *audio.Context
-	deadSound    *audio.Player
-	deadSound2   *audio.Player
-	sonidoFondo  *audio.InfiniteLoop
-	fondo        *audio.Player
-	sonidoIntro  *audio.InfiniteLoop
-	sIntro       *audio.Player
-	sPuerta      *audio.Player
-	sDinero      *audio.Player
-	sNube        *audio.Player
-	sFast        *audio.Player
-	sBarbijo     *audio.Player
-	sLevelUp     *audio.Player
+	audioContext  *audio.Context
+	audiomp3      *audio.Context
+	deadSound     *audio.Player
+	deadSound2    *audio.Player
+	sonidoFondo   *audio.InfiniteLoop
+	fondo         *audio.Player
+	sonidoIntro   *audio.InfiniteLoop
+	sIntro        *audio.Player
+	sPuerta       *audio.Player
+	sDinero       *audio.Player
+	sNube         *audio.Player
+	sFast         *audio.Player
+	sBarbijo      *audio.Player
+	sLevelUp      *audio.Player
+	deadSoundFem  *audio.Player
+	deadSound2Fem *audio.Player
 )
 
 // Inicio valores de sonido del juego al final
@@ -59,13 +62,12 @@ func sonido(p player) {
 		sIntro.Pause()
 		sIntro.Rewind()
 		deadSound2.Rewind()
+		deadSound2Fem.Rewind()
 		fondo.Play()
 
 	case ModeGameOver:
 		fondo.Pause()
 		fondo.Rewind()
-		deadSound.Pause()
-		deadSound2.Play()
 		sIntro.Play()
 	}
 
@@ -113,9 +115,29 @@ func sonidoPuerta() {
 	sPuerta.Play()
 	sPuerta.Rewind()
 }
-func sonidoVidas() {
-	deadSound.Play()
-	deadSound.Rewind()
+func sonidoVidas(p player) {
+	fmt.Println(p.señalador)
+	switch {
+	case p.señalador == 1 || p.señaladorBool:
+		deadSoundFem.Rewind()
+		deadSoundFem.Play()
+
+	case p.señalador == 0:
+		deadSound.Rewind()
+		deadSound.Play()
+
+	}
+	if p.vidas == 0 {
+		switch {
+		case p.señaladorBool || p.señalador == 1:
+			deadSoundFem.Pause()
+			deadSound2Fem.Play()
+		case p.señalador == 0:
+			deadSound.Pause()
+			deadSound2.Play()
+		}
+	}
+
 }
 func sonidomonedas() {
 	sPuerta.Pause()
@@ -316,4 +338,37 @@ func initSonido() {
 		log.Fatal(err)
 	}
 
+	// sonido pierdevida Player2
+	s, err = os.Open(`sircovid\data\audio\estornudo fem 2.mp3`)
+	if err != nil {
+		panic(err)
+	}
+	defer s.Close()
+	data = make([]byte, 16461)
+	_, err = s.Read(data)
+	TosFD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	if err != nil {
+		log.Fatal(err)
+	}
+	deadSoundFem, err = audio.NewPlayer(audioContext, TosFD)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// sonido muerte Player2
+	s, err = os.Open(`sircovid\data\audio\muerte fem 3.mp3`)
+	if err != nil {
+		panic(err)
+	}
+	defer s.Close()
+	data = make([]byte, 16461)
+	_, err = s.Read(data)
+	jabFD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
+	if err != nil {
+		log.Fatal(err)
+	}
+	deadSound2Fem, err = audio.NewPlayer(audioContext, jabFD)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

@@ -14,6 +14,7 @@ type player struct {
 	vidas         int
 	v             float32
 	señalador     int
+	señaladorBool bool
 	a, b, c, d    int
 	MovX          int
 	MovY          int
@@ -54,7 +55,7 @@ func initPlayer() {
 	player1.FrameOY[0] = 72
 	player1.FrameNum[0] = 1
 	player1.X[0] = 15
-	player1.Y[0] = 200
+	player1.Y[0] = -40
 	player1.FrameWidth[0] = 48
 	player1.FrameHeight[0] = 72
 	player1.MovX = 0
@@ -363,7 +364,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 
 		//pierde vidas con humanos
 		for i := randNum; i < numEnemigo+randNum; i++ {
-			if p.X[0]+20 > h.X[i] && p.X[0] < h.X[i]+20 && p.Y[0]+32 > h.Y[i] && p.Y[0] < h.Y[i]+32 {
+			if p.X[0]+wth > h.X[i] && p.X[0]+5 < h.X[i]+wth && p.Y[0]+hgt > h.Y[i]+(hgt-8) && p.Y[0] < h.Y[i]+hgt {
 				p.v += .5
 			}
 		}
@@ -392,7 +393,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 	if p.v >= 30 {
 		p.vidas--
-		sonidoVidas()
+		sonidoVidas(p)
 		p.v = 0
 	}
 	if p.vidas == 0 {
