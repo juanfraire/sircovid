@@ -120,15 +120,15 @@ func introduccion() {
 		ModeTitle = false
 		player1.X[0] = 396
 		player1.Y[0] = 195
-		player2.X[0] = 295
-		player2.Y[0] = -40
+		player2.X[0] = 430
+		player2.Y[0] = 195
 		ModeTitleLevel = true
 	}
 
 }
 
 func siguienteNivel(p player) player {
-	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40 || p.X[0] >= home1.X && p.X[0] <= home1.X+40 && p.Y[0] == -40 && Game1.numPlayers == 2) {
+	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40) {
 		pasarNivel()
 		player1.CompleteLevel = false
 		player2.CompleteLevel = false

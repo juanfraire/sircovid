@@ -73,8 +73,8 @@ func initPlayer() {
 	player2.FrameOX[0] = 48
 	player2.FrameOY[0] = 72
 	player2.FrameNum[0] = 1
-	player2.X[0] = 295
-	player2.Y[0] = -40
+	player2.X[0] = 430
+	player2.Y[0] = 195
 	player2.FrameWidth[0] = 48
 	player2.FrameHeight[0] = 72
 	player1.MovX = 0
@@ -103,8 +103,8 @@ func pasarNivelPlayer() {
 
 	//player2
 	player2.FrameNum[0] = 1
-	player2.X[0] = 295
-	player2.Y[0] = -40
+	player2.X[0] = 430
+	player2.Y[0] = 195
 	player2.MovX = 0
 	player2.MovY = 0
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
@@ -241,13 +241,13 @@ func moverPlayer(p player) player {
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		//home2
-	case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 285 && p.X[0] < 296 && p.Y[0] < 203 && p.Y[0] > 201):
-		p.Y[0] = -40
-		sonidoPuerta()
-		ModeTitleLevel = true
-		p.a, p.b, p.c, p.d = 0, 0, 0, 0
-		p.MovX = 0
-		//pharmacy
+	// case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 285 && p.X[0] < 296 && p.Y[0] < 203 && p.Y[0] > 201):
+	// 	p.Y[0] = -40
+	// 	sonidoPuerta()
+	// 	ModeTitleLevel = true
+	// 	p.a, p.b, p.c, p.d = 0, 0, 0, 0
+	// 	p.MovX = 0
+	//pharmacy
 	case !banco && !casita && p.c == 1 && p.X[0] > 460 && p.X[0] < 485 && p.Y[0] < 365 && p.Y[0] > 350:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
@@ -297,10 +297,10 @@ func moverPlayer(p player) player {
 		salida()
 		casita = false
 		//home2
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 285 && p.X[0] < 296:
-		p.Y[0] = 204
-		sonidoPuerta()
-		//vacunatorio
+	// case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 285 && p.X[0] < 296:
+	// 	p.Y[0] = 204
+	// 	sonidoPuerta()
+	//vacunatorio
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 814 && p.X[0] < 834:
 		p.Y[0] = 364
 		sonidoPuerta()
@@ -349,9 +349,10 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
 		p.Fast = !p.Fast
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyN):
-		pasarNivel()
 		banco = false
 		casita = false
+		pasarNivel()
+
 		// hack = !hack
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune

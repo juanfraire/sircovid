@@ -175,7 +175,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		screen.DrawImage(imgCintas, op)
 		dibujarObjetos(alchol, screen)
 
-	case casita:
+	case casita && !ModePause:
 		screen.DrawImage(imgCasita, op)
 		//dibujar palyers
 		dibujarPlayer(player1, screen)
