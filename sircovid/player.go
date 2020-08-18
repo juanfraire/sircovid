@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -127,7 +126,7 @@ func moverPlayer(p player) player {
 	if (!hack && inpututil.IsKeyJustPressed(ebiten.KeyDown)) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1 {
 		p.d = 1
 	}
-	fmt.Println(player1.X[0], player1.Y[0])
+	// fmt.Println(player1.X[0], player1.Y[0])
 	if p.a == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOX[0] = 0
 		p.FrameOY[0] = 144
