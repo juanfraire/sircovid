@@ -33,8 +33,6 @@ var (
 	humano1, humano2 humanos
 	// nivel            = int(1)
 	// plyrScale float64
-
-	hack   bool
 	banco  bool
 	casita bool
 )
@@ -69,6 +67,7 @@ func initPlayer() {
 	player1.señalador = 0
 	player1.Coins = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
+
 	player1.humanos.img = humano1.img
 
 	//player2
@@ -92,7 +91,7 @@ func initPlayer() {
 }
 func pasarNivelPlayer() {
 	//player1
-	hack = false
+
 	player1.X[0] = 396
 	player1.Y[0] = 195
 	player1.FrameOX[0] = 48
@@ -110,20 +109,22 @@ func pasarNivelPlayer() {
 	player2.MovX = 0
 	player2.MovY = 0
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
+	// hack = false
 
 }
 func moverPlayer(p player) player {
 	// leer tecla
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyD) && p.señalador == 1 {
 		p.a = 1
+		hack = false
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyA) && p.señalador == 1 {
 		p.b = 1
 	}
-	if !hack && inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1 {
+	if (!hack && inpututil.IsKeyJustPressed(ebiten.KeyUp)) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1 {
 		p.c = 1
 	}
-	if !hack && inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1 {
+	if (!hack && inpututil.IsKeyJustPressed(ebiten.KeyDown)) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1 {
 		p.d = 1
 	}
 	fmt.Println(player1.X[0], player1.Y[0])
@@ -352,6 +353,7 @@ func moverPlayer(p player) player {
 		pasarNivel()
 		banco = false
 		casita = false
+		// hack = !hack
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}

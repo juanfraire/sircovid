@@ -23,6 +23,7 @@ func iniciarVariables() {
 }
 func pasarNivel() {
 	Level++
+	// hack = false
 	ModeTitleLevel = true
 	nivel = Level * 2
 	if nivel > 20 {
