@@ -74,6 +74,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModeTitleLevel = false
 			//ModeMissions = true
 			ModeGame = true
+			casita = true
+			interior()
 		}
 		//te muestra cual es tu mision
 	// case ModeMissions:
@@ -97,7 +99,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 		//Game estas jugando
 	case ModeGame:
-
+		// casita = true
 		//para mode pause y muestra los niveles
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
@@ -107,7 +109,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			Commands = !Commands
 		}
 		// nube
-		if !banco {
+		if !banco || !casita {
 			nube1 = moverNube(nube1)
 		}
 
@@ -156,8 +158,31 @@ func (g *Game) Update(screen *ebiten.Image) error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar fondo
 	op := &ebiten.DrawImageOptions{}
-	switch banco {
-	case false:
+	switch {
+	case banco:
+		screen.DrawImage(imgBanco, op)
+		dibujarTextos(screen)
+		dibujarObjetos(monedas, screen)
+		dibujarEnemigos(enemigo, screen)
+		if player1.enBanco == true {
+			dibujarPlayer(player1, screen)
+		}
+		if player2.enBanco == true {
+			if Game1.numPlayers == 2 {
+				dibujarPlayer(player2, screen)
+			}
+		}
+		screen.DrawImage(imgCintas, op)
+		dibujarObjetos(alchol, screen)
+
+	case casita:
+		screen.DrawImage(imgCasita, op)
+		//dibujar palyers
+		dibujarPlayer(player1, screen)
+		if Game1.numPlayers == 2 {
+			dibujarPlayer(player2, screen)
+		}
+	default:
 		screen.DrawImage(imgTiles, op)
 
 		//dibujar objetos
@@ -204,24 +229,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if ModeTitleLevel || ModePause {
 			dibujarNiveles(screen)
 		}
-	case true:
-		screen.DrawImage(imgBanco, op)
-		dibujarTextos(screen)
-		dibujarObjetos(monedas, screen)
-		dibujarEnemigos(enemigo, screen)
-		if player1.enBanco == true {
-			dibujarPlayer(player1, screen)
-		}
-		if player2.enBanco == true {
-			if Game1.numPlayers == 2 {
-				dibujarPlayer(player2, screen)
-			}
-		}
-		screen.DrawImage(imgCintas, op)
-		dibujarObjetos(alchol, screen)
 
 	}
-
 }
 
 // Layout maneja las dimensiones de pantalla

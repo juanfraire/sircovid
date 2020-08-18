@@ -82,7 +82,7 @@ func dibujarTextos(screen *ebiten.Image) {
 			text.Draw(screen, nivel, smallArcadeFont, 400, 320, color.White)
 		}
 		if Level == 2 {
-			nivel := fmt.Sprintf("MISSION: GET BREAD")
+			nivel := fmt.Sprintf("MISSION: GET FOOD")
 			text.Draw(screen, nivel, smallArcadeFont, 390, 320, color.White)
 		}
 		if Level == 3 {
@@ -94,7 +94,7 @@ func dibujarTextos(screen *ebiten.Image) {
 			text.Draw(screen, nivel, smallArcadeFont, 350, 320, color.White)
 		}
 		if Level == 5 {
-			nivel := fmt.Sprintf("MISSION: GET MEDS AND BREAD")
+			nivel := fmt.Sprintf("MISSION: GET MEDS AND FOOD")
 			text.Draw(screen, nivel, smallArcadeFont, 330, 320, color.White)
 		}
 		if Level == 6 {
@@ -102,7 +102,7 @@ func dibujarTextos(screen *ebiten.Image) {
 			text.Draw(screen, nivel, smallArcadeFont, 280, 320, color.White)
 		}
 		if Level == 7 {
-			nivel := fmt.Sprintf("MISSION: GET GLOTHES AND BREAD")
+			nivel := fmt.Sprintf("MISSION: GET GLOTHES AND FOOD")
 			text.Draw(screen, nivel, smallArcadeFont, 300, 320, color.White)
 		}
 		if Level == 8 {

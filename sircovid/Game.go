@@ -48,6 +48,7 @@ var (
 	imgTiles  *ebiten.Image
 	imgBanco  *ebiten.Image
 	imgCintas *ebiten.Image
+	imgCasita *ebiten.Image
 
 	//para start y game over
 	arcadeFont      font.Face
@@ -82,10 +83,10 @@ func introduccion() {
 
 	switch {
 	case ElectNumPlayers == 0:
-		if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+		if !hack && inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 			Game1.numPlayers = 2
 		}
-		if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+		if !hack && inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 			Game1.numPlayers = 1
 		}
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) && (Game1.numPlayers == 1 || Game1.numPlayers == 2) {
@@ -93,11 +94,11 @@ func introduccion() {
 		}
 	case ElectPlayer == 0 && Game1.numPlayers == 1 || Game1.numPlayers == 2:
 		if Game1.numPlayers == 1 || Game1.numPlayers == 2 {
-			if inpututil.IsKeyJustPressed(ebiten.KeyUp) {
+			if !hack && inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 				player1.humanos.img = humano1.img
 				player1.señaladorBool = false
 			}
-			if inpututil.IsKeyJustPressed(ebiten.KeyDown) {
+			if !hack && inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 				player1.humanos.img = humano2.img
 				player1.señaladorBool = true
 			}
@@ -117,8 +118,8 @@ func introduccion() {
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) && ElectPlayer == 1 {
 		ModeTitle = false
-		player1.X[0] = 15
-		player1.Y[0] = -40
+		player1.X[0] = 396
+		player1.Y[0] = 195
 		player2.X[0] = 295
 		player2.Y[0] = -40
 		ModeTitleLevel = true
@@ -225,6 +226,9 @@ func compar(p player) player {
 		farmacia, mart, supermarket, bakery = false, false, false, false
 		elecCompras = 0
 		p.Compras = false
+		// if p.CompleteLevel {
+		// 	casita = false
+		// }
 	}
 	return p
 }

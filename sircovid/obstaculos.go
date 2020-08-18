@@ -3,7 +3,72 @@ package main
 func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 	var objetos [][]int
 	switch {
-	case !banco:
+	case casita:
+		objetos = make([][]int, 21)
+		objetos[0] = []int{645, 20, 198, 30}
+		objetos[1] = []int{634, 50, 170, 37}
+		objetos[2] = []int{518, 78, 185, 25}
+		objetos[3] = []int{389, 44, 179, 36}
+		objetos[4] = []int{382, 81, 235, 31}
+		objetos[5] = []int{548, 48, 244, 53}
+		objetos[6] = []int{439, 54, 321, 60}
+		objetos[7] = []int{415, 20, 330, 20}
+		objetos[8] = []int{389, 17, 356, 41}
+		objetos[9] = []int{666, 18, 354, 44}
+		objetos[10] = []int{691, 368, 1, 529}
+		objetos[11] = []int{576, 482, 410, 120}
+		objetos[12] = []int{-1, 511, 411, 119}
+		objetos[13] = []int{-2, 383, 0, 527}
+		objetos[14] = []int{-2, 1061, -1, 184}
+		objetos[15] = []int{491, 120, 447, 83}
+		objetos[16] = []int{553, 50, 329, 22}
+		//abajo para que no salga de la pantalla
+		objetos[17] = []int{0, 0, 0, screenHeight}
+		objetos[18] = []int{screenWidth, 0, 0, screenHeight}
+		objetos[19] = []int{0, screenWidth, screenHeight, 32}
+		objetos[20] = []int{0, screenWidth, 30, 0}
+
+	case banco:
+		objetos = make([][]int, 35)
+		objetos[0] = []int{455, 128, 212, 55}
+		objetos[1] = []int{615, 66, 262, 4}
+		objetos[2] = []int{555, 94, 212, 22}
+		objetos[3] = []int{678, 2, 173, 92}
+		objetos[4] = []int{616, 63, 159, 26}
+		objetos[5] = []int{454, 115, 160, 59}
+		objetos[6] = []int{563, 56, 291, 28}
+		objetos[7] = []int{423, 2, 265, 31}
+		objetos[8] = []int{359, 65, 264, 3}
+		objetos[9] = []int{359, 1, 183, 82}
+		objetos[10] = []int{358, 49, 184, 1}
+		objetos[11] = []int{406, 3, 158, 26}
+		objetos[12] = []int{391, 65, 211, 25}
+		objetos[13] = []int{420, 54, 293, 23}
+		objetos[14] = []int{614, 2, 265, 30}
+		objetos[15] = []int{542, 146, 157, 1}
+		//limite
+		objetos[16] = []int{0, 1057, -1, 159}
+		objetos[17] = []int{704, 353, 157, 398}
+		objetos[18] = []int{0, 350, 157, 394}
+		objetos[19] = []int{349, 117, 336, 215}
+		objetos[20] = []int{464, 182, 401, 150}
+		objetos[21] = []int{560, 225, 351, 203}
+		objetos[22] = []int{575, 143, 335, 18}
+		objetos[23] = []int{463, 17, 352, 61}
+		objetos[24] = []int{567, 8, 344, 8}
+		objetos[25] = []int{463, 8, 344, 10}
+		objetos[26] = []int{673, 30, 164, 10}
+		objetos[27] = []int{355, 25, 322, 13}
+		objetos[28] = []int{690, 10, 310, 26}
+		objetos[29] = []int{673, 28, 324, 9}
+		objetos[30] = []int{353, 14, 308, 18}
+
+		objetos[31] = []int{0, 0, 0, screenHeight}
+		objetos[32] = []int{screenWidth, 0, 0, screenHeight}
+		objetos[33] = []int{0, screenWidth, screenHeight, 32}
+		objetos[34] = []int{0, screenWidth, 30, 0}
+
+	default:
 		objetos = make([][]int, 60)
 		objetos[0] = []int{237, 79, 125, 99}
 		objetos[1] = []int{235, 5, 310, 33}
@@ -67,49 +132,10 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		objetos[58] = []int{0, screenWidth, screenHeight, 32}
 		objetos[59] = []int{0, screenWidth, 30, 0}
 
-	case banco:
-		objetos = make([][]int, 35)
-		objetos[0] = []int{455, 128, 212, 55}
-		objetos[1] = []int{615, 66, 262, 4}
-		objetos[2] = []int{555, 94, 212, 22}
-		objetos[3] = []int{678, 2, 173, 92}
-		objetos[4] = []int{616, 63, 159, 26}
-		objetos[5] = []int{454, 115, 160, 59}
-		objetos[6] = []int{563, 56, 291, 28}
-		objetos[7] = []int{423, 2, 265, 31}
-		objetos[8] = []int{359, 65, 264, 3}
-		objetos[9] = []int{359, 1, 183, 82}
-		objetos[10] = []int{358, 49, 184, 1}
-		objetos[11] = []int{406, 3, 158, 26}
-		objetos[12] = []int{391, 65, 211, 25}
-		objetos[13] = []int{420, 54, 293, 23}
-		objetos[14] = []int{614, 2, 265, 30}
-		objetos[15] = []int{542, 146, 157, 1}
-		//limite
-		objetos[16] = []int{0, 1057, -1, 159}
-		objetos[17] = []int{704, 353, 157, 398}
-		objetos[18] = []int{0, 350, 157, 394}
-		objetos[19] = []int{349, 117, 336, 215}
-		objetos[20] = []int{464, 182, 401, 150}
-		objetos[21] = []int{560, 225, 351, 203}
-		objetos[22] = []int{575, 143, 335, 18}
-		objetos[23] = []int{463, 17, 352, 61}
-		objetos[24] = []int{567, 8, 344, 8}
-		objetos[25] = []int{463, 8, 344, 10}
-		objetos[26] = []int{673, 30, 164, 10}
-		objetos[27] = []int{355, 25, 322, 13}
-		objetos[28] = []int{690, 10, 310, 26}
-		objetos[29] = []int{673, 28, 324, 9}
-		objetos[30] = []int{353, 14, 308, 18}
-
-		objetos[31] = []int{0, 0, 0, screenHeight}
-		objetos[32] = []int{screenWidth, 0, 0, screenHeight}
-		objetos[33] = []int{0, screenWidth, screenHeight, 32}
-		objetos[34] = []int{0, screenWidth, 30, 0}
 	}
 
 	for i := 0; i < len(objetos); i++ {
-		if int(X+wth-5) > objetos[i][0] && int(X+7) < objetos[i][0]+objetos[i][1] && int(Y+hgt) > objetos[i][2] && int(Y+hgt-5) < objetos[i][2]+objetos[i][3] {
+		if int(X+wth-5) > objetos[i][0] && int(X+7) < objetos[i][0]+objetos[i][1] && int(Y+hgt) > objetos[i][2] && int(Y+(hgt-5)) < objetos[i][2]+objetos[i][3] {
 			X = X1
 			Y = Y1
 			return X, Y, true
@@ -117,7 +143,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	}
 
 	for j := randNum; j < numEnemigo+randNum; j++ {
-		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+hgt && Y+hgt < enemigo.Y[j]+hgt {
+		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+(hgt-5) && Y+hgt < enemigo.Y[j]+(hgt-5) {
 			X = X1
 			Y = Y1
 			return X, Y, true

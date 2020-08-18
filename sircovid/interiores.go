@@ -9,27 +9,40 @@ import (
 
 //bank ajuste interiores
 func interior() {
+	hScaleW = .65
+	hScaleH = .55
+	hgt = float64(player1.FrameHeight[0]) * hScaleH
+	wth = float64(player1.FrameWidth[0]) * hScaleW
+	switch {
+	case casita:
+		imgCasita, _, err = ebitenutil.NewImageFromFile(`sircovid\data\casita.png`, ebiten.FilterDefault)
+		if err != nil {
+			log.Fatal(err)
+		}
+		initPlayer()
 
-	imgBanco, _, err = ebitenutil.NewImageFromFile(`sircovid\data\banco.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	imgCintas, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cintas.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
+	case banco:
+		imgBanco, _, err = ebitenutil.NewImageFromFile(`sircovid\data\banco.png`, ebiten.FilterDefault)
+		if err != nil {
+			log.Fatal(err)
+		}
+		imgCintas, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cintas.png`, ebiten.FilterDefault)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 	initEnemigos()
 	initNube()
-	hScaleW = .65
-	hScaleH = .55
-	// plyrScale = .75
 }
+
 func salida() {
-	if banco {
+	if banco || casita {
 		banco = false
+		casita = false
 		hScaleW = .53
 		hScaleH = .45
-		// plyrScale = .6
+		hgt = float64(player1.FrameHeight[0]) * hScaleH
+		wth = float64(player1.FrameWidth[0]) * hScaleW
 		initNube()
 		initEnemigos()
 	}

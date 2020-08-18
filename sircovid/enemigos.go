@@ -55,6 +55,9 @@ func initEnemigos() {
 	if banco && numEnemigo > 4 {
 		numEnemigo = 4
 	}
+	if casita {
+		numEnemigo = 0
+	}
 
 	rand.Seed(time.Now().UnixNano())
 	for i := randNum; i < numEnemigo+randNum; i++ {

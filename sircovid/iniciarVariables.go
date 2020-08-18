@@ -28,7 +28,6 @@ func pasarNivel() {
 	if nivel > 20 {
 		nivel = 20
 	}
-
 	pasarNivelPlayer()
 	initObjetos()
 	// initSonido()
@@ -38,4 +37,5 @@ func pasarNivel() {
 	count1 = 0
 	//nube
 	initNube()
+
 }

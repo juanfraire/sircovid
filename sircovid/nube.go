@@ -32,30 +32,22 @@ func posicionNube() (float64, float64) {
 		nube1.X[i], nube1.Y[i] = float64(rand.Intn(screenWidth/.4)), float64(rand.Intn(screenHeight/.4)) // enemigo.Y[i] //
 		nube1.Alpha[i] = float64(rand.Intn(11)) * .1
 		x, y = nube1.X[i], nube1.Y[i]
-		// fmt.Println(nube1.X[i], nube1.Y[i], "\n", enemigo.X[i], enemigo.Y[i])
 	}
 
 	return x, y
 }
 func initNube() {
 	switch {
-	case banco:
+	case banco || casita:
 		numNube = 0
 	default:
 		numNube = Level * 2
 		if numNube > 15 {
-			numNube = 20
+			numNube = 15
 		}
 	}
 
 	posicionNube()
-	//rand.Seed(time.Now().UnixNano())
-	// for i := 0; i < numNube; i++ {
-	// 	nube1.X[i] = float64(rand.Intn(screenWidth / .4))  // enemigo.X[i] //
-	// 	nube1.Y[i] = float64(rand.Intn(screenHeight / .4)) // enemigo.Y[i] //
-	// 	nube1.Alpha[i] = 1                                 //float64(rand.Intn(11)) * .1
-	// 	x, y = nube1.X[i], nube1.Y[i]
-	// }
 
 	nube1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\smoke.png`, ebiten.FilterDefault)
 	if err != nil {
@@ -67,29 +59,20 @@ func initNube() {
 //// nubeCovid aumenta y disminuye transparencia de la nube (alpha)
 func moverNube(n nube) nube {
 	rand.Seed(time.Now().UnixNano())
+
 	// creacion de nuevas nubes
 	for i := 0; i < numNube; i++ {
 		if n.Alpha[i] >= 0 {
 			n.X[i]--
 		}
-		// if nube1.AlphaUp[i] {
-		// 	n.X[i], n.Y[i] = posicionNube()
-		// 	// n.AlphaUp[i] = true
-		// } else if n.Alpha[i] > .9 {
-		// 	n.AlphaUp[i] = false
-		// }
-		// fmt.Println(n.AlphaUp)
-
 		if n.Alpha[i] <= 0 {
-			n.X[i], n.Y[i] = posicionNube() //float64(rand.Intn(screenWidth)) / nubScale
-			//float64(rand.Intn(screenHeight)) / nubScale
+			n.X[i], n.Y[i] = posicionNube()
 			n.AlphaUp[i] = true
 		} else if n.Alpha[i] > .9 {
 			n.AlphaUp[i] = false
 		}
 
 		// movimiento nube
-
 		if n.AlphaUp[i] {
 			n.Alpha[i] += .009
 		} else {

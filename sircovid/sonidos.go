@@ -82,14 +82,14 @@ func sonido(p player) {
 		}
 	}
 	// volumen +/-
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPAdd) || inpututil.IsKeyJustPressed(ebiten.Key9) {
+	if hack && inpututil.IsKeyJustPressed(ebiten.KeyUp) {
 		up = true
-	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPAdd) || inpututil.IsKeyJustReleased(ebiten.Key9) {
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyUp) {
 		up = false
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyKPSubtract) || inpututil.IsKeyJustPressed(ebiten.Key8) {
+	if hack && inpututil.IsKeyJustPressed(ebiten.KeyDown) {
 		down = true
-	} else if inpututil.IsKeyJustReleased(ebiten.KeyKPSubtract) || inpututil.IsKeyJustReleased(ebiten.Key8) {
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyDown) {
 		down = false
 	}
 	switch {

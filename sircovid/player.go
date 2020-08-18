@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -33,8 +34,9 @@ var (
 	// nivel            = int(1)
 	// plyrScale float64
 
-	hack  bool
-	banco bool
+	hack   bool
+	banco  bool
+	casita bool
 )
 
 func initPlayer() {
@@ -52,10 +54,10 @@ func initPlayer() {
 	// player1
 
 	player1.FrameOX[0] = 48
-	player1.FrameOY[0] = 72
+	player1.FrameOY[0] = 0
 	player1.FrameNum[0] = 1
-	player1.X[0] = 15
-	player1.Y[0] = -40
+	player1.X[0] = 396
+	player1.Y[0] = 195
 	player1.FrameWidth[0] = 48
 	player1.FrameHeight[0] = 72
 	player1.MovX = 0
@@ -90,9 +92,13 @@ func initPlayer() {
 }
 func pasarNivelPlayer() {
 	//player1
+	hack = false
+	player1.X[0] = 396
+	player1.Y[0] = 195
+	player1.FrameOX[0] = 48
+	player1.FrameOY[0] = 0
 	player1.FrameNum[0] = 1
-	player1.X[0] = 15
-	player1.Y[0] = -40
+
 	player1.MovX = 0
 	player1.MovY = 0
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
@@ -114,13 +120,13 @@ func moverPlayer(p player) player {
 	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyA) && p.señalador == 1 {
 		p.b = 1
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1 {
+	if !hack && inpututil.IsKeyJustPressed(ebiten.KeyUp) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyW) && p.señalador == 1 {
 		p.c = 1
 	}
-	if inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1 {
+	if !hack && inpututil.IsKeyJustPressed(ebiten.KeyDown) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1 {
 		p.d = 1
 	}
-
+	fmt.Println(player1.X[0], player1.Y[0])
 	if p.a == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOX[0] = 0
 		p.FrameOY[0] = 144
@@ -178,13 +184,13 @@ func moverPlayer(p player) player {
 	var Y1 = p.Y[0]
 	switch {
 	case p.MovX == 1 && p.Fast:
-		p.X[0] = p.X[0] + 2.3
+		p.X[0] += 2.3
 	case p.MovX == 2 && p.Fast:
-		p.X[0] = p.X[0] - 2.3
+		p.X[0] -= 2.3
 	case p.MovY == 1 && p.Fast:
-		p.Y[0] = p.Y[0] - 2.3
+		p.Y[0] -= 2.3
 	case p.MovY == 2 && p.Fast:
-		p.Y[0] = p.Y[0] + 2.3
+		p.Y[0] += 2.3
 
 	case p.MovX == 1:
 		p.X[0] += 1.5
@@ -202,9 +208,8 @@ func moverPlayer(p player) player {
 	}
 	///ENTRADAS a puertas///
 	switch {
-	//banco
 	case p.c == 1 && (p.X[0] > 90 && p.X[0] < 103 && p.Y[0] < 89): //&& p.Y[0] > 85):
-		p.Y[0] = 363
+		p.Y[0] = 360
 		p.X[0] = 507
 		sonidoPuerta()
 		banco = true
@@ -219,13 +224,20 @@ func moverPlayer(p player) player {
 		p.Compras = true
 		vacunatorio = true
 		sonidoPuerta()
+
 		//home1
-	case p.c == 1 && p.X[0] > 0 && p.X[0] < 19 && p.Y[0] < 224:
-		p.Y[0] = -40
-		sonidoPuerta()
-		if !p.CompleteLevel {
-			ModeTitleLevel = true
+	case p.c == 1 && p.X[0] < 19 && p.Y[0] < 224:
+
+		switch {
+		case !p.CompleteLevel:
+			p.Y[0] = 379
+			p.X[0] = 507
+			casita = true
+			interior()
+		case p.CompleteLevel:
+			p.Y[0] = -40
 		}
+		sonidoPuerta()
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		//home2
@@ -236,7 +248,7 @@ func moverPlayer(p player) player {
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
 		//pharmacy
-	case p.c == 1 && p.X[0] > 460 && p.X[0] < 485 && p.Y[0] < 365 && p.Y[0] > 350:
+	case !banco && !casita && p.c == 1 && p.X[0] > 460 && p.X[0] < 485 && p.Y[0] < 365 && p.Y[0] > 350:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -270,7 +282,7 @@ func moverPlayer(p player) player {
 
 		///SALIDAS///
 		// banco
-	case p.Y[0] > 364 && p.X[0] > 480 && p.X[0] < 542 && banco:
+	case p.Y[0] > 361 && p.X[0] > 480 && p.X[0] < 542 && banco:
 		p.Y[0] = 90
 		p.X[0] = 95
 		sonidoPuerta()
@@ -278,9 +290,12 @@ func moverPlayer(p player) player {
 		banco = false
 		p.enBanco = false
 		//home1
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 0 && p.X[0] < 26:
+	case p.Y[0] > 380 && p.X[0] > 480 && p.X[0] < 542 && casita:
 		p.Y[0] = 225
+		p.X[0] = 10
 		sonidoPuerta()
+		salida()
+		casita = false
 		//home2
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 285 && p.X[0] < 296:
 		p.Y[0] = 204
@@ -327,6 +342,8 @@ func moverPlayer(p player) player {
 	// coder shortcuts
 	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {
 		hack = true
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyControl) {
+		hack = false
 	}
 	switch {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
@@ -334,6 +351,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyN):
 		pasarNivel()
 		banco = false
+		casita = false
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
@@ -400,6 +418,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		ModeGameOver = true
 		ModeGame = false
 		banco = false
+		// casita = false
 	}
 	//PIERDE POR falta de plata
 	if player1.Coins < 2 && player2.Coins < 2 && !p.CompleteLevel && monedas.X == 1500 {
