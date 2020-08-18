@@ -161,6 +161,8 @@ func compar(p player) player {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		if (farmacia || supermarket) && elecCompras == 0 {
 			p.Coins = p.Coins - 3
+			sBarbijo.Play()
+			sBarbijo.Rewind()
 			p.vidas++
 		}
 		if mart && elecCompras == 1 {
