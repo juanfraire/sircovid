@@ -25,6 +25,7 @@ type player struct {
 	Compras       bool
 	CompleteLevel bool
 	enBanco       bool
+	enCasita      bool
 }
 
 var (
@@ -65,6 +66,7 @@ func initPlayer() {
 	player1.v = 0
 	player1.señalador = 0
 	player1.Coins = 0
+	player1.enCasita = true
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	player1.humanos.img = humano1.img
@@ -79,6 +81,7 @@ func initPlayer() {
 	player2.FrameHeight[0] = 72
 	player1.MovX = 0
 	player1.MovY = 0
+	player2.enCasita = true
 
 	player2.vidas = 3
 	player2.v = 0
@@ -99,6 +102,7 @@ func pasarNivelPlayer() {
 
 	player1.MovX = 0
 	player1.MovY = 0
+	player1.enCasita = true
 	player1.a, player1.b, player1.c, player1.d = 0, 0, 0, 0
 
 	//player2
@@ -107,6 +111,8 @@ func pasarNivelPlayer() {
 	player2.Y[0] = 195
 	player2.MovX = 0
 	player2.MovY = 0
+	player2.enCasita = true
+
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
 	// hack = false
 
@@ -233,6 +239,7 @@ func moverPlayer(p player) player {
 			p.Y[0] = 379
 			p.X[0] = 507
 			casita = true
+			p.enCasita = true
 			interior()
 		case p.CompleteLevel:
 			p.Y[0] = -40
@@ -293,9 +300,18 @@ func moverPlayer(p player) player {
 	case p.Y[0] > 380 && p.X[0] > 480 && p.X[0] < 542 && casita:
 		p.Y[0] = 225
 		p.X[0] = 10
-		sonidoPuerta()
-		salida()
-		casita = false
+		p.enCasita = false
+		if Game1.numPlayers == 2 && player1.enCasita == false || player2.enCasita == false {
+			casita = false
+			sonidoPuerta()
+			salida()
+		}
+		if Game1.numPlayers == 1 {
+			sonidoPuerta()
+			salida()
+			casita = false
+		}
+
 		//home2
 	// case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 285 && p.X[0] < 296:
 	// 	p.Y[0] = 204
@@ -357,6 +373,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
+	//fmt.Println(p.X, p.Y)
 	return p
 }
 

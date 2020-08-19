@@ -178,8 +178,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	case casita && !ModePause:
 		screen.DrawImage(imgCasita, op)
 		//dibujar palyers
-		dibujarPlayer(player1, screen)
-		if Game1.numPlayers == 2 {
+		if player1.enCasita == true {
+			dibujarPlayer(player1, screen)
+		}
+
+		if player2.enCasita == true && Game1.numPlayers == 2 {
 			dibujarPlayer(player2, screen)
 		}
 	default:
@@ -218,11 +221,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		dibujarTextoCompras(player2, screen)
 
 		//dibujar palyers
-		dibujarPlayer(player1, screen)
-		if Game1.numPlayers == 2 {
-			dibujarPlayer(player2, screen)
+		if !ModeTitleLevel {
+			dibujarPlayer(player1, screen)
+			if Game1.numPlayers == 2 {
+				dibujarPlayer(player2, screen)
+			}
 		}
-
 		// dibujar nube
 		dibujarNube(nube1, screen)
 

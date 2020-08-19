@@ -24,13 +24,12 @@ var Game1 Game
 var intro1 intro
 
 var (
-	Commands       bool
-	ModeGame       bool
-	ModeTitleLevel bool
-	Level          = 1
-	ModeWin        bool
-	ModeTitle      bool
-	//ModeMissions              bool
+	Commands                  bool
+	ModeGame                  bool
+	ModeTitleLevel            bool
+	Level                     = 1
+	ModeWin                   bool
+	ModeTitle                 bool
 	ElectNumPlayers           int
 	ElectPlayer               int
 	ModeGameOver              bool
