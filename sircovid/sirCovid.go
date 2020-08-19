@@ -62,7 +62,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	case ModeWin:
 	//toda la introduccion con eleccion de players, etc
 	case Commands:
-		if inpututil.IsKeyJustPressed(ebiten.KeyC) {
+		if inpututil.IsKeyJustPressed(ebiten.KeyH) {
 			Commands = !Commands
 		}
 		//introduccion al juego
@@ -105,7 +105,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			ModePause = !ModePause
 			//ModeMissions = !ModeMissions
 		}
-		if inpututil.IsKeyJustPressed(ebiten.KeyC) {
+		if inpututil.IsKeyJustPressed(ebiten.KeyH) {
 			Commands = !Commands
 		}
 		// nube
@@ -158,10 +158,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	// dibujar fondo
 	op := &ebiten.DrawImageOptions{}
+
 	switch {
 	case banco:
 		screen.DrawImage(imgBanco, op)
-		dibujarTextos(screen)
+		dibujarObjetos(fondoNegroVidas1, screen)
+
 		dibujarObjetos(monedas, screen)
 		dibujarEnemigos(enemigo, screen)
 		if player1.enBanco == true {
@@ -170,23 +172,32 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if player2.enBanco == true {
 			if Game1.numPlayers == 2 {
 				dibujarPlayer(player2, screen)
+				dibujarObjetos(fondoNegroVidas2, screen)
+
 			}
 		}
 		screen.DrawImage(imgCintas, op)
 		dibujarObjetos(alchol, screen)
+		dibujarTextos(screen)
 
 	case casita && !ModePause:
 		screen.DrawImage(imgCasita, op)
+		dibujarObjetos(fondoNegroVidas1, screen)
+
 		//dibujar palyers
 		if player1.enCasita == true {
 			dibujarPlayer(player1, screen)
 		}
 
 		if player2.enCasita == true && Game1.numPlayers == 2 {
+			dibujarObjetos(fondoNegroVidas2, screen)
 			dibujarPlayer(player2, screen)
 		}
+		dibujarTextos(screen)
+
 	default:
 		screen.DrawImage(imgTiles, op)
+		dibujarObjetos(fondoNegroVidas1, screen)
 
 		//dibujar objetos
 		dibujarObjetos(barbijo, screen)
@@ -200,10 +211,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		//dibuja al enemigo
 		dibujarEnemigos(enemigo, screen)
 
-		if ModeTitle || ModeTitleLevel {
+		if ModeTitle {
 			dibujarObjetos(fondoNegro, screen)
 		}
-		if ModePause {
+		if ModePause || ModeTitleLevel {
 			dibujarObjetos(fondoNegroPause, screen)
 
 		}
@@ -213,26 +224,30 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if Commands {
 			dibujarObjetos(fondoNegroCommans, screen)
 		}
-		// dibujar texto
-		dibujarTextos(screen)
-
 		//dibujar textos compras
 		dibujarTextoCompras(player1, screen)
 		dibujarTextoCompras(player2, screen)
 
 		//dibujar palyers
-		if !ModeTitleLevel {
+		if !ModeTitleLevel && !ModePause {
 			dibujarPlayer(player1, screen)
 			if Game1.numPlayers == 2 {
+				dibujarObjetos(fondoNegroVidas2, screen)
 				dibujarPlayer(player2, screen)
 			}
 		}
+
 		// dibujar nube
 		dibujarNube(nube1, screen)
 
 		if ModeTitleLevel || ModePause {
 			dibujarNiveles(screen)
+			if Game1.numPlayers == 2 {
+				dibujarObjetos(fondoNegroVidas2, screen)
+			}
+
 		}
+		dibujarTextos(screen)
 
 	}
 }
