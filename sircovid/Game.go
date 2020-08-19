@@ -256,10 +256,10 @@ func dibujarTextoCompras(p player, screen *ebiten.Image) {
 
 			//EN BAKERY
 		case bakery && elecCompras == 0 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(">$2-CAFE -GO FAST-\n $2-BREAD")
+			jugadores := fmt.Sprintf(">$2-CAFE -GO FAST-\n $2-FOOD")
 			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
 		case bakery && elecCompras == 1 && p.Coins >= 2:
-			jugadores := fmt.Sprintf(" $2-CAFE -GO FAST-\n>$2-BREAD")
+			jugadores := fmt.Sprintf(" $2-CAFE -GO FAST-\n>$2-FOOD")
 			text.Draw(screen, jugadores, arcadeFont, 250, 250, color.White)
 
 			//EN MART

@@ -214,7 +214,8 @@ func moverPlayer(p player) player {
 	}
 	///ENTRADAS a puertas///
 	switch {
-	case p.c == 1 && (p.X[0] > 90 && p.X[0] < 103 && p.Y[0] < 89): //&& p.Y[0] > 85):
+	//banco
+	case p.c == 1 && (p.X[0] > 90 && p.X[0] < 103 && p.Y[0] < 89):
 		p.Y[0] = 360
 		p.X[0] = 507
 		sonidoPuerta()
@@ -247,13 +248,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
-		//home2
-	// case p.c == 1 && Game1.numPlayers == 2 && (p.X[0] > 285 && p.X[0] < 296 && p.Y[0] < 203 && p.Y[0] > 201):
-	// 	p.Y[0] = -40
-	// 	sonidoPuerta()
-	// 	ModeTitleLevel = true
-	// 	p.a, p.b, p.c, p.d = 0, 0, 0, 0
-	// 	p.MovX = 0
+
 	//pharmacy
 	case !banco && !casita && p.c == 1 && p.X[0] > 460 && p.X[0] < 485 && p.Y[0] < 365 && p.Y[0] > 350:
 		p.Y[0] = -40
@@ -271,7 +266,7 @@ func moverPlayer(p player) player {
 		bakery = true
 		sonidoPuerta()
 		//PARA MART
-	case p.c == 1 && p.X[0] > 318 && p.X[0] < 330 && p.Y[0] < 51 && p.Y[0] > 46:
+	case p.c == 1 && p.X[0] > 310 && p.X[0] < 330 && p.Y[0] < 51 && p.Y[0] > 46:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -321,7 +316,7 @@ func moverPlayer(p player) player {
 		p.Y[0] = 364
 		sonidoPuerta()
 		//mart
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 318 && p.X[0] < 330:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 310 && p.X[0] < 330:
 		p.Y[0] = 52
 		mart = false
 		sonidoPuerta()

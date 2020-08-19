@@ -65,53 +65,53 @@ func dibujarTextos(screen *ebiten.Image) {
 
 	case ModeTitleLevel:
 		nivel := fmt.Sprintf("    LEVEL %d", Level)
-		text.Draw(screen, nivel, arcadeFont, 300, 200, color.Black)
+		text.Draw(screen, nivel, arcadeFont, 290, 200, color.Black)
 		nivel1 := fmt.Sprintf("PRESS SPACE KEY")
 		text.Draw(screen, nivel1, smallArcadeFont, 400, 290, color.Black)
 
 		if Level == 1 {
 			nivel := fmt.Sprintf("MISSION: GET MEDS")
-			text.Draw(screen, nivel, smallArcadeFont, 390, 250, color.Black)
+			text.Draw(screen, nivel, smallArcadeFont, 380, 250, color.Black)
 		}
 		if Level == 2 {
 			nivel := fmt.Sprintf("MISSION: GET FOOD")
-			text.Draw(screen, nivel, smallArcadeFont, 390, 250, color.Black)
+			text.Draw(screen, nivel, smallArcadeFont, 380, 250, color.Black)
 		}
 		if Level == 3 {
 			nivel := fmt.Sprintf("MISSION GET CLOTHES")
-			text.Draw(screen, nivel, smallArcadeFont, 380, 250, color.Black)
+			text.Draw(screen, nivel, smallArcadeFont, 370, 250, color.Black)
 		}
 		if Level == 4 {
 			nivel := fmt.Sprintf("MISSION: GET TOLIET PAPER")
-			text.Draw(screen, nivel, smallArcadeFont, 350, 250, color.Black)
+			text.Draw(screen, nivel, smallArcadeFont, 314, 250, color.Black)
 		}
 		if Level == 5 {
-			nivel := fmt.Sprintf("MISSION: GET MEDS AND FOOD")
-			text.Draw(screen, nivel, smallArcadeFont, 330, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET MEDS\n    AND FOOD")
+			text.Draw(screen, nivel, smallArcadeFont, 380, 235, color.Black)
 		}
 		if Level == 6 {
-			nivel := fmt.Sprintf("MISSION: GET TOLET PAPER AND MEDS")
-			text.Draw(screen, nivel, smallArcadeFont, 280, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET TOLET PAPER\n        AND MEDS")
+			text.Draw(screen, nivel, smallArcadeFont, 320, 235, color.Black)
 		}
 		if Level == 7 {
-			nivel := fmt.Sprintf("MISSION: GET GLOTHES AND FOOD")
-			text.Draw(screen, nivel, smallArcadeFont, 300, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET GLOTHES\n      AND FOOD")
+			text.Draw(screen, nivel, smallArcadeFont, 350, 235, color.Black)
 		}
 		if Level == 8 {
-			nivel := fmt.Sprintf("MISSION: GET MEDS AND CLOTHES")
-			text.Draw(screen, nivel, smallArcadeFont, 320, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET MEDS\n   AND CLOTHES")
+			text.Draw(screen, nivel, smallArcadeFont, 380, 235, color.Black)
 		}
 		if Level == 9 {
-			nivel := fmt.Sprintf("MISSION GET TOILET PAPER AND CLOTHES")
-			text.Draw(screen, nivel, smallArcadeFont, 240, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION GET TOILET PAPER\n       AND CLOTHES")
+			text.Draw(screen, nivel, smallArcadeFont, 320, 235, color.Black)
 		}
 		if Level == 10 {
-			nivel := fmt.Sprintf("MISSION: GET BREAD AND TOILET PAPER")
-			text.Draw(screen, nivel, smallArcadeFont, 260, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET BREAD\n AND TOILET PAPER")
+			text.Draw(screen, nivel, smallArcadeFont, 360, 235, color.Black)
 		}
 		if Level > 10 {
 			nivel := fmt.Sprintf("MISSION: GET VACCINE")
-			text.Draw(screen, nivel, smallArcadeFont, 370, 250, color.Black)
+			text.Draw(screen, nivel, smallArcadeFont, 350, 250, color.Black)
 		}
 
 	case ModeGameOver:
