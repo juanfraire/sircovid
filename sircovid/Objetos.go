@@ -37,10 +37,10 @@ var (
 func initObjetos() {
 	//objetos
 	barbijo.FrameOX = 0
-	barbijo.FrameOY = 160
+	barbijo.FrameOY = 62
 	barbijo.FrameNum = 1
-	barbijo.FrameWidth = 105
-	barbijo.FrameHeight = 40
+	barbijo.FrameWidth = 38
+	barbijo.FrameHeight = 17
 	barbijo.X = float64(650)
 	barbijo.Y = float64(150)
 	barbijo.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\objetos.png`, ebiten.FilterDefault)
@@ -48,30 +48,30 @@ func initObjetos() {
 		log.Fatal(err)
 	}
 	plasma.FrameOX = 0
-	plasma.FrameOY = 200
+	plasma.FrameOY = 79
 	plasma.FrameNum = 1
-	plasma.FrameWidth = 60
-	plasma.FrameHeight = 120
+	plasma.FrameWidth = 30
+	plasma.FrameHeight = 48
 	plasma.X = float64(489)
 	plasma.Y = float64(73)
 	plasma.img = barbijo.img
 
 	alchol.FrameOX = 0
-	alchol.FrameOY = 320
+	alchol.FrameOY = 124
 	alchol.FrameNum = 1
-	alchol.FrameWidth = 65
-	alchol.FrameHeight = 120
+	alchol.FrameWidth = 30
+	alchol.FrameHeight = 39
 	alchol.X = float64(353)
-	alchol.Y = float64(270)
+	alchol.Y = float64(260)
 	alchol.img = barbijo.img
 
 	monedas.FrameOX = 0
-	monedas.FrameOY = 440
+	monedas.FrameOY = 170
 	monedas.FrameNum = 1
-	monedas.FrameWidth = 65
-	monedas.FrameHeight = 80
-	monedas.X = float64(433)
-	monedas.Y = float64(130)
+	monedas.FrameWidth = 24
+	monedas.FrameHeight = 30
+	monedas.X = float64(430)
+	monedas.Y = float64(125)
 	monedas.img = barbijo.img
 
 	//carteles
@@ -100,18 +100,7 @@ func initObjetos() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	cruz.FrameOX = 0
-	cruz.FrameOX = 0
-	cruz.FrameOY = 0
-	cruz.FrameNum = 1
-	cruz.FrameWidth = 862
-	cruz.FrameHeight = 370
-	cruz.X = float64(785)
-	cruz.Y = float64(330)
-	cruz.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\cruz.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
+
 	fondoNegro.FrameOX = 344
 	fondoNegro.FrameOY = 876
 	fondoNegro.FrameNum = 1
@@ -174,104 +163,67 @@ func initObjetos() {
 		log.Fatal(err)
 	}
 	mhome.FrameOX = 0
-	mhome.FrameOY = 0
+	mhome.FrameOY = 202
 	mhome.FrameNum = 1
-	mhome.FrameWidth = 388
-	mhome.FrameHeight = 757
+	mhome.FrameWidth = 144
+	mhome.FrameHeight = 287
 	mhome.X = float64(0)
 	mhome.Y = float64(200)
-	mhome.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-home.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	mhome1.FrameOX = 0
-	mhome1.FrameOY = 0
-	mhome1.FrameNum = 1
-	mhome1.FrameWidth = 388
-	mhome1.FrameHeight = 757
-	mhome1.X = float64(220)
-	mhome1.Y = float64(200)
-	mhome1.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-home.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
+	mhome.img = fondoNegro.img
+
 	money.FrameOX = 0
-	money.FrameOY = 0
+	money.FrameOY = 600
 	money.FrameNum = 1
-	money.FrameWidth = 1070
-	money.FrameHeight = 423
+	money.FrameWidth = 290
+	money.FrameHeight = 232
 	money.X = float64(50)
 	money.Y = float64(50)
-	money.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-money.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	meds.FrameOX = 0
-	meds.FrameOY = 0
+	money.img = fondoNegro.img
+
+	meds.FrameOX = 297
+	meds.FrameOY = 310
 	meds.FrameNum = 1
-	meds.FrameWidth = 945
-	meds.FrameHeight = 759
-	meds.X = float64(230)
+	meds.FrameWidth = 300
+	meds.FrameHeight = 180
+	meds.X = float64(315)
 	meds.Y = float64(310)
-	meds.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-meds.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	bread.FrameOX = 0
-	bread.FrameOY = 0
+	meds.img = fondoNegro.img
+
+	bread.FrameOX = 975
+	bread.FrameOY = 140
 	bread.FrameNum = 1
-	bread.FrameWidth = 1047
-	bread.FrameHeight = 503
-	bread.X = float64(750)
+	bread.FrameWidth = 140
+	bread.FrameHeight = 257
+	bread.X = float64(950)
 	bread.Y = float64(145)
-	bread.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-bread.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	clothes.FrameOX = 0
+	bread.img = fondoNegro.img
+
+	clothes.FrameOX = 278
 	clothes.FrameOY = 0
 	clothes.FrameNum = 1
-	clothes.FrameWidth = 941
-	clothes.FrameHeight = 694
+	clothes.FrameWidth = 387
+	clothes.FrameHeight = 142
 	clothes.X = float64(270)
 	clothes.Y = float64(0)
-	clothes.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-clothes.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	tpaper.FrameOX = 0
-	tpaper.FrameOY = 0
+	clothes.img = fondoNegro.img
+
+	tpaper.FrameOX = 794
+	tpaper.FrameOY = 610
 	tpaper.FrameNum = 1
-	tpaper.FrameWidth = 1151
-	tpaper.FrameHeight = 388
-	tpaper.X = float64(560)
-	tpaper.Y = float64(135)
-	tpaper.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-tpaper.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	tpaper.FrameOX = 0
-	tpaper.FrameOY = 0
-	tpaper.FrameNum = 1
-	tpaper.FrameWidth = 1151
-	tpaper.FrameHeight = 388
-	tpaper.X = float64(560)
-	tpaper.Y = float64(135)
-	tpaper.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-tpaper.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	vaccine.FrameOX = 0
-	vaccine.FrameOY = 0
+	tpaper.FrameWidth = 210
+	tpaper.FrameHeight = 259
+	tpaper.X = float64(750)
+	tpaper.Y = float64(35)
+	tpaper.img = fondoNegro.img
+
+	vaccine.FrameOX = 590
+	vaccine.FrameOY = 312
 	vaccine.FrameNum = 1
-	vaccine.FrameWidth = 1106
-	vaccine.FrameHeight = 468
-	vaccine.X = float64(560)
+	vaccine.FrameWidth = 360
+	vaccine.FrameHeight = 182
+	vaccine.X = float64(600)
 	vaccine.Y = float64(335)
-	vaccine.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\mission-vaccine.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
+	vaccine.img = fondoNegro.img
 }
 
 func dibujarNiveles(screen *ebiten.Image) {
@@ -304,8 +256,8 @@ func dibujarNiveles(screen *ebiten.Image) {
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	if B != fondoNegroVidas2 && B != fondoNegroVidas1 && B != relato && B != papiro && B != fondoNegro && B != fondoNegroCompras && B != fondoNegroCommans && B != fondoNegroPause {
-		op.GeoM.Scale(objScale, objScale)
+	if B == mhome || B == money || B == meds || B == bread || B == clothes || B == tpaper || B == vaccine {
+		op.GeoM.Scale(.8, .8)
 	}
 	op.GeoM.Translate(B.X, B.Y)
 	bx, by := B.FrameOX, B.FrameOY

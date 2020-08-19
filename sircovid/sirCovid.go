@@ -202,11 +202,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		//dibujar objetos
 		dibujarObjetos(barbijo, screen)
 		dibujarObjetos(plasma, screen)
-		//dibujarObjetos(alchol, screen)
-		//dibujarObjetos(monedas, screen)
-		if Level > 10 {
-			dibujarObjetos(cruz, screen)
-		}
 
 		//dibuja al enemigo
 		dibujarEnemigos(enemigo, screen)
