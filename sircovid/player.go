@@ -339,7 +339,7 @@ func moverPlayer(p player) player {
 	}
 
 	//Vuelta a la realidad
-	if p.Y[0] < 0 {
+	if p.Y[0] < 0 && player1.X[0] != 396 {
 		p.X[0] = X1
 	}
 	if p.Y[0] < -40 && p.Y[0] > -60 {
@@ -368,7 +368,7 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
-	//fmt.Println(p.X, p.Y)
+	//fmt.Println(p.X[0], p.Y[0], player1.X[0])
 	return p
 }
 
@@ -444,7 +444,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		ModeGameOver = true
 	}
 	//gana monedas
-	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y+20 && p.Y[0]+hgt < monedas.Y+20+coinHScale {
+	if p.X[0]+wth > monedas.X && p.X[0] < monedas.X+coinWscale && p.Y[0]+hgt > monedas.Y+40 && p.Y[0]+hgt < monedas.Y+40+coinHScale {
 		monedas.X = 1500
 		p.Coins += 5
 		sonidomonedas()

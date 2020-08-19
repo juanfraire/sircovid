@@ -256,7 +256,7 @@ func dibujarNiveles(screen *ebiten.Image) {
 
 func dibujarObjetos(B Objetos, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	if B == mhome || B == money || B == meds || B == bread || B == clothes || B == tpaper || B == vaccine {
+	if B == mhome || B == money || B == meds || B == bread || B == clothes || B == tpaper || B == vaccine || B == monedas {
 		op.GeoM.Scale(.8, .8)
 	}
 	op.GeoM.Translate(B.X, B.Y)
