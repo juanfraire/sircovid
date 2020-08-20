@@ -132,7 +132,6 @@ func moverPlayer(p player) player {
 	if (!hack && inpututil.IsKeyJustPressed(ebiten.KeyDown)) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyS) && p.señalador == 1 {
 		p.d = 1
 	}
-	// fmt.Println(player1.X[0], player1.Y[0])
 	if p.a == 1 && p.MovY != 1 && p.MovY != 2 {
 		p.FrameOX[0] = 0
 		p.FrameOY[0] = 144
@@ -270,9 +269,10 @@ func moverPlayer(p player) player {
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
+		sonidoPuerta()
 		p.Compras = true
 		mart = true
-		sonidoPuerta()
+		ModeGame = false
 		//SUPERMAKET
 	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 855 && p.Y[0] < 174 && p.Y[0] > 171):
 		p.Y[0] = -80
@@ -297,9 +297,10 @@ func moverPlayer(p player) player {
 		p.X[0] = 10
 		p.enCasita = false
 		if Game1.numPlayers == 2 && player1.enCasita == false || player2.enCasita == false {
-			casita = false
 			sonidoPuerta()
 			salida()
+			casita = false
+
 		}
 		if Game1.numPlayers == 1 {
 			sonidoPuerta()
@@ -307,10 +308,6 @@ func moverPlayer(p player) player {
 			casita = false
 		}
 
-		//home2
-	// case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 285 && p.X[0] < 296:
-	// 	p.Y[0] = 204
-	// 	sonidoPuerta()
 	//vacunatorio
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 814 && p.X[0] < 834:
 		p.Y[0] = 364
@@ -320,6 +317,7 @@ func moverPlayer(p player) player {
 		p.Y[0] = 52
 		mart = false
 		sonidoPuerta()
+
 		//Pharmacy
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 460 && p.X[0] < 486:
 		p.Y[0] = 366
@@ -339,7 +337,7 @@ func moverPlayer(p player) player {
 	}
 
 	//Vuelta a la realidad
-	if p.Y[0] < 0 && player1.X[0] != 396 {
+	if p.Y[0] < 0 {
 		p.X[0] = X1
 	}
 	if p.Y[0] < -40 && p.Y[0] > -60 {
@@ -368,7 +366,17 @@ func moverPlayer(p player) player {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
-	//fmt.Println(p.X[0], p.Y[0], player1.X[0])
+	if inconcebible {
+		p.X[0] = 396
+		p.Y[0] = 195
+		p.FrameOX[0] = 48
+		p.FrameOY[0] = 0
+		p.FrameNum[0] = 1
+		p.MovX = 0
+		p.MovY = 0
+		p.enCasita = true
+		inconcebible = false
+	}
 	return p
 }
 

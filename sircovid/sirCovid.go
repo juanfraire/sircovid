@@ -209,15 +209,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			dibujarObjetos(fondoNegroPause, screen)
 
 		}
-		if player1.Compras || player2.Compras || ModeGameOver {
-			dibujarObjetos(fondoNegroCompras, screen)
-		}
 		if Commands {
 			dibujarObjetos(fondoNegroCommans, screen)
 		}
-		//dibujar textos compras
-		dibujarTextoCompras(player1, screen)
-		dibujarTextoCompras(player2, screen)
 
 		//dibujar palyers
 		if !ModeTitleLevel && !ModePause {
@@ -227,7 +221,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 				dibujarPlayer(player2, screen)
 			}
 		}
-
+		if player1.Compras || player2.Compras || ModeGameOver {
+			dibujarObjetos(fondoNegroCompras, screen)
+		}
+		//dibujar textos compras
+		dibujarTextoCompras(player1, screen)
+		dibujarTextoCompras(player2, screen)
 		// dibujar nube
 		dibujarNube(nube1, screen)
 
