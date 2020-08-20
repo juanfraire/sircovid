@@ -52,7 +52,6 @@ func sonido(p player) {
 		fondo.Rewind()
 		sLevelUp.Play()
 		sLevelUp.Rewind()
-		tmpS = Level
 
 	case ModeTitle:
 		fadeIn()
@@ -71,6 +70,7 @@ func sonido(p player) {
 		fondo.Rewind()
 		sIntro.Play()
 	}
+	tmpS = Level
 
 	// volumen on/off
 	if inpututil.IsKeyJustPressed(ebiten.KeyX) {

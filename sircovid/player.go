@@ -388,17 +388,15 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		for i := 0; i < numNube; i++ {
 			nubX := nube1.X[i] * nubScale
 			nubY := nube1.Y[i] * nubScale
-			nubFrameWith *= nubScale
-			nubFrameHight *= nubScale
 
-			if p.X[0]+wth > nubX && p.X[0] < nubX+nubFrameWith && p.Y[0]+hgt > nubY && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
+			if p.X[0]+wth > nubX+20 && p.X[0] < nubX+nubFrameWidth && p.Y[0]+hgt > nubY+20 && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
 				p.v += .3
 			}
 		}
 
 		//pierde vidas con humanos
 		for i := randNum; i < numEnemigo+randNum; i++ {
-			if p.X[0]+wth > h.X[i] && p.X[0]+5 < h.X[i]+wth && p.Y[0]+hgt > h.Y[i]+(hgt-6) && p.Y[0] < h.Y[i]+hgt {
+			if p.X[0]+wth > h.X[i] && p.X[0] < h.X[i]+wth && p.Y[0]+hgt > h.Y[i]+(hgt-12) && p.Y[0]+(hgt-12) < h.Y[i]+hgt {
 				p.v += .5
 			}
 		}

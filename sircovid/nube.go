@@ -21,7 +21,7 @@ var (
 	nube1         nube
 	nubScale      = float64(.4)
 	nubFrameHight = float64(300) * nubScale
-	nubFrameWith  = float64(300) * nubScale
+	nubFrameWidth = float64(300) * nubScale
 	numNube       = 2
 )
 

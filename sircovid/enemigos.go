@@ -116,16 +116,16 @@ func moverHumanos(E humanos) humanos {
 		}
 
 		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], E.X1[i], E.Y1[i])
-		for j := randNum; j < numEnemigo+randNum; j++ {
-			if i != j && E.X[i]+wth > E.X[j] && E.X[i] < E.X[j]+wth && E.Y[i]+hgt > E.Y[j]+hgt-15 && E.Y[i]+hgt-15 < E.Y[j]+hgt {
-				E.X[i] = E.X1[i]
-				E.Y[i] = E.Y1[i]
-				E.X[j] = E.X1[j]
-				E.Y[j] = E.Y1[j]
-				E.num[i] = 0
-				E.num[j] = 0
-			}
-		}
+		// for j := randNum; j < numEnemigo+randNum; j++ {
+		// 	if i != j && E.X[i]+wth > E.X[j] && E.X[i] < E.X[j]+wth && E.Y[i]+hgt > E.Y[j]+hgt-15 && E.Y[i]+hgt-15 < E.Y[j]+hgt {
+		// 		E.X[i] = E.X1[i]
+		// 		E.Y[i] = E.Y1[i]
+		// 		E.X[j] = E.X1[j]
+		// 		E.Y[j] = E.Y1[j]
+		// 		E.num[i] = 0
+		// 		E.num[j] = 0
+		// 	}
+		// }
 
 		if E.X[i]+wth > player1.X[0] && E.X[i] < player1.X[0]+wth && E.Y[i]+hgt > player1.Y[0] && E.Y[i] < player1.Y[0]+hgt {
 			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
@@ -133,7 +133,7 @@ func moverHumanos(E humanos) humanos {
 		}
 
 		if obs {
-			E.num[i] = 0
+			E.num[i] = 3
 			E.cambio[i] = count + 10
 		}
 	}

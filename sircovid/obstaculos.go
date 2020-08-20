@@ -1,7 +1,10 @@
 package main
 
+import "fmt"
+
 func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 	var objetos [][]int
+	var bul bool
 	switch {
 	case casita:
 		objetos = make([][]int, 21)
@@ -138,17 +141,19 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		if int(X+(wth-7)) > objetos[i][0] && int(X+7) < objetos[i][0]+objetos[i][1] && int(Y+hgt) > objetos[i][2] && int(Y+(hgt-5)) < objetos[i][2]+objetos[i][3] {
 			X = X1
 			Y = Y1
-			return X, Y, true
+			bul = true
 		}
 	}
 
 	for j := randNum; j < numEnemigo+randNum; j++ {
-		if i != j && X+wth > enemigo.X[j] && X < enemigo.X[j]+wth && Y+hgt > enemigo.Y[j]+(hgt-5) && Y+hgt < enemigo.Y[j]+(hgt-5) {
+		if i != j && X+wth-5 > enemigo.X[j]+5 && X+5 < enemigo.X[j]+wth-5 && Y+hgt > enemigo.Y[j]+hgt-15 && Y+hgt < enemigo.Y[j]+hgt {
 			X = X1
 			Y = Y1
-			return X, Y, true
+			bul = true
+			fmt.Println(enemigo.X[j])
 		}
+
 	}
 
-	return X, Y, false
+	return X, Y, bul
 }
