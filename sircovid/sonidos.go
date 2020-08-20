@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -117,7 +116,6 @@ func sonidoPuerta() {
 	sPuerta.Rewind()
 }
 func sonidoVidas(p player) {
-	fmt.Println(p.señalador)
 	switch {
 	case p.señalador == 1 || p.señaladorBool:
 		deadSoundFem.Rewind()
