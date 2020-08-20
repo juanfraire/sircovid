@@ -77,12 +77,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			casita = true
 			interior()
 		}
-		//te muestra cual es tu mision
-	// case ModeMissions:
-	// 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-	// 		ModeMissions = false
-	// 		ModeGame = true
-	// 	}
+	//te muestra cual es tu mision
+
 	case player1.Compras:
 		if player1.Coins >= 2 {
 			player1 = compar(player1)

@@ -229,9 +229,7 @@ func initObjetos() {
 func dibujarNiveles(screen *ebiten.Image) {
 	dibujarObjetos(mhome, screen)
 	dibujarObjetos(money, screen)
-	if Game1.numPlayers == 2 {
-		dibujarObjetos(mhome1, screen)
-	}
+
 	if Level == 1 || Level == 5 || Level == 6 || Level == 8 {
 		dibujarObjetos(meds, screen)
 
