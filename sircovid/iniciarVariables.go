@@ -24,12 +24,12 @@ func iniciarVariables() {
 func pasarNivel() {
 	Level++
 	// hack = false
+	pasarNivelPlayer()
 	ModeTitleLevel = true
 	nivel = Level * 2
 	if nivel > 20 {
 		nivel = 20
 	}
-	pasarNivelPlayer()
 	initObjetos()
 	// initSonido()
 	count = 0

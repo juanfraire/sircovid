@@ -42,6 +42,7 @@ var (
 	supermarket, supermarket1 bool
 	vacunatorio               bool
 	senia                     bool
+	inconcebible              bool
 
 	// imágenes
 	imgTiles  *ebiten.Image
@@ -166,6 +167,9 @@ func compar(p player) player {
 		}
 		if mart && elecCompras == 1 {
 			p.Coins = p.Coins - 5
+			p.X[0] = 396
+			p.Y[0] = 195
+			inconcebible = true
 			pasarNivel()
 		}
 		if mart && elecCompras == 0 {
@@ -227,9 +231,7 @@ func compar(p player) player {
 		farmacia, mart, supermarket, bakery = false, false, false, false
 		elecCompras = 0
 		p.Compras = false
-		// if p.CompleteLevel {
-		// 	casita = false
-		// }
+
 	}
 	return p
 }
