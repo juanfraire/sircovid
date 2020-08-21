@@ -77,29 +77,29 @@ func initObjetos() {
 	//carteles
 
 	//realto inicio juego
-	relato.FrameOX = 0
-	relato.FrameOY = 0
-	relato.FrameNum = 1
-	relato.FrameWidth = 1500
-	relato.FrameHeight = 2500
-	relato.X = float64(230)
-	relato.Y = float64(100)
-	relato.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\relato2.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
-	papiro.FrameOX = 0
-	papiro.FrameOX = 0
-	papiro.FrameOY = 0
-	papiro.FrameNum = 1
-	papiro.FrameWidth = 1288
-	papiro.FrameHeight = 898
-	papiro.X = float64(-90)
-	papiro.Y = float64(-50)
-	papiro.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\papiro.png`, ebiten.FilterDefault)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// relato.FrameOX = 0
+	// relato.FrameOY = 0
+	// relato.FrameNum = 1
+	// relato.FrameWidth = 1500
+	// relato.FrameHeight = 2500
+	// relato.X = float64(230)
+	// relato.Y = float64(100)
+	// relato.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\relato2.png`, ebiten.FilterDefault)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// papiro.FrameOX = 0
+	// papiro.FrameOX = 0
+	// papiro.FrameOY = 0
+	// papiro.FrameNum = 1
+	// papiro.FrameWidth = 1288
+	// papiro.FrameHeight = 898
+	// papiro.X = float64(-90)
+	// papiro.Y = float64(-50)
+	// papiro.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\papiro.png`, ebiten.FilterDefault)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	fondoNegro.FrameOX = 344
 	fondoNegro.FrameOY = 876
