@@ -52,8 +52,8 @@ func initEnemigos() {
 	} else {
 		randNum = 0
 	}
-	if banco && numEnemigo > 4 {
-		numEnemigo = 4
+	if banco && numEnemigo > 3 {
+		numEnemigo = 3
 	}
 	if casita {
 		numEnemigo = 0
