@@ -137,6 +137,7 @@ func moverHumanos(E humanos) humanos {
 			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
 			obs = true
 			player2.contacto = true
+		}
 
 		if obs {
 			E.num[i] = 0
