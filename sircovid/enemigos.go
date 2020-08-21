@@ -52,8 +52,8 @@ func initEnemigos() {
 	} else {
 		randNum = 0
 	}
-	if banco && numEnemigo > 3 {
-		numEnemigo = 3
+	if banco && numEnemigo > 4 {
+		numEnemigo = 4
 	}
 	if casita {
 		numEnemigo = 0
@@ -78,10 +78,6 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
-	var (
-		X1 float64
-		Y1 float64
-	)
 	// var i int
 	rand.Seed(time.Now().UnixNano())
 	if ModeGame {
@@ -99,7 +95,7 @@ func moverHumanos(E humanos) humanos {
 			E.num[i] = tmp
 		}
 
-		X1, Y1 = E.X[i], E.Y[i]
+		E.X1[i], E.Y1[i] = E.X[i], E.Y[i]
 
 		switch E.num[i] {
 		case 0:
@@ -119,18 +115,28 @@ func moverHumanos(E humanos) humanos {
 			E.Y[i]++
 		}
 
-		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], X1, Y1)
+		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], E.X1[i], E.Y1[i])
+		for j := randNum; j < numEnemigo+randNum; j++ {
+			if i != j && E.X[i]+(wth-7) > E.X[j]+5 && E.X[i]+5 < E.X[j]+(wth-7) && E.Y[i]+hgt > E.Y[j]+(hgt-10) && E.Y[i]+(hgt-10) < E.Y[j]+hgt {
+				E.X[i] = E.X1[i]
+				E.Y[i] = E.Y1[i]
+				E.X[j] = E.X1[j]
+				E.Y[j] = E.Y1[j]
+				obs = true
+				E.num[j] = 0
+				E.cambio[j] = count + 10
+			}
+		}
 
-		if E.X[i]+wth > player1.X[0] && E.X[i] < player1.X[0]+wth && E.Y[i]+hgt > player1.Y[0] && E.Y[i] < player1.Y[0]+hgt {
+		if E.X[i]+(wth-7) > player1.X[0]+5 && E.X[i]+5 < player1.X[0]+(wth-7) && E.Y[i]+hgt > player1.Y[0]+(hgt-10) && E.Y[i]+(hgt-10) < player1.Y[0]+hgt {
+			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
+			obs = true
 			player1.contacto = true
-			E.X[i], E.Y[i] = X1, Y1
-			obs = true
 		}
-		if E.X[i]+wth > player2.X[0] && E.X[i] < player2.X[0]+wth && E.Y[i]+hgt > player2.Y[0] && E.Y[i] < player2.Y[0]+hgt {
+		if E.X[i]+(wth-7) > player2.X[0]+5 && E.X[i]+5 < player2.X[0]+(wth-7) && E.Y[i]+hgt > player2.Y[0]+(hgt-10) && E.Y[i]+(hgt-10) < player2.Y[0]+hgt {
+			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
+			obs = true
 			player2.contacto = true
-			E.X[i], E.Y[i] = X1, Y1
-			obs = true
-		}
 
 		if obs {
 			E.num[i] = 0

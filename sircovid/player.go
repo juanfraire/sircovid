@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"log"
 
@@ -404,9 +405,11 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		//pierde vidas con humanos
 		for i := randNum; i < numEnemigo+randNum; i++ {
 			if p.contacto {
-				//p.X[0]+wth > h.X[i] && p.X[0] < h.X[i]+wth && p.Y[0]+hgt >= h.Y[i]+(hgt-10) && p.Y[0]+(hgt-10) <= h.Y[i]+hgt {
-				p.v += .5
+				//p.X[0]+(wth-7) >= h.X[i]+5 && p.X[0]+5 <= h.X[i]+(wth-7) && p.Y[0]+hgt >= h.Y[i]+(hgt-10) && p.Y[0]+(hgt-10) <= h.Y[i]+hgt {
+				p.v += 30
+				// p.vidas--
 				p.contacto = false
+				fmt.Println(p.v)
 			}
 		}
 	}

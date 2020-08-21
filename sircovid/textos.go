@@ -58,6 +58,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		Inm := fmt.Sprintf("Fast for:%02d", player2.CountPoder/60)
 		text.Draw(screen, Inm, arcadeFont, 700, 150, color.White)
 	}
+	come := "& come back safe"
 	switch {
 	case ModeTitle:
 		// intro draw
@@ -70,53 +71,53 @@ func dibujarTextos(screen *ebiten.Image) {
 		text.Draw(screen, nivel1, smallArcadeFont, 400, 290, color.Black)
 
 		if Level == 1 {
-			nivel := fmt.Sprintf("MISSION: GET MEDS")
-			text.Draw(screen, nivel, smallArcadeFont, 380, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET MEDS\n" + come)
+			text.Draw(screen, nivel, smallArcadeFont, 380, 230, color.Black)
 		}
 		if Level == 2 {
-			nivel := fmt.Sprintf("MISSION: GET FOOD")
-			text.Draw(screen, nivel, smallArcadeFont, 380, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET FOOD\n" + come)
+			text.Draw(screen, nivel, smallArcadeFont, 380, 230, color.Black)
 		}
 		if Level == 3 {
-			nivel := fmt.Sprintf("MISSION GET CLOTHES")
-			text.Draw(screen, nivel, smallArcadeFont, 370, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION GET CLOTHES\n" + come)
+			text.Draw(screen, nivel, smallArcadeFont, 370, 230, color.Black)
 		}
 		if Level == 4 {
-			nivel := fmt.Sprintf("MISSION: GET TOLIET PAPER")
-			text.Draw(screen, nivel, smallArcadeFont, 314, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET TOLIET PAPER\n   " + come)
+			text.Draw(screen, nivel, smallArcadeFont, 314, 230, color.Black)
 		}
 		if Level == 5 {
-			nivel := fmt.Sprintf("MISSION: GET MEDS\n    AND FOOD")
-			text.Draw(screen, nivel, smallArcadeFont, 380, 235, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET MEDS,\nFOOD\n" + come)
+			text.Draw(screen, nivel, smallArcadeFont, 370, 230, color.Black)
 		}
 		if Level == 6 {
-			nivel := fmt.Sprintf("MISSION: GET TOLET PAPER\n        AND MEDS")
-			text.Draw(screen, nivel, smallArcadeFont, 320, 235, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET TOLET PAPER,\nMEDS " + come)
+			text.Draw(screen, nivel, smallArcadeFont, 320, 230, color.Black)
 		}
 		if Level == 7 {
-			nivel := fmt.Sprintf("MISSION: GET GLOTHES\n      AND FOOD")
-			text.Draw(screen, nivel, smallArcadeFont, 350, 235, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET GLOTHES,\nFOOD\n" + come)
+			text.Draw(screen, nivel, smallArcadeFont, 350, 230, color.Black)
 		}
 		if Level == 8 {
-			nivel := fmt.Sprintf("MISSION: GET MEDS\n   AND CLOTHES")
-			text.Draw(screen, nivel, smallArcadeFont, 380, 235, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET MEDS,\nCLOTHES " + come)
+			text.Draw(screen, nivel, smallArcadeFont, 320, 225, color.Black)
 		}
 		if Level == 9 {
-			nivel := fmt.Sprintf("MISSION GET TOILET PAPER\n       AND CLOTHES")
-			text.Draw(screen, nivel, smallArcadeFont, 320, 235, color.Black)
+			nivel := fmt.Sprintf("MISSION: Toilet PAPER,\nCLOTHES " + come)
+			text.Draw(screen, nivel, smallArcadeFont, 320, 230, color.Black)
 		}
 		if Level == 10 {
-			nivel := fmt.Sprintf("MISSION: GET BREAD\n AND TOILET PAPER")
-			text.Draw(screen, nivel, smallArcadeFont, 360, 235, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET BREAD,\nTOILET PAPER\n" + come)
+			text.Draw(screen, nivel, smallArcadeFont, 320, 225, color.Black)
 		}
 		if Level > 10 {
-			nivel := fmt.Sprintf("MISSION: GET VACCINE")
-			text.Draw(screen, nivel, smallArcadeFont, 350, 250, color.Black)
+			nivel := fmt.Sprintf("MISSION: GET VACCINE\n&come back free")
+			text.Draw(screen, nivel, smallArcadeFont, 350, 230, color.Black)
 		}
 
 	case ModeGameOver:
 		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
-		noMoney := fmt.Sprintf("Mission failed!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
+		noMoney := fmt.Sprintf("Mission failed!\n you ran out of money\nTRAY AGAIN?\n\nPRESS SPACE KEY")
 
 		if player1.Coins < 2 && player2.Coins < 2 && monedas.X == 1500 {
 			text.Draw(screen, noMoney, arcadeFont, 310, 200, color.White)
@@ -124,8 +125,8 @@ func dibujarTextos(screen *ebiten.Image) {
 			text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
 		}
 	case ModeWin == true:
-		win := fmt.Sprintf("YOU WIN")
-		text.Draw(screen, win, arcadeFont, 400, 300, color.White)
+		win := fmt.Sprintf("you succeded surviving\nthe pandemic!\n\n       YOU WIN")
+		text.Draw(screen, win, arcadeFont, 200, 200, color.Black)
 	}
 	switch {
 	case ModePause && count1 < 40:

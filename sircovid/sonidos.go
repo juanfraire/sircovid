@@ -104,12 +104,15 @@ func sonido(p player) {
 	fondo.SetVolume(vol)
 	deadSound.SetVolume(vol)
 	deadSound2.SetVolume(vol)
+	deadSoundFem.SetVolume(vol)
+	deadSound2Fem.SetVolume(vol)
 	sBarbijo.SetVolume(vol)
 	sDinero.SetVolume(vol)
 	sFast.SetVolume(vol)
 	sIntro.SetVolume(vol)
 	sLevelUp.SetVolume(vol)
 	sPuerta.SetVolume(vol)
+
 }
 func sonidoPuerta() {
 	sPuerta.Play()
