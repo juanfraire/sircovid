@@ -51,7 +51,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	}
 	//func sonido
 	sonido(player1)
-
+	if inpututil.IsKeyJustPressed(ebiten.KeyH) {
+		Commands = !Commands
+	}
 	switch {
 	//pausar el juego
 
@@ -61,18 +63,14 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 	case ModeWin:
 	//toda la introduccion con eleccion de players, etc
-	case Commands:
-		if inpututil.IsKeyJustPressed(ebiten.KeyH) {
-			Commands = !Commands
-		}
-		//introduccion al juego
+
+	//introduccion al juego
 	case ModeTitle:
 		introduccion()
 		//escribe en que nivel estas
 	case ModeTitleLevel:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModeTitleLevel = false
-			//ModeMissions = true
 			ModeGame = true
 			casita = true
 			interior()
@@ -99,10 +97,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//para mode pause y muestra los niveles
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
-			//ModeMissions = !ModeMissions
-		}
-		if inpututil.IsKeyJustPressed(ebiten.KeyH) {
-			Commands = !Commands
 		}
 		// nube
 		if !banco || !casita {
@@ -156,6 +150,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 
 	switch {
+	case Commands:
+		dibujarObjetos(fondoNegroCommans, screen)
+		dibujarTextos(screen)
+
 	case banco:
 		screen.DrawImage(imgBanco, op)
 		dibujarObjetos(fondoNegroVidas1, screen)
@@ -209,9 +207,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			dibujarObjetos(fondoNegroPause, screen)
 
 		}
-		if Commands {
-			dibujarObjetos(fondoNegroCommans, screen)
-		}
+		// if Commands {
+		// 	dibujarObjetos(fondoNegroCommans, screen)
+		// }
 
 		//dibujar palyers
 		if !ModeTitleLevel && !ModePause {
@@ -238,7 +236,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 		}
 		dibujarTextos(screen)
-
 	}
 }
 
