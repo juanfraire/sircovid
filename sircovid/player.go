@@ -273,7 +273,6 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		p.Compras = true
 		mart = true
-		ModeGame = false
 		//SUPERMAKET
 	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 855 && p.Y[0] < 174 && p.Y[0] > 171):
 		p.Y[0] = -80
