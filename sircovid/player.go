@@ -414,7 +414,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		}
 	}
 	//inmune con barbijo o alchol en gel
-	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt-30 > b.Y && p.Y[0]+hgt-30 < b.Y+barHScale {
+	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale+20 && p.Y[0]+hgt-45 > b.Y && p.Y[0]+hgt-45 < b.Y+barHScale {
 		sBarbijo.Play()
 		sBarbijo.Rewind()
 		b.X = 1500
