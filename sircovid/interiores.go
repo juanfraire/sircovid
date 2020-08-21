@@ -19,7 +19,6 @@ func interior() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		// initPlayer()
 
 	case banco:
 		imgBanco, _, err = ebitenutil.NewImageFromFile(`sircovid\data\banco.png`, ebiten.FilterDefault)
