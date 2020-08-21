@@ -52,15 +52,15 @@ func initEnemigos() {
 	} else {
 		randNum = 0
 	}
-	if banco && numEnemigo > 4 {
-		numEnemigo = 4
+	if banco && numEnemigo > 3 {
+		numEnemigo = 3
 	}
 	if casita {
 		numEnemigo = 0
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	for i := randNum; i < numEnemigo+randNum; i++ {
+	for i = randNum; i < numEnemigo+randNum; i++ {
 		en = `sircovid\data\enemigo` + strconv.Itoa(i+1) + `.png`
 		enemigo.FrameOX[i] = 48
 		enemigo.FrameOY[i] = 72 * rand.Intn(4)
@@ -78,12 +78,16 @@ func initEnemigos() {
 }
 
 func moverHumanos(E humanos) humanos {
+	var (
+		X1 float64
+		Y1 float64
+	)
 	// var i int
 	rand.Seed(time.Now().UnixNano())
 	if ModeGame {
 		count++
 	}
-	for i := randNum; i < numEnemigo+randNum; i++ {
+	for i = randNum; i < numEnemigo+randNum; i++ {
 
 		E.FrameNum[i] = 3
 		E.FrameOX[i] = 0
@@ -95,7 +99,7 @@ func moverHumanos(E humanos) humanos {
 			E.num[i] = tmp
 		}
 
-		E.X1[i], E.Y1[i] = E.X[i], E.Y[i]
+		X1, Y1 = E.X[i], E.Y[i]
 
 		switch E.num[i] {
 		case 0:
@@ -115,25 +119,21 @@ func moverHumanos(E humanos) humanos {
 			E.Y[i]++
 		}
 
-		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], E.X1[i], E.Y1[i])
-		// for j := randNum; j < numEnemigo+randNum; j++ {
-		// 	if i != j && E.X[i]+wth > E.X[j] && E.X[i] < E.X[j]+wth && E.Y[i]+hgt > E.Y[j]+hgt-15 && E.Y[i]+hgt-15 < E.Y[j]+hgt {
-		// 		E.X[i] = E.X1[i]
-		// 		E.Y[i] = E.Y1[i]
-		// 		E.X[j] = E.X1[j]
-		// 		E.Y[j] = E.Y1[j]
-		// 		E.num[i] = 0
-		// 		E.num[j] = 0
-		// 	}
-		// }
+		E.X[i], E.Y[i], obs = obstaculos(E.X[i], E.Y[i], X1, Y1)
 
 		if E.X[i]+wth > player1.X[0] && E.X[i] < player1.X[0]+wth && E.Y[i]+hgt > player1.Y[0] && E.Y[i] < player1.Y[0]+hgt {
-			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
+			player1.contacto = true
+			E.X[i], E.Y[i] = X1, Y1
+			obs = true
+		}
+		if E.X[i]+wth > player2.X[0] && E.X[i] < player2.X[0]+wth && E.Y[i]+hgt > player2.Y[0] && E.Y[i] < player2.Y[0]+hgt {
+			player2.contacto = true
+			E.X[i], E.Y[i] = X1, Y1
 			obs = true
 		}
 
 		if obs {
-			E.num[i] = 3
+			E.num[i] = 0
 			E.cambio[i] = count + 10
 		}
 	}
@@ -141,8 +141,8 @@ func moverHumanos(E humanos) humanos {
 }
 
 func dibujarEnemigos(E humanos, screen *ebiten.Image) {
-	for i := randNum; i < numEnemigo+randNum; i++ {
-		if ModePause || ModeWin {
+	for i = randNum; i < numEnemigo+randNum; i++ {
+		if ModePause || ModeWin || ModeTitleLevel || ModeGameOver {
 			E.FrameNum[i] = 1
 			E.FrameOX[i] = 48
 		}

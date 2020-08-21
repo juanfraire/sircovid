@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 	var objetos [][]int
 	var bul bool
@@ -146,11 +144,11 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	}
 
 	for j := randNum; j < numEnemigo+randNum; j++ {
-		if i != j && X+wth-5 > enemigo.X[j]+5 && X+5 < enemigo.X[j]+wth-5 && Y+hgt > enemigo.Y[j]+hgt-15 && Y+hgt < enemigo.Y[j]+hgt {
+		if i != j && X+(wth-7) > enemigo.X[j]+5 && X+5 < enemigo.X[j]+(wth-7) && Y+hgt > enemigo.Y[j]+(hgt-10) && Y+5 < enemigo.Y[j]+hgt-10 {
+			//X+wth-7 > enemigo.X[j] && X+7 < enemigo.X[j]+wth-7 && Y+hgt > enemigo.Y[j]-15 && Y < enemigo.Y[j]+hgt {
 			X = X1
 			Y = Y1
 			bul = true
-			fmt.Println(enemigo.X[j])
 		}
 
 	}

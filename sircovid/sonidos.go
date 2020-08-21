@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -117,7 +116,6 @@ func sonidoPuerta() {
 	sPuerta.Rewind()
 }
 func sonidoVidas(p player) {
-	fmt.Println(p.señalador)
 	switch {
 	case p.señalador == 1 || p.señaladorBool:
 		deadSoundFem.Rewind()
@@ -169,7 +167,6 @@ func initSonido() {
 	defer s.Close()
 	data := make([]byte, 521901)
 	c, err := s.Read(data)
-	// fmt.Println(c)
 
 	fondoD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -191,7 +188,6 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 371565)
 	c, err = s.Read(data)
-	// fmt.Println(c)
 
 	introD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -214,7 +210,6 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 4653)
 	c, err = s.Read(data)
-	// fmt.Println("puerta", c)
 
 	puertaD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -233,7 +228,6 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 9549)
 	c, err = s.Read(data)
-	// fmt.Println("dinero", c)
 
 	dineroD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -251,7 +245,6 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 7533)
 	c, err = s.Read(data)
-	// fmt.Println("cofee", c)
 
 	fastD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -271,7 +264,6 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 4653)
 	c, err = s.Read(data)
-	// fmt.Println("barbijo", c)
 
 	barbijoD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -291,7 +283,6 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 9549)
 	c, err = s.Read(data)
-	// fmt.Println("pasar nivel", c)
 
 	levelD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -310,7 +301,6 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 16461)
 	c, err = s.Read(data)
-	// fmt.Println("tos", c)
 
 	tosD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
@@ -329,7 +319,7 @@ func initSonido() {
 	defer s.Close()
 	data = make([]byte, 16461)
 	_, err = s.Read(data)
-	// fmt.Println("nube", c)
+
 	jabD, err := mp3.Decode(audioContext, audio.BytesReadSeekCloser(data))
 	if err != nil {
 		log.Fatal(err)

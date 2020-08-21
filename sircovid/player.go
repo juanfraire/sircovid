@@ -26,6 +26,7 @@ type player struct {
 	CompleteLevel bool
 	enBanco       bool
 	enCasita      bool
+	contacto      bool
 }
 
 var (
@@ -362,7 +363,6 @@ func moverPlayer(p player) player {
 		casita = false
 		pasarNivel()
 
-		// hack = !hack
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		p.Inmune = !p.Inmune
 	}
@@ -404,8 +404,10 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 
 		//pierde vidas con humanos
 		for i := randNum; i < numEnemigo+randNum; i++ {
-			if p.X[0]+wth > h.X[i] && p.X[0] < h.X[i]+wth && p.Y[0]+hgt > h.Y[i]+(hgt-12) && p.Y[0]+(hgt-12) < h.Y[i]+hgt {
+			if p.contacto {
+				//p.X[0]+wth > h.X[i] && p.X[0] < h.X[i]+wth && p.Y[0]+hgt >= h.Y[i]+(hgt-10) && p.Y[0]+(hgt-10) <= h.Y[i]+hgt {
 				p.v += .5
+				p.contacto = false
 			}
 		}
 	}
@@ -442,7 +444,6 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		ModeGameOver = true
 		ModeGame = false
 		banco = false
-		// casita = false
 	}
 	//PIERDE POR falta de plata
 	if player1.Coins < 2 && player2.Coins < 2 && !p.CompleteLevel && monedas.X == 1500 {
