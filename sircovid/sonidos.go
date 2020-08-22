@@ -128,7 +128,6 @@ func sonidoVidas(p player) {
 	case p.señalador == 0:
 		deadSound.Rewind()
 		deadSound.Play()
-
 	}
 	if p.vidas == 0 {
 		switch {

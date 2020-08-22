@@ -128,18 +128,9 @@ func moverHumanos(E humanos) humanos {
 			}
 		}
 
-		if E.X[i]+(wth-7) >= player1.X[0]+5 && E.X[i]+5 <= player1.X[0]+(wth-7) && E.Y[i]+hgt >= player1.Y[0]+(hgt-10) && E.Y[i]+(hgt-10) <= player1.Y[0]+hgt {
+		if E.X[i]+(wth-7) >= player1.X[0]+5 && E.X[i]+5 <= player1.X[0]+(wth-7) && E.Y[i]+hgt >= player1.Y[0]+(hgt-10) && E.Y[i]+(hgt-10) <= player1.Y[0]+hgt ||
+			(E.X[i]+(wth-7) >= player2.X[0]+5 && E.X[i]+5 <= player2.X[0]+(wth-7) && E.Y[i]+hgt >= player2.Y[0]+(hgt-10) && E.Y[i]+(hgt-10) <= player2.Y[0]+hgt) {
 			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
-			if countVida > 60 {
-				player1.contacto = true
-			}
-			obs = true
-		}
-		if E.X[i]+(wth-7) >= player2.X[0]+5 && E.X[i]+5 <= player2.X[0]+(wth-7) && E.Y[i]+hgt >= player2.Y[0]+(hgt-10) && E.Y[i]+(hgt-10) <= player2.Y[0]+hgt {
-			E.X[i], E.Y[i] = E.X1[i], E.Y1[i]
-			if countVida > 60 {
-				player2.contacto = true
-			}
 			obs = true
 		}
 

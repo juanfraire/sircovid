@@ -12,7 +12,6 @@ import (
 type player struct {
 	humanos
 	vidas         int
-	v             float32
 	señalador     int
 	señaladorBool bool
 	a, b, c, d    int
@@ -26,7 +25,6 @@ type player struct {
 	CompleteLevel bool
 	enBanco       bool
 	enCasita      bool
-	contacto      bool
 }
 
 var (
@@ -65,7 +63,6 @@ func initPlayer() {
 	//player
 	// player1.humanos = player1
 	player1.vidas = 3
-	player1.v = 0
 	player1.señalador = 0
 	player1.Coins = 0
 	player1.enCasita = true
@@ -86,7 +83,6 @@ func initPlayer() {
 	player2.enCasita = true
 
 	player2.vidas = 3
-	player2.v = 0
 	player2.señalador = 1
 	player2.Coins = 0
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
@@ -208,8 +204,6 @@ func moverPlayer(p player) player {
 	}
 	p.X[0], p.Y[0], obs = obstaculos(p.X[0], p.Y[0], X1, Y1)
 	if obs {
-		p.X[0] = X1
-		p.Y[0] = Y1
 		p.FrameOX[0] = 48
 		p.FrameNum[0] = 1
 	}
@@ -373,31 +367,31 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	plasmaHScale = float64(plasma.FrameHeight) * objScale
 	plasmaWScale = float64(plasma.FrameWidth) * objScale
 
-	if !p.Inmune {
+	if !p.Inmune && countVida > 60 {
 
 		//pierde vidas con la nube
 		for i := 0; i < numNube; i++ {
 			nubX := nube1.X[i] * nubScale
 			nubY := nube1.Y[i] * nubScale
 
-			if p.X[0]+wth > nubX+20 && p.X[0] < nubX+nubFrameWidth && p.Y[0]+hgt > nubY+20 && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
-				if countVida > 60 {
-					p.v += 30
-					countVida = 0
-				}
+			if countVida > 60 && p.X[0]+wth > nubX+20 && p.X[0] < nubX+nubFrameWidth && p.Y[0]+hgt > nubY+20 && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
+				p.vidas--
+				countVida = 0
+				sonidoVidas(p)
 			}
 		}
 
 		//pierde vidas con humanos
 		for i := randNum; i < numEnemigo+randNum; i++ {
 			if p.X[0]+(wth-5) > h.X[i]+5 && p.X[0]+5 < h.X[i]+(wth-5) && p.Y[0]+hgt > h.Y[i]+(hgt-8) && p.Y[0]+(hgt-8) < h.Y[i]+hgt {
-				if countVida > 60 {
-					p.v += 30
-					countVida = 0
-				}
+				p.vidas--
+				countVida = 0
+				sonidoVidas(p)
 			}
 		}
+
 	}
+
 	//inmune con barbijo o alchol en gel
 	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt-30 > b.Y && p.Y[0]+hgt-30 < b.Y+barHScale {
 		sBarbijo.Play()
@@ -422,11 +416,11 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.vidas++
 		pl.X = 1500
 	}
-	if p.v >= 30 {
-		p.vidas--
-		sonidoVidas(p)
-		p.v = 0
-	}
+	// if p.v >= 30 {
+	// 	p.vidas--
+	// 	sonidoVidas(p)
+	// 	p.v = 0
+	// }
 	if p.vidas == 0 {
 		ModeGameOver = true
 		ModeGame = false
