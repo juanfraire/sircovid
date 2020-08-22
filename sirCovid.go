@@ -51,6 +51,9 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	}
 	//func sonido
 	sonido(player1)
+	if inpututil.IsKeyJustPressed(ebiten.KeyH) {
+		Commands = !Commands
+	}
 
 	switch {
 	//pausar el juego
@@ -61,11 +64,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 	case ModeWin:
 	//toda la introduccion con eleccion de players, etc
-	case Commands:
-		if inpututil.IsKeyJustPressed(ebiten.KeyH) {
-			Commands = !Commands
-		}
-		//introduccion al juego
+
+	//introduccion al juego
 	case ModeTitle:
 		introduccion()
 		//escribe en que nivel estas
@@ -99,11 +99,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		//para mode pause y muestra los niveles
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
-			//ModeMissions = !ModeMissions
 		}
-		if inpututil.IsKeyJustPressed(ebiten.KeyH) {
-			Commands = !Commands
-		}
+
 		// nube
 		if !banco || !casita {
 			nube1 = moverNube(nube1)
@@ -156,6 +153,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 
 	switch {
+	case Commands:
+		dibujarObjetos(fondoNegroCommans, screen)
+		dibujarTextos(screen)
+
 	case banco:
 		screen.DrawImage(imgBanco, op)
 		dibujarObjetos(fondoNegroVidas1, screen)
@@ -208,9 +209,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		if ModePause || ModeTitleLevel {
 			dibujarObjetos(fondoNegroPause, screen)
 
-		}
-		if Commands {
-			dibujarObjetos(fondoNegroCommans, screen)
 		}
 
 		//dibujar palyers
