@@ -34,8 +34,9 @@ var (
 	humano1, humano2 humanos
 	// nivel            = int(1)
 	// plyrScale float64
-	banco  bool
-	casita bool
+	banco     bool
+	casita    bool
+	countVida int
 )
 
 func initPlayer() {
@@ -115,14 +116,12 @@ func pasarNivelPlayer() {
 	player2.enCasita = true
 
 	player2.a, player2.b, player2.c, player2.d = 0, 0, 0, 0
-	// hack = false
 
 }
 func moverPlayer(p player) player {
 	// leer tecla
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyD) && p.señalador == 1 {
 		p.a = 1
-		// hack = false
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyA) && p.señalador == 1 {
 		p.b = 1
@@ -388,11 +387,10 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		for i := randNum; i < numEnemigo+randNum; i++ {
 			if p.contacto {
 				//p.X[0]+(wth-7) >= h.X[i]+5 && p.X[0]+5 <= h.X[i]+(wth-7) && p.Y[0]+hgt >= h.Y[i]+(hgt-10) && p.Y[0]+(hgt-10) <= h.Y[i]+hgt {
-				p.v += 10
+				p.v += 30
 				// p.vidas--
 				p.contacto = false
-				// sonidoVidas(p)
-				// fmt.Println(p.v)
+				countVida = 0
 			}
 		}
 	}

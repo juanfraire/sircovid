@@ -47,6 +47,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	comandos()
 	g.count++
 	count1++
+	countVida++
 	if count1 == 60 {
 		count1 = 0
 	}
