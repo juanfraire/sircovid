@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	_ "image/png"
 	"log"
 
@@ -49,7 +48,6 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	g.count++
 	count1++
 	countVida++
-	fmt.Println(countVida)
 	if count1 == 60 {
 		count1 = 0
 	}
@@ -57,6 +55,15 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	sonido(player1)
 	if inpututil.IsKeyJustPressed(ebiten.KeyH) {
 		Commands = !Commands
+		if Credits {
+			Credits = !Credits
+		}
+	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyC) {
+		Credits = !Credits
+		if Commands {
+			Commands = !Commands
+		}
 	}
 	switch {
 
@@ -154,6 +161,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 
 	switch {
+	case Credits:
+		dibujarObjetos(fondoNegroCommans, screen)
+		dibujarTextos(screen)
 	case Commands:
 		dibujarObjetos(fondoNegroCommans, screen)
 		dibujarTextos(screen)

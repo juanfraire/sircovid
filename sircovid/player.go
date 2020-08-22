@@ -393,13 +393,14 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 
 	//inmune con barbijo o alchol en gel
-	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale && p.Y[0]+hgt-30 > b.Y && p.Y[0]+hgt-30 < b.Y+barHScale {
+	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale+20 && p.Y[0]+hgt-45 > b.Y && p.Y[0]+hgt-45 < b.Y+barHScale {
 		sBarbijo.Play()
 		sBarbijo.Rewind()
 		b.X = 1500
 		p.Inmune = true
 		p.CountPoder = 1200
 	}
+
 	if p.Inmune || p.Fast {
 
 		p.CountPoder--
@@ -410,17 +411,13 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 
 	//gana/pierde vida
-	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale {
+	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale+20 && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale+20 {
 		sBarbijo.Play()
 		sBarbijo.Rewind()
 		p.vidas++
 		pl.X = 1500
 	}
-	// if p.v >= 30 {
-	// 	p.vidas--
-	// 	sonidoVidas(p)
-	// 	p.v = 0
-	// }
+
 	if p.vidas == 0 {
 		ModeGameOver = true
 		ModeGame = false
