@@ -20,16 +20,16 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, fondoNegro, fondoNegroVidas1, fondoNegroVidas2, fondoNegroCommans, fondoNegroCompras, fondoNegroPause, home1, home, monedas, relato, papiro, ciudad, tpaper, vaccine, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
-	objScale                                                                                                                                                                                                                                               = .3
-	barHScale                                                                                                                                                                                                                                              float64
-	barWscale                                                                                                                                                                                                                                              float64
-	coinHScale                                                                                                                                                                                                                                             float64
-	coinWscale                                                                                                                                                                                                                                             float64
-	plasmaHScale                                                                                                                                                                                                                                           float64
-	plasmaWScale                                                                                                                                                                                                                                           float64
-	alcholHScale                                                                                                                                                                                                                                           float64
-	alcholWScale                                                                                                                                                                                                                                           float64
+	barbijo, alchol, plasma, fondoNegro, fondoNegroVidas1, fondoNegroVidas2, fondoNegroInmune1, fondoNegroInmune2, fondoNegroFast1, fondoNegroFast2, fondoNegroCommans, fondoNegroCompras, fondoNegroPause, home1, home, monedas, relato, papiro, ciudad, tpaper, vaccine, money, meds, mmeds, mhome, mhome1, bread, clothes Objetos
+	objScale                                                                                                                                                                                                                                                                                                                 = .3
+	barHScale                                                                                                                                                                                                                                                                                                                float64
+	barWscale                                                                                                                                                                                                                                                                                                                float64
+	coinHScale                                                                                                                                                                                                                                                                                                               float64
+	coinWscale                                                                                                                                                                                                                                                                                                               float64
+	plasmaHScale                                                                                                                                                                                                                                                                                                             float64
+	plasmaWScale                                                                                                                                                                                                                                                                                                             float64
+	alcholHScale                                                                                                                                                                                                                                                                                                             float64
+	alcholWScale                                                                                                                                                                                                                                                                                                             float64
 )
 
 //cartFarmacy, cartSupermarket, cartStore, cartBanck
@@ -75,32 +75,6 @@ func initObjetos() {
 	monedas.img = barbijo.img
 
 	//carteles
-
-	//realto inicio juego
-	// relato.FrameOX = 0
-	// relato.FrameOY = 0
-	// relato.FrameNum = 1
-	// relato.FrameWidth = 1500
-	// relato.FrameHeight = 2500
-	// relato.X = float64(230)
-	// relato.Y = float64(100)
-	// relato.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\relato2.png`, ebiten.FilterDefault)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// papiro.FrameOX = 0
-	// papiro.FrameOX = 0
-	// papiro.FrameOY = 0
-	// papiro.FrameNum = 1
-	// papiro.FrameWidth = 1288
-	// papiro.FrameHeight = 898
-	// papiro.X = float64(-90)
-	// papiro.Y = float64(-50)
-	// papiro.img, _, err = ebitenutil.NewImageFromFile(`sircovid\data\papiro.png`, ebiten.FilterDefault)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
 	fondoNegro.FrameOX = 344
 	fondoNegro.FrameOY = 876
 	fondoNegro.FrameNum = 1
@@ -138,6 +112,42 @@ func initObjetos() {
 	fondoNegroVidas2.X = float64(750)
 	fondoNegroVidas2.Y = float64(470)
 	fondoNegroVidas2.img = fondoNegro.img
+
+	fondoNegroInmune1.FrameOX = 0
+	fondoNegroInmune1.FrameOY = 485
+	fondoNegroInmune1.FrameNum = 1
+	fondoNegroInmune1.FrameWidth = 435
+	fondoNegroInmune1.FrameHeight = 50
+	fondoNegroInmune1.X = float64(0)
+	fondoNegroInmune1.Y = float64(-10)
+	fondoNegroInmune1.img = fondoNegro.img
+
+	fondoNegroInmune2.FrameOX = 0
+	fondoNegroInmune2.FrameOY = 485
+	fondoNegroInmune2.FrameNum = 1
+	fondoNegroInmune2.FrameWidth = 435
+	fondoNegroInmune2.FrameHeight = 50
+	fondoNegroInmune2.X = float64(745)
+	fondoNegroInmune2.Y = float64(-10)
+	fondoNegroInmune2.img = fondoNegro.img
+
+	fondoNegroFast1.FrameOX = 0
+	fondoNegroFast1.FrameOY = 485
+	fondoNegroFast1.FrameNum = 1
+	fondoNegroFast1.FrameWidth = 435
+	fondoNegroFast1.FrameHeight = 50
+	fondoNegroFast1.X = float64(200)
+	fondoNegroFast1.Y = float64(-10)
+	fondoNegroFast1.img = fondoNegro.img
+
+	fondoNegroFast2.FrameOX = 0
+	fondoNegroFast2.FrameOY = 485
+	fondoNegroFast2.FrameNum = 1
+	fondoNegroFast2.FrameWidth = 435
+	fondoNegroFast2.FrameHeight = 50
+	fondoNegroFast2.X = float64(510)
+	fondoNegroFast2.Y = float64(-10)
+	fondoNegroFast2.img = fondoNegro.img
 
 	fondoNegroCommans.FrameOX = 0
 	fondoNegroCommans.FrameOY = 0

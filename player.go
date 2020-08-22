@@ -261,7 +261,7 @@ func moverPlayer(p player) player {
 		bakery = true
 		sonidoPuerta()
 		//PARA MART
-	case p.c == 1 && p.X[0] > 310 && p.X[0] < 330 && p.Y[0] < 51 && p.Y[0] > 46:
+	case p.c == 1 && p.X[0] > 310 && p.X[0] < 330 && p.Y[0] < 52 && p.Y[0] > 46:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -309,7 +309,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		//mart
 	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 310 && p.X[0] < 330:
-		p.Y[0] = 52
+		p.Y[0] = 53
 		mart = false
 		sonidoPuerta()
 
