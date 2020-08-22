@@ -390,7 +390,6 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	plasmaWScale = float64(plasma.FrameWidth) * objScale
 
 	if !p.Inmune {
-
 		//pierde vidas con la nube
 		for i := 0; i < numNube; i++ {
 			nubX := nube1.X[i] * nubScale
@@ -404,13 +403,13 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		//pierde vidas con humanos
 		for i := randNum; i < numEnemigo+randNum; i++ {
 			if p.contacto {
-				//p.X[0]+(wth-7) >= h.X[i]+5 && p.X[0]+5 <= h.X[i]+(wth-7) && p.Y[0]+hgt >= h.Y[i]+(hgt-10) && p.Y[0]+(hgt-10) <= h.Y[i]+hgt {
-				p.v += 30
-				// p.vidas--
+				//p.X[0]+wth > h.X[i] && p.X[0] < h.X[i]+wth && p.Y[0]+hgt >= h.Y[i]+(hgt-10) && p.Y[0]+(hgt-10) <= h.Y[i]+hgt {
+				p.v += .5
 				p.contacto = false
 			}
 		}
 	}
+
 	//inmune con barbijo o alchol en gel
 	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale+20 && p.Y[0]+hgt-45 > b.Y && p.Y[0]+hgt-45 < b.Y+barHScale {
 		sBarbijo.Play()
