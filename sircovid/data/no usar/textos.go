@@ -43,20 +43,20 @@ func dibujarTextos(screen *ebiten.Image) {
 	//dibujar inmunidad
 	if player1.Inmune {
 		Inm := fmt.Sprintf("Inmune for:%02d", player1.CountPoder/60)
-		text.Draw(screen, Inm, arcadeFont, fontSize, 100, color.White)
+		text.Draw(screen, Inm, smallArcadeFont, fontSize, 20, color.Black)
 	}
 	if player2.Inmune {
 		Inm := fmt.Sprintf("Inmune for:%02d", player2.CountPoder/60)
-		text.Draw(screen, Inm, arcadeFont, 630, 100, color.White)
+		text.Draw(screen, Inm, smallArcadeFont, 800, 20, color.Black)
 	}
 	//dibujar Fast
 	if player1.Fast {
 		Inm := fmt.Sprintf("Fast for:%02d", player1.CountPoder/60)
-		text.Draw(screen, Inm, arcadeFont, fontSize, 150, color.White)
+		text.Draw(screen, Inm, smallArcadeFont, 260, 20, color.Black)
 	}
 	if player2.Fast {
 		Inm := fmt.Sprintf("Fast for:%02d", player2.CountPoder/60)
-		text.Draw(screen, Inm, arcadeFont, 700, 150, color.White)
+		text.Draw(screen, Inm, smallArcadeFont, 600, 20, color.Black)
 	}
 	come := "& come back safe"
 	switch {

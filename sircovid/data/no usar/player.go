@@ -421,6 +421,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		p.Inmune = true
 		p.CountPoder = 1200
 	}
+
 	if p.Inmune || p.Fast {
 
 		p.CountPoder--

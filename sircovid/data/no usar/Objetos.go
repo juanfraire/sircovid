@@ -20,16 +20,16 @@ type Objetos struct {
 }
 
 var (
-	barbijo, alchol, plasma, fondoNegro, fondoNegroVidas1, fondoNegroVidas2, fondoNegroCommans, fondoNegroCompras, fondoNegroPause, home1, home, monedas, relato, papiro, ciudad, tpaper, vaccine, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
-	objScale                                                                                                                                                                                                                                               = .3
-	barHScale                                                                                                                                                                                                                                              float64
-	barWscale                                                                                                                                                                                                                                              float64
-	coinHScale                                                                                                                                                                                                                                             float64
-	coinWscale                                                                                                                                                                                                                                             float64
-	plasmaHScale                                                                                                                                                                                                                                           float64
-	plasmaWScale                                                                                                                                                                                                                                           float64
-	alcholHScale                                                                                                                                                                                                                                           float64
-	alcholWScale                                                                                                                                                                                                                                           float64
+	barbijo, alchol, plasma, fondoNegro, fondoNegroVidas1, fondoNegroVidas2, fondoNegroInmune1, fondoNegroInmune2, fondoNegroCommans, fondoNegroCompras, fondoNegroPause, home1, home, monedas, relato, papiro, ciudad, tpaper, vaccine, money, meds, mmeds, mhome, mhome1, bread, clothes, cruz Objetos
+	objScale                                                                                                                                                                                                                                                                                     = .3
+	barHScale                                                                                                                                                                                                                                                                                    float64
+	barWscale                                                                                                                                                                                                                                                                                    float64
+	coinHScale                                                                                                                                                                                                                                                                                   float64
+	coinWscale                                                                                                                                                                                                                                                                                   float64
+	plasmaHScale                                                                                                                                                                                                                                                                                 float64
+	plasmaWScale                                                                                                                                                                                                                                                                                 float64
+	alcholHScale                                                                                                                                                                                                                                                                                 float64
+	alcholWScale                                                                                                                                                                                                                                                                                 float64
 )
 
 //cartFarmacy, cartSupermarket, cartStore, cartBanck
@@ -138,6 +138,24 @@ func initObjetos() {
 	fondoNegroVidas2.X = float64(750)
 	fondoNegroVidas2.Y = float64(470)
 	fondoNegroVidas2.img = fondoNegro.img
+
+	fondoNegroInmune1.FrameOX = 0
+	fondoNegroInmune1.FrameOY = 485
+	fondoNegroInmune1.FrameNum = 1
+	fondoNegroInmune1.FrameWidth = 435
+	fondoNegroInmune1.FrameHeight = 155
+	fondoNegroInmune1.X = float64(0)
+	fondoNegroInmune1.Y = float64(0)
+	fondoNegroInmune1.img = fondoNegro.img
+
+	fondoNegroInmune2.FrameOX = 0
+	fondoNegroInmune2.FrameOY = 485
+	fondoNegroInmune2.FrameNum = 1
+	fondoNegroInmune2.FrameWidth = 435
+	fondoNegroInmune2.FrameHeight = 155
+	fondoNegroInmune2.X = float64(600)
+	fondoNegroInmune2.Y = float64(0)
+	fondoNegroInmune2.img = fondoNegro.img
 
 	fondoNegroCommans.FrameOX = 0
 	fondoNegroCommans.FrameOY = 0

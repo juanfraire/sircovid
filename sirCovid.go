@@ -237,9 +237,35 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			}
 
 		}
-		dibujarTextos(screen)
+		// if player1.Inmune {
+		// 	dibujarObjetos(fondoNegroInmune1, screen)
+		// }
+		// if player2.Inmune {
+		// 	dibujarObjetos(fondoNegroInmune2, screen)
+		// }
+		// if player1.Fast {
+		// 	dibujarObjetos(fondoNegroFast1, screen)
+		// }
+		// if player2.Fast {
+		// 	dibujarObjetos(fondoNegroFast2, screen)
+		// }
+		//dibujarTextos(screen)
 
 	}
+	if player1.Inmune {
+		dibujarObjetos(fondoNegroInmune1, screen)
+	}
+	if player2.Inmune {
+		dibujarObjetos(fondoNegroInmune2, screen)
+	}
+	if player1.Fast {
+		dibujarObjetos(fondoNegroFast1, screen)
+	}
+	if player2.Fast {
+		dibujarObjetos(fondoNegroFast2, screen)
+	}
+	dibujarTextos(screen)
+
 }
 
 // Layout maneja las dimensiones de pantalla
