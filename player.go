@@ -269,7 +269,7 @@ func moverPlayer(p player) player {
 		p.Compras = true
 		mart = true
 		//SUPERMAKET
-	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 855 && p.Y[0] < 174 && p.Y[0] > 171):
+	case p.c == 1 && (p.X[0] > 795 && p.X[0] < 855 && p.Y[0] < 185 && p.Y[0] > 171):
 		p.Y[0] = -80
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -325,7 +325,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 		//supermarket
 	case p.Y[0] < -76 && p.Y[0] > -79 && (p.X[0] > 795 && p.X[0] < 856):
-		p.Y[0] = 175
+		p.Y[0] = 186
 		supermarket = false
 		sonidoPuerta()
 
