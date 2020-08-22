@@ -53,8 +53,16 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	sonido(player1)
 	if inpututil.IsKeyJustPressed(ebiten.KeyH) {
 		Commands = !Commands
+		if Credits {
+			Credits = !Credits
+		}
 	}
-
+	if inpututil.IsKeyJustPressed(ebiten.KeyC) {
+		Credits = !Credits
+		if Commands {
+			Commands = !Commands
+		}
+	}
 	switch {
 	//pausar el juego
 
@@ -153,6 +161,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 
 	switch {
+	case Credits:
+		dibujarObjetos(fondoNegroCommans, screen)
+		dibujarTextos(screen)
 	case Commands:
 		dibujarObjetos(fondoNegroCommans, screen)
 		dibujarTextos(screen)

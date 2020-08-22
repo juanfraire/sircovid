@@ -25,6 +25,7 @@ var intro1 intro
 
 var (
 	Commands                  bool
+	Credits                   bool
 	ModeGame                  bool
 	ModeTitleLevel            bool
 	Level                     = 1

@@ -160,8 +160,12 @@ func dibujarTextos(screen *ebiten.Image) {
 		text.Draw(screen, plasmaVida, smallArcadeFont, 325, 150, color.White)
 		alcholInmune := fmt.Sprintf("\nPlayer 2 movements:\n\n Up: W\n Dow: S\n Rigth: D\n Left: A")
 		text.Draw(screen, alcholInmune, smallArcadeFont, 325, 250, color.White)
-		barbijoInmune := fmt.Sprintf("\nPause: Space Bar\n\nMute: X\n\nVolume Up: Ctrl+Arrow Up\nVolume Down: Ctrl+Arrow Down")
+		barbijoInmune := fmt.Sprintf("\nPause: Space Bar\n\nMute: X\n\nVolume Up: Ctrl+Arrow Up\nVolume Down: Ctrl+Arrow Down\n\nCredits: C")
 		text.Draw(screen, barbijoInmune, smallArcadeFont, 325, 360, color.White)
 
+	}
+	if Credits {
+		credits := fmt.Sprintf("Credits:\n\nMusic and Sound: Kim Kaos\n\nGraphics:City by Fere Duelli\n\nHome: tileset by Kymotonian & Speedialga\n\nBank: titelest by Princess Phoenix\n\nSoftware:L.A.T. Software Factory\n\nCaracters graphics: Matthias1")
+		text.Draw(screen, credits, smallArcadeFont, 275, 150, color.White)
 	}
 }
