@@ -67,6 +67,8 @@ func dibujarTextos(screen *ebiten.Image) {
 	case ModeTitleLevel:
 		nivel := fmt.Sprintf("    LEVEL %d", Level)
 		text.Draw(screen, nivel, arcadeFont, 290, 200, color.Black)
+		nivel2 := fmt.Sprintf("& BACK HOME")
+		text.Draw(screen, nivel2, smallArcadeFont, 420, 270, color.Black)
 		nivel1 := fmt.Sprintf("PRESS SPACE KEY")
 		text.Draw(screen, nivel1, smallArcadeFont, 400, 290, color.Black)
 
