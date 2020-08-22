@@ -429,7 +429,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 
 	//gana/pierde vida
-	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale {
+	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale+20 && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale+20 {
 		sBarbijo.Play()
 		sBarbijo.Rewind()
 		p.vidas++
