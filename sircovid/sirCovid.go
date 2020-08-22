@@ -44,6 +44,7 @@ func init() {
 // Update se llama 60 veces por segundo
 func (g *Game) Update(screen *ebiten.Image) error {
 	// game counter
+	comandos()
 	g.count++
 	count1++
 	if count1 == 60 {
@@ -55,8 +56,8 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		Commands = !Commands
 	}
 	switch {
-	//pausar el juego
 
+	//pausar el juego
 	case ModePause:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause

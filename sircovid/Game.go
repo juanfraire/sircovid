@@ -235,6 +235,25 @@ func compar(p player) player {
 	}
 	return p
 }
+func comandos() {
+	// coder shortcuts
+	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {
+		hack = true
+	} else if inpututil.IsKeyJustReleased(ebiten.KeyControl) {
+		hack = false
+	}
+	switch {
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
+		player1.Fast = !player1.Fast
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyN):
+		banco = false
+		casita = false
+		pasarNivel()
+
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
+		player1.Inmune = !player1.Inmune
+	}
+}
 
 func dibujarTextoCompras(p player, screen *ebiten.Image) {
 

@@ -122,7 +122,7 @@ func moverPlayer(p player) player {
 	// leer tecla
 	if inpututil.IsKeyJustPressed(ebiten.KeyRight) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyD) && p.señalador == 1 {
 		p.a = 1
-		hack = false
+		// hack = false
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeyLeft) && p.señalador == 0 || inpututil.IsKeyJustPressed(ebiten.KeyA) && p.señalador == 1 {
 		p.b = 1
@@ -348,23 +348,6 @@ func moverPlayer(p player) player {
 		p.Y[0] = -80
 	}
 
-	// coder shortcuts
-	if inpututil.IsKeyJustPressed(ebiten.KeyControl) {
-		hack = true
-	} else if inpututil.IsKeyJustReleased(ebiten.KeyControl) {
-		hack = false
-	}
-	switch {
-	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
-		p.Fast = !p.Fast
-	case hack && inpututil.IsKeyJustPressed(ebiten.KeyN):
-		banco = false
-		casita = false
-		pasarNivel()
-
-	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
-		p.Inmune = !p.Inmune
-	}
 	if inconcebible {
 		p.X[0] = 396
 		p.Y[0] = 195
