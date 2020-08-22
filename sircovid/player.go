@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image"
 	"log"
 
@@ -409,7 +408,8 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 				p.v += 30
 				// p.vidas--
 				p.contacto = false
-				fmt.Println(p.v)
+				// sonidoVidas(p)
+				// fmt.Println(p.v)
 			}
 		}
 	}
