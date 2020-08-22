@@ -3,6 +3,7 @@ package main
 func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64, bool) {
 	var objetos [][]int
 	var bul bool
+
 	switch {
 	case casita:
 		objetos = make([][]int, 21)
@@ -70,68 +71,83 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		objetos[34] = []int{0, screenWidth, 30, 0}
 
 	default:
-		objetos = make([][]int, 60)
-		objetos[0] = []int{237, 79, 125, 99}
-		objetos[1] = []int{235, 5, 310, 33}
-		objetos[2] = []int{147, 124, 26, 68}
-		objetos[3] = []int{55, 89, 30, 80}
-		objetos[4] = []int{0, 59, 0, 245}
-		objetos[5] = []int{68, 29, 129, 116}
-		objetos[6] = []int{115, 31, 134, 111}
-		objetos[7] = []int{148, 9, 220, 35}
-		objetos[8] = []int{15, 44, 329, 82}
-		objetos[9] = []int{335, 67, 285, 151}
-		objetos[10] = []int{357, 38, 450, 82}
-		objetos[11] = []int{443, 70, 317, 69}
-		objetos[12] = []int{456, 54, 303, 13}
-		objetos[13] = []int{471, 20, 295, 23}
-		objetos[14] = []int{520, 100, 292, 237}
-		objetos[15] = []int{455, 64, 445, 85}
-		objetos[16] = []int{355, 127, 145, 72}
-		objetos[17] = []int{482, 122, 133, 80}
-		objetos[18] = []int{522, 100, 28, 171}
-		objetos[19] = []int{298, 62, 23, 42}
-		objetos[20] = []int{316, 23, 61, 11}
-		objetos[21] = []int{690, 49, 291, 240}
-		objetos[22] = []int{795, 70, 309, 75}
-		objetos[23] = []int{874, 101, 293, 237}
-		objetos[24] = []int{810, 69, 441, 89}
-		objetos[25] = []int{682, 3, 351, 28}
-		objetos[26] = []int{241, 11, 353, 66}
-		objetos[27] = []int{238, 23, 392, 20}
-		objetos[28] = []int{16, 42, 458, 73}
-		objetos[29] = []int{31, 14, 447, 11}
-		objetos[30] = []int{96, 89, 320, 59}
-		objetos[31] = []int{147, 38, 379, 146}
-		objetos[32] = []int{92, 93, 459, 69}
-		objetos[33] = []int{715, 341, 0, 177}
-		objetos[34] = []int{698, 16, 1, 144}
-		objetos[35] = []int{705, 11, 146, 33}
-		objetos[36] = []int{710, 4, 181, 21}
-		objetos[37] = []int{717, 77, 179, 26}
-		objetos[38] = []int{800, 11, 200, 10}
-		objetos[39] = []int{892, 33, 176, 33}
-		objetos[40] = []int{795, 101, 179, 16}
-		objetos[41] = []int{362, 162, 23, 35}
-		objetos[42] = []int{603, 9, 200, 6}
-		objetos[43] = []int{25, 613, 0, 28}
-		objetos[44] = []int{638, 30, 0, 15}
-		objetos[45] = []int{638, 18, 13, 11}
-		objetos[46] = []int{925, 131, 176, 30}
-		objetos[47] = []int{1039, 17, 301, 225}
-		objetos[48] = []int{1012, 29, 330, 196}
-		objetos[49] = []int{1023, 17, 312, 18}
-		objetos[50] = []int{809, 40, 294, 13}
-		objetos[51] = []int{891, 26, 283, 12}
-		objetos[52] = []int{943, 21, 286, 13}
-		objetos[53] = []int{699, 15, 283, 11}
-		objetos[54] = []int{538, 25, 285, 11}
-		objetos[55] = []int{370, 107, 132, 23}
+		objetos = make([][]int, 74)
+		objetos[0] = []int{232, 85, 123, 104}
+		objetos[1] = []int{355, 247, 142, 76}
+		objetos[2] = []int{297, 63, -1, 72}
+		objetos[3] = []int{-1, 275, 0, 96}
+		objetos[4] = []int{-3, 64, 0, 250}
+		objetos[5] = []int{111, 15, 134, 114}
+		objetos[6] = []int{111, 35, 235, 11}
+		objetos[7] = []int{144, 17, 216, 40}
+		objetos[8] = []int{134, 12, 141, 40}
+		objetos[9] = []int{128, 25, 190, 38}
+		objetos[10] = []int{62, 31, 128, 119}
+		objetos[11] = []int{19, 38, 329, 83}
+		objetos[12] = []int{25, 29, 448, 80}
+		objetos[13] = []int{102, 73, 329, 48}
+		objetos[14] = []int{121, 27, 385, 13}
+		objetos[15] = []int{125, 22, 440, 12}
+		objetos[16] = []int{153, 22, 444, 45}
+		objetos[17] = []int{160, 26, 406, 30}
+		objetos[18] = []int{100, 41, 460, 67}
+		objetos[19] = []int{240, 12, 353, 64}
+		objetos[20] = []int{254, 8, 391, 24}
+		objetos[21] = []int{232, 8, 304, 27}
+		objetos[22] = []int{345, 54, 278, 160}
+		objetos[23] = []int{336, 68, 285, 64}
+		objetos[24] = []int{364, 34, 448, 59}
+		objetos[25] = []int{365, 39, 518, 10}
+		objetos[26] = []int{443, 180, 315, 68}
+		objetos[27] = []int{517, 105, 381, 147}
+		objetos[28] = []int{452, 48, 439, 88}
+		objetos[29] = []int{496, 22, 385, 143}
+		objetos[30] = []int{523, 101, -2, 203}
+		objetos[31] = []int{494, 10, 57, 11}
+		objetos[32] = []int{504, 15, 77, 20}
+		objetos[33] = []int{373, 16, 73, 25}
+		objetos[34] = []int{521, 100, 292, 29}
+		objetos[35] = []int{540, 24, 284, 16}
+		objetos[36] = []int{592, 24, 284, 19}
+		objetos[37] = []int{463, 40, 298, 27}
+		objetos[38] = []int{453, 60, 303, 13}
+		objetos[39] = []int{487, 39, 119, 26}
+		objetos[40] = []int{372, 118, 132, 10}
+		objetos[41] = []int{698, 17, 280, 108}
+		objetos[42] = []int{688, 52, 291, 237}
+		objetos[43] = []int{679, 12, 345, 45}
+		objetos[44] = []int{749, 5, 505, 19}
+		objetos[45] = []int{734, 11, 485, 44}
+		objetos[46] = []int{812, 40, 292, 92}
+		objetos[47] = []int{874, 108, 292, 235}
+		objetos[48] = []int{809, 29, 435, 91}
+		objetos[49] = []int{857, 17, 437, 92}
+		objetos[50] = []int{837, 27, 460, 68}
+		objetos[51] = []int{853, 21, 301, 101}
+		objetos[52] = []int{862, 15, 400, 41}
+		objetos[53] = []int{1010, 48, 331, 195}
+		objetos[54] = []int{1022, 35, 311, 20}
+		objetos[55] = []int{1030, 27, 304, 7}
+		objetos[56] = []int{720, 338, -2, 213}
+		objetos[57] = []int{703, 22, -1, 190}
+		objetos[58] = []int{691, 38, -2, 137}
+		objetos[59] = []int{-3, 646, -1, 29}
+		objetos[60] = []int{642, 26, -1, 17}
+		objetos[61] = []int{621, 34, -2, 26}
+		objetos[62] = []int{659, 21, -2, 7}
+		objetos[63] = []int{550, 44, 204, 22}
+		objetos[64] = []int{315, 26, 52, 25}
+		objetos[65] = []int{147, 34, 510, 16}
+		objetos[66] = []int{311, 22, 442, 47}
+		objetos[67] = []int{308, 24, 505, 21}
+		objetos[68] = []int{52, 94, 80, 31}
+		objetos[69] = []int{354, 169, 22, 33}
+		objetos[70] = []int{723, 0, 60, 0}
 		//abajo para que no salga de la pantalla
-		objetos[56] = []int{0, 0, 0, screenHeight}
-		objetos[57] = []int{screenWidth, 0, 0, screenHeight}
-		objetos[58] = []int{0, screenWidth, screenHeight, 32}
-		objetos[59] = []int{0, screenWidth, 30, 0}
+		objetos[70] = []int{0, 0, 0, screenHeight}
+		objetos[71] = []int{screenWidth, 0, 0, screenHeight}
+		objetos[72] = []int{0, screenWidth, screenHeight, 32}
+		objetos[73] = []int{0, screenWidth, 30, 0}
 
 	}
 
@@ -146,8 +162,8 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 	for j := randNum; j < numEnemigo+randNum; j++ {
 		if i != j && X+(wth-7) > enemigo.X[j]+5 && X+5 < enemigo.X[j]+(wth-7) && Y+hgt > enemigo.Y[j]+(hgt-10) && Y+(hgt-10) <= enemigo.Y[j]+hgt {
 			//X+wth-7 > enemigo.X[j] && X+7 < enemigo.X[j]+wth-7 && Y+hgt > enemigo.Y[j]-15 && Y < enemigo.Y[j]+hgt {
-			X = X1
-			Y = Y1
+			// X = X1
+			// Y = Y1
 			bul = true
 		}
 
