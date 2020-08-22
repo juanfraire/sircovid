@@ -16,7 +16,6 @@ var (
 	up   bool
 	down bool
 	fade bool
-	hack bool
 	tmpS = 1
 	// sonido
 	audioContext  *audio.Context

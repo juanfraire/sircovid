@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"ciudadFere.json"
+        }
+    },
  "height":33,
  "infinite":false,
  "layers":[
@@ -669,7 +677,7 @@
                  "y":-2.54148885727832
                 }, 
                 {
-                 "height":31.7686107159791,
+                 "height":29.2271218587008,
                  "id":64,
                  "name":"",
                  "rotation":0,
@@ -777,6 +785,28 @@
                  "width":94.0350877192983,
                  "x":52.1005215742058,
                  "y":80.0568990042674
+                }, 
+                {
+                 "height":33.0393551446183,
+                 "id":74,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":169.009009009009,
+                 "x":354.537695590327,
+                 "y":22.873399715505
+                }, 
+                {
+                 "height":0,
+                 "id":75,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":723.053579895685,
+                 "y":60.9957325746799
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -785,7 +815,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":74,
+ "nextobjectid":76,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.0",
