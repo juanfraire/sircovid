@@ -115,6 +115,7 @@ func sonido(p player) {
 
 }
 func sonidoPuerta() {
+	countVida = 0
 	sPuerta.Play()
 	sPuerta.Rewind()
 }
