@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	_ "image/png"
 	"log"
 
@@ -48,6 +49,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	g.count++
 	count1++
 	countVida++
+	fmt.Println(countVida)
 	if count1 == 60 {
 		count1 = 0
 	}

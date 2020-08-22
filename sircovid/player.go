@@ -208,6 +208,8 @@ func moverPlayer(p player) player {
 	}
 	p.X[0], p.Y[0], obs = obstaculos(p.X[0], p.Y[0], X1, Y1)
 	if obs {
+		p.X[0] = X1
+		p.Y[0] = Y1
 		p.FrameOX[0] = 48
 		p.FrameNum[0] = 1
 	}
@@ -379,18 +381,20 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 			nubY := nube1.Y[i] * nubScale
 
 			if p.X[0]+wth > nubX+20 && p.X[0] < nubX+nubFrameWidth && p.Y[0]+hgt > nubY+20 && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
-				p.v += .3
+				if countVida > 60 {
+					p.v += 30
+					countVida = 0
+				}
 			}
 		}
 
 		//pierde vidas con humanos
 		for i := randNum; i < numEnemigo+randNum; i++ {
-			if p.contacto {
-				//p.X[0]+(wth-7) >= h.X[i]+5 && p.X[0]+5 <= h.X[i]+(wth-7) && p.Y[0]+hgt >= h.Y[i]+(hgt-10) && p.Y[0]+(hgt-10) <= h.Y[i]+hgt {
-				p.v += 30
-				// p.vidas--
-				p.contacto = false
-				countVida = 0
+			if p.X[0]+(wth-5) > h.X[i]+5 && p.X[0]+5 < h.X[i]+(wth-5) && p.Y[0]+hgt > h.Y[i]+(hgt-8) && p.Y[0]+(hgt-8) < h.Y[i]+hgt {
+				if countVida > 60 {
+					p.v += 30
+					countVida = 0
+				}
 			}
 		}
 	}

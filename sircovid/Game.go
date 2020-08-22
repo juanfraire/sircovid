@@ -245,6 +245,7 @@ func comandos() {
 	switch {
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyF):
 		player1.Fast = !player1.Fast
+
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyN):
 		banco = false
 		casita = false
@@ -252,6 +253,9 @@ func comandos() {
 
 	case hack && inpututil.IsKeyJustPressed(ebiten.KeyI):
 		player1.Inmune = !player1.Inmune
+
+	case hack && inpututil.IsKeyJustPressed(ebiten.KeyM):
+		player1.Coins += 10
 	}
 }
 
