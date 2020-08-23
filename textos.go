@@ -108,7 +108,7 @@ func dibujarTextos(screen *ebiten.Image) {
 			text.Draw(screen, nivel, smallArcadeFont, 320, 230, color.Black)
 		}
 		if Level == 10 {
-			nivel := fmt.Sprintf("MISSION: GET BREAD,\nTOILET PAPER\n" + come)
+			nivel := fmt.Sprintf("MISSION: GET food,\nTOILET PAPER\n" + come)
 			text.Draw(screen, nivel, smallArcadeFont, 320, 225, color.Black)
 		}
 		if Level > 10 {

@@ -373,8 +373,10 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 		for i := 0; i < numNube; i++ {
 			nubX := nube1.X[i] * nubScale
 			nubY := nube1.Y[i] * nubScale
+			nubFrameWidth := nubFrameWidth * nubScale
+			nubFrameHight := nubFrameHight * nubScale
 
-			if countVida > 60 && p.X[0]+wth > nubX+20 && p.X[0] < nubX+nubFrameWidth && p.Y[0]+hgt > nubY+20 && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .3 {
+			if countVida > 90 && p.X[0]+wth > nubX+35 && p.X[0] < nubX+nubFrameWidth && p.Y[0]+hgt > nubY+20 && p.Y[0] < nubY+nubFrameHight && nube1.Alpha[i] > .4 {
 				p.vidas--
 				countVida = 0
 				sonidoVidas(p)
