@@ -59,7 +59,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		text.Draw(screen, Inm, smallArcadeFont, 600, 25, color.Black)
 	}
 
-	come := "& come back home"
+	come := "& come back safe"
 	switch {
 	case ModeTitle:
 		// intro draw
