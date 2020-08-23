@@ -121,7 +121,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		noMoney := fmt.Sprintf("Mission failed!\n you ran out of money\nTRAY AGAIN?\n\nPRESS SPACE KEY")
 
 		if player1.Coins < 2 && player2.Coins < 2 && monedas.X == 1500 {
-			text.Draw(screen, noMoney, arcadeFont, 310, 200, color.White)
+			text.Draw(screen, noMoney, arcadeFont, 220, 200, color.White)
 		} else {
 			text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
 		}

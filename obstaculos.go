@@ -71,7 +71,7 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		objetos[34] = []int{0, screenWidth, 30, 0}
 
 	default:
-		objetos = make([][]int, 74)
+		objetos = make([][]int, 76)
 		objetos[0] = []int{232, 85, 123, 104}
 		objetos[1] = []int{355, 247, 142, 76}
 		objetos[2] = []int{297, 63, -1, 72}
@@ -143,11 +143,12 @@ func obstaculos(X float64, Y float64, X1 float64, Y1 float64) (float64, float64,
 		objetos[68] = []int{52, 94, 80, 31}
 		objetos[69] = []int{354, 169, 22, 33}
 		objetos[70] = []int{723, 0, 60, 0}
+		objetos[71] = []int{796, 74, 307, 76}
 		//abajo para que no salga de la pantalla
-		objetos[70] = []int{0, 0, 0, screenHeight}
-		objetos[71] = []int{screenWidth, 0, 0, screenHeight}
-		objetos[72] = []int{0, screenWidth, screenHeight, 32}
-		objetos[73] = []int{0, screenWidth, 30, 0}
+		objetos[72] = []int{0, 0, 0, screenHeight}
+		objetos[73] = []int{screenWidth, 0, 0, screenHeight}
+		objetos[74] = []int{0, screenWidth, screenHeight, 32}
+		objetos[75] = []int{0, screenWidth, 30, 0}
 
 	}
 
