@@ -126,8 +126,8 @@ func dibujarTextos(screen *ebiten.Image) {
 			text.Draw(screen, lost, arcadeFont, 310, 200, color.White)
 		}
 	case ModeWin == true:
-		win := fmt.Sprintf("you succeded surviving\nthe pandemic!\n\n       YOU WIN")
-		text.Draw(screen, win, arcadeFont, 200, 200, color.Black)
+		win := fmt.Sprintf("you succeded surviving\nthe pandemic!\n\n       YOU WIN\n\n  press c for creidts")
+		text.Draw(screen, win, arcadeFont, 200, 200, color.White)
 	}
 	switch {
 	case ModePause && count1 < 40:
