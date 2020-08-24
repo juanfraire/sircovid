@@ -245,7 +245,7 @@ func moverPlayer(p player) player {
 		p.MovX = 0
 
 	//pharmacy
-	case !banco && !casita && p.c == 1 && p.X[0] > 460 && p.X[0] < 485 && p.Y[0] < 366 && p.Y[0] > 350:
+	case !banco && !casita && p.c == 1 && p.X[0] > 455 && p.X[0] < 485 && p.Y[0] < 366 && p.Y[0] > 350:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -314,7 +314,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 
 		//Pharmacy
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 460 && p.X[0] < 486:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 454 && p.X[0] < 486:
 		p.Y[0] = 367
 		farmacia = false
 		sonidoPuerta()
