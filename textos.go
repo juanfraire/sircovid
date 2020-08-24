@@ -158,7 +158,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		//dibujar creditos
 	case Credits:
 		// ModeGameOver = false
-		credits := fmt.Sprintf("Credits:\n\nMusic and Sound: Kim Kaos\n\nGraphics:City by Fere Duelli\n\nHome: tileset by Kymotonian & Speedialga\n\nBank: titelest by Princess Phoenix\n\nSoftware:L.A.T. Software Factory\n\nCaracters graphics: Matthias1")
+		credits := fmt.Sprintf("Credits:\n\nMusic and Sound: Kim Kaos\n\nGraphics:City by Fere Duelli\n\nHome: tileset by Kymotonian & Speedialga\n\nBank: titelest by Princess Phoenix\n\nSoftware:L.A.T. Software Factory\n\nCaracters graphics: Matthias1n\nmade whith ebiten library")
 		text.Draw(screen, credits, smallArcadeFont, 275, 150, color.White)
 	case ModePause && count1 < 40:
 		jugadores := fmt.Sprintf("PAUSE")
