@@ -114,7 +114,7 @@ func initObjetos() {
 	fondoNegroVidas2.img = fondoNegro.img
 
 	fondoNegroInmune1.FrameOX = 0
-	fondoNegroInmune1.FrameOY = 485
+	fondoNegroInmune1.FrameOY = 500
 	fondoNegroInmune1.FrameNum = 1
 	fondoNegroInmune1.FrameWidth = 435
 	fondoNegroInmune1.FrameHeight = 50
@@ -123,7 +123,7 @@ func initObjetos() {
 	fondoNegroInmune1.img = fondoNegro.img
 
 	fondoNegroInmune2.FrameOX = 0
-	fondoNegroInmune2.FrameOY = 485
+	fondoNegroInmune2.FrameOY = 500
 	fondoNegroInmune2.FrameNum = 1
 	fondoNegroInmune2.FrameWidth = 435
 	fondoNegroInmune2.FrameHeight = 50
@@ -132,7 +132,7 @@ func initObjetos() {
 	fondoNegroInmune2.img = fondoNegro.img
 
 	fondoNegroFast1.FrameOX = 0
-	fondoNegroFast1.FrameOY = 485
+	fondoNegroFast1.FrameOY = 500
 	fondoNegroFast1.FrameNum = 1
 	fondoNegroFast1.FrameWidth = 435
 	fondoNegroFast1.FrameHeight = 50
@@ -141,7 +141,7 @@ func initObjetos() {
 	fondoNegroFast1.img = fondoNegro.img
 
 	fondoNegroFast2.FrameOX = 0
-	fondoNegroFast2.FrameOY = 485
+	fondoNegroFast2.FrameOY = 500
 	fondoNegroFast2.FrameNum = 1
 	fondoNegroFast2.FrameWidth = 435
 	fondoNegroFast2.FrameHeight = 50
