@@ -129,7 +129,7 @@ func introduccion() {
 }
 
 func siguienteNivel(p player) player {
-	if p.CompleteLevel && (p.X[0] >= home.X && p.X[0] <= home.X+40 && p.Y[0] == -40) {
+	if p.CompleteLevel && (p.X[0] >= home.X-40 && p.X[0] <= home.X+40 && p.Y[0] == -40) {
 		pasarNivel()
 		player1.CompleteLevel = false
 		player2.CompleteLevel = false
