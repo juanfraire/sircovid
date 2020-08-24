@@ -117,7 +117,7 @@ func dibujarTextos(screen *ebiten.Image) {
 		}
 
 	case ModeGameOver:
-		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY")
+		lost := fmt.Sprintf("  GAME OVER!\n\n  TRAY AGAIN?\n\nPRESS SPACE KEY\n\n c for credits\n\n ")
 		noMoney := fmt.Sprintf("Mission failed!\n you ran out of money\nTRAY AGAIN?\n\nPRESS SPACE KEY")
 
 		if player1.Coins < 2 && player2.Coins < 2 && monedas.X == 1500 {
