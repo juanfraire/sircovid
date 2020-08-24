@@ -65,6 +65,10 @@ func (g *Game) Update(screen *ebiten.Image) error {
 			Commands = !Commands
 		}
 	}
+	if inpututil.IsKeyJustPressed(ebiten.KeySpace) || inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		Commands = false
+		Credits = false
+	}
 	switch {
 
 	//pausar el juego
