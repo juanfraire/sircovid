@@ -30,6 +30,11 @@ func pasarNivel() {
 	if nivel > 20 {
 		nivel = 20
 	}
+	mart1 = false
+	bakery1 = false
+	supermarket1 = false
+	farmacia1 = false
+
 	initObjetos()
 	// initSonido()
 	count = 0

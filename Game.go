@@ -204,16 +204,17 @@ func compar(p player) player {
 			supermarket1 = true
 		}
 		switch {
-		case farmacia && elecCompras == 2 && Level == 1:
+		case farmacia1 && Level == 1:
 			p.CompleteLevel = true
-		case bakery && elecCompras == 1 && Level == 2:
+		case bakery1 && Level == 2:
 			p.CompleteLevel = true
-		case mart && elecCompras == 2 && Level == 3:
+		case mart1 && Level == 3:
 			p.CompleteLevel = true
-		case supermarket && elecCompras == 2 && Level == 4:
+		case supermarket1 && Level == 4:
 			p.CompleteLevel = true
 		case farmacia1 && bakery1 && Level == 5:
 			p.CompleteLevel = true
+
 		case farmacia1 && supermarket1 && Level == 6:
 			p.CompleteLevel = true
 		case mart1 && bakery1 && Level == 7:
