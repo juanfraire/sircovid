@@ -245,7 +245,7 @@ func moverPlayer(p player) player {
 		p.MovX = 0
 
 	//pharmacy
-	case !banco && !casita && p.c == 1 && p.X[0] > 460 && p.X[0] < 485 && p.Y[0] < 366 && p.Y[0] > 350:
+	case !banco && !casita && p.c == 1 && p.X[0] > 455 && p.X[0] < 485 && p.Y[0] < 366 && p.Y[0] > 350:
 		p.Y[0] = -40
 		p.a, p.b, p.c, p.d = 0, 0, 0, 0
 		p.MovX = 0
@@ -314,7 +314,7 @@ func moverPlayer(p player) player {
 		sonidoPuerta()
 
 		//Pharmacy
-	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 460 && p.X[0] < 486:
+	case p.Y[0] < -36 && p.Y[0] > -39 && p.X[0] > 454 && p.X[0] < 486:
 		p.Y[0] = 367
 		farmacia = false
 		sonidoPuerta()
@@ -395,7 +395,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 
 	//inmune con barbijo o alchol en gel
-	if p.X[0]+wth > b.X && p.X[0] < b.X+barWscale+20 && p.Y[0]+hgt-45 > b.Y && p.Y[0]+hgt-45 < b.Y+barHScale {
+	if !casita && !banco && p.X[0]+wth > b.X && p.X[0] < b.X+barWscale+20 && p.Y[0]+hgt-45 > b.Y && p.Y[0]+hgt-45 < b.Y+barHScale {
 		sBarbijo.Play()
 		sBarbijo.Rewind()
 		b.X = 1500
@@ -413,7 +413,7 @@ func vida(h humanos, p player, b Objetos, pl Objetos) (player, Objetos, Objetos)
 	}
 
 	//gana/pierde vida
-	if p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale+20 && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale+20 {
+	if !casita && !banco && p.X[0]+wth > pl.X && p.X[0] < pl.X+plasmaWScale+20 && p.Y[0]+hgt > pl.Y && p.Y[0]+hgt < pl.Y+plasmaHScale+20 {
 		sBarbijo.Play()
 		sBarbijo.Rewind()
 		p.vidas++
