@@ -66,8 +66,12 @@ func (g *Game) Update(screen *ebiten.Image) error {
 		}
 	}
 	switch {
-
+	//mustra los creditos
+	case Credits:
+		//muestra ayuda
+	case Commands:
 	//pausar el juego
+
 	case ModePause:
 		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			ModePause = !ModePause
