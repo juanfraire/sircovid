@@ -249,14 +249,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 		}
 
-		//dibujar palyers
-		// if !ModeTitleLevel && !ModePause {
-		// 	dibujarPlayer(player1, screen)
-		// 	if Game1.numPlayers == 2 {
-		// 		dibujarObjetos(fondoNegroVidas2, screen)
-		// 		dibujarPlayer(player2, screen)
-		// 	}
-		// }
 		if player1.Compras || player2.Compras || ModeGameOver || ModeWin {
 			dibujarObjetos(fondoNegroCompras, screen)
 		}
@@ -271,7 +263,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			if Game1.numPlayers == 2 {
 				dibujarObjetos(fondoNegroVidas2, screen)
 			}
-
+		}
+		if ModeGame && count1 < 45 && !banco && !casita {
+			dibujarNiveles(screen)
+			if Game1.numPlayers == 2 {
+				dibujarObjetos(fondoNegroVidas2, screen)
+			}
 		}
 	}
 	if player1.Inmune {
