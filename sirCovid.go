@@ -48,7 +48,7 @@ func (g *Game) Update(screen *ebiten.Image) error {
 	g.count++
 	count1++
 	countVida++
-	if count1 == 60 {
+	if count1 == 80 {
 		count1 = 0
 	}
 	//func sonido
@@ -264,7 +264,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 				dibujarObjetos(fondoNegroVidas2, screen)
 			}
 		}
-		if ModeGame && count1 < 45 && !banco && !casita {
+		if ModeGame && count1 < 60 && !banco && !casita {
 			dibujarNiveles(screen)
 			if Game1.numPlayers == 2 {
 				dibujarObjetos(fondoNegroVidas2, screen)
