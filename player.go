@@ -40,12 +40,12 @@ var (
 func initPlayer() {
 
 	//////////////   Imangen VIEJO  //////////////////////////////
-	humano1.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player1 (2).png`, ebiten.FilterDefault)
+	humano1.img[0], _, err = ebitenutil.NewImageFromFile(`data/player1 (2).png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
-	//imagen chica
-	humano2.img[0], _, err = ebitenutil.NewImageFromFile(`sircovid\data\player2 (2).png`, ebiten.FilterDefault)
+	//imagen chic
+	humano2.img[0], _, err = ebitenutil.NewImageFromFile(`data/player2 (2).png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}

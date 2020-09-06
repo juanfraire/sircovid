@@ -13,7 +13,7 @@ import (
 func init() {
 
 	//init ciudad img
-	imgTiles, _, err = ebitenutil.NewImageFromFile(`sircovid\data\ciudad Fere sat1(rezised).png`, ebiten.FilterDefault)
+	imgTiles, _, err = ebitenutil.NewImageFromFile(`data/ciudad Fere sat1(rezised).png`, ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
